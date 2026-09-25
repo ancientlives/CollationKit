@@ -1,0 +1,4 @@
+a line of verse here
+another line follows
+a third gray line
+a closing line

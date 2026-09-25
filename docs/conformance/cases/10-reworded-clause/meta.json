@@ -1,0 +1,9 @@
+{
+  "name": "reworded-clause",
+  "description": "A multi-word reworded clause that should classify as a single substitution span, not many.",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

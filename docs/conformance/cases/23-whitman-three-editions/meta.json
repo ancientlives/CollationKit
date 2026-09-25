@@ -1,0 +1,17 @@
+{
+  "name": "whitman-three-editions",
+  "description": "Real public-domain N-WITNESS edition case (BACKLOG B4, ≥3 witnesses, exercising the variant graph on real text): the SHARED opening three stanzas of Walt Whitman's 'Song of Myself' across THREE editions of Leaves of Grass — 1855, 1860, and 1891-92. This is the authentic 'one author, many editions' shape the variant graph was designed for. The text genuinely evolves: 1855 'I celebrate myself,' → (1860 same line) → 1891 'I celebrate myself, and sing myself,'; the 1860 edition adds section numbers (1. 2. 3.) and capitalises 'Soul'; the four-dot 1855 ellipses become an em-dash in 1860 and a comma in 1891. NOTE the passage is restricted to the three stanzas common to all three editions (the 1891 'My tongue…/Creeds…' insertions, collated separately in case 18, are omitted here so the graph compares like-for-like). The 1855 and 1860 witnesses are OCR (Internet Archive) hand-corrected against canonical transcriptions, retaining authentic edition features; 1891 is verbatim (Gutenberg #1322). Base = 1855. See docs/development/CASE_STUDY.md.",
+  "base": "ed1855",
+  "witnessOrder": ["ed1855", "ed1860", "ed1891"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "source": {
+    "work": "Walt Whitman, 'Song of Myself' (Leaves of Grass), opening three stanzas common to all editions",
+    "ed1855": "Internet Archive 'whitmanleavesofgrass' (1855 first edition) OCR, hand-corrected against the canonical 1855 transcription; four-dot ellipses retained",
+    "ed1860": "Internet Archive 'leavesofgrass00inwhit' (1860 third edition) OCR, hand-corrected; authentic 1860 section numbers (1./2./3.), capitalised 'Soul' and em-dash retained",
+    "ed1891": "Project Gutenberg eBook #1322 (1891-92 'deathbed' edition), verbatim (presentational indent/CRLF normalised)",
+    "licence": "public domain",
+    "retrieved": "2026-06-29"
+  }
+}

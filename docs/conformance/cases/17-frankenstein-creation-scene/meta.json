@@ -1,0 +1,16 @@
+{
+  "name": "frankenstein-creation-scene",
+  "description": "Real public-domain multi-edition witness pair (BACKLOG B4): the opening two paragraphs of the creation scene from Mary Shelley's Frankenstein, Chapter 5 ('It was on a dreary night of November…'), as printed in the 1818 first edition versus the revised 1831 edition. Substantive view (accidentals folded). The 1818->1831 changes in this passage are almost entirely accidental (punctuation/hyphenation), so a correct substantive collation should report near-identity; the one surfaced variant (dun white -> dun-white) is a genuine tokenisation effect, not a wording change. See docs/development/CASE_STUDY.md.",
+  "base": "1818",
+  "witnessOrder": ["1818", "1831"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "source": {
+    "work": "Mary Shelley, Frankenstein; or, The Modern Prometheus, Chapter 5 (creation scene, first two paragraphs)",
+    "1818": "Project Gutenberg eBook #41445 (photo-reprint of the 1818 first edition)",
+    "1831": "Project Gutenberg eBook #84 (1831 edition)",
+    "licence": "public domain",
+    "retrieved": "2026-06-29"
+  }
+}

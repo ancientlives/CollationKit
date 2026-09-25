@@ -1,0 +1,244 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "she",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "opened",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "heavy",
+            "witnesses" : [
+              "A"
+            ]
+          },
+          {
+            "reading" : "oak",
+            "witnesses" : [
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "door",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "turned",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 8,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "leave",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "at",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "last",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 1,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 15,
+            "charTo" : 20,
+            "cite" : "p.1 · line 1 · word 4",
+            "endLine" : 0,
+            "firstWord" : 3,
+            "lastWord" : 3,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "heavy",
+          "baseTokens" : {
+            "from" : 3,
+            "to" : 4
+          },
+          "comparedLocation" : {
+            "charFrom" : 23,
+            "charTo" : 26,
+            "cite" : "p.1 · line 1 · word 6",
+            "endLine" : 0,
+            "firstWord" : 5,
+            "lastWord" : 5,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "oak",
+          "comparedTokens" : {
+            "from" : 5,
+            "to" : 6
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 46,
+            "charTo" : 53,
+            "cite" : "p.1 · line 1 · words 10–11",
+            "endLine" : 0,
+            "firstWord" : 9,
+            "lastWord" : 10,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "at last",
+          "baseTokens" : {
+            "from" : 9,
+            "to" : 11
+          },
+          "comparedLocation" : {
+            "charFrom" : 0,
+            "charTo" : 7,
+            "cite" : "p.1 · line 1 · words 1–2",
+            "endLine" : 0,
+            "firstWord" : 0,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "at last",
+          "comparedTokens" : {
+            "from" : 0,
+            "to" : 2
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "transposition",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

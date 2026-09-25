@@ -1,0 +1,5 @@
+# Python dependencies for validating the conformance goldens against collation.schema.json.
+#   python3 -m venv .venv && . .venv/bin/activate
+#   pip install -r docs/conformance/requirements.txt
+#   python3 docs/conformance/validate.py
+jsonschema>=4.0

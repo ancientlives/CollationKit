@@ -1,0 +1,28 @@
+{
+  "name": "20000-leagues-translations",
+  "work": "Jules Verne, Twenty Thousand Leagues Under the Sea(s) (Vingt mille lieues sous les mers, 1870)",
+  "description": "Two competing English TRANSLATIONS of the same French novel — the material 'variant English editions of Verne' actually means (English Verne is always a translation of the French original). base = the older Mercier translation. The Part 1, Chapter 1 excerpts (mercier.txt / walter.txt) are the routine collation-test witnesses; the whole-novel witnesses (full/mercier.txt, full/walter.txt) are for scale/benchmark testing.",
+  "base": "mercier",
+  "witnessOrder": ["mercier", "walter"],
+  "witnesses": {
+    "mercier": {
+      "translation": "Lewis Page Mercier ('Mercier Lewis'), the Sampson Low, 1872 'standard' English translation — known for abridging and altering the French",
+      "source": "Project Gutenberg eBook #164 (pg164.txt)",
+      "excerpt": "Part 1, Chapter I 'A Shifting Reef' (between '^CHAPTER I$' and '^CHAPTER II$')"
+    },
+    "walter": {
+      "translation": "Frederick Paul Walter, a modern faithful/unabridged English translation",
+      "source": "Project Gutenberg eBook #2488 (pg2488.txt)",
+      "excerpt": "Part 1, Chapter 1 'A Runaway Reef' (between '^CHAPTER 1$' and '^CHAPTER 2$')"
+    }
+  },
+  "collate": {
+    "recordAccidentals": false,
+    "recordPunctuation": false,
+    "pagination": "default",
+    "normalizer": "substantive"
+  },
+  "notes": "The excerpt pair yields ~403 variants (heavy substitution + transposition + edits-within-moves) — a demanding real-world substantive-variation test, the same kind as conformance case 20-verne-translation but a full chapter. The WHOLE-NOVEL witnesses under full/ collate in ~3 s (~21.8k variants) and are the engine's largest real scale test; they exposed and now guard against an inverted-range crash (fixed 2026-07-01, see ../known-issues/README.md).",
+  "licence": "mercier: public domain (Project Gutenberg). walter: (c) 1999 Frederick Paul Walter, distributed by Project Gutenberg under its licence; NOT included in this repository, rebuilt locally by scripts/build_corpus.sh",
+  "retrieved": "2026-07-01"
+}

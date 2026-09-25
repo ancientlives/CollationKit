@@ -1,0 +1,9 @@
+{
+  "name": "variant-spelling-folded",
+  "description": "GB/US spelling differences folded by the gbUS normalizer; with accidentals off they are not reported.",
+  "base": "GB",
+  "witnessOrder": ["GB", "US"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "gbUS"
+}

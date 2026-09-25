@@ -1,0 +1,44 @@
+name: Collation result looks wrong
+description: A false or missed move, a mis-classified variant, a wrong citation, or a poor alignment on real text.
+labels: ["collation-quality"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Results on real editions are valuable evaluation data. Please include enough for a maintainer to
+        reproduce the run. Only share texts that are public domain or that you have the right to share.
+  - type: textarea
+    id: witnesses
+    attributes:
+      label: Witnesses
+      description: What the texts are (work, editions or translations, source) and how to obtain them.
+    validations:
+      required: true
+  - type: input
+    id: command
+    attributes:
+      label: Command
+      placeholder: collate run --strategy peer-msa a.txt b.txt --out ./results
+    validations:
+      required: true
+  - type: textarea
+    id: finding
+    attributes:
+      label: The finding
+      description: Quote the variant as reported (with its citation) and say what you believe is correct, and why.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of problem
+      options:
+        - False move (reported transposition that is not one)
+        - Missed move
+        - Wrong variant type (e.g. substitution vs insertion + deletion)
+        - Wrong citation (page, line or word)
+        - Substantive / accidental misclassification
+        - Poor alignment overall
+        - Other
+    validations:
+      required: true

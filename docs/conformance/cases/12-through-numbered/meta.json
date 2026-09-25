@@ -1,0 +1,9 @@
+{
+  "name": "through-numbered",
+  "description": "Continuous line numbering (no per-page reset), as for a poem cited by through-line.",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "throughNumbered",
+  "normalizer": "substantive"
+}

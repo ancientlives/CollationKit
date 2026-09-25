@@ -1,0 +1,218 @@
+{
+  "graph" : {
+    "baseID" : "MS",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "MS",
+              "PR",
+              "TS"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "pilgrim",
+            "witnesses" : [
+              "PR"
+            ]
+          },
+          {
+            "reading" : "traveller",
+            "witnesses" : [
+              "MS",
+              "TS"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "reached",
+            "witnesses" : [
+              "MS",
+              "PR",
+              "TS"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "MS",
+              "PR",
+              "TS"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "inn",
+            "witnesses" : [
+              "MS",
+              "PR",
+              "TS"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "at",
+            "witnesses" : [
+              "MS",
+              "PR",
+              "TS"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "dawn",
+            "witnesses" : [
+              "PR",
+              "TS"
+            ]
+          },
+          {
+            "reading" : "dusk",
+            "witnesses" : [
+              "MS"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "MS",
+      "compared" : "TS",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 33,
+            "charTo" : 37,
+            "cite" : "p.1 · line 1 · word 7",
+            "endLine" : 0,
+            "firstWord" : 6,
+            "lastWord" : 6,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "dusk",
+          "baseTokens" : {
+            "from" : 6,
+            "to" : 7
+          },
+          "comparedLocation" : {
+            "charFrom" : 33,
+            "charTo" : 37,
+            "cite" : "p.1 · line 1 · word 7",
+            "endLine" : 0,
+            "firstWord" : 6,
+            "lastWord" : 6,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "dawn",
+          "comparedTokens" : {
+            "from" : 6,
+            "to" : 7
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    },
+    {
+      "base" : "TS",
+      "compared" : "PR",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 4,
+            "charTo" : 13,
+            "cite" : "p.1 · line 1 · word 2",
+            "endLine" : 0,
+            "firstWord" : 1,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "traveller",
+          "baseTokens" : {
+            "from" : 1,
+            "to" : 2
+          },
+          "comparedLocation" : {
+            "charFrom" : 4,
+            "charTo" : 11,
+            "cite" : "p.1 · line 1 · word 2",
+            "endLine" : 0,
+            "firstWord" : 1,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "pilgrim",
+          "comparedTokens" : {
+            "from" : 1,
+            "to" : 2
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

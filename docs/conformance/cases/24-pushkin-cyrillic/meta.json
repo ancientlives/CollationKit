@@ -1,0 +1,16 @@
+{
+  "name": "pushkin-cyrillic",
+  "description": "CYRILLIC (Russian) tokeniser case (BACKLOG B4 / tokeniser parity B6): Alexander Pushkin's 'Я вас любил…' (1829), the canonical eight-line text, to verify the engine tokenises a non-Latin ALPHABETIC script the way it handles Latin/Greek (space-separated words). Witness A is the verbatim canonical poem; witness B applies ONE controlled, documented substitution (искренно → сердечно on line 7) so the engine must locate a Cyrillic variant. This proves Cyrillic word-tokenisation and citation work; the controlled edit is the third script family in the corpus (after Latin/English and Greek, and French diacritics/elisions). NOTE the engine's tokeniser is space-delimited, so this validates alphabetic non-Latin scripts; scriptio continua scripts (CJK, with no inter-word spaces) remain a known tokeniser limitation (B6) and are NOT claimed here. See docs/development/CASE_STUDY.md.",
+  "base": "canonical",
+  "witnessOrder": ["canonical", "variant"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "source": {
+    "work": "Alexander Pushkin, 'Я вас любил: любовь ещё, быть может…' (1829; first printed Северные цветы, 1830)",
+    "canonical": "Russian Wikisource, canonical text, verbatim (public domain)",
+    "variant": "constructed from canonical by one documented substitution (искренно → сердечно) to exercise Cyrillic tokenisation/location",
+    "licence": "public domain (base text)",
+    "retrieved": "2026-06-29"
+  }
+}

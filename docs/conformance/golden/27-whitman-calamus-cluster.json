@@ -1,0 +1,1633 @@
+{
+  "graph" : {
+    "baseID" : "ed1860",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "In",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "paths",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "untrodden",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "In",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "growth",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "by",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 8,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "margins",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "pond",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 11,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "waters",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 13,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Escaped",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 14,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "from",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 15,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 16,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "life",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 17,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 18,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "exhibits",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 19,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "itself",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 21,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Scented",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 22,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "herbage",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 23,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 24,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "my",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 25,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "breast",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 27,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Leaves",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 28,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "from",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 29,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "you",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 30,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 31,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "glean",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 33,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 34,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "write",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 36,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 37,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "be",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 38,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "perused",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 39,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "best",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 40,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "afterwards",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 42,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Tomb",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 43,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "leaves",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 45,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "body",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 46,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "leaves",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 47,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "growing",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 48,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "up",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 49,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "above",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 50,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "me",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 51,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "above",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 52,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "death",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 54,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Whoever",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 55,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "you",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 56,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "are",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 57,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "holding",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 58,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "me",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 59,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "now",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 60,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "in",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 61,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "hand",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 63,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Without",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 64,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "one",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 65,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "thing",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 66,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "all",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 67,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "will",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 68,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "be",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 69,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "useless",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 71,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 72,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "give",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 73,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "you",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 74,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "fair",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 75,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "warning",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 76,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "before",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 77,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "you",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 78,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "attempt",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 79,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "me",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 80,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "further",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 82,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "These",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 83,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 84,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "singing",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 85,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "in",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 86,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "spring",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 87,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "collect",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 88,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "for",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 89,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "lovers",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 91,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Collecting",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 92,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 93,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "traverse",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 94,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 95,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "garden",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 96,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 97,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "world",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 99,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "but",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 100,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "soon",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 101,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 102,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "pass",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 103,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 104,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "gates",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 106,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Alone",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 107,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 108,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "had",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 109,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "thought",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 111,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "yet",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 112,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "soon",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 113,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 114,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "troop",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 115,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "gathers",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 116,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "around",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 117,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "me",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 119,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "States",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 121,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Were",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 122,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "you",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 123,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "looking",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 124,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 125,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "be",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 126,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "held",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 127,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "together",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 128,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "by",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 129,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "lawyers",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 131,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "By",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 132,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "an",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 133,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "agreement",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 134,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "on",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 135,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 136,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "paper",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 138,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Or",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 139,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "by",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 140,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "arms",
+            "witnesses" : [
+              "ed1860",
+              "ed1867"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "ed1860",
+      "compared" : "ed1867",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 0,
+        "transposition" : 1,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 570,
+            "charTo" : 665,
+            "cite" : "p.1 · lines 13–15 · words 1…10",
+            "endLine" : 14,
+            "firstWord" : 0,
+            "lastWord" : 9,
+            "line" : 12,
+            "page" : 0
+          },
+          "baseReading" : "States ! Were you looking to be held together by lawyers ? By an agreement on a paper ? Or by arms",
+          "baseTokens" : {
+            "from" : 119,
+            "to" : 141
+          },
+          "comparedLocation" : {
+            "charFrom" : 106,
+            "charTo" : 201,
+            "cite" : "p.1 · lines 4–6 · words 1…10",
+            "endLine" : 5,
+            "firstWord" : 0,
+            "lastWord" : 9,
+            "line" : 3,
+            "page" : 0
+          },
+          "comparedReading" : "States ! Were you looking to be held together by lawyers ? By an agreement on a paper ? Or by arms",
+          "comparedTokens" : {
+            "from" : 21,
+            "to" : 43
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "transposition",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+"source": "PG2488 cleaned by clean_gutenberg.py (no markers)",
+"note": "Each entry: [line index in the cleaned text before which to insert, marker line]. Contains only no_collate markers, no text of the work.",
+"insert": [
+[
+0,
+"<!-- no_collate"
+],
+[
+264,
+"-->"
+],
+[
+342,
+"<!-- no_collate"
+],
+[
+344,
+"-->"
+],
+[
+745,
+"<!-- no_collate"
+],
+[
+747,
+"-->"
+],
+[
+976,
+"<!-- no_collate"
+],
+[
+978,
+"-->"
+],
+[
+2320,
+"<!-- no_collate"
+],
+[
+2322,
+"-->"
+],
+[
+2556,
+"<!-- no_collate"
+],
+[
+2557,
+"-->"
+],
+[
+3907,
+"<!-- no_collate"
+],
+[
+3910,
+"-->"
+],
+[
+4778,
+"<!-- no_collate"
+],
+[
+4780,
+"-->"
+]
+]
+}

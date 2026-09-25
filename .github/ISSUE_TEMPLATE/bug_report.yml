@@ -1,0 +1,31 @@
+name: Bug report
+description: The engine or CLI crashed, errored, or behaved incorrectly.
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce
+      description: The exact command, and the witness texts or a minimal excerpt (attach files if long).
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: output
+    attributes:
+      label: Output or error message
+      render: text
+  - type: input
+    id: version
+    attributes:
+      label: Environment
+      description: Commit or version, macOS version, and `swift --version`; debug or release build.
+    validations:
+      required: true

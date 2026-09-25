@@ -1,0 +1,214 @@
+{
+  "_about": "Machine-readable companion to BIBLIOGRAPHY.md. Verne Voyages extraordinaires, oriented to collation-corpus building. Field convention mirrors corpus/verne/<work>/meta.json. Every value is EITHER sourced OR null with a `verify` note — never a guessed value. `pg` = Project Gutenberg eBook id (public domain, US). `held` = we already have cleaned witnesses in corpus/verne/.",
+  "_sources": [
+    "https://en.wikipedia.org/wiki/Jules_Verne_bibliography",
+    "https://en.wikipedia.org/wiki/Twenty_Thousand_Leagues_Under_the_Seas",
+    "https://en.wikipedia.org/wiki/Journey_to_the_Center_of_the_Earth",
+    "https://en.wikipedia.org/wiki/From_the_Earth_to_the_Moon",
+    "https://en.wikipedia.org/wiki/The_Mysterious_Island",
+    "https://en.wikipedia.org/wiki/Around_the_World_in_Eighty_Days",
+    "https://en.wikipedia.org/wiki/Five_Weeks_in_a_Balloon",
+    "https://www.gutenberg.org/ebooks/author/60"
+  ],
+  "_retrieved": "2026-07-24",
+  "_frenchSourcesDownloaded": "The French originals for the 4 corpus works are downloaded into raw/ (2026-07-24): pg5097 (Vingt mille lieues), pg38674 (De la terre a la lune), pg4791 (Voyage au centre de la Terre — Gallica OCR w/ FR+EN preface), pg14287 (L'ile mysterieuse). scripts/build_corpus.sh fetches them and has a commented-out French-witness section (fr- sigla) ready to uncomment for French<->English or French-French collation. The cleaner preserves accents. FR 'Le Tour du monde' id still unresolved (20973 404s).",
+  "_schema": {
+    "work": "slug (matches corpus/verne/<work>/ when held)",
+    "titleEn": "common English title",
+    "titleFr": "original French title",
+    "frenchFirst": "first French publication year (verified)",
+    "frenchRevised": "year of a revised French state, if any (a French-French collation seam)",
+    "frenchPublisher": "publisher of the French first edition",
+    "frenchPg": "Gutenberg id of a public-domain French text, or null",
+    "inCorpus": "true if cleaned witnesses exist under corpus/verne/<work>/",
+    "translations": [
+      {
+        "translator": "name, or 'anonymous'",
+        "year": "first English publication year",
+        "publisher": "publisher | null (+ verify)",
+        "pg": "Gutenberg id if public-domain text exists | null",
+        "held": "true if a cleaned witness of THIS translation is in the corpus",
+        "publicDomain": "true|false|null — US public-domain status",
+        "note": "collation-relevant character (abridged? rewrite? faithful?)",
+        "verify": "what still needs sourcing, if anything"
+      }
+    ]
+  },
+
+  "works": [
+    {
+      "work": "20000-leagues",
+      "titleEn": "Twenty Thousand Leagues Under the Sea",
+      "titleFr": "Vingt mille lieues sous les mers",
+      "frenchFirst": "1869-1870 (serial); 1871 (book)",
+      "frenchRevised": null,
+      "frenchPublisher": "Pierre-Jules Hetzel",
+      "frenchPg": 5097,
+      "inCorpus": true,
+      "translations": [
+        { "translator": "Lewis Page Mercier", "year": 1872, "publisher": "Sampson Low (Nov. 1872 — their first Verne)", "pg": 164, "held": true, "publicDomain": true, "note": "the abridging 'standard'; cut ~1/4, many errors (scaphandre->'cork-jacket')", "verify": null },
+        { "translator": "Anthony Bonner", "year": 1962, "publisher": "Bantam Classics", "pg": null, "held": false, "publicDomain": false, "note": "intro by Ray Bradbury", "verify": null },
+        { "translator": "Walter James Miller", "year": 1966, "publisher": "Washington Square Press", "pg": null, "held": false, "publicDomain": false, "note": "corrected Mercier", "verify": null },
+        { "translator": "Walter James Miller & Frederick Paul Walter", "year": 1993, "publisher": "Naval Institute Press", "pg": null, "held": false, "publicDomain": false, "note": "completely restored & annotated", "verify": null },
+        { "translator": "William Butcher", "year": 1998, "publisher": "Oxford University Press", "pg": null, "held": false, "publicDomain": false, "note": "annotated", "verify": null },
+        { "translator": "Frederick Paul Walter", "year": 2010, "publisher": "SUNY Press", "pg": 2488, "held": true, "publicDomain": true, "note": "fully restored/unabridged; faithful counter-witness to Mercier", "verify": "PG2488 is the Walter text released to PG; confirm identity" },
+        { "translator": "David Coward", "year": 2017, "publisher": "Penguin Classics", "pg": null, "held": false, "publicDomain": false, "note": "new translation", "verify": null }
+      ]
+    },
+    {
+      "work": "earth-to-moon",
+      "titleEn": "From the Earth to the Moon",
+      "titleFr": "De la Terre a la Lune",
+      "frenchFirst": "1865",
+      "frenchRevised": null,
+      "frenchPublisher": "Pierre-Jules Hetzel",
+      "frenchPg": 38674,
+      "inCorpus": true,
+      "note": "PG83 and PG12901 bundle the sequel 'Round the Moon' (Autour de la Lune, 1870); corpus full/ witnesses take only the first novel.",
+      "translations": [
+        { "translator": "anonymous", "year": 1867, "publisher": null, "pg": null, "held": false, "publicDomain": true, "note": "earliest English", "verify": "publisher" },
+        { "translator": "J. K. Hoyt", "year": 1869, "publisher": null, "pg": null, "held": false, "publicDomain": true, "note": null, "verify": "publisher" },
+        { "translator": "Lewis (Louis) Page Mercier & Eleanor E. King", "year": 1873, "publisher": "Sampson Low", "pg": 83, "held": true, "publicDomain": true, "note": "the 19th-c. 'standard'; = corpus witness 'towle' (siglum is a LEGACY MISATTRIBUTION corrected 2026-07-24 — NOT George M. Towle). PG83 'From the Earth to the Moon; and, Round the Moon'.", "verify": null },
+        { "translator": "Edward Roth", "year": 1874, "publisher": null, "pg": null, "held": false, "publicDomain": true, "note": "free adaptation", "verify": "publisher" },
+        { "translator": "Thomas H. Linklater", "year": 1877, "publisher": "George Routledge & Sons", "pg": 12901, "held": true, "publicDomain": true, "note": "'From the Earth to the Moon Direct and Round the Moon'; = corpus witness 'moonvoyage' ('The Moon-Voyage', Ward Lock reissue, ill. Henry Austin). Attribution PROBABLE not confirmed.", "verify": "confirm PG12901 'The Moon-Voyage' == Linklater's Routledge text (title/publisher differ; may be a reissue)" },
+        { "translator": "I. O. Evans", "year": 1959, "publisher": null, "pg": null, "held": false, "publicDomain": false, "note": null, "verify": "publisher" },
+        { "translator": "Lowell Bair", "year": 1967, "publisher": null, "pg": null, "held": false, "publicDomain": false, "note": null, "verify": "publisher" },
+        { "translator": "Jacqueline & Robert Baldick", "year": 1970, "publisher": null, "pg": null, "held": false, "publicDomain": false, "note": null, "verify": "publisher" },
+        { "translator": "Harold Salemson", "year": 1970, "publisher": null, "pg": null, "held": false, "publicDomain": false, "note": null, "verify": "publisher" },
+        { "translator": "Walter James Miller", "year": 1996, "publisher": null, "pg": null, "held": false, "publicDomain": false, "note": "annotated", "verify": "publisher" },
+        { "translator": "Frederick Paul Walter", "year": 2010, "publisher": "SUNY Press", "pg": null, "held": false, "publicDomain": false, "note": "in Amazing Journeys omnibus", "verify": null },
+        { "translator": "William Butcher", "year": 2025, "publisher": "Oxford University Press", "pg": null, "held": false, "publicDomain": false, "note": "most recent", "verify": null },
+        { "translator": "UNRESOLVED", "year": null, "publisher": null, "pg": 28918, "held": false, "publicDomain": true, "note": "a further PG English text ('From the Earth to the Moon')", "verify": "translator/identity — IA record archive.org/details/fromtheearthtoth28918gut attributes it to Lewis Page Mercier; confirm" }
+      ]
+    },
+    {
+      "work": "journey-centre-earth",
+      "titleEn": "Journey to the Centre of the Earth",
+      "titleFr": "Voyage au centre de la Terre",
+      "frenchFirst": "1864",
+      "frenchRevised": "1867",
+      "frenchPublisher": "J. Hetzel et Cie",
+      "frenchPg": 4791,
+      "inCorpus": true,
+      "note": "The 1864 vs 1867 revised-and-expanded French states are themselves a French-French collation opportunity.",
+      "translations": [
+        { "translator": "anonymous (Prof. Hardwigg)", "year": 1871, "publisher": "Griffith & Farran", "pg": 18857, "held": true, "publicDomain": true, "note": "drastically rewritten; renamed characters (Hardwigg/Harry/Gretchen); ~16% longer — a near-rewrite", "verify": null },
+        { "translator": "Frederick A. Malleson (Liedenbrock)", "year": 1877, "publisher": "Ward, Lock & Co.", "pg": 3748, "held": true, "publicDomain": true, "note": "more faithful; kept Liedenbrock", "verify": null },
+        { "translator": "Robert Baldick", "year": 1965, "publisher": "Penguin Classics", "pg": null, "held": false, "publicDomain": false, "note": null, "verify": null },
+        { "translator": "William Butcher", "year": 1992, "publisher": "Oxford World's Classics", "pg": null, "held": false, "publicDomain": false, "note": null, "verify": null },
+        { "translator": "Frank Wynne", "year": 2009, "publisher": "Penguin Classics", "pg": null, "held": false, "publicDomain": false, "note": null, "verify": null },
+        { "translator": "Matthew Jonas", "year": 2022, "publisher": "Birch Hill Publishing", "pg": null, "held": false, "publicDomain": false, "note": null, "verify": null },
+        { "translator": "UNRESOLVED", "year": null, "publisher": null, "pg": 19513, "held": false, "publicDomain": true, "note": "'A Journey to the Center of the Earth' — a further PG English text", "verify": "which translation" }
+      ]
+    },
+    {
+      "work": "mysterious-island",
+      "titleEn": "The Mysterious Island",
+      "titleFr": "L'Ile mysterieuse",
+      "frenchFirst": "1874-1875 (serial); 1875 (book)",
+      "frenchRevised": null,
+      "frenchPublisher": "Pierre-Jules Hetzel",
+      "frenchPg": 14287,
+      "inCorpus": true,
+      "translations": [
+        { "translator": "Agnes Kinloch Kingston & W. H. G. Kingston", "year": 1875, "publisher": "Sampson Low (UK); Scribner (US)", "pg": 1268, "held": true, "publicDomain": true, "note": "century-standard English; credited to W.H.G.K., largely his wife's work", "verify": null },
+        { "translator": "Stephen W. White", "year": 1876, "publisher": "Evening Telegraph (Philadelphia), then reprint", "pg": 8993, "held": true, "publicDomain": true, "note": "~175,000 words; fuller independent rendering", "verify": null },
+        { "translator": "I. O. Evans", "year": 1959, "publisher": "Associated Booksellers (Fitzroy)", "pg": null, "held": false, "publicDomain": false, "note": "abridged ~90k words", "verify": null },
+        { "translator": "Lowell Bair", "year": 1970, "publisher": "Bantam", "pg": null, "held": false, "publicDomain": false, "note": "abridged ~90k words", "verify": null },
+        { "translator": "Sidney Kravitz", "year": 2001, "publisher": "Wesleyan University Press", "pg": null, "held": false, "publicDomain": false, "note": "unabridged, illustrated", "verify": null },
+        { "translator": "Jordan Stump", "year": 2001, "publisher": "Random House / Modern Library", "pg": null, "held": false, "publicDomain": false, "note": "unabridged", "verify": null }
+      ]
+    },
+    {
+      "work": "around-the-world-80-days",
+      "titleEn": "Around the World in Eighty Days",
+      "titleFr": "Le Tour du monde en quatre-vingts jours",
+      "frenchFirst": "1872 (serial, Le Temps); 1873 (book)",
+      "frenchRevised": null,
+      "frenchPublisher": "Pierre-Jules Hetzel",
+      "frenchPg": null,
+      "inCorpus": false,
+      "note": "Strong CANDIDATE next corpus work: PG103 (Towle) vs PG28947 would be a clean two-translation pair. FRENCH SOURCE ID UNRESOLVED: gutenberg 20973 404s on both cache/epub and files paths (2026-07-24) — find the correct FR 'Le Tour du monde' id before adding.",
+      "translations": [
+        { "translator": "George Makepeace Towle", "year": 1873, "publisher": "James Osgood (Boston), reprinted by Sampson Low", "pg": 103, "held": false, "publicDomain": true, "note": "earliest English; widely reprinted", "verify": null },
+        { "translator": "UNRESOLVED", "year": null, "publisher": null, "pg": 28947, "held": false, "publicDomain": true, "note": "a second PG English text", "verify": "translator" },
+        { "translator": "William Butcher", "year": 1995, "publisher": "Oxford World's Classics", "pg": null, "held": false, "publicDomain": false, "note": null, "verify": null }
+      ]
+    },
+    {
+      "work": "five-weeks-in-a-balloon",
+      "titleEn": "Five Weeks in a Balloon",
+      "titleFr": "Cinq semaines en ballon",
+      "frenchFirst": "1863",
+      "frenchRevised": null,
+      "frenchPublisher": "Pierre-Jules Hetzel",
+      "frenchPg": null,
+      "inCorpus": false,
+      "note": "Verne's first Voyage extraordinaire.",
+      "translations": [
+        { "translator": "William Lackland", "year": 1869, "publisher": null, "pg": 3526, "held": false, "publicDomain": true, "note": null, "verify": "publisher; and confirm PG3526 is the Lackland text" },
+        { "translator": "Frederick Paul Walter (ed. Arthur B. Evans)", "year": 2015, "publisher": null, "pg": null, "held": false, "publicDomain": false, "note": "unabridged", "verify": "publisher" }
+      ]
+    }
+  ],
+
+  "canonIndex": {
+    "_note": "The full 54-novel Voyages extraordinaires (Verne's lifetime), English/French titles + first French year, all verified from the Wikipedia bibliography (sourced to Taves & Michaluk). English-translation detail is filled per work in `works` only as verified. This is the backlog scaffold: promote a row to `works` once its translations are sourced.",
+    "novels": [
+      { "n": 1, "en": "Five Weeks in a Balloon", "fr": "Cinq semaines en ballon", "frYear": "1863" },
+      { "n": 2, "en": "Journey to the Center of the Earth", "fr": "Voyage au centre de la Terre", "frYear": "1864 (rev. 1867)" },
+      { "n": 3, "en": "From the Earth to the Moon", "fr": "De la Terre a la Lune", "frYear": "1865" },
+      { "n": 4, "en": "The Adventures of Captain Hatteras", "fr": "Voyages et aventures du capitaine Hatteras", "frYear": "1866" },
+      { "n": 5, "en": "In Search of the Castaways", "fr": "Les Enfants du capitaine Grant", "frYear": "1867-68" },
+      { "n": 6, "en": "Twenty Thousand Leagues Under the Seas", "fr": "Vingt mille lieues sous les mers", "frYear": "1869-70" },
+      { "n": 7, "en": "Around the Moon", "fr": "Autour de la Lune", "frYear": "1870" },
+      { "n": 8, "en": "A Floating City", "fr": "Une ville flottante", "frYear": "1871" },
+      { "n": 9, "en": "The Adventures of Three Englishmen and Three Russians in South Africa", "fr": "Aventures de trois Russes et de trois Anglais dans l'Afrique australe", "frYear": "1872" },
+      { "n": 10, "en": "The Fur Country", "fr": "Le Pays des fourrures", "frYear": "1873" },
+      { "n": 11, "en": "Around the World in Eighty Days", "fr": "Le Tour du monde en quatre-vingts jours", "frYear": "1873" },
+      { "n": 12, "en": "The Mysterious Island", "fr": "L'Ile mysterieuse", "frYear": "1874-75" },
+      { "n": 13, "en": "The Survivors of the Chancellor", "fr": "Le Chancellor", "frYear": "1875" },
+      { "n": 14, "en": "Michael Strogoff", "fr": "Michel Strogoff", "frYear": "1876" },
+      { "n": 15, "en": "Off on a Comet (Hector Servadac)", "fr": "Hector Servadac", "frYear": "1877" },
+      { "n": 16, "en": "The Child of the Cavern", "fr": "Les Indes noires", "frYear": "1877" },
+      { "n": 17, "en": "Dick Sand, A Captain at Fifteen", "fr": "Un capitaine de quinze ans", "frYear": "1878" },
+      { "n": 18, "en": "The Begum's Fortune", "fr": "Les Cinq Cents Millions de la Begum", "frYear": "1879" },
+      { "n": 19, "en": "Tribulations of a Chinaman in China", "fr": "Les Tribulations d'un Chinois en Chine", "frYear": "1879" },
+      { "n": 20, "en": "The Steam House", "fr": "La Maison a vapeur", "frYear": "1880" },
+      { "n": 21, "en": "The Giant Raft", "fr": "La Jangada", "frYear": "1881" },
+      { "n": 22, "en": "Godfrey Morgan (The School for Robinsons)", "fr": "L'Ecole des Robinsons", "frYear": "1882" },
+      { "n": 23, "en": "The Green Ray", "fr": "Le Rayon vert", "frYear": "1882" },
+      { "n": 24, "en": "Keraban the Inflexible", "fr": "Keraban-le-tetu", "frYear": "1883" },
+      { "n": 25, "en": "The Vanished Diamond (The Star of the South)", "fr": "L'Etoile du sud", "frYear": "1884" },
+      { "n": 26, "en": "The Archipelago on Fire", "fr": "L'Archipel en feu", "frYear": "1884" },
+      { "n": 27, "en": "Mathias Sandorf", "fr": "Mathias Sandorf", "frYear": "1885" },
+      { "n": 28, "en": "The Lottery Ticket", "fr": "Un billet de loterie", "frYear": "1886" },
+      { "n": 29, "en": "Robur the Conqueror (The Clipper of the Clouds)", "fr": "Robur-le-Conquerant", "frYear": "1886" },
+      { "n": 30, "en": "North Against South", "fr": "Nord contre Sud", "frYear": "1887" },
+      { "n": 31, "en": "The Flight to France", "fr": "Le Chemin de France", "frYear": "1887" },
+      { "n": 32, "en": "Two Years' Vacation", "fr": "Deux ans de vacances", "frYear": "1888" },
+      { "n": 33, "en": "Family Without a Name", "fr": "Famille-sans-nom", "frYear": "1889" },
+      { "n": 34, "en": "The Purchase of the North Pole (Topsy-Turvy)", "fr": "Sans dessus dessous", "frYear": "1889" },
+      { "n": 35, "en": "Cesar Cascabel", "fr": "Cesar Cascabel", "frYear": "1890" },
+      { "n": 36, "en": "Mistress Branican", "fr": "Mistress Branican", "frYear": "1891" },
+      { "n": 37, "en": "Carpathian Castle", "fr": "Le Chateau des Carpathes", "frYear": "1892" },
+      { "n": 38, "en": "Claudius Bombarnac", "fr": "Claudius Bombarnac", "frYear": "1893" },
+      { "n": 39, "en": "Foundling Mick", "fr": "P'tit-Bonhomme", "frYear": "1893" },
+      { "n": 40, "en": "Captain Antifer", "fr": "Mirifiques Aventures de Maitre Antifer", "frYear": "1894" },
+      { "n": 41, "en": "Propeller Island", "fr": "L'Ile a helice", "frYear": "1895" },
+      { "n": 42, "en": "Facing the Flag", "fr": "Face au drapeau", "frYear": "1896" },
+      { "n": 43, "en": "Clovis Dardentor", "fr": "Clovis Dardentor", "frYear": "1896" },
+      { "n": 44, "en": "An Antarctic Mystery (The Sphinx of the Ice Fields)", "fr": "Le Sphinx des glaces", "frYear": "1897" },
+      { "n": 45, "en": "The Mighty Orinoco", "fr": "Le Superbe Orenoque", "frYear": "1898" },
+      { "n": 46, "en": "The Will of an Eccentric", "fr": "Le Testament d'un excentrique", "frYear": "1899" },
+      { "n": 47, "en": "The Castaways of the Flag (Second Fatherland)", "fr": "Seconde Patrie", "frYear": "1900" },
+      { "n": 48, "en": "The Village in the Treetops", "fr": "Le Village aerien", "frYear": "1901" },
+      { "n": 49, "en": "The Sea Serpent (The Yarns of Jean-Marie Cabidoulin)", "fr": "Les Histoires de Jean-Marie Cabidoulin", "frYear": "1901" },
+      { "n": 50, "en": "The Kip Brothers", "fr": "Les Freres Kip", "frYear": "1902" },
+      { "n": 51, "en": "Travel Scholarships", "fr": "Bourses de voyage", "frYear": "1903" },
+      { "n": 52, "en": "A Drama in Livonia", "fr": "Un drame en Livonie", "frYear": "1904" },
+      { "n": 53, "en": "Master of the World", "fr": "Maitre du monde", "frYear": "1904" },
+      { "n": 54, "en": "Invasion of the Sea", "fr": "L'Invasion de la mer", "frYear": "1905" }
+    ]
+  }
+}

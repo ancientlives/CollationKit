@@ -1,0 +1,1130 @@
+{
+  "graph" : {
+    "baseID" : "ed5097",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "L'année",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "1866",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "fut",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "marquée",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "par",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "un",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "événement",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "bizarre",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "un",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "phénomène",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 11,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "inexpliqué",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 12,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "et",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 13,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "inexplicable",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 14,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "que",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 15,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "personne",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 16,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "n'a",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 17,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "sans",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 18,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "doute",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 19,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "oublié",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 21,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Sans",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 22,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "parler",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 23,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 24,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "rumeurs",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 25,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "qui",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 26,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "agitaient",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 27,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "les",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 28,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "populations",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 29,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 30,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ports",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 31,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "et",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 32,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "surexcitaient",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 33,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "l'esprit",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 34,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "public",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 35,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "à",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 36,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "l'intérieur",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 37,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 38,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "continents",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 39,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "les",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 40,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "gens",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 41,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 42,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "mer",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 43,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "furent",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 44,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "particulièrement",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 45,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "émus",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 47,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Les",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 48,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "négociants",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 50,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "armateurs",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 52,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "capitaines",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 53,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 54,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "navires",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 56,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "skippers",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 57,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "et",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 58,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "masters",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 59,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 60,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "l'Europe",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 61,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "et",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 62,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 63,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "l'Amérique",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 65,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "officiers",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 66,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 67,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "marines",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 68,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "militaires",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 69,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 70,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "tous",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 71,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "pays",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 73,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "et",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 75,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "après",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 76,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "eux",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 78,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "les",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 79,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "gouvernements",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 80,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 81,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "divers",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 82,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "États",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 83,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 84,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "deux",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 85,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "continents",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 87,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "se",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 88,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "préoccupèrent",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 89,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 90,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ce",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 91,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "fait",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 92,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "au",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 93,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "plus",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 94,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "haut",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 95,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "point",
+            "witnesses" : [
+              "ed5097",
+              "ed54873"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "ed5097",
+      "compared" : "ed54873",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+
+      ]
+    }
+  ]
+}

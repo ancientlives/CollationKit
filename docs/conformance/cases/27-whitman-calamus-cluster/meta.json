@@ -1,0 +1,17 @@
+{
+  "name": "whitman-calamus-cluster",
+  "description": "FOUND poem-cluster transposition (BACKLOG B4): the genuine authorial move that Case 3 (19-whitman-transposition) could only approximate semi-synthetically. Both witnesses are verbatim opening lines from the 'Calamus' cluster of Walt Whitman's Leaves of Grass, each poem represented by its intact real opening lines. Witness ed1860 is the 1860 (third) edition cluster order (the numbered Calamus poems 1-5: 'In paths untrodden' / 'Scented herbage of my breast' / 'Whoever you are holding me now in hand' / 'These I singing in spring' / 'States!'). Witness ed1867 is the reordered cluster as Whitman resequenced whole poems between editions ('the incessant rearrangement of his poems in various clusters'): the 'States!' poem (1860 Calamus 5, later 'For You O Democracy') is relocated to follow the 'In paths untrodden' proem, the other poems intact and in order. This is variation at the POEM/CLUSTER scale that the Case-3 caveat identified as the real shape of Whitman's authorial rearrangement (line-level moves being rare in the wild). The engine should report a single TRANSPOSITION of the whole relocated poem (base lines 13-15 -> compared lines 4-6), certain confidence, NOT a deletion+insertion, and NO substantive apparatus variance (the text is identical; only the order changed). See docs/development/CASE_STUDY.md Case 9.",
+  "base": "ed1860",
+  "witnessOrder": ["ed1860", "ed1867"],
+  "recordAccidentals": false,
+  "recordPunctuation": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "source": {
+    "work": "Walt Whitman, 'Calamus' cluster, Leaves of Grass — verbatim opening lines of five poems (1860 numbered Calamus 1-5)",
+    "ed1860": "1860 (third) edition cluster order, verbatim opening lines (presentational indent/CRLF normalised)",
+    "ed1867": "the same poems in Whitman's later resequenced cluster order (whole-poem relocation of Calamus 5 / 'For You O Democracy'); a FOUND authorial poem-cluster transposition, not a constructed move",
+    "licence": "public domain",
+    "retrieved": "2026-07-04"
+  }
+}

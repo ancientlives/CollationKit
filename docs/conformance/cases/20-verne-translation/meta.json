@@ -1,0 +1,16 @@
+{
+  "name": "verne-translation",
+  "description": "Real TRANSLATION-collation case (BACKLOG B4): the opening paragraph of Jules Verne's 'Twenty Thousand Leagues Under the Seas' (Part 1, Ch.1) in two competing English translations of the same French original — the 1872 Mercier Lewis 'standard' translation (abridging/altering) versus the faithful, unabridged F. P. Walter translation. This is NOT authorial revision but translation variation: it stress-tests the engine on heavy substantive substitution between two renderings of one source ('signalised'/'marked', 'remarkable incident'/'bizarre development', 'deeply interested'/'extremely disturbed'). Base = the older Mercier translation. See docs/development/CASE_STUDY.md.",
+  "base": "mercier",
+  "witnessOrder": ["mercier", "walter"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "source": {
+    "work": "Jules Verne, Twenty Thousand Leagues Under the Seas, Part 1, Ch.1 ('The year 1866…'), first paragraph",
+    "mercier": "Project Gutenberg eBook #164 (Lewis Page Mercier translation, 1872), verbatim",
+    "walter": "Project Gutenberg eBook #2488 (F. P. Walter translation, complete/unabridged), verbatim",
+    "licence": "Mercier witness public domain; the Walter witness (PG2488) is (c) 1999 Frederick Paul Walter, used here as a short 87-word quotation for research and testing only (see LICENSE-docs.md)",
+    "retrieved": "2026-06-29"
+  }
+}

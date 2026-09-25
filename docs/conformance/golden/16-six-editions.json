@@ -1,0 +1,812 @@
+{
+  "graph" : {
+    "baseID" : "MS",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "The",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "travellers",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "reached",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "grey",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "harbour",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "at",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "dusk",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "They",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "were",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 11,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "tired",
+            "witnesses" : [
+              "MS"
+            ]
+          },
+          {
+            "reading" : "weary",
+            "witnesses" : [
+              "GB1",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 12,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 13,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 14,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "road",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 15,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "had",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 16,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "been",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 17,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "long",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 19,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "The",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 20,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "lamps",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 21,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "were",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 22,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "lit",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 23,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "along",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 24,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 25,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "quay",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 26,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "one",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 27,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "by",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 28,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "one",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 30,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "A",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 31,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "bitter",
+            "witnesses" : [
+              "UNI"
+            ]
+          },
+          {
+            "reading" : "cold",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 32,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "wind",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 33,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "came",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 34,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "in",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 35,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "from",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 36,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 37,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "open",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 38,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "sea",
+            "witnesses" : [
+              "GB1",
+              "MS",
+              "PR",
+              "TS",
+              "UNI",
+              "US1"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "MS",
+      "compared" : "TS",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 59,
+            "charTo" : 64,
+            "cite" : "p.1 · line 2 · word 3",
+            "endLine" : 1,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 1,
+            "page" : 0
+          },
+          "baseReading" : "tired",
+          "baseTokens" : {
+            "from" : 11,
+            "to" : 12
+          },
+          "comparedLocation" : {
+            "charFrom" : 59,
+            "charTo" : 64,
+            "cite" : "p.1 · line 2 · word 3",
+            "endLine" : 1,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 1,
+            "page" : 0
+          },
+          "comparedReading" : "weary",
+          "comparedTokens" : {
+            "from" : 11,
+            "to" : 12
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    },
+    {
+      "base" : "TS",
+      "compared" : "PR",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 0,
+        "transposition" : 1,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 115,
+            "charTo" : 159,
+            "cite" : "p.2 · line 1 · words 1–10",
+            "endLine" : 0,
+            "firstWord" : 0,
+            "lastWord" : 9,
+            "line" : 0,
+            "page" : 1
+          },
+          "baseReading" : "The lamps were lit along the quay one by one",
+          "baseTokens" : {
+            "from" : 19,
+            "to" : 29
+          },
+          "comparedLocation" : {
+            "charFrom" : 49,
+            "charTo" : 93,
+            "cite" : "p.1 · line 2 · words 1–10",
+            "endLine" : 1,
+            "firstWord" : 0,
+            "lastWord" : 9,
+            "line" : 1,
+            "page" : 0
+          },
+          "comparedReading" : "The lamps were lit along the quay one by one",
+          "comparedTokens" : {
+            "from" : 9,
+            "to" : 19
+          },
+          "confidence" : "certain",
+          "crossesPage" : true,
+          "type" : "transposition",
+          "withinTransposition" : false
+        }
+      ]
+    },
+    {
+      "base" : "PR",
+      "compared" : "GB1",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+
+      ]
+    },
+    {
+      "base" : "GB1",
+      "compared" : "US1",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+
+      ]
+    },
+    {
+      "base" : "US1",
+      "compared" : "UNI",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 161,
+            "charTo" : 165,
+            "cite" : "p.2 · line 1 · word 2",
+            "endLine" : 0,
+            "firstWord" : 1,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 1
+          },
+          "baseReading" : "cold",
+          "baseTokens" : {
+            "from" : 31,
+            "to" : 32
+          },
+          "comparedLocation" : {
+            "charFrom" : 161,
+            "charTo" : 167,
+            "cite" : "p.2 · line 1 · word 2",
+            "endLine" : 0,
+            "firstWord" : 1,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 1
+          },
+          "comparedReading" : "bitter",
+          "comparedTokens" : {
+            "from" : 31,
+            "to" : 32
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

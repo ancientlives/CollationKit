@@ -1,0 +1,90 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "witnesses",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "agree",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "everywhere",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "here",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+
+      ]
+    }
+  ]
+}

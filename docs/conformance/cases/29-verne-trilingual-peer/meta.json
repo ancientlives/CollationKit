@@ -1,0 +1,41 @@
+{
+  "name": "verne-trilingual-peer",
+  "description": "CROSS-LANGUAGE case (BACKLOG B10 + B14): the same three real witnesses as case 22 (Verne '20,000 Leagues' Pt 1 Ch.1 — the French original + the Mercier and Walter English translations), but collated with the PEER-MSA strategy and a TRANSLATION LEXICON covering the passage's skeleton (année/year, marquée/marked/signalised, phénomène/phenomenon, …). Case 22 pinned the honest NEGATIVE: without translation-aware anchoring the graph aligns positionally and drifts. This case pins the B10 fix: lexicon pairs anchor the alignment across the language boundary, each slot shows the per-witness renderings (the synoptic translation view — 'marquée | signalised | marked'), and where the two translations share a rendering they group onto ONE reading against the French. The lexicon is inline in this meta.json, so the case is self-contained and language-neutral. This is the pilot for the collated Verne digital corpus (all French editions + English translations). Residual, documented: French noun-adjective inversions ('phénomène inexpliqué' vs 'mysterious phenomenon') are an alignment tie and may pair one slot off; see CASE_STUDY.md.",
+  "base": "fr-5097",
+  "witnessOrder": ["fr-5097", "en-mercier", "en-walter"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "strategy": "peer-msa",
+  "lexicon": [
+    ["l'année", "year"],
+    ["fut", "was"],
+    ["marquée", "marked", "signalised"],
+    ["un", "a", "an"],
+    ["événement", "incident", "development"],
+    ["phénomène", "phenomenon"],
+    ["inexpliqué", "unexplained"],
+    ["que", "which", "that"],
+    ["personne", "one"],
+    ["oublié", "forgotten"],
+    ["rumeurs", "rumours", "rumors"],
+    ["capitaines", "captains"],
+    ["navires", "vessels"],
+    ["l'europe", "europe"],
+    ["l'amérique", "america"],
+    ["officiers", "officers"],
+    ["pays", "countries", "country"],
+    ["gouvernements", "governments"],
+    ["états", "states"],
+    ["deux", "two"],
+    ["et", "and"]
+  ],
+  "source": {
+    "work": "Jules Verne, Vingt mille lieues sous les mers / 20,000 Leagues Under the Seas, Pt 1 Ch. 1 opening",
+    "fr-5097": "Project Gutenberg #5097 (French), verbatim (same file as case 22)",
+    "en-mercier": "Project Gutenberg #164 (Mercier 1872), verbatim (same file as case 22)",
+    "en-walter": "Project Gutenberg #2488 (F. P. Walter), verbatim (same file as case 22)",
+    "licence": "fr/Mercier witnesses public domain; the Walter witness (PG2488) is (c) 1999 Frederick Paul Walter, used here as a short 87-word quotation for research and testing only (see LICENSE-docs.md)",
+    "retrieved": "2026-07-06"
+  }
+}

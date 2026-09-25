@@ -1,0 +1,1094 @@
+{
+  "graph" : {
+    "baseID" : "1855",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "celebrate",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "myself",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 2,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "and sing myself",
+            "witnesses" : [
+              "1891"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "1855"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "And",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "what",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "assume",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 8,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "you",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "shall",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "assume",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 12,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "For",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 13,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "every",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 14,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "atom",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 15,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "belonging",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 16,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 17,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "me",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 18,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "as",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 19,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "good",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 20,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "belongs",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 21,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 22,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "you",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 24,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 25,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "loafe",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 26,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 27,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "invite",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 28,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "my",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 29,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "soul",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 31,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 32,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "lean",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 33,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 34,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "loafe",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 35,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "at",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 36,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "my",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 37,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ease",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 42,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "observing",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 43,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 44,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "spear",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 45,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 46,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "summer",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 47,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "grass",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 47,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "My tongue , every atom of my blood , form’d from this soil , this air , Born here of parents born here from parents the same , and their parents the same , I , now thirty - seven years old in perfect health begin , Hoping to cease not till death . Creeds and schools in abeyance , Retiring back a while sufficed at what they are , but never forgotten , I harbor for good or bad , I permit to speak at every hazard , Nature without check with original energy",
+            "witnesses" : [
+              "1891"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "1855"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 49,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Houses",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 50,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 51,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "rooms",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 52,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "are",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 53,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "full",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 54,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 55,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "perfumes",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 60,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 61,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "shelves",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 62,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "are",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 63,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "crowded",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 64,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "with",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 65,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "perfumes",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 67,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 68,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "breathe",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 69,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 70,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "fragrance",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 71,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "myself",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 73,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 74,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "know",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 75,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "it",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 76,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 77,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "like",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 78,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "it",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 80,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "The",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 81,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "distillation",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 82,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "would",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 83,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "intoxicate",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 84,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "me",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 85,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "also",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 87,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "but",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 88,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 89,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "shall",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 90,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "not",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 91,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "let",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 92,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "it",
+            "witnesses" : [
+              "1855",
+              "1891"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "1855",
+      "compared" : "1891",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 2,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseReading" : "",
+          "comparedLocation" : {
+            "charFrom" : 20,
+            "charTo" : 35,
+            "cite" : "p.1 · line 1 · words 5–7",
+            "endLine" : 0,
+            "firstWord" : 4,
+            "lastWord" : 6,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "and sing myself",
+          "comparedTokens" : {
+            "from" : 4,
+            "to" : 7
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "insertion",
+          "withinTransposition" : false
+        },
+        {
+          "baseReading" : "",
+          "comparedLocation" : {
+            "charFrom" : 221,
+            "charTo" : 663,
+            "cite" : "p.1 · lines 6–13 · words 1…6",
+            "endLine" : 12,
+            "firstWord" : 0,
+            "lastWord" : 5,
+            "line" : 5,
+            "page" : 0
+          },
+          "comparedReading" : "My tongue , every atom of my blood , form’d from this soil , this air , Born here of parents born here from parents the same , and their parents the same , I , now thirty - seven years old in perfect health begin , Hoping to cease not till death . Creeds and schools in abeyance , Retiring back a while sufficed at what they are , but never forgotten , I harbor for good or bad , I permit to speak at every hazard , Nature without check with original energy",
+          "comparedTokens" : {
+            "from" : 49,
+            "to" : 144
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "insertion",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

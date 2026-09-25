@@ -1,0 +1,117 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "quick",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "brown",
+            "witnesses" : [
+              "A"
+            ]
+          },
+          {
+            "reading" : "red",
+            "witnesses" : [
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "fox",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 10,
+            "charTo" : 15,
+            "cite" : "p.1 · line 1 · word 3",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "brown",
+          "baseTokens" : {
+            "from" : 2,
+            "to" : 3
+          },
+          "comparedLocation" : {
+            "charFrom" : 10,
+            "charTo" : 13,
+            "cite" : "p.1 · line 1 · word 3",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "red",
+          "comparedTokens" : {
+            "from" : 2,
+            "to" : 3
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

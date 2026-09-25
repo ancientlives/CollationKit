@@ -1,0 +1,9 @@
+{
+  "name": "apostrophe-hyphen",
+  "description": "Tokeniser parity: apostrophes and hyphens in words (seeds B6). One substantive change among them.",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

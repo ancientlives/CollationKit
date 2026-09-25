@@ -1,0 +1,31 @@
+# SwiftPM / Xcode
+.build/
+.swiftpm/
+*.xcodeproj/
+xcuserdata/
+DerivedData/
+Package.resolved
+
+# collate output
+/results/
+collation.html
+!site/**/collation.html
+
+# Verne corpus raw downloads (rebuilt by corpus/verne/scripts/build_corpus.sh)
+corpus/verne/raw/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# OS / editors
+.DS_Store
+.vscode/
+.idea/
+
+# F. P. Walter translation (copyrighted; rebuilt locally by corpus/verne/scripts/build_corpus.sh — never commit)
+corpus/verne/20000-leagues/walter.txt
+corpus/verne/20000-leagues/full/walter.txt
+corpus/verne/20000-leagues/full/walter.unmarked.txt
+corpus/verne/known-issues/repro-walter-700.txt

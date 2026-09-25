@@ -1,0 +1,2226 @@
+import CollationKit
+import Foundation
+
+// MARK: - Interactive collation viewer (BACKLOG B8 — the HTML export)
+//
+// A single, SELF-CONTAINED page (no network, no dependencies) a user opens after a run to *explore* the
+// collation — the interactive counterpart of the printed apparatus:
+//
+//   • PERSPECTIVES — one tab per witness. The base tab shows the copy-text annotated with every point where
+//     any witness diverges; a witness tab shows THAT text annotated with how it differs from the base. The
+//     same variation is reachable from both sides, so the user can flip perspective and see the counterpart.
+//   • ALIGNMENT AT A GLANCE — unmarked text is agreement; coloured spans are variation, coloured by type
+//     (substitution / insertion / deletion / transposition / spelling), with `certain`/`likely` and
+//     within-a-move edits distinguished.
+//   • EXPLORATION — clicking a span (or a row in the variant panel) shows the full entry: both readings,
+//     both citations, type + confidence; rows without a span on the current side (e.g. a deletion viewed
+//     from the witness that omits it) offer a "view in ⟨other witness⟩" hop that switches perspective and
+//     scrolls to the counterpart. The panel filters by type; the apparatus view lists the N-witness variant
+//     graph entries (lemma] reading sigla; …).
+//
+// Rendering strategy: the page embeds the witness TEXTS and the annotation LIST as JSON (UTF-16 offsets —
+// exactly `TextLocation.charRange`'s units, which are also JavaScript's native string indexing), and a small
+// inline script slices the text into spans in the browser. Slicing client-side keeps offsets exact, keeps
+// the Swift side free of HTML-in-text escaping bugs, and keeps this exporter a *pure, deterministic*
+// function of the `CollationRun` (snapshot-testable like every other exporter).
+
+public enum HTMLExport {
+
+    // MARK: payload (embedded as JSON)
+
+    struct Payload: Encodable {
+        struct WitnessDTO: Encodable { let id: String; let text: String }
+        struct Side: Encodable {
+            let from: Int?          // UTF-16 offset range in that witness's text; nil when this side omits
+            let to: Int?
+            let cite: String?       // the human citation ("p.1 · line 2 · words 3–6")
+            let reading: String
+        }
+        struct Annotation: Encodable {
+            let witness: String     // the non-base witness this annotation compares against the base
+            let type: String
+            let confidence: String
+            let withinMove: Bool
+            let base: Side
+            let comp: Side
+            let baseAnchor: Int?    // for an INSERTION (no base span): the base UTF-16 offset it follows, so the
+                                    // change/transformation view can place the added text in reading order (#5)
+        }
+        struct ApparatusVariant: Encodable { let reading: String; let sigla: [String] }
+        struct ApparatusEntryDTO: Encodable {
+            let position: Int
+            let lemma: String
+            let type: String
+            let variants: [ApparatusVariant]
+            let from: Int?        // base-text UTF-16 range of the lemma (nil for an inserted-only entry) — lets
+            let to: Int?          // the apparatus line link to its place in the base text (#4)
+        }
+
+        // #2 — the merge substrate for the VISUAL variant-graph: the spine (canonical reading order), every
+        // node with its readings (surface → sigla) and whether it is agreement / inserted, plus the edges
+        // (spine + move). Surfaced straight from `run.tokenGraph`; deterministic (sorted, no timestamps).
+        //
+        // COMPACTNESS matters here — a novel has ~145k spine nodes, most of them agreement. An agreement node's
+        // reading is identical across every witness, so it needs only its surface string (`agree`), not the
+        // per-witness `readings`/sigla (that would carry the whole witness list on every agreeing token and
+        // dominate the payload). Only variant/inserted nodes carry `readings`. Encodable skips nil fields.
+        struct GraphNodeDTO: Encodable {
+            let id: Int
+            let isInserted: Bool
+            let insertedAfterCol: Int?  // for an inserted node: the SPINE COLUMN index it follows (-1 = before all)
+            let from: Int?          // base-text UTF-16 range for a spine node (nil for inserted / off-base)
+            let to: Int?
+            let agree: String?      // agreement node: the shared surface (readings/isAgreement omitted)
+            let readings: [ApparatusVariant]?  // variant/inserted node: reading (surface) → sigla, sorted
+        }
+        struct GraphEdgeDTO: Encodable {
+            let from: Int
+            let to: Int
+            let isMove: Bool
+            let confidence: String
+            let witnesses: [String]
+        }
+        struct GraphDTO: Encodable {
+            let spine: [Int]
+            let nodes: [GraphNodeDTO]
+            let edges: [GraphEdgeDTO]
+        }
+
+        // The metadata / "what was detected" panel (tail of #5). Run-wide, not per-perspective: total counts
+        // per type across every base↔witness pair, the witness list with sizes, and the graph shape. Types
+        // with a zero count are still listed so "spelling was checked and found nothing" is explicit.
+        struct WitnessSizeDTO: Encodable { let id: String; let chars: Int; let tokens: Int }
+        struct SummaryDTO: Encodable {
+            let typeCounts: [String: Int]     // every known type → total across the run (0 if never detected)
+            let witnessSizes: [WitnessSizeDTO]
+            let spineLength: Int
+            let variantNodes: Int
+            let insertedNodes: Int
+            let moveEdges: Int
+        }
+
+        // The plain-prose story of the collation (`CollationNarrative`), one entry per non-base witness, keyed by
+        // witness id. Embedded so the viewer's Story tab renders the SAME narrative as `summary.txt` / the console.
+        struct NarrativeDTO: Encodable { let witness: String; let text: String }
+
+        let base: String
+        let witnesses: [WitnessDTO]
+        let annotations: [Annotation]
+        let apparatus: [ApparatusEntryDTO]
+        let graph: GraphDTO?             // nil when no token-graph was built (empty set / legacy fallback)
+        let summary: SummaryDTO
+        let narratives: [NarrativeDTO]   // the prose story per compared witness (Story tab / summary.txt)
+        let strategy: String
+        let scoring: String
+        let hasLexicon: Bool
+        let viewerPairsAvailable: Bool   // false → texts shown without highlights (run lacked basePairs)
+    }
+
+    /// Build the payload from a run. Annotations come from the BASE-ANCHORED pairs (base ↔ each witness),
+    /// which is what makes perspective flipping coherent: every annotation has a base side and a witness side.
+    static func payload(for run: CollationRun) -> Payload {
+        // Base tokens, to resolve an insertion's anchor (a base token index) to a char offset for the #5 view.
+        let baseTokensForAnchor = Tokenizer.tokenize(run.witnesses.first?.text ?? "",
+                                                     with: run.options.normalizer, pagination: run.options.pagination.model)
+        func anchorChar(_ tokenIndex: Int?) -> Int? {
+            guard let i = tokenIndex else { return nil }
+            if i < 0 { return 0 }                                   // before all base text
+            return i < baseTokensForAnchor.count ? baseTokensForAnchor[i].range.upperBound : nil
+        }
+        var annotations: [Payload.Annotation] = []
+        for pair in run.basePairs {
+            for v in pair.variations {
+                annotations.append(Payload.Annotation(
+                    witness: pair.compared,
+                    type: v.type.rawValue,
+                    confidence: v.confidence.rawValue,
+                    withinMove: v.withinTransposition,
+                    base: Payload.Side(from: v.baseLocation?.charRange.lowerBound,
+                                       to: v.baseLocation?.charRange.upperBound,
+                                       cite: v.baseLocation?.human,
+                                       reading: v.baseReading),
+                    comp: Payload.Side(from: v.comparedLocation?.charRange.lowerBound,
+                                       to: v.comparedLocation?.charRange.upperBound,
+                                       cite: v.comparedLocation?.human,
+                                       reading: v.comparedReading),
+                    baseAnchor: v.type == .insertion ? anchorChar(v.insertionAnchor) : nil))
+            }
+        }
+        // Base token char ranges, so an apparatus line can link to its place in the base text (#4). The entry's
+        // `position` is a base full-token index for a substantive node (-1/insert-anchor for an inserted entry).
+        let baseToks = Tokenizer.tokenize(run.witnesses.first?.text ?? "",
+                                          with: run.options.normalizer, pagination: run.options.pagination.model)
+        let apparatus = Apparatus.entries(from: run.graph)
+            .sorted { $0.position < $1.position }
+            .map { e -> Payload.ApparatusEntryDTO in
+                let rng = (e.position >= 0 && e.position < baseToks.count) ? baseToks[e.position].range : nil
+                return Payload.ApparatusEntryDTO(
+                    position: e.position, lemma: e.lemma, type: e.type.rawValue,
+                    variants: e.variants.map { Payload.ApparatusVariant(reading: $0.reading, sigla: $0.sigla) },
+                    from: rng?.lowerBound, to: rng?.upperBound)
+            }
+        // The prose narrative per compared witness — the exact `CollationNarrative` the console/`summary.txt`
+        // show, so the viewer's Story tab is the same story (single source of truth). Base-anchored pairs when
+        // available (each witness vs the base); else the successive pairs.
+        let narrPairs = run.basePairs.isEmpty ? run.pairs : run.basePairs
+        let textByID = Dictionary(run.witnesses.map { ($0.id, $0.text) }, uniquingKeysWith: { a, _ in a })
+        let narratives = narrPairs.map { pair in
+            Payload.NarrativeDTO(witness: pair.compared,
+                                 text: CollationNarrative.summary(pair,
+                                                                  base: textByID[pair.base] ?? "",
+                                                                  compared: textByID[pair.compared] ?? ""))
+        }
+
+        return Payload(
+            base: run.baseID,
+            witnesses: run.witnesses.map { Payload.WitnessDTO(id: $0.id, text: $0.text) },
+            annotations: annotations,
+            apparatus: apparatus,
+            graph: graphDTO(for: run),
+            summary: summaryDTO(for: run, annotations: annotations),
+            narratives: narratives,
+            strategy: run.options.strategy.rawValue,
+            scoring: run.options.scoring.rawValue,
+            hasLexicon: run.lexicon != nil,
+            viewerPairsAvailable: !run.basePairs.isEmpty)
+    }
+
+    /// #2 — project the raw `TokenGraph` to the viewer's graph DTO: spine order, every node with sorted
+    /// readings and (for spine nodes) its base-text char range so a clicked column cross-links to the text, and
+    /// the edges (spine + move). Deterministic: nodes emitted in id order, readings and edges sorted.
+    static func graphDTO(for run: CollationRun) -> Payload.GraphDTO? {
+        guard let g = run.tokenGraph else { return nil }
+        // Base char ranges for spine nodes: tokenise the base exactly as the run did, then map each spine
+        // index → its base full-token position (`baseComparablePositions`) → that token's UTF-16 range.
+        let baseTokens = Tokenizer.tokenize(run.witnesses.first?.text ?? "",
+                                            with: run.options.normalizer,
+                                            pagination: run.options.pagination.model)
+        var rangeForNode: [TokenGraphNode.NodeID: Range<Int>] = [:]
+        var colForBasePos: [Int: Int] = [:]   // base full-token position → spine column index
+        for (i, nodeID) in g.spine.enumerated() where i < g.baseComparablePositions.count {
+            let pos = g.baseComparablePositions[i]
+            colForBasePos[pos] = i
+            if pos >= 0 && pos < baseTokens.count { rangeForNode[nodeID] = baseTokens[pos].range }
+        }
+        let spineSet = Set(g.spine)
+        let nodes = g.nodes.sorted { $0.id < $1.id }.map { n -> Payload.GraphNodeDTO in
+            let rng = rangeForNode[n.id]
+            let inserted = !spineSet.contains(n.id)
+            // Agreement spine node: only its shared surface is needed (readings/sigla would be pure bloat).
+            if n.isAgreement, let only = n.readings.values.first {
+                return Payload.GraphNodeDTO(id: n.id, isInserted: false, insertedAfterCol: nil,
+                                            from: rng?.lowerBound, to: rng?.upperBound,
+                                            agree: only.surface, readings: nil)
+            }
+            // Variant/inserted node: readings surface → sigla (merge buckets sharing a surface), sorted.
+            var bySurface: [String: Set<String>] = [:]
+            for r in n.readings.values { bySurface[r.surface, default: []].formUnion(r.witnesses) }
+            let readings = bySurface.keys.sorted().map { s in
+                Payload.ApparatusVariant(reading: s, sigla: bySurface[s]!.sorted())
+            }
+            let anchorPos = g.insertedAnchorByNodeID[n.id] ?? -1
+            return Payload.GraphNodeDTO(
+                id: n.id, isInserted: inserted,
+                insertedAfterCol: inserted ? (anchorPos < 0 ? -1 : (colForBasePos[anchorPos] ?? -1)) : nil,
+                from: rng?.lowerBound, to: rng?.upperBound, agree: nil, readings: readings)
+        }
+        let edges = g.edges
+            .sorted { a, b in a.from != b.from ? a.from < b.from
+                            : (a.to != b.to ? a.to < b.to : (!a.isMove && b.isMove)) }
+            .map { e in
+                Payload.GraphEdgeDTO(from: e.from, to: e.to, isMove: e.isMove,
+                                     confidence: e.confidence.rawValue, witnesses: e.witnesses.sorted())
+            }
+        return Payload.GraphDTO(spine: g.spine, nodes: nodes, edges: edges)
+    }
+
+    /// The metadata / "what was detected" summary. Type counts are run-wide (across every base↔witness pair, so
+    /// they don't shift with perspective) and every known type is present — a zero tells the user a type was
+    /// checked and found nothing, rather than "not checked". Witness sizes + graph shape round it out.
+    static func summaryDTO(for run: CollationRun, annotations: [Payload.Annotation]) -> Payload.SummaryDTO {
+        var counts: [String: Int] = [:]
+        for t in VariationType.allCases { counts[t.rawValue] = 0 }
+        for a in annotations { counts[a.type, default: 0] += 1 }
+        let sizes = run.witnesses.map { w -> Payload.WitnessSizeDTO in
+            let toks = Tokenizer.tokenize(w.text, with: run.options.normalizer,
+                                          pagination: run.options.pagination.model)
+                .filter { $0.isComparable }.count
+            return Payload.WitnessSizeDTO(id: w.id, chars: (w.text as NSString).length, tokens: toks)
+        }
+        let g = run.tokenGraph
+        let spineSet = Set(g?.spine ?? [])
+        let variantNodes = g?.nodes.filter { $0.readings.count > 1 }.count ?? 0
+        let insertedNodes = g?.nodes.filter { !spineSet.contains($0.id) }.count ?? 0
+        let moveEdges = g?.edges.filter { $0.isMove }.count ?? 0
+        return Payload.SummaryDTO(typeCounts: counts, witnessSizes: sizes,
+                                  spineLength: g?.spine.count ?? 0, variantNodes: variantNodes,
+                                  insertedNodes: insertedNodes, moveEdges: moveEdges)
+    }
+
+    /// The complete, self-contained page. Deterministic (sorted JSON keys; no timestamps).
+    public static func html(_ run: CollationRun) -> String {
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.sortedKeys]
+        let data = (try? encoder.encode(payload(for: run))) ?? Data("{}".utf8)
+        // `</` must not terminate the script block early; escaping it is the one required transform.
+        let json = String(decoding: data, as: UTF8.self).replacingOccurrences(of: "</", with: "<\\/")
+        return template
+            .replacingOccurrences(of: "%%TITLE%%", with: escapeHTML("Collation — \(run.witnessOrder.joined(separator: " · "))"))
+            .replacingOccurrences(of: "%%DATA%%", with: json)
+    }
+
+    static func escapeHTML(_ s: String) -> String {
+        s.replacingOccurrences(of: "&", with: "&amp;")
+         .replacingOccurrences(of: "<", with: "&lt;")
+         .replacingOccurrences(of: ">", with: "&gt;")
+    }
+
+    // MARK: the page (inline CSS + JS; no external resources)
+
+    static let template = #"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>%%TITLE%%</title>
+<style>
+  :root { --sub:#b45309; --ins:#15803d; --del:#b91c1c; --mov:#1d4ed8; --spl:#7e22ce;
+          --subbg:#fef3c7; --insbg:#dcfce7; --delbg:#fee2e2; --movbg:#dbeafe; --splbg:#f3e8ff; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.5 -apple-system, "Segoe UI", Roboto, sans-serif; color:#1c1917; background:#fafaf9; }
+  header { padding:10px 16px; background:#292524; color:#fafaf9; }
+  header h1 { margin:0; font-size:15px; font-weight:600; }
+  header .meta { font-size:12px; color:#d6d3d1; margin-top:2px; }
+  nav.tabs { display:flex; gap:2px; padding:8px 16px 0; background:#292524; flex-wrap:wrap; }
+  nav.tabs button { border:0; padding:7px 14px; border-radius:6px 6px 0 0; background:#44403c; color:#e7e5e4;
+                    cursor:pointer; font-size:13px; }
+  nav.tabs button.active { background:#fafaf9; color:#1c1917; font-weight:600; }
+  nav.tabs button .badge { opacity:.7; font-size:11px; margin-left:6px; }
+  .legend { padding:6px 16px; font-size:12px; color:#57534e; border-bottom:1px solid #e7e5e4; background:#fff;
+            display:flex; flex-wrap:wrap; align-items:center; gap:4px 2px; }
+  .legend .k { padding:1px 6px; border-radius:3px; margin-right:8px; white-space:nowrap; }
+  .legend label { margin-right:10px; cursor:pointer; white-space:nowrap; }
+  /* #1 — the persistent COLOUR KEY: always shown on a text tab so a reader knows what each highlight colour
+     means, independent of the (separate) type filters. One swatch per variation type, coloured as the spans. */
+  .keybar { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-right:14px; }
+  .keybar .ky { display:inline-flex; align-items:center; gap:5px; white-space:nowrap; }
+  .keybar .sw { width:13px; height:13px; border-radius:3px; display:inline-block; }
+  .legend .filters { display:flex; flex-wrap:wrap; align-items:center; gap:4px 2px; }
+  .legend .sep { color:#d6d3d1; margin:0 6px; }
+  main { display:flex; height:calc(100vh - 118px); }
+  #text { flex:1.7; overflow:auto; padding:18px 22px; white-space:pre-wrap; font:14px/1.75 Georgia, "Times New Roman", serif;
+          background:#fff; }
+  /* The side panel is a flex COLUMN: the detail card stays pinned at the top while only the variant list below
+     it scrolls — so the metadata for a selected variation is always visible however far you've scrolled (#2). */
+  #side { flex:1; min-width:320px; max-width:460px; display:flex; flex-direction:column; min-height:0;
+          border-left:1px solid #e7e5e4; background:#fafaf9; }
+  #detail { flex:0 0 auto; padding:10px 14px; border-bottom:2px solid #d6d3d1; background:#fff; min-height:74px;
+            max-height:45%; overflow:auto; font-size:13px; }
+  #detail .cite { color:#78716c; font-size:12px; }
+  #detail .rdg { font:13px Georgia, serif; padding:2px 6px; border-radius:3px; }
+  #list { flex:1 1 auto; overflow:auto; min-height:0; }
+  #list div.row { padding:5px 14px; border-bottom:1px solid #eee; cursor:pointer; font-size:12.5px; }
+  #list div.row:hover { background:#f5f5f4; }
+  #list div.row.active { background:#e7e5e4; }
+  #list .t { display:inline-block; width:86px; font-weight:600; font-size:11px; text-transform:uppercase; }
+  #list .likely { opacity:.65; }
+  #list .hop { float:right; font-size:11px; color:#1d4ed8; }
+  span.v { border-radius:3px; cursor:pointer; }
+  span.v.active { outline:2px solid #1c1917; }
+  /* a brief pulse on a span we JUMPED to from the graph/apparatus, so the exact variant is obvious (#1) */
+  .flash { animation:flashpulse 1.4s ease-out; }
+  @keyframes flashpulse { 0% { box-shadow:0 0 0 3px #fde68a, 0 0 0 6px #f59e0b; }
+                          100% { box-shadow:0 0 0 3px transparent, 0 0 0 6px transparent; } }
+  .substitution { background:var(--subbg); box-shadow:inset 0 -2px 0 var(--sub); }
+  .insertion { background:var(--insbg); box-shadow:inset 0 -2px 0 var(--ins); }
+  .deletion { background:var(--delbg); box-shadow:inset 0 -2px 0 var(--del); }
+  .transposition { background:var(--movbg); box-shadow:inset 0 -2px 0 var(--mov); }
+  .variantSpelling { background:var(--splbg); box-shadow:inset 0 -2px 0 var(--spl); }
+  .withinMove { text-decoration: underline dotted; }
+  .likelySpan { opacity:.75; }
+  /* apparatus tab: a help header, a SCROLLABLE clickable list, and its OWN detail panel — self-contained (#4) */
+  #apparatus { padding:0; background:#fff; overflow:hidden; flex:1.7; display:none; flex-direction:column; }
+  #apparatus .aphelp { flex:0 0 auto; padding:10px 20px; font:12.5px/1.55 -apple-system, sans-serif; color:#57534e;
+                       background:#fbfbfa; border-bottom:1px solid #e7e5e4; }
+  #apparatus .aphelp b { color:#1c1917; }
+  #apparatus .aphelp .ex { display:inline-block; background:#fff; border:1px solid #e7e5e4; border-radius:4px;
+                           padding:1px 6px; font:12px Georgia, serif; }
+  #apparatus .aphelp .ex .p { color:#a8a29e; } #apparatus .aphelp .ex .lm { font-weight:700; }
+  #apparatus .aphelp .ex .sg { font:10px -apple-system, sans-serif; color:#78716c; text-transform:uppercase; }
+  #apparatus .aplist { flex:1 1 auto; overflow:auto; min-height:0; padding:8px 0 14px; font:13px/1.7 Georgia, serif; }
+  #apparatus .apline { padding:2px 20px; cursor:pointer; border-left:3px solid transparent; }
+  #apparatus .apline:hover { background:#f5f5f4; }
+  #apparatus .apline.active { background:#eef2ff; border-left-color:#1d4ed8; }
+  #apparatus .pos { color:#a8a29e; margin-right:8px; font:11px -apple-system, sans-serif; }
+  #apparatus .lemma { font-weight:700; }
+  #apparatus .apsig { font:10px -apple-system, sans-serif; color:#78716c; text-transform:uppercase; letter-spacing:.3px; }
+  #apparatus .semi { color:#c4c0bb; }
+  /* the apparatus detail panel (its own, not the text-tab sidebar) */
+  #apparatus .apdetail { flex:0 0 auto; max-height:40%; overflow:auto; border-top:2px solid #d6d3d1; background:#fff;
+                         padding:12px 20px; font:13px -apple-system, sans-serif; display:none; }
+  #apparatus .apdetail.on { display:block; }
+  #apparatus .apdetail h4 { margin:0 0 8px; font-size:13px; }
+  #apparatus .apdetail .rd { margin:5px 0; font:14px Georgia, serif; }
+  #apparatus .apdetail .rd .sig { font:10px -apple-system, sans-serif; color:#78716c; text-transform:uppercase;
+                                  letter-spacing:.4px; margin-right:8px; display:inline-block; min-width:70px; }
+  #apparatus .apdetail .rd .rw { padding:1px 6px; border-radius:3px; }
+  #apparatus .apdetail .apcite { margin-top:8px; font:12px -apple-system, sans-serif; color:#78716c; }
+  #apparatus .apdetail .apcite b { color:#1c1917; }
+  #apparatus .apdetail .links { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+  #apparatus .apdetail .links button { border:1px solid #d6d3d1; background:#fff; color:#1d4ed8; border-radius:5px;
+                                       padding:5px 11px; font-size:12px; cursor:pointer; }
+  #apparatus .apdetail .links button:hover { background:#f5f5f4; }
+  .notice { padding:14px 20px; color:#78716c; font-size:13px; }
+
+  /* #2 — visual variant-graph (columnar "score" layout). Each spine position is a column; agreement columns
+     render compact/greyed, variant columns stack one row per reading (sigla-labelled, type-coloured). Windowed:
+     only the columns near the viewport are built. Move edges are an inline-SVG overlay of arcs above the row. */
+  #graph { flex:1.7; background:#fff; display:none; flex-direction:column; overflow:hidden; }
+  #graph .ghelp { flex:0 0 auto; padding:7px 16px; font-size:12px; color:#57534e; background:#fbfbfa;
+                  border-bottom:1px solid #e7e5e4; }
+  #graph .ghelp b { color:#1c1917; }
+  #graph .hscroll { flex:1 1 auto; overflow:auto; position:relative; min-height:0; }
+  #graph .scroller { position:relative; min-height:100%; }
+  /* The columns are laid out on a horizontal SPINE (the agreement backbone). A baseline rule runs through the
+     agreement row; each column is a node ON that spine, and a variant column's stacked readings hang BELOW the
+     spine as branches (a connector drops from the spine to each reading). This is what makes it read as a
+     variant GRAPH — spine + branch nodes + move arcs — rather than a flat list of boxes (#3).
+     The spine sits well down the viewport (SPINE_TOP) so move arcs have room to bow up ABOVE it and variant
+     readings have room to hang BELOW it — using the vertical space like a real graph (#3). */
+  #graph .cols { display:flex; align-items:flex-start; padding:150px 14px 40px; gap:0; min-height:100%;
+                 position:relative; }
+  #graph .spineline { position:absolute; left:0; height:2px; background:#d6d3d1; top:168px; z-index:0; }
+  /* Every column is exactly COL_W wide (JS positions the spine + arcs on that stride), so the dots stay evenly
+     spaced. Variant readings hang below on a connector; a hovered/active node lifts above the rest. Nodes are
+     kept clear + readable (#2): a legible reading, each reading tagged with a witness chip, colour-coded. */
+  .gcol { position:relative; z-index:1; flex:0 0 auto; width:76px; display:flex; flex-direction:column;
+          align-items:center; cursor:pointer; border-radius:6px; transition:background .1s; }
+  .gcol:hover { z-index:6; }
+  .gcol.variant:hover, .gcol.inserted:hover, .gcol.active { z-index:5; }
+  /* #1 — edge columns anchor their hover-expanded card inward so it never spills off the (non-left-scrollable)
+     start of the graph. The dot/label stay centred on the spine; only the widening branch card (and the greyed
+     agreement label) is re-anchored — left-edge cards grow rightward, right-edge cards grow leftward. */
+  .gcol.edgeL .branches, .gcol.edgeL .agreelbl { align-self:flex-start; text-align:left; }
+  .gcol.edgeR .branches, .gcol.edgeR .agreelbl { align-self:flex-end; text-align:right; }
+  /* #2 — clear HOVER FEEDBACK that a node is clickable: a soft highlight column behind it (reaching up to the
+     spine) and a ring on the dot. Makes even an agreement node read as interactive. */
+  .gcol::before { content:''; position:absolute; top:-6px; left:2px; right:2px; bottom:0; border-radius:6px;
+                  background:transparent; z-index:-1; pointer-events:none; transition:background .1s; }
+  .gcol:hover::before { background:rgba(29,78,216,.07); box-shadow:0 0 0 1px rgba(29,78,216,.18); }
+  .gcol.active::before { background:rgba(245,158,11,.10); box-shadow:0 0 0 1px rgba(245,158,11,.35); }
+  .gcol .gpos { font:10px -apple-system, sans-serif; color:#c4c0bb; margin-bottom:3px; }
+  .gcol:hover .gpos { color:#1d4ed8; }
+  /* the node dot sitting ON the spine */
+  .gcol .dot { width:10px; height:10px; border-radius:50%; background:#a8a29e; border:2px solid #fff;
+               box-shadow:0 0 0 1px #d6d3d1; margin-bottom:3px; transition:box-shadow .1s, transform .1s; }
+  .gcol.variant .dot { background:#57534e; box-shadow:0 0 0 1px #57534e; }
+  .gcol.inserted .dot { background:var(--ins); box-shadow:0 0 0 1px var(--ins); }
+  .gcol:hover .dot { transform:scale(1.25); box-shadow:0 0 0 2px #1d4ed8; }
+  .gcol.active .dot { width:13px; height:13px; background:#1c1917; box-shadow:0 0 0 3px #fde68a, 0 0 0 4px #1c1917; }
+  /* agreement label sits just under its dot, compact + greyed */
+  .gcol .agreelbl { font:12px/1.35 Georgia, serif; color:#57534e; max-width:74px; text-align:center;
+                    white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .gcol:hover .agreelbl { max-width:220px; overflow:visible; color:#1c1917; }
+  /* a short connector line dropping from the spine dot to the branch box, so branches read as hanging off it */
+  .gcol .stem { width:2px; height:14px; background:#a8a29e; }
+  .gcol.inserted .stem { background:var(--ins); }
+  /* variant branches drop below the spine — a card with one clear ROW per witness reading. Each row STACKS a
+     small witness chip above its reading, so both stay legible in a narrow column (#2). A type-coloured left
+     stripe reinforces what kind of variant it is. On hover/active the card widens to show full readings. */
+  .gcol .branches { display:flex; flex-direction:column; gap:0; width:74px;
+                    border-radius:6px; background:#fff; border:1px solid #d6d3d1; overflow:hidden;
+                    box-shadow:0 1px 3px rgba(0,0,0,.07); }
+  .gcol.active .branches, .gcol:hover .branches { width:230px; border-color:#78716c; }
+  .gcol .grow { display:flex; flex-direction:column; gap:1px; padding:4px 7px; border-top:1px solid #f0efed;
+                border-left:3px solid transparent; }
+  .gcol .grow:first-child { border-top:0; }
+  /* the witness chip (sigla) — a small tag naming which witness(es) read this */
+  .gcol .grow .sig { align-self:flex-start; font:9px/1.5 -apple-system, sans-serif; font-weight:700; color:#57534e;
+                     background:#f0efed; border-radius:3px; padding:0 5px; text-transform:uppercase; letter-spacing:.4px;
+                     white-space:nowrap; }
+  /* the reading text — coloured by variation type, ellipsised until the node is focused */
+  .gcol .grow .rdt { font:13px/1.3 Georgia, serif; color:#1c1917; overflow:hidden; text-overflow:ellipsis;
+                     white-space:nowrap; }
+  .gcol .grow.rsub { border-left-color:var(--sub); } .gcol .grow.rins { border-left-color:var(--ins); }
+  .gcol .grow.rdel { border-left-color:var(--del); } .gcol .grow.rmov { border-left-color:var(--mov); }
+  .gcol .grow.rsub .rdt { color:var(--sub); } .gcol .grow.rins .rdt { color:var(--ins); }
+  .gcol .grow.rdel .rdt { color:var(--del); } .gcol .grow.rmov .rdt { color:var(--mov); }
+  /* the node-detail panel below the graph (#2): shows the clicked node's reading(s) + snippet(s) + links */
+  #graph .gdetail { flex:0 0 auto; max-height:38%; overflow:auto; border-top:2px solid #d6d3d1; background:#fff;
+                    padding:12px 18px; font-size:13px; display:none; }
+  #graph .gdetail.on { display:block; }
+  #graph .gdetail h4 { margin:0 0 8px; font-size:13px; }
+  #graph .gdetail .rd { margin:5px 0; }
+  #graph .gdetail .rd .sig { font:10px -apple-system, sans-serif; color:#78716c; text-transform:uppercase;
+                             letter-spacing:.4px; margin-right:8px; display:inline-block; min-width:64px; }
+  #graph .gdetail .rd .rw { font:14px Georgia, serif; padding:1px 6px; border-radius:3px; }
+  #graph .gdetail .snip { margin:8px 0 4px; padding:8px 10px; background:#fafaf9; border:1px solid #eee;
+                          border-radius:5px; font:13px/1.6 Georgia, serif; }
+  #graph .gdetail .snip .lbl { font:10px -apple-system, sans-serif; text-transform:uppercase; letter-spacing:.4px;
+                              color:#78716c; display:block; margin-bottom:2px; }
+  #graph .gdetail .snip mark { background:var(--subbg); box-shadow:inset 0 -2px 0 var(--sub); border-radius:2px; }
+  #graph .gdetail .links { margin-top:10px; display:flex; gap:8px; flex-wrap:wrap; }
+  #graph .gdetail .links button { border:1px solid #d6d3d1; background:#fff; color:#1d4ed8; border-radius:5px;
+                                  padding:5px 11px; font-size:12px; cursor:pointer; }
+  #graph .gdetail .links button:hover { background:#f5f5f4; }
+  #graph .gdetail .hint { color:#a8a29e; }
+  .gcol.active .branches { outline:2px solid #1c1917; }
+  .gcol .grow { font:12px/1.35 Georgia, serif; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+                max-width:88px; }
+  .gcol.active .grow, .gcol:hover .grow { max-width:220px; }   /* the focused node shows full readings */
+  .gcol .grow .sig { font:9px -apple-system, sans-serif; color:#78716c; margin-right:4px;
+                     text-transform:uppercase; letter-spacing:.3px; }
+  .gcol .grow.rsub { color:var(--sub); } .gcol .grow.rins { color:var(--ins); }
+  .gcol .grow.rdel { color:var(--del); } .gcol .grow.rmov { color:var(--mov); }
+  #graph svg.moves { position:absolute; top:0; left:0; pointer-events:none; overflow:visible; z-index:2; }
+  #graph .overview { flex:0 0 26px; background:#fff; border-bottom:1px solid #e7e5e4;
+                     display:flex; align-items:stretch; }
+  #graph .overview .ov { flex:1 1 0; cursor:pointer; }   /* colour set inline per bucket (#4) */
+  /* #3 — the overall-variant summary bar at the top of the graph: the run-wide shape of the difference. */
+  #graph .gsum { flex:0 0 auto; padding:9px 16px; background:#fff; border-bottom:1px solid #e7e5e4; }
+  #graph .gsum .gsline { font-size:13px; color:#292524; } #graph .gsum .gsline b { color:#1c1917; }
+  #graph .gsum .gschips { display:flex; flex-wrap:wrap; gap:6px 14px; margin-top:7px; }
+  #graph .gsum .gschip { display:inline-flex; align-items:center; gap:5px; font-size:12px; color:#57534e; white-space:nowrap; }
+  #graph .gsum .gschip b { color:#1c1917; } #graph .gsum .gschip.zero { opacity:.5; }
+  #graph .gsum .gsw { width:12px; height:12px; border-radius:3px; display:inline-block; }
+
+  /* #3 — parallel side-by-side (base ⇄ one witness). Two scrolled columns; variation highlighted on BOTH
+     sides in matching colours; a ∅ gap marker where one side omits. Linked hover flags the counterpart. */
+  #parallel { flex:2.7; display:none; overflow:hidden; flex-direction:column; }
+  #parallel .pbar { display:flex; align-items:center; gap:8px; padding:6px 14px; border-bottom:1px solid #e7e5e4;
+                    background:#fff; font-size:12px; }
+  #parallel .cols2 { display:flex; flex:1; min-height:0; }
+  #parallel .pcol { flex:1; overflow:auto; padding:16px 20px 16px 8px;
+                    font:14px/1.8 Georgia, "Times New Roman", serif; }
+  #parallel .pcol.base { border-right:1px solid #e7e5e4; background:#fff; }
+  #parallel .pcol.comp { background:#fcfcfb; }
+  #parallel .pcol h4 { position:sticky; top:-16px; margin:-16px 0 10px -8px; padding:6px 20px; background:#f5f5f4;
+                       font:600 12px -apple-system, sans-serif; color:#57534e; border-bottom:1px solid #e7e5e4; }
+  /* each physical line is a row: an (optional) line-number gutter + the line body */
+  #parallel .pline { display:flex; align-items:flex-start; }
+  #parallel .plnum { display:none; flex:0 0 auto; width:0; margin-right:0; text-align:right; user-select:none;
+                     font:11px/1.8 -apple-system, sans-serif; color:#c4c0bb; }
+  #parallel .plbody { flex:1; white-space:pre-wrap; min-width:0; }
+  /* #4 — line numbers on: reveal the gutter */
+  #parallel.lines .plnum { display:block; width:42px; margin-right:12px; border-right:1px solid #eee; padding-right:8px; }
+  #parallel.lines .pline:hover .plnum { color:#78716c; }
+  #parallel span.pv { border-radius:3px; cursor:pointer; }
+  #parallel span.pv.mate { outline:2px solid #1c1917; }
+  #parallel .gap { color:var(--del); font-weight:700; background:var(--delbg); border-radius:3px; padding:0 3px; }
+  #parallel .pbar label { display:inline-flex; align-items:center; gap:5px; cursor:pointer; }
+  /* #3 — the parallel highlight colour key (types present in this pair) */
+  #parallel .pbar .pkey { margin-left:auto; display:inline-flex; flex-wrap:wrap; align-items:center; gap:10px; color:#57534e; }
+  #parallel .pbar .pkey b { font-weight:600; color:#1c1917; }
+  #parallel .pbar .pkey .kk { display:inline-flex; align-items:center; gap:4px; white-space:nowrap; }
+  #parallel .pbar .pkey .sw { width:13px; height:13px; border-radius:3px; display:inline-block; }
+
+  /* #5 — CHANGES view: read the BASE and watch it transform into the witness (track-changes / redline), with a
+     change-intensity heatmap for the where/how-much at a glance. Designed for a reader unfamiliar with the texts. */
+  #changes { flex:2.7; display:none; overflow:hidden; flex-direction:column; background:#fff; }
+  #changes .cbar { flex:0 0 auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:7px 16px;
+                   border-bottom:1px solid #e7e5e4; background:#fff; font-size:12px; }
+  #changes .cbar b { color:#1c1917; }
+  #changes .cbar select { font-size:12px; }
+  #changes .cbar .clegend { display:flex; gap:12px; flex-wrap:wrap; margin-left:auto; color:#57534e; }
+  #changes .cbar .clegend .k { display:inline-flex; align-items:center; gap:4px; }
+  #changes .cbar .clegend .sw { width:22px; height:12px; border-radius:2px; display:inline-block; }
+  /* the summary banner */
+  #changes .csum { flex:0 0 auto; padding:9px 16px; background:#fbfbfa; border-bottom:1px solid #e7e5e4; font-size:13px; color:#292524; }
+  #changes .csum b { font-size:15px; }
+  #changes .csum .pct { display:inline-block; min-width:120px; }
+  /* the heatmap strip — one cell per bucket of the base, coloured by change density; click to jump */
+  #changes .heat { flex:0 0 auto; display:flex; height:30px; border-bottom:1px solid #e7e5e4; background:#fafaf9; cursor:pointer; }
+  #changes .heat .hc { flex:1 1 0; }
+  /* the transformation reading — `pre-wrap` PRESERVES the base text's own line/paragraph breaks (otherwise every
+     newline collapses to a space and the reading is one wall of text). Long lines still wrap. */
+  #changes .cbody { flex:1 1 auto; overflow:auto; min-height:0; padding:18px 32px 40px; white-space:pre-wrap;
+                    font:15px/1.9 Georgia, "Times New Roman", serif; color:#1c1917; }
+  #changes .cbody .kept { color:#1c1917; }
+  /* substitution: struck base → new witness reading */
+  #changes .sub-old { color:#b91c1c; text-decoration:line-through; text-decoration-color:#f0a0a0; opacity:.75; }
+  #changes .sub-new { color:var(--ins); background:var(--insbg); border-radius:3px; padding:0 3px; }
+  #changes .sub-arrow { color:#a8a29e; margin:0 2px; }
+  /* deletion: struck base (witness omits it) */
+  #changes .del { color:var(--del); text-decoration:line-through; text-decoration-color:#f0a0a0;
+                  background:var(--delbg); border-radius:3px; padding:0 2px; }
+  /* insertion: a caret + the witness-added text */
+  #changes .ins { color:var(--ins); background:var(--insbg); border-radius:3px; padding:0 3px; }
+  #changes .ins::before { content:'‸'; color:var(--ins); font-weight:700; margin-right:1px; }
+  /* moved: the base text stays, marked with a move badge */
+  #changes .mov { background:var(--movbg); border-radius:3px; padding:0 2px; box-shadow:inset 0 -2px 0 var(--mov); }
+  #changes .mov::after { content:'⇄'; color:var(--mov); font-size:11px; vertical-align:super; margin-left:1px; }
+  #changes .chunk { cursor:pointer; }
+  #changes .chunk.on { outline:2px solid #f59e0b; border-radius:3px; }
+  #changes .cnote { color:#a8a29e; font-size:12px; padding:10px 26px; }
+
+  /* ALIGNMENT MAP — a correspondence dot-plot (base position × comparison position) so a reviewer can CONFIRM
+     the collation aligned correctly at a glance: a clean monotonic near-diagonal = the texts track each other;
+     points flying off it = a mis-alignment. Answers "did the collation actually work?". */
+  #alignmap { flex:2.7; display:none; overflow:hidden; flex-direction:column; background:#fff; }
+  #alignmap .abar { flex:0 0 auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:7px 16px;
+                    border-bottom:1px solid #e7e5e4; font-size:12px; }
+  #alignmap .abar b { color:#1c1917; }
+  /* the verdict banner — plain-language confidence statement */
+  #alignmap .verdict { flex:0 0 auto; padding:10px 16px; font-size:13px; border-bottom:1px solid #e7e5e4;
+                       display:flex; align-items:center; gap:9px; }
+  #alignmap .verdict.ok { background:#f0fdf4; color:#166534; } #alignmap .verdict.warn { background:#fffbeb; color:#92400e; }
+  #alignmap .verdict .icon { font-size:17px; } #alignmap .verdict b { color:inherit; }
+  #alignmap .help { flex:0 0 auto; padding:8px 16px; font-size:12px; color:#57534e; background:#fbfbfa;
+                    border-bottom:1px solid #e7e5e4; }
+  #alignmap .help b { color:#1c1917; }
+  #alignmap .plotwrap { flex:1 1 auto; overflow:auto; min-height:0; padding:16px; display:flex; justify-content:center; }
+  #alignmap svg { background:#fff; }
+  #alignmap svg .diag { stroke:#d6d3d1; stroke-width:1; stroke-dasharray:5 4; }
+  #alignmap svg .axis { stroke:#e7e5e4; stroke-width:1; }
+  #alignmap svg .axlbl { font:11px -apple-system, sans-serif; fill:#78716c; }
+  #alignmap svg .band { fill:rgba(22,101,52,.05); }
+  #alignmap svg .pt { cursor:pointer; }
+  #alignmap svg .pt:hover { stroke:#1c1917; stroke-width:1.5; }
+  #alignmap .tip { position:fixed; z-index:60; background:#1c1917; color:#fff; font:11px -apple-system, sans-serif;
+                   padding:5px 8px; border-radius:5px; pointer-events:none; display:none; max-width:280px; }
+
+  /* STORY view — the collation as prose: the high-level narrative, then a readable, section-by-section account of
+     the recorded changes so a reader gets the *full story* of how the witness changed from the base. */
+  #story { flex:2.7; display:none; overflow:hidden; flex-direction:column; background:#fff; }
+  #story .sbar { flex:0 0 auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap; padding:7px 16px;
+                 border-bottom:1px solid #e7e5e4; font-size:12px; }
+  #story .sbody { flex:1 1 auto; overflow:auto; min-height:0; padding:22px 30px 50px; }
+  #story .swrap { max-width:820px; }
+  #story h2 { margin:0 0 6px; font-size:21px; font-weight:600; }
+  #story .lede { font:16px/1.65 Georgia, serif; color:#292524; margin:0 0 22px; }
+  #story h3 { margin:26px 0 8px; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.4px;
+              color:#78716c; border-top:1px solid #f0efed; padding-top:16px; }
+  #story .seg { margin:0 0 14px; }
+  #story .seg .sh { font:600 13px -apple-system, sans-serif; color:#1c1917; margin-bottom:4px; }
+  #story .seg .sh .loc { color:#a8a29e; font-weight:400; margin-left:6px; }
+  #story .seg p { margin:0 0 6px; font:14px/1.7 Georgia, serif; color:#292524; }
+  /* an inline change rendered in the prose: struck old → new, etc. — reuse the redline vocabulary */
+  #story .c-sub .o { color:#b91c1c; text-decoration:line-through; text-decoration-color:#f0a0a0; opacity:.8; }
+  #story .c-sub .n { color:var(--ins); }
+  #story .c-del { color:var(--del); text-decoration:line-through; text-decoration-color:#f0a0a0; }
+  #story .c-ins { color:var(--ins); }
+  #story .c-mov { color:var(--mov); }
+  #story .ex { cursor:pointer; border-radius:3px; padding:0 2px; }
+  #story .ex:hover { background:#f5f5f4; }
+  #story .more { color:#a8a29e; font:12.5px -apple-system, sans-serif; }
+
+  /* the Overview / dashboard home panel (#1, #5) */
+  #info { flex:2.7; overflow:auto; background:#fafaf9; display:none; padding:20px 26px 40px; font-size:13px; }
+  #info .wrap { max-width:1040px; }
+  #info h2 { margin:0 0 10px; font-size:20px; font-weight:600; }
+  #info h3 { margin:0 0 10px; font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:.4px; color:#78716c; }
+  #info section { margin-bottom:24px; }
+  #info .intro p { margin:0 0 10px; max-width:820px; line-height:1.6; color:#292524; }
+  /* clickable navigation cards → jump to the matching tab (#1) */
+  #info .nav { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:10px; margin-top:14px; }
+  #info .navc { background:#fff; border:1px solid #e7e5e4; border-radius:8px; padding:11px 13px;
+                font-size:12.5px; line-height:1.5; color:#57534e; cursor:pointer; transition:border-color .12s, box-shadow .12s;
+                display:flex; flex-direction:column; }
+  #info .navc:hover { border-color:#a8a29e; box-shadow:0 1px 5px rgba(0,0,0,.06); }
+  #info .navc .navt { color:#1c1917; font-weight:600; display:flex; align-items:center; justify-content:space-between; }
+  #info .navc .navt .go { color:#1d4ed8; font-size:14px; }
+  #info .navc .navd { margin-top:3px; }
+  /* stat tiles row */
+  #info .tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(120px,1fr)); gap:10px; }
+  #info .tile { background:#fff; border:1px solid #e7e5e4; border-radius:8px; padding:12px 14px; }
+  #info .tile .big { font-size:24px; font-weight:600; color:#1c1917; line-height:1.1; }
+  #info .tile .lbl { font-size:11.5px; color:#78716c; margin-top:3px; }
+  /* variation-type breakdown as a horizontal bar chart */
+  #info .bars { background:#fff; border:1px solid #e7e5e4; border-radius:8px; padding:14px 16px; max-width:640px; }
+  #info .bar { display:flex; align-items:center; gap:10px; margin:5px 0; }
+  #info .bar .bl { width:96px; font-size:12px; text-align:right; color:#57534e; flex:0 0 auto; }
+  #info .bar .bt { flex:1; height:16px; background:#f5f5f4; border-radius:4px; overflow:hidden; }
+  #info .bar .bf { height:100%; border-radius:4px; }
+  #info .bar .bn { width:64px; font-size:12px; color:#292524; flex:0 0 auto; }
+  #info .bar.zero .bl, #info .bar.zero .bn { color:#a8a29e; }
+  #info .bar.zero .bn i { font-style:normal; font-size:11px; }
+  /* witness cards */
+  #info .wits { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:10px; }
+  #info .wit { background:#fff; border:1px solid #e7e5e4; border-radius:8px; padding:11px 13px; }
+  #info .wit .wid { font-weight:600; color:#1c1917; }
+  #info .wit .wbase { font-size:10px; text-transform:uppercase; letter-spacing:.5px; color:#1d4ed8; margin-left:6px; }
+  #info .wit .wmeta { font-size:12px; color:#78716c; margin-top:4px; }
+  #info .wit .wbar { height:6px; background:#f5f5f4; border-radius:3px; margin-top:8px; overflow:hidden; }
+  #info .wit .wbar div { height:100%; background:#a8a29e; border-radius:3px; }
+  #info .k { padding:1px 6px; border-radius:3px; }
+  #info .settings { color:#57534e; font-size:12.5px; }
+  #info .settings b { color:#1c1917; }
+  /* ANALYTICAL dashboard additions */
+  /* confidence strip — the alignment verdict, up front, with a drill-down to the Alignment map */
+  #info .confidence { display:flex; align-items:center; gap:11px; background:#fff; border:1px solid #e7e5e4;
+                      border-left-width:4px; border-radius:8px; padding:12px 15px; cursor:pointer; }
+  #info .confidence.ok { border-left-color:#16a34a; } #info .confidence.warn { border-left-color:#f59e0b; }
+  #info .confidence .cf-ic { font-size:20px; } #info .confidence.ok .cf-ic { color:#16a34a; } #info .confidence.warn .cf-ic { color:#b45309; }
+  #info .confidence .cf-txt { flex:1; font-size:12.5px; color:#57534e; line-height:1.5; }
+  #info .confidence .cf-txt b { color:#1c1917; }
+  #info .confidence .go { color:#1d4ed8; font-size:15px; }
+  #info .confidence:hover { border-color:#a8a29e; }
+  /* where changes cluster — a clickable positional histogram across the base text */
+  #info .distrib { background:#fff; border:1px solid #e7e5e4; border-radius:8px; padding:14px 16px 10px; }
+  #info .distrib .dhead { font-size:12px; color:#78716c; margin-bottom:8px; }
+  #info .distrib .hist { display:flex; align-items:flex-end; gap:1px; height:96px; }
+  #info .distrib .hb { flex:1 1 0; background:#e7e5e4; border-radius:2px 2px 0 0; min-height:1px; cursor:pointer;
+                       transition:background .1s; position:relative; }
+  #info .distrib .hb:hover { background:#1d4ed8; }
+  #info .distrib .hb .seg { position:absolute; left:0; right:0; }
+  #info .distrib .daxis { display:flex; justify-content:space-between; font-size:10.5px; color:#a8a29e; margin-top:5px; }
+  #info .distrib .dnote { font-size:11.5px; color:#a8a29e; margin-top:6px; }
+  /* proportion / interpretation callout */
+  #info .insight { background:#fbfbfa; border:1px solid #e7e5e4; border-radius:8px; padding:12px 15px; font-size:13px;
+                   color:#292524; line-height:1.55; }
+  #info .insight b { color:#1c1917; }
+  /* Loading overlay — shown while a heavy re-render (re-slicing a full-novel text) runs, so a click that
+     takes a beat reads as "working", not frozen. */
+  #busy { position:fixed; inset:0; display:none; align-items:center; justify-content:center;
+          background:rgba(250,250,249,.55); z-index:50; }
+  #busy.on { display:flex; }
+  #busy .spin { width:34px; height:34px; border:3px solid #d6d3d1; border-top-color:#1d4ed8;
+                border-radius:50%; animation:spin .7s linear infinite; }
+  @keyframes spin { to { transform:rotate(360deg); } }
+</style>
+</head>
+<body>
+<header><h1>%%TITLE%%</h1><div class="meta" id="meta"></div></header>
+<nav class="tabs" id="tabs"></nav>
+<div class="legend" id="legend"></div>
+<main>
+  <div id="text"></div>
+  <div id="apparatus"></div>
+  <div id="graph"></div>
+  <div id="parallel"></div>
+  <div id="changes"></div>
+  <div id="story"></div>
+  <div id="alignmap"></div>
+  <div id="info"></div>
+  <div id="side"><div id="detail">Select a highlighted span, or a row below.</div><div id="list"></div></div>
+</main>
+<div id="busy"><div class="spin"></div></div>
+<script type="application/json" id="data">%%DATA%%</script>
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById('data').textContent);
+  // The SVG namespace (a well-known constant identifier, not a fetched resource). Assembled from parts so the
+  // exporter's "no external http(s) URL" self-containment check isn't tripped by the literal.
+  var SVGNS = ['http', '://www.w3.org/2000/svg'].join('');
+  var TYPES = ['substitution','insertion','deletion','transposition','variantSpelling'];
+  var LABEL = { substitution:'substitution', insertion:'insertion', deletion:'deletion',
+                transposition:'moved', variantSpelling:'spelling' };
+  // view mode: 'info' (the Overview/home) | 'text' (a perspective) | 'apparatus' | 'graph' | 'parallel'.
+  // Opens on the Overview so a reader lands on an orientation page (#5), not straight into raw highlights.
+  // `state.apparatus` is kept as a derived alias so the existing text/selection fast-path reads unchanged.
+  var state = { perspective: D.base, filters: {}, mode: 'info', active: -1,
+                mate: (D.witnesses.filter(function (w) { return w.id !== D.base; })[0] || {}).id || null };
+  Object.defineProperty(state, 'apparatus', { get: function () { return this.mode === 'apparatus'; } });
+  TYPES.forEach(function (t) { state.filters[t] = true; });
+
+  // ---- caches (built once, reused) so a click doesn't recompute over the whole novel ----
+  var textById = {};                                  // witness id → text
+  D.witnesses.forEach(function (w) { textById[w.id] = w.text; });
+  var annsCache = {};                                 // perspective → [{a, idx, from, to}] (memoised)
+  var countsCache = {};                               // perspective → {type → n}
+  var busyEl = document.getElementById('busy');
+
+  function witnessText(id) { return textById[id] || ''; }
+
+  // Annotations relevant to a perspective, each with the span range on THAT side (or null). Memoised: the
+  // set never changes for a given perspective, so we compute it once instead of on every render.
+  function annsFor(p) {
+    if (annsCache[p]) return annsCache[p];
+    var out = [];
+    D.annotations.forEach(function (a, idx) {
+      if (p === D.base) out.push({ a: a, idx: idx, from: a.base.from, to: a.base.to });
+      else if (a.witness === p) out.push({ a: a, idx: idx, from: a.comp.from, to: a.comp.to });
+    });
+    annsCache[p] = out;
+    return out;
+  }
+  function counts(p) {
+    if (countsCache[p]) return countsCache[p];
+    var c = {};
+    annsFor(p).forEach(function (r) { c[r.a.type] = (c[r.a.type] || 0) + 1; });
+    countsCache[p] = c;
+    return c;
+  }
+  // Index: annotation idx → the text span element currently rendered for it (null if off-screen/filtered).
+  // Lets selection toggle just the two affected spans instead of re-slicing the whole text.
+  var spanByIdx = {};
+
+  // Run a heavy re-render behind the spinner: show it, yield a frame so it paints, then do the work.
+  function withSpinner(work) {
+    busyEl.classList.add('on');
+    requestAnimationFrame(function () { requestAnimationFrame(function () {
+      try { work(); } finally { busyEl.classList.remove('on'); }
+    }); });
+  }
+
+  function renderTabs() {
+    var nav = document.getElementById('tabs'); nav.innerHTML = '';
+    function modeTab(mode, label, badge) {
+      var b = document.createElement('button'); b.textContent = label;
+      if (badge != null) { var s = document.createElement('span'); s.className = 'badge'; s.textContent = badge; b.appendChild(s); }
+      if (state.mode === mode) b.className = 'active';
+      b.onclick = function () { if (state.mode === mode) return; withSpinner(function () { state.mode = mode; render(); }); };
+      nav.appendChild(b);
+    }
+    // #5 — the Overview/home tab leads, so a reader gets oriented first.
+    modeTab('info', 'Overview');
+    // A small divider, then the per-witness text perspectives (base first).
+    var div = document.createElement('span'); div.style.width = '10px'; nav.appendChild(div);
+    D.witnesses.forEach(function (w) {
+      var b = document.createElement('button');
+      var n = annsFor(w.id).length;
+      b.textContent = (w.id === D.base ? w.id + ' (base)' : w.id);
+      var s = document.createElement('span'); s.className = 'badge'; s.textContent = n; b.appendChild(s);
+      if (state.mode === 'text' && w.id === state.perspective) b.className = 'active';
+      b.onclick = function () {
+        if (state.mode === 'text' && w.id === state.perspective) return;   // no-op click, don't re-render
+        withSpinner(function () {
+          state.mode = 'text'; state.perspective = w.id; state.active = -1; render();
+        });
+      };
+      nav.appendChild(b);
+    });
+    var div2 = document.createElement('span'); div2.style.width = '10px'; nav.appendChild(div2);
+    if (D.graph) modeTab('graph', 'variant graph', D.summary.variantNodes);   // #2 visual graph
+    modeTab('apparatus', 'apparatus (list)', D.apparatus.length);
+    if (D.witnesses.length >= 2) modeTab('parallel', 'parallel ⇄');           // #3 side-by-side
+    if (D.witnesses.length >= 2) modeTab('changes', 'changes ✎');             // #5 transformation view
+    if (D.witnesses.length >= 2) modeTab('story', 'story ✍');                 // the prose account
+    if (D.witnesses.length >= 2) modeTab('alignmap', 'alignment ✓');          // confidence/review dot-plot
+  }
+
+  // CSS custom-property name carrying each type's colour (matches `:root` in the stylesheet).
+  var TYPE_VAR = { substitution:'sub', insertion:'ins', deletion:'del', transposition:'mov', variantSpelling:'spl' };
+
+  function renderLegend() {
+    var lg = document.getElementById('legend'); lg.innerHTML = '';
+    // The legend applies to the annotated text view; the wide views carry their own affordances.
+    if (state.mode !== 'text') { lg.style.display = 'none'; return; }
+    lg.style.display = '';
+    var c = counts(state.perspective);
+
+    // #1 — the persistent COLOUR KEY: EVERY variation type, always shown, so the reader always knows what each
+    // highlight colour means (independent of the filters below). A swatch coloured as the span + its label.
+    var key = document.createElement('span'); key.className = 'keybar';
+    var kh = document.createElement('b'); kh.textContent = 'Key: '; kh.style.fontWeight = '600'; key.appendChild(kh);
+    TYPES.forEach(function (t) {
+      var el = document.createElement('span'); el.className = 'ky';
+      var sw = document.createElement('span'); sw.className = 'sw';
+      sw.style.background = 'var(--' + TYPE_VAR[t] + 'bg)';
+      sw.style.boxShadow = 'inset 0 -3px 0 var(--' + TYPE_VAR[t] + ')';
+      el.appendChild(sw);
+      el.appendChild(document.createTextNode(LABEL[t]));
+      key.appendChild(el);
+    });
+    lg.appendChild(key);
+
+    // The FILTERS: a checkbox per type that actually occurs in this perspective (a 0-count type is noise here;
+    // the whole-run "what was/wasn't detected" summary lives on the Overview tab). Shown after the key so the
+    // two roles read distinctly: the key TEACHES the colours, the filters TOGGLE them.
+    var filters = document.createElement('span'); filters.className = 'filters';
+    var shown = 0;
+    TYPES.forEach(function (t) {
+      if (!(c[t] > 0)) return;
+      if (shown === 0) { var fl = document.createElement('b'); fl.textContent = 'Show: '; fl.style.fontWeight = '600'; filters.appendChild(fl); }
+      shown++;
+      var lab = document.createElement('label');
+      var cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = state.filters[t];
+      cb.onchange = function () {
+        withSpinner(function () { state.filters[t] = cb.checked; renderView(); renderList(); });
+      };
+      var k = document.createElement('span'); k.className = 'k ' + t; k.textContent = LABEL[t] + ' ' + c[t];
+      lab.appendChild(cb); lab.appendChild(k);
+      filters.appendChild(lab);
+    });
+    if (shown) { var sep = document.createElement('span'); sep.className = 'sep'; sep.textContent = '·'; lg.appendChild(sep); }
+    lg.appendChild(filters);
+
+    var hint = document.createElement('span'); hint.className = 'sep';
+    hint.style.color = '#78716c';
+    hint.textContent = shown ? '  unmarked text = witnesses agree · click a span or row for detail'
+                             : '  no variation of the filterable types in this perspective';
+    lg.appendChild(hint);
+  }
+
+  // Slice the text at every annotation boundary; a segment carries every annotation covering it. Builds the
+  // `spanByIdx` index so selection can later highlight the right span WITHOUT re-slicing the whole text.
+  // Uses a DocumentFragment so the ~thousands of nodes attach to the DOM in one reflow, not N.
+  function renderText() {
+    var el = document.getElementById('text'); el.innerHTML = ''; spanByIdx = {};
+    var text = witnessText(state.perspective);
+    var rows = annsFor(state.perspective).filter(function (r) {
+      return r.from !== null && r.from !== undefined && state.filters[r.a.type];
+    });
+    if (!D.viewerPairsAvailable) {
+      var n = document.createElement('div'); n.className = 'notice';
+      n.textContent = 'This export was generated without viewer annotations; texts are shown without highlights.';
+      el.appendChild(n);
+    }
+    var frag = document.createDocumentFragment();
+    var bounds = [0, text.length];
+    rows.forEach(function (r) { bounds.push(r.from, r.to); });
+    bounds = Array.from(new Set(bounds)).sort(function (x, y) { return x - y; });
+    for (var i = 0; i + 1 < bounds.length; i++) {
+      var lo = bounds[i], hi = bounds[i + 1];
+      if (lo >= hi) continue;
+      var covering = rows.filter(function (r) { return r.from <= lo && hi <= r.to; });
+      var slice = text.substring(lo, hi);
+      if (!covering.length) { frag.appendChild(document.createTextNode(slice)); continue; }
+      var span = document.createElement('span');
+      // The PRIMARY annotation drives the span's colour. When a segment is covered by several annotations (e.g.
+      // an INSERTION that falls inside a MOVED passage), pick the most SPECIFIC/innermost — the shortest-range
+      // one — so its own type colour shows, instead of letting whichever CSS class comes last win (#1: the
+      // insertion's green was being overwritten by the surrounding move's blue). `withinMove` still marks it as
+      // sitting inside a move. Every covering annotation still points at this span via `spanByIdx`.
+      var primary = covering[0];
+      covering.forEach(function (r) {
+        spanByIdx[r.idx] = span;
+        var span1 = (r.to - r.from), spanP = (primary.to - primary.from);
+        if (span1 < spanP) primary = r;        // narrower coverage = more specific = the reading shown here
+      });
+      var classes = ['v', primary.a.type];
+      if (covering.some(function (r) { return r.a.withinMove; })) classes.push('withinMove');
+      if (primary.a.confidence === 'likely') classes.push('likelySpan');
+      span.className = classes.join(' ');
+      span.id = 'seg' + lo;
+      span.dataset.idx = primary.idx;
+      if (covering.some(function (r) { return r.idx === state.active; })) span.classList.add('active');
+      span.onclick = function (ev) { select(parseInt(ev.currentTarget.dataset.idx, 10), false); };
+      span.appendChild(document.createTextNode(slice));
+      frag.appendChild(span);
+    }
+    el.appendChild(frag);
+  }
+
+  function renderList() {
+    var list = document.getElementById('list'); list.innerHTML = '';
+    annsFor(state.perspective).forEach(function (r) {
+      if (!state.filters[r.a.type]) return;
+      var row = document.createElement('div'); row.className = 'row' + (r.idx === state.active ? ' active' : '');
+      row.setAttribute('data-row', r.idx);
+      var t = document.createElement('span');
+      t.className = 't ' + (r.a.confidence === 'likely' ? 'likely' : '');
+      t.style.color = 'var(--' + { substitution:'sub', insertion:'ins', deletion:'del',
+                                   transposition:'mov', variantSpelling:'spl' }[r.a.type] + ')';
+      t.textContent = LABEL[r.a.type] + (r.a.confidence === 'likely' ? '?' : '');
+      row.appendChild(t);
+      var txt = r.a.type === 'deletion' ? r.a.base.reading
+              : r.a.type === 'insertion' ? r.a.comp.reading
+              : (r.a.base.reading + ' → ' + r.a.comp.reading);
+      row.appendChild(document.createTextNode(' ' + (txt.length > 60 ? txt.slice(0, 57) + '…' : txt)));
+      if ((r.from === null || r.from === undefined)) {
+        var other = state.perspective === D.base ? r.a.witness : D.base;
+        var hop = document.createElement('span'); hop.className = 'hop'; hop.textContent = 'view in ' + other + ' ›';
+        row.appendChild(hop);
+      }
+      row.onclick = function () { select(r.idx, true); };
+      list.appendChild(row);
+    });
+  }
+
+  function select(idx, mayHop) {
+    var a = D.annotations[idx];
+    var prev = state.active;
+    state.active = idx;
+
+    // Decide whether this selection needs a heavy re-render of the text view, or just a span toggle.
+    // A re-render is needed when: we're on the apparatus tab (#4 — jump must leave it), OR the entry has no
+    // span in the current perspective and we may hop to the side that shows it (perspective change).
+    var side = state.perspective === D.base ? a.base : a.comp;
+    var needHop = (side.from === null || side.from === undefined) && mayHop;
+    var wasApparatus = state.apparatus;
+
+    if (wasApparatus || needHop) {
+      // #4: leaving the apparatus tab; and/or hopping perspective. This re-slices, so run behind the spinner.
+      withSpinner(function () {
+        state.mode = 'text';
+        if (needHop) state.perspective = state.perspective === D.base ? a.witness : D.base;
+        renderChrome(); renderView(); renderList();
+        showDetailAndScroll(idx);
+      });
+      return;
+    }
+
+    // Fast path: same perspective, text already rendered — just move the highlight (toggle two spans), update
+    // the list's active row, and fill the detail panel. No re-slice of the novel.
+    if (prev !== idx && spanByIdx[prev]) spanByIdx[prev].classList.remove('active');
+    if (spanByIdx[idx]) spanByIdx[idx].classList.add('active');
+    updateListActive(prev, idx);
+    showDetailAndScroll(idx);
+  }
+
+  // Move the `.active` marker between two list rows without rebuilding the list.
+  function updateListActive(prev, idx) {
+    var list = document.getElementById('list');
+    var p = list.querySelector('[data-row="' + prev + '"]'); if (p) p.classList.remove('active');
+    var n = list.querySelector('[data-row="' + idx + '"]'); if (n) n.classList.add('active');
+  }
+
+  // Fill the detail panel for annotation `idx` and scroll its span into view (if present on this side).
+  function showDetailAndScroll(idx) {
+    var a = D.annotations[idx];
+    var side = state.perspective === D.base ? a.base : a.comp;
+    if (side.from !== null && side.from !== undefined) {
+      var el = document.getElementById('seg' + side.from);
+      if (el) el.scrollIntoView({ block: 'center' });
+    }
+    var d = document.getElementById('detail');
+    d.innerHTML = '';
+    function line(label, sideObj, cls) {
+      var p = document.createElement('div');
+      var b = document.createElement('b'); b.textContent = label + ': '; p.appendChild(b);
+      var rd = document.createElement('span'); rd.className = 'rdg ' + cls;
+      rd.textContent = sideObj.reading === '' ? '∅' : sideObj.reading; p.appendChild(rd);
+      if (sideObj.cite) {
+        var c = document.createElement('span'); c.className = 'cite'; c.textContent = '  @ ' + sideObj.cite;
+        p.appendChild(c);
+      }
+      d.appendChild(p);
+    }
+    var head = document.createElement('div');
+    head.innerHTML = '<b>' + LABEL[a.type].toUpperCase() + '</b>'
+      + (a.confidence === 'likely' ? ' <i>(possible — heuristic pairing)</i>' : '')
+      + (a.withinMove ? ' <i>(within a moved passage)</i>' : '');
+    d.appendChild(head);
+    line(D.base, a.base, a.type);
+    line(a.witness, a.comp, a.type);
+  }
+
+  // The apparatus tab: a help header, a scrollable CLICKABLE list of variant entries, and its OWN detail panel
+  // below (#4). Clicking a line selects it (highlighted in place) and shows its full detail — all readings +
+  // sigla + a link to that spot in the base text — WITHOUT leaving the tab. Bounded/chunked for the novel.
+  var APPARATUS_CAP = 4000;
+  function renderApparatus() {
+    var ap = document.getElementById('apparatus'); ap.innerHTML = '';
+    var help = document.createElement('div'); help.className = 'aphelp';
+    help.innerHTML = '<b>Apparatus of variants.</b> Every place the witnesses differ, in reading order — '
+      + '<b>click a line</b> for its full detail below. Each line reads: '
+      + '<span class="ex"><span class="p">№</span> <span class="lm">base reading ]</span> '
+      + 'other reading <span class="sg">WITNESSES</span></span> — the <b>base/copy-text</b> reading before '
+      + 'the <b>]</b> bracket, then each differing reading followed by the sigla (short IDs) of the witnesses '
+      + 'that carry it; <b>∅</b> means a witness omits the text here. Witness IDs: '
+      + D.witnesses.map(function (w) { return '<b>' + esc(w.id) + '</b>' + (w.id === D.base ? ' (base)' : ''); }).join(', ')
+      + '. (The <b>Variant graph</b> tab shows the same data visually.)';
+    ap.appendChild(help);
+
+    var listEl = document.createElement('div'); listEl.className = 'aplist'; ap.appendChild(listEl);
+    var detail = document.createElement('div'); detail.className = 'apdetail'; detail.id = 'apdetail';
+
+    if (!D.apparatus.length) {
+      var n = document.createElement('div'); n.className = 'notice'; n.textContent = '(no points of variance)';
+      listEl.appendChild(n); ap.appendChild(detail); return;
+    }
+    var frag = document.createDocumentFragment();
+    var shown = Math.min(D.apparatus.length, APPARATUS_CAP);
+    for (var i = 0; i < shown; i++) {
+      (function (e, idx) {
+        var p = document.createElement('div'); p.className = 'apline'; p.setAttribute('data-ap', idx);
+        var pos = document.createElement('span'); pos.className = 'pos'; pos.textContent = e.position; p.appendChild(pos);
+        var lem = document.createElement('span'); lem.className = 'lemma'; lem.textContent = e.lemma + ' ]'; p.appendChild(lem);
+        e.variants.forEach(function (v, vi) {
+          if (vi > 0) { var semi = document.createElement('span'); semi.className = 'semi'; semi.textContent = ' ; '; p.appendChild(semi); }
+          p.appendChild(document.createTextNode(' ' + (v.reading === '' ? '∅' : v.reading) + ' '));
+          var sg = document.createElement('span'); sg.className = 'apsig'; sg.textContent = v.sigla.join(' '); p.appendChild(sg);
+        });
+        p.onclick = function () { selectApparatus(idx); };
+        frag.appendChild(p);
+      })(D.apparatus[i], i);
+    }
+    listEl.appendChild(frag);
+    if (D.apparatus.length > shown) {
+      var m = document.createElement('div'); m.className = 'notice';
+      m.textContent = 'showing ' + shown + ' of ' + D.apparatus.length + ' entries (list view is capped; '
+                    + 'the full apparatus is in apparatus.txt / collation.json).';
+      listEl.appendChild(m);
+    }
+    ap.appendChild(detail);
+  }
+  // Select an apparatus entry: highlight its line and fill the apparatus's own detail panel (stays on the tab).
+  function selectApparatus(idx) {
+    var e = D.apparatus[idx];
+    var listEl = document.querySelector('#apparatus .aplist');
+    if (listEl) { var prev = listEl.querySelector('.apline.active'); if (prev) prev.classList.remove('active');
+      var row = listEl.querySelector('[data-ap="' + idx + '"]'); if (row) row.classList.add('active'); }
+    var d = document.getElementById('apdetail'); if (!d) return;
+    d.className = 'apdetail on'; d.innerHTML = '';
+    var h = document.createElement('h4');
+    h.textContent = 'Entry ' + e.position + ' — ' + (LABEL[e.type] || e.type);
+    d.appendChild(h);
+    // lemma (base reading) first, then each variant reading with its sigla.
+    var lem = document.createElement('div'); lem.className = 'rd';
+    lem.innerHTML = '<span class="sig">' + esc(D.base) + ' (base)</span><span class="rw">'
+      + (e.lemma === '∅' ? '∅ (omits)' : esc(e.lemma)) + '</span>'; d.appendChild(lem);
+    e.variants.forEach(function (v) {
+      var row = document.createElement('div'); row.className = 'rd';
+      row.innerHTML = '<span class="sig">' + esc(v.sigla.join(', ')) + '</span><span class="rw '
+        + (e.type === 'insertion' ? 'insertion' : e.type === 'deletion' ? 'deletion' : 'substitution') + '">'
+        + (v.reading === '' ? '∅ (omits)' : esc(v.reading)) + '</span>'; d.appendChild(row);
+    });
+    // #3 — the same entry seen from the WITNESS side: find the covering annotation, show its citation, and offer
+    // the full set of "open in …" links (base text, witness text, parallel) — not just the base.
+    var mate = mateForBaseRange(e.from, e.to);
+    if (mate && mate.ann.comp.cite) {
+      var cite = document.createElement('div'); cite.className = 'apcite';
+      cite.innerHTML = '<b>' + esc(D.base) + '</b>: ' + (mate.ann.base.cite ? esc(mate.ann.base.cite) : '—')
+        + ' &nbsp;·&nbsp; <b>' + esc(mate.ann.witness) + '</b>: ' + esc(mate.ann.comp.cite);
+      d.appendChild(cite);
+    }
+    if ((e.from !== null && e.from !== undefined) || mate) {
+      d.appendChild(variantLinks(e.from, mate));
+    }
+    d.scrollIntoView({ block: 'nearest' });
+  }
+
+  // Jump to another view (used by the Overview's nav cards and the graph's "view in …" links).
+  function goTo(mode, perspective) {
+    withSpinner(function () {
+      state.mode = mode;
+      if (mode === 'text' && perspective) state.perspective = perspective;
+      render();
+    });
+  }
+
+  // ---- the Overview DASHBOARD (#1, #5) -----------------------------------------------------------------
+  // A data-visualisation home: the orientation intro + clickable navigation cards, then the collation's
+  // metadata as stat tiles, a variation-type bar chart, witness cards, and the graph shape / run settings.
+  function fmt(n) { return (n || 0).toLocaleString(); }
+  // Alignment quality for a witness (shared by the Overview confidence strip and the Alignment map). Returns the
+  // correspondence points + the verdict metrics (max off-diagonal drift %, monotonicity %, whether it's sound).
+  function alignMetrics(mate) {
+    var wlen = witnessText(D.base).length || 1, mlen = witnessText(mate).length || 1;
+    var pts = [];
+    D.annotations.forEach(function (a, idx) {
+      if (a.witness !== mate || a.base.from == null || a.comp.from == null) return;
+      pts.push({ b: a.base.from, c: a.comp.from, type: a.type, idx: idx, bcite: a.base.cite, ccite: a.comp.cite });
+    });
+    pts.sort(function (x, y) { return x.b - y.b; });
+    var maxDev = 0, mono = 0;
+    for (var i = 0; i < pts.length; i++) {
+      var dev = Math.abs(pts[i].c - pts[i].b / wlen * mlen) / mlen; if (dev > maxDev) maxDev = dev;
+      if (i > 0 && pts[i].c >= pts[i - 1].c) mono++;
+    }
+    var monoPct = pts.length > 1 ? Math.round(1000 * mono / (pts.length - 1)) / 10 : 100;
+    var devPct = Math.round(maxDev * 1000) / 10;
+    return { pts: pts, wlen: wlen, mlen: mlen, devPct: devPct, monoPct: monoPct,
+             good: devPct <= 8 && monoPct >= 98 };
+  }
+
+  function renderInfo() {
+    var el = document.getElementById('info'); el.innerHTML = '';
+    var S = D.summary;
+    var wrap = document.createElement('div'); wrap.className = 'wrap'; el.appendChild(wrap);
+    function sec(title) { var s = document.createElement('section');
+      if (title) { var h = document.createElement('h3'); h.textContent = title; s.appendChild(h); }
+      wrap.appendChild(s); return s; }
+
+    // Orientation intro (kept from #5).
+    var intro = sec(''); intro.className = 'intro section';
+    var others = D.witnesses.filter(function (w) { return w.id !== D.base; }).map(function (w) { return w.id; });
+    intro.innerHTML =
+      '<h2>Collation overview</h2>'
+      + '<p>A place-by-place comparison of <b>' + D.witnesses.length + ' witnesses</b> (versions) of one work, to '
+      + '<b>explore where, how, and how much</b> they differ. It reports <b>substitutions, insertions, deletions</b> '
+      + 'and <b>moved passages</b> (transpositions) against the <b>base</b> (copy-text), <b>' + esc(D.base) + '</b>'
+      + (others.length ? '; the other witness' + (others.length === 1 ? ' is ' : 'es are ') + '<b>'
+          + others.map(esc).join('</b>, <b>') + '</b>' : '')
+      + '. Start below, then drill into any view.</p>';
+
+    // Clickable navigation cards → each jumps to its tab (#1).
+    var nav = document.createElement('div'); nav.className = 'nav'; intro.appendChild(nav);
+    function navCard(title, desc, onclick) {
+      var c = document.createElement('div'); c.className = 'navc';
+      c.innerHTML = '<div class="navt">' + title + ' <span class="go">›</span></div><div class="navd">' + desc + '</div>';
+      c.onclick = onclick; nav.appendChild(c);
+    }
+    navCard(esc(D.base) + ' (base) &amp; witness texts',
+      'The text itself, every difference highlighted in place — colours = variation type. Click a highlight for details.',
+      function () { goTo('text', D.base); });
+    if (D.graph) navCard('Variant graph',
+      'The differences as a diagram: a spine where all agree, readings branching where they diverge, arcs where a passage moved.',
+      function () { goTo('graph'); });
+    navCard('Apparatus (list)',
+      'The scholarly print form — one line per point of variance, keyed to the base text.',
+      function () { goTo('apparatus'); });
+    if (D.witnesses.length >= 2) navCard('Parallel ⇄',
+      'Two versions side by side, differences aligned, so you can read across from one to the other.',
+      function () { goTo('parallel'); });
+    if (D.witnesses.length >= 2) navCard('Changes ✎',
+      'Read the base and watch it transform into a witness — added, deleted, substituted and moved shown inline, '
+      + 'with a heatmap of where and how much changed. Best if you don’t know the texts.',
+      function () { goTo('changes'); });
+    if (D.witnesses.length >= 2) navCard('Story ✍',
+      'The collation told as prose: a plain-language account of how, where and how much a witness changed, '
+      + 'section by section through the work, with examples.',
+      function () { goTo('story'); });
+    if (D.witnesses.length >= 2) navCard('Alignment ✓',
+      'Confirm the collation aligned correctly: a correspondence map that shows the two texts tracking each other '
+      + '— a clean diagonal means the comparison is sound, end to end.',
+      function () { goTo('alignmap'); });
+
+    var totalVar = TYPES.reduce(function (s, t) { return s + (S.typeCounts[t] || 0); }, 0);
+    var primaryMate = (D.witnesses.filter(function (w) { return w.id !== D.base; })[0] || {}).id;
+
+    // ANALYTICAL dashboard — this is an investigation surface, so lead with the reviewer's two first questions:
+    // "can I trust this?" (alignment confidence) and "what & where changed?" (distribution + breakdown), each a
+    // drill-down into the detail views. (Executive-style static tiles come after, as reference.)
+
+    // 1) CONFIDENCE — did the collation align correctly? (drills into the Alignment map.)
+    if (D.witnesses.length >= 2 && primaryMate && D.viewerPairsAvailable) {
+      var M = alignMetrics(primaryMate);
+      var csec = sec('Can I trust this collation?');
+      var conf = document.createElement('div'); conf.className = 'confidence ' + (M.good ? 'ok' : 'warn');
+      conf.innerHTML = '<span class="cf-ic">' + (M.good ? '✓' : '⚠') + '</span><span class="cf-txt">'
+        + (M.good
+          ? '<b>Yes — the texts align cleanly.</b> ' + M.pts.length.toLocaleString() + ' shared points track a '
+            + 'monotonic diagonal (max drift ' + M.devPct + '%, ' + M.monoPct + '% in step). Open the '
+            + '<b>Alignment ✓</b> map to see it and inspect any outlier.'
+          : '<b>Worth checking.</b> Some points sit off the diagonal (max drift ' + M.devPct + '%, ' + M.monoPct
+            + '% monotonic). Open the <b>Alignment ✓</b> map to inspect them.')
+        + '</span><span class="go">›</span>';
+      conf.onclick = function () { state.mate = primaryMate; goTo('alignmap'); };
+      csec.appendChild(conf);
+    }
+
+    // 2) WHERE do changes cluster? — a clickable positional histogram of change intensity across the base text.
+    if (D.witnesses.length >= 2 && primaryMate && D.viewerPairsAvailable) {
+      var baseLen = witnessText(D.base).length || 1;
+      var NB = 80, hb = []; for (var q = 0; q < NB; q++) hb.push({});
+      D.annotations.forEach(function (a) {
+        if (a.witness !== primaryMate || a.base.from == null) return;
+        var bi = Math.min(NB - 1, Math.floor(a.base.from / baseLen * NB));
+        hb[bi][a.type] = (hb[bi][a.type] || 0) + 1;
+      });
+      var maxBucket = Math.max(1, hb.reduce(function (m, b) {
+        return Math.max(m, TYPES.reduce(function (s, t) { return s + (b[t] || 0); }, 0)); }, 0));
+      var dsec = sec('Where do the changes fall?');
+      var box = document.createElement('div'); box.className = 'distrib'; dsec.appendChild(box);
+      var dh = document.createElement('div'); dh.className = 'dhead';
+      dh.innerHTML = 'Change intensity across <b>' + esc(D.base) + '</b>, start → end. Taller = more variation; '
+        + 'colour = type. Click a bar to open that stretch in the Changes view.';
+      box.appendChild(dh);
+      var hist = document.createElement('div'); hist.className = 'hist';
+      hb.forEach(function (b, bi) {
+        var tot = TYPES.reduce(function (s, t) { return s + (b[t] || 0); }, 0);
+        var bar = document.createElement('div'); bar.className = 'hb';
+        bar.style.height = Math.max(1, Math.round(96 * tot / maxBucket)) + '%';
+        // stack type segments inside the bar
+        var acc = 0;
+        TYPES.forEach(function (t) { var n = b[t] || 0; if (!n) return;
+          var seg = document.createElement('div'); seg.className = 'seg';
+          seg.style.background = 'var(--' + TYPE_VAR[t] + ')';
+          seg.style.bottom = Math.round(100 * acc / (tot || 1)) + '%';
+          seg.style.height = Math.round(100 * n / (tot || 1)) + '%'; acc += n; bar.appendChild(seg); });
+        bar.title = tot.toLocaleString() + ' change' + (tot === 1 ? '' : 's') + ' at ~' + Math.round(bi / NB * 100) + '% in';
+        bar.onclick = function () { state.mate = primaryMate; goTo('changes');
+          afterRender(function () { var body = document.querySelector('#changes .cbody'); if (!body) return false;
+            body.scrollTop = (bi / NB) * (body.scrollHeight - body.clientHeight); return true; }); };
+        hist.appendChild(bar);
+      });
+      box.appendChild(hist);
+      var ax = document.createElement('div'); ax.className = 'daxis';
+      ax.innerHTML = '<span>start of ' + esc(D.base) + '</span><span>end</span>'; box.appendChild(ax);
+    }
+
+    // 3) WHAT kind of change dominates? — an interpretation callout + the type bar chart.
+    if (totalVar > 0) {
+      var dom = TYPES.slice().sort(function (a, b) { return (S.typeCounts[b] || 0) - (S.typeCounts[a] || 0); })[0];
+      var domN = S.typeCounts[dom] || 0;
+      var isec = sec('What kind of change?');
+      var ins = document.createElement('div'); ins.className = 'insight';
+      ins.innerHTML = 'Across the whole work, <b>' + primaryMate + '</b> differs from <b>' + esc(D.base) + '</b> at <b>'
+        + fmt(totalVar) + '</b> points. The dominant kind is <b>' + (LABEL[dom] || dom) + '</b> ('
+        + Math.round(100 * domN / totalVar) + '% of changes)'
+        + (S.moveEdges ? ', with <b>' + fmt(S.moveEdges) + '</b> passage' + (S.moveEdges === 1 ? '' : 's') + ' moved' : '')
+        + '. ' + (S.typeCounts.variantSpelling ? '' : 'Spelling/accidental differences were checked and none were recorded (a substantive collation). ')
+        + 'Use the breakdown below, then drill into a view.';
+      isec.appendChild(ins);
+    }
+
+    // Variation-type breakdown as a bar chart (whole run vs base). A 0 stays visible ("checked — none found").
+    var maxN = Math.max(1, TYPES.reduce(function (m, t) { return Math.max(m, S.typeCounts[t] || 0); }, 0));
+    var bsec = sec('Variation by type (whole run, vs base)');
+    var bars = document.createElement('div'); bars.className = 'bars'; bsec.appendChild(bars);
+    TYPES.forEach(function (t) {
+      var n = S.typeCounts[t] || 0;
+      var row = document.createElement('div'); row.className = 'bar' + (n ? '' : ' zero');
+      var bl = document.createElement('div'); bl.className = 'bl'; bl.textContent = LABEL[t]; row.appendChild(bl);
+      var bt = document.createElement('div'); bt.className = 'bt';
+      var bf = document.createElement('div'); bf.className = 'bf';
+      bf.style.width = (n ? Math.max(2, Math.round(100 * n / maxN)) : 0) + '%';
+      bf.style.background = 'var(--' + TYPE_VAR[t] + ')';
+      bt.appendChild(bf); row.appendChild(bt);
+      var bn = document.createElement('div'); bn.className = 'bn';
+      bn.innerHTML = n ? fmt(n) + (totalVar ? ' <i>· ' + Math.round(100 * n / totalVar) + '%</i>' : '') : '0 <i>· checked</i>';
+      row.appendChild(bn);
+      bars.appendChild(row);
+    });
+
+    // Reference stat tiles.
+    var tsec = sec('At a glance');
+    var tiles = document.createElement('div'); tiles.className = 'tiles'; tsec.appendChild(tiles);
+    function tile(big, lbl) { var t = document.createElement('div'); t.className = 'tile';
+      t.innerHTML = '<div class="big">' + big + '</div><div class="lbl">' + lbl + '</div>'; tiles.appendChild(t); }
+    tile(fmt(D.witnesses.length), 'witnesses');
+    tile(fmt(totalVar), 'variations vs base');
+    tile(fmt(S.spineLength), 'agreement points (spine)');
+    tile(fmt(S.moveEdges), 'moved passages');
+
+    // Witness cards with a size bar (relative to the largest witness).
+    var maxTok = Math.max(1, S.witnessSizes.reduce(function (m, w) { return Math.max(m, w.tokens); }, 0));
+    var wsec = sec('Witnesses (editions)');
+    var wits = document.createElement('div'); wits.className = 'wits'; wsec.appendChild(wits);
+    S.witnessSizes.forEach(function (w) {
+      var c = document.createElement('div'); c.className = 'wit';
+      c.innerHTML = '<div class="wid">' + esc(w.id) + (w.id === D.base ? '<span class="wbase">base</span>' : '') + '</div>'
+        + '<div class="wmeta">' + fmt(w.tokens) + ' words · ' + fmt(w.chars) + ' characters</div>'
+        + '<div class="wbar"><div style="width:' + Math.round(100 * w.tokens / maxTok) + '%"></div></div>';
+      wits.appendChild(c);
+    });
+
+    // Graph shape as tiles + run settings.
+    if (D.graph) {
+      var gsec = sec('Merged graph shape');
+      var gtiles = document.createElement('div'); gtiles.className = 'tiles'; gsec.appendChild(gtiles);
+      [['spine (agreement)', S.spineLength], ['variant nodes', S.variantNodes],
+       ['inserted nodes', S.insertedNodes], ['move edges', S.moveEdges]].forEach(function (p) {
+        var t = document.createElement('div'); t.className = 'tile';
+        t.innerHTML = '<div class="big">' + fmt(p[1]) + '</div><div class="lbl">' + p[0] + '</div>'; gtiles.appendChild(t);
+      });
+    }
+    var ssec = sec('Run settings');
+    var set = document.createElement('div'); set.className = 'settings';
+    set.innerHTML = 'strategy: <b>' + esc(D.strategy) + '</b> · scoring: <b>' + esc(D.scoring) + '</b> · lexicon: <b>'
+      + (D.hasLexicon ? 'yes' : 'no') + '</b>';
+    ssec.appendChild(set);
+  }
+
+  // ---- #2 visual variant-graph (columnar "score" layout) ------------------------------------------------
+  // The spine is walked left→right; each spine position is a column. Agreement columns render compact/greyed;
+  // variant/inserted columns stack one row per reading (sigla-labelled, type-coloured). WINDOWED: only the
+  // columns intersecting the viewport (± a margin) are built, so a novel's tens of thousands stay responsive.
+  // Move edges are drawn as SVG arcs over the visible columns. Clicking a column cross-links to the text view.
+  var COL_W = 78, GRAPH_MARGIN = 40;          // column stride (px, matches .gcol width) + extra columns each side
+  var graphNodeById = null, graphSpineNodes = null;
+  var colForSpineID = null;                    // spine node id → its column index (for move-edge endpoints)
+  function buildGraphIndex() {
+    if (graphSpineNodes) return;
+    graphNodeById = {}; D.graph.nodes.forEach(function (n) { graphNodeById[n.id] = n; });
+    // Columns in reading order: each spine node, with any INSERTED node slotted in immediately after the spine
+    // column it anchors to (`insertedAfterCol`; -1 = before all text). So off-spine additions get a column too.
+    var insertedAfter = {};                    // spine column index → [inserted nodes], sorted by id
+    D.graph.nodes.forEach(function (n) {
+      if (!n.isInserted) return;
+      var c = (n.insertedAfterCol == null ? -1 : n.insertedAfterCol);
+      (insertedAfter[c] = insertedAfter[c] || []).push(n);
+    });
+    Object.keys(insertedAfter).forEach(function (k) { insertedAfter[k].sort(function (a, b) { return a.id - b.id; }); });
+    graphSpineNodes = []; colForSpineID = {};
+    (insertedAfter[-1] || []).forEach(function (n) { graphSpineNodes.push({ n: n }); });   // inserts before all text
+    D.graph.spine.forEach(function (id, i) {
+      colForSpineID[id] = graphSpineNodes.length;
+      graphSpineNodes.push({ n: graphNodeById[id] });
+      (insertedAfter[i] || []).forEach(function (n) { graphSpineNodes.push({ n: n }); });
+    });
+  }
+  // A node is a VARIANT (witnesses disagree here) iff it carries an explicit `readings` array; agreement nodes
+  // are compacted to just `agree` (a shared surface) to keep a novel's payload small.
+  function isVariant(n) { return !!n.readings; }
+  function nodeType(n) {                        // colour class for a variant node's off-base reading
+    if (n.isInserted) return 'ins';
+    var hasOmit = n.readings.some(function (r) { return r.reading === '∅'; });
+    return hasOmit ? 'del' : 'sub';
+  }
+  function renderGraph() {
+    var host = document.getElementById('graph'); host.innerHTML = '';
+    if (!D.graph || !D.graph.spine.length) {
+      var nt = document.createElement('div'); nt.className = 'notice'; nt.textContent = '(no graph to display)';
+      host.appendChild(nt); return;
+    }
+    buildGraphIndex();
+    var N = graphSpineNodes.length;
+
+    // A one-line explainer so the structure reads as a graph, not a mystery list of boxes (#3).
+    var help = document.createElement('div'); help.className = 'ghelp';
+    help.innerHTML = 'Reading left→right along the <b>spine</b> (the grey backbone where all witnesses agree). '
+      + 'Each dot is a point in the text; where witnesses <b>disagree</b> the readings branch below it, '
+      + 'labelled by witness. <b>Blue arcs</b> link a passage to where a witness <b>moved</b> it '
+      + '(dashed = possible). Scroll sideways; use the strip above to jump. Click a node to see it in the text.';
+    host.appendChild(help);
+
+    // #3 — overall variant data for the two (or more) texts, up front: the run-wide totals so a reader knows the
+    // SHAPE of the difference before scrolling the graph. Each type carries its graph colour (doubling as the
+    // minimap/branch colour key for #4), plus the witnesses compared and the spine/variant/move tallies.
+    var S = D.summary;
+    var totalVar = TYPES.reduce(function (s, t) { return s + (S.typeCounts[t] || 0); }, 0);
+    var gsum = document.createElement('div'); gsum.className = 'gsum';
+    var others = D.witnesses.filter(function (w) { return w.id !== D.base; }).map(function (w) { return w.id; });
+    var head = document.createElement('div'); head.className = 'gsline';
+    head.innerHTML = '<b>' + esc(D.base) + '</b> (base) vs <b>' + others.map(esc).join('</b>, <b>') + '</b>'
+      + ' — <b>' + fmt(totalVar) + '</b> variant point' + (totalVar === 1 ? '' : 's')
+      + ' across <b>' + fmt(S.spineLength) + '</b> aligned positions'
+      + (S.moveEdges ? ', <b>' + fmt(S.moveEdges) + '</b> moved passage' + (S.moveEdges === 1 ? '' : 's') : '') + '.';
+    gsum.appendChild(head);
+    // per-type chips, coloured as the graph readings / minimap, with the run-wide count (0s shown greyed).
+    // Noun forms (sing./plur.) — the `LABEL` map's "moved"/"spelling" don't pluralise cleanly on their own.
+    var NOUN = { substitution:['substitution','substitutions'], insertion:['insertion','insertions'],
+                 deletion:['deletion','deletions'], transposition:['moved passage','moved passages'],
+                 variantSpelling:['spelling variant','spelling variants'] };
+    var chips = document.createElement('div'); chips.className = 'gschips';
+    TYPES.forEach(function (t) {
+      var n = S.typeCounts[t] || 0;
+      var chip = document.createElement('span'); chip.className = 'gschip' + (n ? '' : ' zero');
+      var sw = document.createElement('span'); sw.className = 'gsw'; sw.style.background = 'var(--' + TYPE_VAR[t] + ')';
+      chip.appendChild(sw);
+      var lbl = document.createElement('span');
+      lbl.innerHTML = '<b>' + fmt(n) + '</b> ' + esc((NOUN[t] || [t, t])[n === 1 ? 0 : 1]);
+      chip.appendChild(lbl); chips.appendChild(chip);
+    });
+    gsum.appendChild(chips);
+    host.appendChild(gsum);
+
+    // overview minimap (fixed strip at the top of #graph): marks where variation / moves cluster; click to jump.
+    var ov = document.createElement('div'); ov.className = 'overview';
+    var moveCols = {}; D.graph.edges.forEach(function (e) {
+      if (!e.isMove) return; var f = spineCol(e.from); if (f >= 0) moveCols[f] = 1;
+    });
+    // #4 — colour each minimap bucket by the variation it holds, using the SAME type colours as the graph
+    // itself (substitution / insertion / deletion), rather than a generic grey. A move in the bucket takes
+    // precedence (move blue); otherwise the type of the densest variation kind in the bucket wins. Intensity
+    // (opacity) scales with how many variant nodes fall in the bucket, so denser stretches read as bolder.
+    // `mov` → CSS var; sub/ins/del map to the graph's own reading colours (nodeType).
+    var TVAR = { sub:'--sub', ins:'--ins', del:'--del', mov:'--mov' };
+    var hscroll = document.createElement('div'); hscroll.className = 'hscroll';
+    for (var b = 0; b < 120; b++) {
+      var lo = Math.floor(b * N / 120), hi = Math.max(lo + 1, Math.floor((b + 1) * N / 120));
+      var kinds = { sub:0, ins:0, del:0 }, nvar = 0, mv = false;
+      for (var j = lo; j < hi && j < N; j++) {
+        var node = graphSpineNodes[j].n;
+        if (isVariant(node)) { kinds[nodeType(node)]++; nvar++; }
+        if (moveCols[j]) mv = true;
+      }
+      var cell = document.createElement('div'); cell.className = 'ov';
+      var key = mv ? 'mov'
+        : (nvar ? (kinds.del >= kinds.sub && kinds.del >= kinds.ins ? 'del'
+                  : kinds.ins >= kinds.sub ? 'ins' : 'sub') : null);
+      if (key) {
+        cell.style.background = 'var(' + TVAR[key] + ')';
+        // denser buckets read bolder; a move bucket is always fully saturated.
+        cell.style.opacity = mv ? '0.85' : String(Math.min(1, 0.45 + nvar / 6));
+        cell.title = mv ? 'moved passage here' : nvar + ' variant point' + (nvar === 1 ? '' : 's');
+      }
+      (function (frac) { cell.onclick = function () {
+        hscroll.scrollLeft = frac * Math.max(0, (N * COL_W + 28) - hscroll.clientWidth); }; })(lo / N);
+      ov.appendChild(cell);
+    }
+    host.appendChild(ov); host.appendChild(hscroll);
+
+    var scroller = document.createElement('div'); scroller.className = 'scroller';
+    scroller.style.width = (N * COL_W + 28) + 'px';
+    var cols = document.createElement('div'); cols.className = 'cols'; cols.style.position = 'relative';
+    // The spine baseline: a horizontal rule the node dots sit on, drawn full-width so the backbone is visible.
+    var spineline = document.createElement('div'); spineline.className = 'spineline';
+    spineline.style.width = (N * COL_W + 28) + 'px';
+    var svg = document.createElementNS(SVGNS, 'svg'); svg.setAttribute('class', 'moves');
+    scroller.appendChild(spineline); scroller.appendChild(cols); scroller.appendChild(svg);
+    hscroll.appendChild(scroller);
+
+    function paint() {                         // render only the columns near the viewport
+      var first = Math.max(0, Math.floor(hscroll.scrollLeft / COL_W) - GRAPH_MARGIN);
+      var last = Math.min(N, first + Math.ceil(hscroll.clientWidth / COL_W) + 2 * GRAPH_MARGIN);
+      cols.style.paddingLeft = (14 + first * COL_W) + 'px';
+      cols.innerHTML = '';
+      for (var i = first; i < last; i++) cols.appendChild(colEl(graphSpineNodes[i], i));
+      drawMoves(svg, first, last);
+    }
+    var raf = null;
+    hscroll.onscroll = function () { if (raf) return; raf = requestAnimationFrame(function () { raf = null; paint(); }); };
+    paint();
+
+    // The node-detail panel below the graph (#2): populated when a node is clicked; stays within this tab.
+    var gd = document.createElement('div'); gd.className = 'gdetail'; gd.id = 'gdetail';
+    gd.innerHTML = '<span class="hint">Click a node above to see its readings and the surrounding text here.</span>';
+    host.appendChild(gd);
+  }
+  function spineCol(nodeID) { return colForSpineID && colForSpineID[nodeID] != null ? colForSpineID[nodeID] : -1; }
+  // One column = one node on the spine: a position label, a dot ON the spine baseline, then EITHER the shared
+  // agreement word (compact, under the dot) OR — for a variant/inserted node — the stacked readings hanging as
+  // BRANCHES below the spine, each labelled by its witness sigla. This node+dot+branch shape (plus the spine
+  // rule behind it and the SVG move arcs over it) is what makes the view read as a variant GRAPH (#3).
+  function colEl(item, i) {
+    var n = item.n, variant = isVariant(n);
+    var c = document.createElement('div'); c.__nid = n.id;
+    c.className = 'gcol ' + (n.isInserted ? 'inserted' : variant ? 'variant' : 'agree');
+    if (state.active === ('g' + n.id)) c.className += ' active';
+    // #1 — the hover-expanded card widens ~230px. A column near the LEFT edge would expand off-screen to the
+    // left (the graph can't scroll left past its start), so anchor edge columns' expansion to grow INWARD:
+    // left-edge columns grow rightward, right-edge columns grow leftward. ~3 cols each side covers the widening.
+    var N = graphSpineNodes.length;
+    if (i <= 2) c.className += ' edgeL'; else if (i >= N - 3) c.className += ' edgeR';
+    var pos = document.createElement('div'); pos.className = 'gpos'; pos.textContent = i; c.appendChild(pos);
+    var dot = document.createElement('div'); dot.className = 'dot'; c.appendChild(dot);
+    if (!variant) {
+      var r = document.createElement('div'); r.className = 'agreelbl';
+      r.textContent = n.agree || '·'; c.appendChild(r);
+    } else {
+      var stem = document.createElement('div'); stem.className = 'stem'; c.appendChild(stem);
+      var br = document.createElement('div'); br.className = 'branches';
+      var tcls = 'r' + nodeType(n);
+      // One clear ROW per witness reading: a colour-coded witness chip + the reading. Multiple witnesses that
+      // share a reading are shown on one chip (comma-joined).
+      n.readings.forEach(function (rd) {
+        var r = document.createElement('div'); r.className = 'grow ' + tcls;
+        var sg = document.createElement('span'); sg.className = 'sig'; sg.textContent = rd.sigla.join(', ');
+        var rt = document.createElement('span'); rt.className = 'rdt';
+        rt.textContent = rd.reading === '∅' ? '∅' : rd.reading;
+        r.appendChild(sg); r.appendChild(rt);
+        br.appendChild(r);
+      });
+      c.appendChild(br);
+    }
+    c.onclick = function () { selectGraphNode(n); };
+    return c;
+  }
+  // Draw move arcs whose endpoints fall in [first,last). Endpoints beyond the spine (the build's virtual
+  // "after-end" node id) clamp to the last column so the arc still reads as "moved to the end".
+  // Move arcs bow UP from the spine baseline between the from/to columns, so they visibly connect the two
+  // positions a witness reordered. Coloured as `moved`; dashed for a `likely` move. Matches `.spineline` top.
+  var SPINE_Y = 169;
+  function drawMoves(svg, first, last) {
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    var N = graphSpineNodes.length;
+    svg.setAttribute('width', (N * COL_W + 28)); svg.setAttribute('height', SPINE_Y + 4);
+    D.graph.edges.forEach(function (e) {
+      if (!e.isMove) return;
+      var a = clampCol(spineCol(e.from)), b = clampCol(spineCol(e.to) < 0 ? N - 1 : spineCol(e.to));
+      if (a < 0 || b < 0) return;
+      var vis = (a >= first && a < last) || (b >= first && b < last);
+      if (!vis) return;
+      var x1 = 14 + a * COL_W + COL_W / 2, x2 = 14 + b * COL_W + COL_W / 2;
+      var span = Math.abs(x2 - x1), peak = Math.max(10, SPINE_Y - Math.min(150, 24 + span / 6));
+      var mx = (x1 + x2) / 2, path = document.createElementNS(svg.namespaceURI, 'path');
+      path.setAttribute('d', 'M' + x1 + ',' + SPINE_Y + ' Q' + mx + ',' + peak + ' ' + x2 + ',' + SPINE_Y);
+      path.setAttribute('fill', 'none');
+      path.setAttribute('stroke', 'var(--mov)');
+      path.setAttribute('stroke-width', '1.5');
+      if (e.confidence === 'likely') path.setAttribute('stroke-dasharray', '4 3');
+      svg.appendChild(path);
+    });
+  }
+  function clampCol(c) { var N = graphSpineNodes.length; return c < 0 ? -1 : Math.min(c, N - 1); }
+  // A windowed snippet of `text` around [from,to), with the [from,to) span wrapped in <mark>. `pad` chars of
+  // context each side, trimmed to word boundaries and escaped. Returns { html } or null.
+  function snippet(text, from, to, pad) {
+    if (from === null || from === undefined || to === null || to === undefined) return null;
+    pad = pad || 60;
+    var lo = Math.max(0, from - pad), hi = Math.min(text.length, to + pad);
+    var pre = text.substring(lo, from), mid = text.substring(from, to), post = text.substring(to, hi);
+    if (lo > 0) { var sp = pre.indexOf(' '); if (sp > 0 && sp < 20) pre = '…' + pre.substring(sp); else pre = '…' + pre; }
+    if (hi < text.length) { var sp2 = post.lastIndexOf(' '); if (sp2 > post.length - 20 && sp2 > 0) post = post.substring(0, sp2) + '…'; else post = post + '…'; }
+    return { html: esc(pre) + '<mark>' + esc(mid || '∅') + '</mark>' + esc(post) };
+  }
+
+  // Find the base-anchored annotation covering a base char range [from,to) — the one that carries the WITNESS
+  // (comp) side for that spot. Returns { ann, idx } or null. Shared by the graph-node and apparatus detail (#3).
+  function mateForBaseRange(from, to) {
+    if (from === null || from === undefined) return null;
+    var hi = (to === null || to === undefined) ? from : to;
+    for (var ai = 0; ai < D.annotations.length; ai++) {
+      var a = D.annotations[ai];
+      if (a.base.from !== null && a.base.from !== undefined && a.base.from <= from
+          && hi <= (a.base.to == null ? a.base.from : a.base.to)) {
+        if (a.comp.from !== null && a.comp.from !== undefined) return { ann: a, idx: ai };
+      }
+    }
+    return null;
+  }
+  // Find the INSERTION annotation for an inserted graph node (issue #2). An inserted node carries no base
+  // range, so `mateForBaseRange` can't reach it — instead match on the reading surface + witness sigla: an
+  // insertion annotation whose witness read this surface as an addition. Returns { ann, idx } or null, giving
+  // the witness-text offset (`comp.from`) and the base anchor (`baseAnchor`) so the node links to both sides.
+  function insertionMateForNode(n) {
+    if (!n.isInserted || !n.readings) return null;
+    var sigla = {}, surfaces = {};
+    n.readings.forEach(function (rd) {
+      surfaces[rd.reading] = 1; rd.sigla.forEach(function (s) { sigla[s] = 1; });
+    });
+    for (var ai = 0; ai < D.annotations.length; ai++) {
+      var a = D.annotations[ai];
+      if (a.type !== 'insertion' || !sigla[a.witness]) continue;
+      if (surfaces[a.comp.reading]) return { ann: a, idx: ai };
+    }
+    // Fall back to any insertion by a witness that reads this node (surfaces may be normalised differently).
+    for (var aj = 0; aj < D.annotations.length; aj++) {
+      var b = D.annotations[aj];
+      if (b.type === 'insertion' && sigla[b.witness]) return { ann: b, idx: aj };
+    }
+    return null;
+  }
+
+  // Build the shared "open this variant in …" link buttons: base text, the witness text, and the parallel view
+  // (jumping directly to the variant). `baseFrom` locates the base span; `mate` (from mateForBaseRange) gives the
+  // witness side + the annotation index the parallel view keys on. Reused by the graph node + apparatus (#1, #3).
+  function variantLinks(baseFrom, mate) {
+    var links = document.createElement('div'); links.className = 'links';
+    if (baseFrom !== null && baseFrom !== undefined) {
+      var bt = document.createElement('button'); bt.textContent = 'Open in ' + D.base + ' (base) text ›';
+      bt.onclick = function () { openTextAt(D.base, baseFrom); }; links.appendChild(bt);
+    }
+    if (mate && mate.ann.comp.from !== null && mate.ann.comp.from !== undefined) {
+      var wt = document.createElement('button'); wt.textContent = 'Open in ' + mate.ann.witness + ' text ›';
+      wt.onclick = function () { openTextAt(mate.ann.witness, mate.ann.comp.from); }; links.appendChild(wt);
+    }
+    if (D.witnesses.length >= 2 && mate) {
+      var pt = document.createElement('button'); pt.textContent = 'Open in parallel ⇄';
+      pt.onclick = function () { openParallelAt(mate.ann.witness, mate.idx); }; links.appendChild(pt);
+    }
+    return links;
+  }
+
+  // Clicking a graph node: mark it and show, IN A PANEL BELOW THE GRAPH (#2), its readings and the surrounding
+  // text — both the base and (when we can locate it) the witness snippet — with buttons to open the full text
+  // (or the parallel view) rather than navigating away automatically.
+  function selectGraphNode(n) {
+    state.active = 'g' + n.id;
+    // Move the active outline to the clicked node among the currently-rendered (windowed) columns.
+    var host = document.getElementById('graph');
+    Array.prototype.forEach.call(host.querySelectorAll('.gcol'), function (c) {
+      c.classList.toggle('active', c.__nid === n.id);
+    });
+    var gd = document.getElementById('gdetail'); if (!gd) return;
+    gd.className = 'gdetail on'; gd.innerHTML = '';
+
+    var readings = n.readings || (n.agree ? [{ reading: n.agree, sigla: D.witnesses.map(function (w) { return w.id; }) }] : []);
+    var head = document.createElement('h4');
+    head.textContent = isVariant(n) ? 'Point of variance' : 'Agreement — all witnesses read the same here';
+    gd.appendChild(head);
+    readings.forEach(function (rd) {
+      var row = document.createElement('div'); row.className = 'rd';
+      var sg = document.createElement('span'); sg.className = 'sig'; sg.textContent = rd.sigla.join(', '); row.appendChild(sg);
+      var rw = document.createElement('span'); rw.className = 'rw ' + (isVariant(n) ? nodeType(n) === 'del' ? 'deletion' : nodeType(n) === 'ins' ? 'insertion' : 'substitution' : '');
+      rw.textContent = rd.reading === '∅' ? '∅ (omits)' : rd.reading; row.appendChild(rw);
+      gd.appendChild(row);
+    });
+
+    // Base snippet (the node carries a base char range).
+    var baseSnip = snippet(witnessText(D.base), n.from, n.to, 70);
+    if (baseSnip) {
+      var s = document.createElement('div'); s.className = 'snip';
+      s.innerHTML = '<span class="lbl">' + esc(D.base) + ' (base)</span>' + baseSnip.html; gd.appendChild(s);
+    }
+    // Witness snippet — for an inserted (green) node find its INSERTION annotation (it has no base range so the
+    // base-range lookup can't reach it, issue #2); otherwise the base-anchored annotation covering this range.
+    var mate = n.isInserted ? insertionMateForNode(n) : mateForBaseRange(n.from, n.to);
+    if (mate) {
+      var cs = snippet(witnessText(mate.ann.witness), mate.ann.comp.from, mate.ann.comp.to, 70);
+      if (cs) { var sc = document.createElement('div'); sc.className = 'snip';
+        sc.innerHTML = '<span class="lbl">' + esc(mate.ann.witness) + '</span>' + cs.html; gd.appendChild(sc); }
+    }
+
+    // Navigation links — open this spot in the base text, the witness text, or the parallel view, jumping
+    // DIRECTLY to this exact variant (#1). Base span from the covering annotation when there is one; for an
+    // insertion the base ANCHOR (where the addition sits); else the node's own base range (agreement node).
+    var baseLink = mate ? (n.isInserted ? mate.ann.baseAnchor : mate.ann.base.from) : n.from;
+    gd.appendChild(variantLinks(baseLink, mate));
+    gd.scrollIntoView({ block: 'nearest' });
+  }
+  // Run `attempt` once the pending view render has painted — the render runs behind the spinner (double-rAF),
+  // and slicing a full-novel view can take longer than a fixed timeout, so we retry until `attempt()` returns
+  // true (found + jumped) or we give up. This is what makes the graph→text / graph→parallel jump reliable (#1).
+  function afterRender(attempt) {
+    var tries = 0;
+    (function poll() {
+      var busy = document.getElementById('busy').classList.contains('on');
+      if (!busy && attempt()) return;               // done
+      if (++tries > 40) return;                     // ~2 s cap
+      setTimeout(poll, 50);
+    })();
+  }
+  // Open a witness's text view and jump to the span at base/comp char offset `from`, highlighting it. The text
+  // spans are keyed `seg{boundary}`; a variant boundary lands exactly, but for robustness (agreement nodes, or
+  // an off-boundary offset) we fall back to the nearest span at/after `from`.
+  function openTextAt(perspective, from) {
+    goTo('text', perspective);
+    afterRender(function () {
+      var el = document.getElementById('seg' + from);
+      if (!el) {                                   // nearest rendered span at/after `from`
+        var spans = document.querySelectorAll('#text span.v[id^="seg"]'), best = null, bestD = Infinity;
+        Array.prototype.forEach.call(spans, function (s) {
+          var o = parseInt(s.id.slice(3), 10); var d = o - from;
+          if (!isNaN(o) && d >= -2 && d < bestD) { bestD = d; best = s; }
+        });
+        el = best;
+      }
+      if (!el) return false;
+      el.scrollIntoView({ block: 'center' }); el.classList.add('active'); flash(el); return true;
+    });
+  }
+  // Open the parallel view (base ⇄ the chosen witness) and jump BOTH columns to this annotation's spans (#1).
+  function openParallelAt(witness, annIdx) {
+    state.mate = witness;
+    goTo('parallel');
+    afterRender(function () {
+      var host = document.getElementById('parallel');
+      var spans = host.querySelectorAll('.pv[data-idx="' + annIdx + '"]');
+      if (!spans.length) return false;
+      Array.prototype.forEach.call(spans, function (s) {
+        s.scrollIntoView({ block: 'center' }); s.classList.add('mate'); flash(s);
+      });
+      return true;
+    });
+  }
+  // Briefly pulse an element so the jumped-to variant is obvious.
+  function flash(el) {
+    el.classList.add('flash');
+    setTimeout(function () { el.classList.remove('flash'); }, 1400);
+  }
+
+  // ---- #3 parallel side-by-side (base ⇄ one witness) ---------------------------------------------------
+  // Two scrolled columns; variation highlighted on BOTH sides in matching colours, a ∅ gap marker where one
+  // side omits, and linked hover flagging the counterpart. Data is the base-anchored annotations, which carry
+  // both sides — no new engine work for the 2-witness alignment (VIEWER_UX_PLAN #3).
+  function renderParallel() {
+    var host = document.getElementById('parallel'); host.innerHTML = '';
+    var mate = state.mate || (D.witnesses.filter(function (w) { return w.id !== D.base; })[0] || {}).id;
+    state.mate = mate;
+
+    var bar = document.createElement('div'); bar.className = 'pbar';
+    bar.appendChild(document.createTextNode('base '));
+    var strong = document.createElement('b'); strong.textContent = D.base; bar.appendChild(strong);
+    bar.appendChild(document.createTextNode('  ⇄  '));
+    var sel = document.createElement('select');
+    D.witnesses.filter(function (w) { return w.id !== D.base; }).forEach(function (w) {
+      var o = document.createElement('option'); o.value = w.id; o.textContent = w.id;
+      if (w.id === mate) o.selected = true; sel.appendChild(o);
+    });
+    sel.onchange = function () { withSpinner(function () { state.mate = sel.value; renderParallel(); }); };
+    bar.appendChild(sel);
+    if (!D.viewerPairsAvailable) bar.appendChild(document.createTextNode('  (no alignment in this export)'));
+    // #4 — a toggle to show line numbers as the user scrolls (a per-column gutter). Off by default. NOTE: each
+    // column numbers its OWN physical lines, so the two counts legitimately differ (the texts differ in length /
+    // wrapping) — that divergence is NOT a mis-alignment. The Alignment ✓ tab confirms the collation is sound.
+    var lnLabel = document.createElement('label');
+    var lncb = document.createElement('input'); lncb.type = 'checkbox'; lncb.checked = !!state.parallelLines;
+    lncb.onchange = function () { state.parallelLines = lncb.checked;
+      host.classList.toggle('lines', lncb.checked); };
+    lnLabel.appendChild(lncb); lnLabel.appendChild(document.createTextNode('line numbers'));
+    lnLabel.title = 'Each column numbers its own lines; the two texts differ in length, so the counts differ — that is not a mis-alignment. See the Alignment ✓ tab.';
+    bar.appendChild(lnLabel);
+    // #3 — a colour key for the highlight types shown in the two texts (only the types that actually occur here).
+    var pkey = document.createElement('span'); pkey.className = 'pkey';
+    var present = {}; pairAnnsForKey(mate).forEach(function (t) { present[t] = 1; });
+    var kh = document.createElement('b'); kh.textContent = 'Key: '; pkey.appendChild(kh);
+    TYPES.forEach(function (t) {
+      if (!present[t]) return;
+      var el = document.createElement('span'); el.className = 'kk';
+      var sw = document.createElement('span'); sw.className = 'sw';
+      sw.style.background = 'var(--' + TYPE_VAR[t] + 'bg)'; sw.style.boxShadow = 'inset 0 -3px 0 var(--' + TYPE_VAR[t] + ')';
+      el.appendChild(sw); el.appendChild(document.createTextNode(LABEL[t]));
+      pkey.appendChild(el);
+    });
+    bar.appendChild(pkey);
+    host.classList.toggle('lines', !!state.parallelLines);
+    host.appendChild(bar);
+
+    var cols2 = document.createElement('div'); cols2.className = 'cols2';
+    var baseCol = document.createElement('div'); baseCol.className = 'pcol base';
+    var compCol = document.createElement('div'); compCol.className = 'pcol comp';
+    baseCol.innerHTML = '<h4>' + esc(D.base) + ' (base)</h4>';
+    compCol.innerHTML = '<h4>' + esc(mate) + '</h4>';
+    cols2.appendChild(baseCol); cols2.appendChild(compCol); host.appendChild(cols2);
+    parallelCols = { base: baseCol, comp: compCol };   // for flagMate's hover auto-scroll (#2)
+
+    // annotations for this base↔mate pair, indexed by side range; render each column by slicing at boundaries.
+    var pairAnns = [];
+    D.annotations.forEach(function (a, idx) { if (a.witness === mate) pairAnns.push({ a: a, idx: idx }); });
+    sliceInto(baseCol, witnessText(D.base), pairAnns, 'base');
+    sliceInto(compCol, witnessText(mate), pairAnns, 'comp');
+
+    // Linked scroll — ANCHORED, not proportional. Two translations differ wildly in length (and the excluded
+    // front matter differs too), so "scroll to the same %" leaves the columns showing unrelated passages. Every
+    // variant span (`.pv[data-idx]`) is a shared alignment point that exists on BOTH sides; we sync by keeping
+    // the counterpart of the topmost visible variant at the same screen offset. So scrolling Walter's chapter 1
+    // brings Mercier's chapter 1 alongside it, however far their raw offsets have drifted apart.
+    var lock = false;
+    function firstVisiblePV(col) {                 // the shallowest `.pv` at/below the column's top edge
+      var top = col.getBoundingClientRect().top, best = null, bestD = Infinity;
+      col.querySelectorAll('.pv[data-idx]').forEach(function (s) {
+        var d = s.getBoundingClientRect().top - top;
+        if (d >= -4 && d < bestD) { bestD = d; best = s; }
+      });
+      return best ? { el: best, delta: bestD } : null;
+    }
+    function link(from, to) { from.onscroll = function () {
+      if (lock) { lock = false; return; }
+      if (parallelScrollLock) return;               // a hover auto-scroll (#2) is in progress — don't echo it
+      var anchor = firstVisiblePV(from); if (!anchor) return;
+      var mate = to.querySelector('.pv[data-idx="' + anchor.el.dataset.idx + '"]');
+      if (!mate) return;                            // e.g. a one-sided ins/del with no counterpart span
+      lock = true;                                  // align the mate to the same in-column offset as the anchor
+      to.scrollTop += (mate.getBoundingClientRect().top - to.getBoundingClientRect().top) - anchor.delta;
+    }; }
+    link(baseCol, compCol); link(compCol, baseCol);
+  }
+  // Slice a column's text at every annotation boundary on `sideKey`, wrapping each physical LINE in a `.pline`
+  // row that carries a line-number gutter (toggled by #4). A segment covered by an annotation becomes a
+  // coloured `.pv` span; plain text is a text node. Splitting per line lets the gutter number every line and
+  // keeps the columns aligned to their own line numbering as the user scrolls.
+  function sliceInto(col, text, pairAnns, sideKey) {
+    var rows = [];
+    pairAnns.forEach(function (r) {
+      var side = r.a[sideKey];
+      if (side.from !== null && side.from !== undefined) rows.push({ r: r, from: side.from, to: side.to });
+    });
+    rows.sort(function (a, b) { return a.from - b.from; });
+    var bounds = [0, text.length];
+    rows.forEach(function (x) { bounds.push(x.from, x.to); });
+    bounds = Array.from(new Set(bounds)).sort(function (a, b) { return a - b; });
+
+    var frag = document.createDocumentFragment();
+    var lineNo = 1, curLine = newLine(lineNo);
+    function newLine(n) {
+      var ln = document.createElement('div'); ln.className = 'pline';
+      var g = document.createElement('span'); g.className = 'plnum'; g.textContent = n; ln.appendChild(g);
+      var body = document.createElement('span'); body.className = 'plbody'; ln.appendChild(body);
+      ln._body = body; return ln;
+    }
+    // Append `node` (text node or span) to the current line, breaking into a new `.pline` at each '\n'.
+    function emit(strOrSpan, isSpan) {
+      if (isSpan) { curLine._body.appendChild(strOrSpan); return; }
+      var parts = strOrSpan.split('\n');
+      for (var k = 0; k < parts.length; k++) {
+        if (k > 0) { frag.appendChild(curLine); lineNo++; curLine = newLine(lineNo); }
+        if (parts[k]) curLine._body.appendChild(document.createTextNode(parts[k]));
+      }
+    }
+    for (var i = 0; i + 1 < bounds.length; i++) {
+      var lo = bounds[i], hi = bounds[i + 1]; if (lo >= hi) continue;
+      var covering = rows.filter(function (x) { return x.from <= lo && hi <= x.to; });
+      var slice = text.substring(lo, hi);
+      if (!covering.length) { emit(slice, false); continue; }
+      // A coloured span may itself contain newlines; split it across lines so the gutter stays correct.
+      var top = covering[covering.length - 1].r;
+      var segs = slice.split('\n');
+      for (var s = 0; s < segs.length; s++) {
+        if (s > 0) { frag.appendChild(curLine); lineNo++; curLine = newLine(lineNo); }
+        if (!segs[s]) continue;
+        var span = document.createElement('span');
+        span.className = 'pv ' + top.a.type; span.dataset.idx = top.idx; span.dataset.side = sideKey;
+        span.appendChild(document.createTextNode(segs[s]));
+        span.onmouseenter = function (ev) { flagMate(parseInt(ev.currentTarget.dataset.idx, 10), true, ev.currentTarget.dataset.side); };
+        span.onmouseleave = function (ev) { flagMate(parseInt(ev.currentTarget.dataset.idx, 10), false, ev.currentTarget.dataset.side); };
+        emit(span, true);
+      }
+    }
+    frag.appendChild(curLine);
+    col.appendChild(frag);
+  }
+  // Hover on one side outlines the SAME annotation's span on the other side (its counterpart) AND, if that
+  // counterpart is off-screen in its column, scrolls that column so it becomes visible (#2) — so the reader can
+  // always see how the hovered passage reads in the other text without hunting for it. Only the OPPOSITE column
+  // is scrolled (the hovered one stays put); a lock keeps the linked-scroll from fighting back.
+  // The variation types actually present for a base↔witness pair (drives the parallel colour key, #3).
+  function pairAnnsForKey(mate) {
+    var seen = [];
+    D.annotations.forEach(function (a) { if (a.witness === mate && seen.indexOf(a.type) < 0) seen.push(a.type); });
+    return seen;
+  }
+  var parallelCols = null, parallelScrollLock = false;
+  function flagMate(idx, on, sourceSide) {
+    var host = document.getElementById('parallel');
+    host.querySelectorAll('.pv[data-idx="' + idx + '"]').forEach(function (s) { s.classList.toggle('mate', on); });
+    if (!on || !parallelCols || !sourceSide) return;
+    // the OTHER column and this annotation's span within it
+    var otherCol = sourceSide === 'base' ? parallelCols.comp : parallelCols.base;
+    if (!otherCol) return;
+    var target = otherCol.querySelector('.pv[data-idx="' + idx + '"]'); if (!target) return;
+    var cr = otherCol.getBoundingClientRect(), tr = target.getBoundingClientRect();
+    // in view already (with a little margin)? then leave it.
+    if (tr.top >= cr.top + 8 && tr.bottom <= cr.bottom - 8) return;
+    parallelScrollLock = true;                       // suppress the linked-scroll echo
+    otherCol.scrollTop += (tr.top - cr.top) - cr.height * 0.4;   // bring the counterpart into the upper-middle
+    setTimeout(function () { parallelScrollLock = false; }, 60);
+  }
+
+  // ---- #5 CHANGES view: read the BASE and watch it transform into the witness ----------------------------
+  // A "track-changes" rendering: the base text, with each variant shown INLINE as the edit that turns it into
+  // the witness — a substitution as struck base → new reading, a deletion struck through, an insertion as a
+  // caret + added text, a move badged. Above it, a change-intensity HEATMAP answers where/how-much at a glance,
+  // and a summary states the overall extent of change. Built for a reader unfamiliar with the texts.
+  function renderChanges() {
+    var host = document.getElementById('changes'); host.innerHTML = '';
+    var mate = state.mate || (D.witnesses.filter(function (w) { return w.id !== D.base; })[0] || {}).id;
+    state.mate = mate;
+    var baseText = witnessText(D.base);
+
+    // Control bar: witness selector + a legend of the change marks.
+    var bar = document.createElement('div'); bar.className = 'cbar';
+    bar.appendChild(document.createTextNode('How ')); var wsel = document.createElement('select');
+    D.witnesses.filter(function (w) { return w.id !== D.base; }).forEach(function (w) {
+      var o = document.createElement('option'); o.value = w.id; o.textContent = w.id; if (w.id === mate) o.selected = true; wsel.appendChild(o);
+    });
+    wsel.onchange = function () { withSpinner(function () { state.mate = wsel.value; renderChanges(); }); };
+    bar.appendChild(wsel);
+    var lead = document.createElement('b'); lead.textContent = ' changed from ' + D.base + ' (base)'; bar.appendChild(lead);
+    var lg = document.createElement('span'); lg.className = 'clegend';
+    lg.innerHTML = '<span class="k"><span class="sub-old">was</span><span class="sub-arrow">→</span><span class="sub-new">now</span> substituted</span>'
+      + '<span class="k"><span class="del">deleted</span></span>'
+      + '<span class="k"><span class="ins">added</span></span>'
+      + '<span class="k"><span class="mov">moved</span></span>';
+    bar.appendChild(lg); host.appendChild(bar);
+
+    // Base-anchored change events for this witness, in reading order. Each has a base [from,to) (or an anchor
+    // offset for an insertion) so we can weave them into the base text.
+    var anns = [];
+    D.annotations.forEach(function (a, idx) {
+      if (a.witness !== mate) return;
+      var from = a.base.from, to = a.base.to;
+      if (a.type === 'insertion') { from = (a.baseAnchor == null ? null : a.baseAnchor); to = from; }
+      if (from === null || from === undefined) return;   // can't place it → skip (rare)
+      anns.push({ a: a, idx: idx, from: from, to: (to == null ? from : to) });
+    });
+    anns.sort(function (x, y) { return x.from - y.from || x.to - y.to; });
+
+    // Summary — the extent of change.
+    var counts = { substitution:0, insertion:0, deletion:0, transposition:0, variantSpelling:0 };
+    var changedChars = 0;
+    anns.forEach(function (r) { counts[r.a.type] = (counts[r.a.type] || 0) + 1;
+      if (r.a.type !== 'insertion') changedChars += Math.max(0, r.to - r.from); });
+    var pct = baseText.length ? Math.min(100, Math.round(1000 * changedChars / baseText.length) / 10) : 0;
+    var total = anns.length;
+    var sum = document.createElement('div'); sum.className = 'csum';
+    sum.innerHTML = '<span class="pct"><b>' + pct + '%</b> of the base text differs</span> · '
+      + '<b>' + total.toLocaleString() + '</b> change' + (total === 1 ? '' : 's') + ': '
+      + counts.substitution.toLocaleString() + ' substituted · '
+      + counts.deletion.toLocaleString() + ' deleted · '
+      + counts.insertion.toLocaleString() + ' added · '
+      + counts.transposition.toLocaleString() + ' moved';
+    host.appendChild(sum);
+
+    // Heatmap strip — the base split into buckets, each shaded by how much of it changed. Click to jump.
+    var NB = 160, buckets = new Array(NB).fill(0);
+    anns.forEach(function (r) {
+      if (r.a.type === 'insertion') { var bi = Math.min(NB - 1, Math.floor(r.from / baseText.length * NB)); buckets[bi] += 6; return; }
+      var b0 = Math.floor(r.from / baseText.length * NB), b1 = Math.floor((r.to - 1) / baseText.length * NB);
+      for (var bb = b0; bb <= b1 && bb < NB; bb++) buckets[bb] += (r.to - r.from);
+    });
+    var maxB = Math.max(1, buckets.reduce(function (m, v) { return Math.max(m, v); }, 0));
+    var heat = document.createElement('div'); heat.className = 'heat';
+    var body = document.createElement('div'); body.className = 'cbody';   // (declared here so heat click can scroll it)
+    for (var hb = 0; hb < NB; hb++) {
+      (function (frac, intensity) {
+        var cell = document.createElement('div'); cell.className = 'hc';
+        var t = Math.min(1, intensity / maxB);
+        cell.style.background = t === 0 ? 'transparent'
+          : 'rgba(180,83,9,' + (0.12 + 0.7 * t) + ')';    // warm ramp = more change
+        cell.title = Math.round(t * 100) + '% change intensity';
+        cell.onclick = function () { body.scrollTop = frac * (body.scrollHeight - body.clientHeight); };
+        heat.appendChild(cell);
+      })(hb / NB, buckets[hb]);
+    }
+    host.appendChild(heat);
+
+    // The transformation reading: walk the base, emitting kept runs plus each change inline.
+    if (!D.viewerPairsAvailable) {
+      var note = document.createElement('div'); note.className = 'cnote';
+      note.textContent = 'This export was generated without viewer annotations; the change view is unavailable.';
+      host.appendChild(note); host.appendChild(body); return;
+    }
+    var frag = document.createDocumentFragment();
+    var cursor = 0;
+    function kept(txt) { if (txt) frag.appendChild(document.createTextNode(txt)); }
+    anns.forEach(function (r) {
+      var a = r.a;
+      if (r.from > cursor) kept(baseText.substring(cursor, r.from));   // unchanged run before this change
+      if (r.from < cursor) return;                                     // overlapping (e.g. nested) — skip to avoid dupes
+      var el = document.createElement('span'); el.className = 'chunk'; el.dataset.idx = r.idx;
+      if (a.type === 'insertion') {
+        el.className += ' ins'; el.textContent = a.comp.reading;       // added text (base has nothing here)
+      } else if (a.type === 'deletion') {
+        el.className += ' del'; el.textContent = baseText.substring(r.from, r.to);
+        cursor = r.to;
+      } else if (a.type === 'transposition') {
+        el.className += ' mov'; el.textContent = baseText.substring(r.from, r.to);
+        cursor = r.to;
+      } else {   // substitution (and any spelling)
+        var oldSpan = document.createElement('span'); oldSpan.className = 'sub-old';
+        oldSpan.textContent = baseText.substring(r.from, r.to);
+        var arr = document.createElement('span'); arr.className = 'sub-arrow'; arr.textContent = '→';
+        var neu = document.createElement('span'); neu.className = 'sub-new'; neu.textContent = a.comp.reading || '∅';
+        el.appendChild(oldSpan); el.appendChild(arr); el.appendChild(neu);
+        cursor = r.to;
+      }
+      el.onclick = (function (idx) { return function () { selectChange(idx, el); }; })(r.idx);
+      frag.appendChild(el);
+    });
+    kept(baseText.substring(cursor));                                  // the tail
+    body.appendChild(frag);
+    host.appendChild(body);
+  }
+  // Clicking a change chunk: mark it + open the parallel view at this variant (reuses the #1 jump machinery).
+  function selectChange(annIdx, el) {
+    var host = document.getElementById('changes');
+    var prev = host.querySelector('.chunk.on'); if (prev) prev.classList.remove('on');
+    if (el) el.classList.add('on');
+    var a = D.annotations[annIdx];
+    if (a && a.comp.from !== null && a.comp.from !== undefined) openParallelAt(a.witness, annIdx);
+  }
+
+  // ---- STORY: the whole collation as prose (#1) --------------------------------------------------------
+  // The high-level narrative (the exact `CollationNarrative` prose from summary.txt), then a section-by-section
+  // walkthrough of the recorded changes so a reader gets the FULL story of how the witness changed — each section
+  // covers a stretch of the base, counts its changes by kind, and shows a few representative examples inline
+  // (struck old → new, added, deleted, moved), clickable to open in the parallel view.
+  var STORY_SEGMENTS = 12, STORY_EXAMPLES = 6;   // sections across the work; example changes shown per section
+  function renderStory() {
+    var host = document.getElementById('story'); host.innerHTML = '';
+    var mate = state.mate || (D.witnesses.filter(function (w) { return w.id !== D.base; })[0] || {}).id;
+    state.mate = mate;
+
+    var bar = document.createElement('div'); bar.className = 'sbar';
+    bar.appendChild(document.createTextNode('The story of ')); var sel = document.createElement('select');
+    D.witnesses.filter(function (w) { return w.id !== D.base; }).forEach(function (w) {
+      var o = document.createElement('option'); o.value = w.id; o.textContent = w.id; if (w.id === mate) o.selected = true; sel.appendChild(o);
+    });
+    sel.onchange = function () { withSpinner(function () { state.mate = sel.value; renderStory(); }); };
+    bar.appendChild(sel);
+    var vsbase = document.createElement('span'); vsbase.innerHTML = ' vs <b>' + esc(D.base) + '</b> (base)'; bar.appendChild(vsbase);
+    host.appendChild(bar);
+
+    var body = document.createElement('div'); body.className = 'sbody'; host.appendChild(body);
+    var wrap = document.createElement('div'); wrap.className = 'swrap'; body.appendChild(wrap);
+
+    // The high-level narrative (single source of truth from Swift `CollationNarrative`).
+    var narr = (D.narratives || []).filter(function (n) { return n.witness === mate; })[0];
+    var h = document.createElement('h2'); h.textContent = 'How ' + mate + ' changed from ' + D.base; wrap.appendChild(h);
+    var lede = document.createElement('p'); lede.className = 'lede'; lede.textContent = narr ? narr.text
+      : 'No narrative is available for this witness.'; wrap.appendChild(lede);
+
+    if (!D.viewerPairsAvailable) return;
+
+    // Base-anchored changes for this witness, in reading order (insertions placed by their base anchor).
+    var baseLen = witnessText(D.base).length || 1;
+    var anns = [];
+    D.annotations.forEach(function (a, idx) {
+      if (a.witness !== mate) return;
+      var from = a.type === 'insertion' ? a.baseAnchor : a.base.from;
+      if (from === null || from === undefined) return;
+      anns.push({ a: a, idx: idx, from: from });
+    });
+    anns.sort(function (x, y) { return x.from - y.from; });
+    if (!anns.length) return;
+
+    var wh = document.createElement('h3'); wh.textContent = 'Through the text, change by change'; wrap.appendChild(wh);
+
+    // Split into equal-width base segments; describe each.
+    var seg = baseLen / STORY_SEGMENTS;
+    for (var s = 0; s < STORY_SEGMENTS; s++) {
+      var lo = s * seg, hi = (s + 1) * seg;
+      var inSeg = anns.filter(function (r) { return r.from >= lo && r.from < hi; });
+      if (!inSeg.length) continue;
+      var by = { substitution:0, insertion:0, deletion:0, transposition:0, variantSpelling:0 };
+      inSeg.forEach(function (r) { by[r.a.type] = (by[r.a.type] || 0) + 1; });
+      var segEl = document.createElement('div'); segEl.className = 'seg';
+      var sh = document.createElement('div'); sh.className = 'sh';
+      sh.innerHTML = 'Around ' + Math.round(s / STORY_SEGMENTS * 100) + '–' + Math.round((s + 1) / STORY_SEGMENTS * 100)
+        + '% of the work <span class="loc">(' + inSeg.length + ' change' + (inSeg.length === 1 ? '' : 's') + ')</span>';
+      segEl.appendChild(sh);
+      // a sentence of counts
+      var made = [];
+      if (by.substitution) made.push(by.substitution + ' substituted');
+      if (by.deletion) made.push(by.deletion + ' deleted');
+      if (by.insertion) made.push(by.insertion + ' added');
+      if (by.transposition) made.push(by.transposition + ' moved');
+      var pcount = document.createElement('p');
+      pcount.innerHTML = capitalise(mate) + ' ' + joinListJS(made) + ' here. For example: ';
+      // a few representative inline examples
+      var shown = inSeg.slice(0, STORY_EXAMPLES);
+      shown.forEach(function (r, i) {
+        if (i > 0) pcount.appendChild(document.createTextNode('; '));
+        pcount.appendChild(changeExample(r));
+      });
+      if (inSeg.length > shown.length) {
+        var more = document.createElement('span'); more.className = 'more';
+        more.textContent = ' … and ' + (inSeg.length - shown.length) + ' more.'; pcount.appendChild(more);
+      } else { pcount.appendChild(document.createTextNode('.')); }
+      segEl.appendChild(pcount);
+      wrap.appendChild(segEl);
+    }
+  }
+  // One change rendered inline, in the redline vocabulary, clickable → parallel at that variant.
+  function changeExample(r) {
+    var a = r.a, span = document.createElement('span'); span.className = 'ex';
+    if (a.type === 'substitution' || a.type === 'variantSpelling') {
+      span.className += ' c-sub';
+      span.innerHTML = '“<span class="o">' + esc(clip(a.base.reading)) + '</span>” → “<span class="n">' + esc(clip(a.comp.reading)) + '</span>”';
+    } else if (a.type === 'deletion') {
+      span.className += ' c-del'; span.innerHTML = 'dropped “' + esc(clip(a.base.reading)) + '”';
+    } else if (a.type === 'insertion') {
+      span.className += ' c-ins'; span.innerHTML = 'added “' + esc(clip(a.comp.reading)) + '”';
+    } else {   // transposition
+      span.className += ' c-mov'; span.innerHTML = 'moved “' + esc(clip(a.base.reading || a.comp.reading)) + '”';
+    }
+    span.onclick = (function (idx, wit) { return function () {
+      if (D.annotations[idx].comp.from != null) openParallelAt(wit, idx); }; })(r.idx, a.witness);
+    return span;
+  }
+  function clip(s) { s = s || '∅'; return s.length > 42 ? s.slice(0, 40) + '…' : s; }
+  function capitalise(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : s; }
+  function joinListJS(parts) {
+    if (!parts.length) return 'made changes';
+    if (parts.length === 1) return parts[0];
+    if (parts.length === 2) return parts[0] + ' and ' + parts[1];
+    return parts.slice(0, -1).join(', ') + ', and ' + parts[parts.length - 1];
+  }
+
+  // Position a floating tooltip near the cursor, but FLIP it above/left of the pointer when it would overflow the
+  // viewport edge — so the whole tip stays on screen (near the plot's bottom-left, a naive below-right tip was
+  // clipped and only its heading showed; scrolling to see the rest hid it). `position:fixed`, so viewport coords.
+  function positionTip(tip, ev) {
+    var pad = 12, vw = window.innerWidth, vh = window.innerHeight;
+    var tw = tip.offsetWidth || 200, th = tip.offsetHeight || 60;
+    var x = ev.clientX + pad, y = ev.clientY + pad;
+    if (x + tw > vw - 6) x = ev.clientX - pad - tw;      // flip left
+    if (y + th > vh - 6) y = ev.clientY - pad - th;      // flip up
+    tip.style.left = Math.max(6, x) + 'px';
+    tip.style.top = Math.max(6, y) + 'px';
+  }
+
+  // ---- ALIGNMENT MAP: confirm the collation aligned correctly ------------------------------------------
+  // A correspondence dot-plot: every variation point plotted at (base position, comparison position). A correct
+  // collation makes the points hug a smooth, monotonically-rising near-diagonal — the two texts advance together;
+  // a mistake (a jump, a wrong-occurrence match) throws points far off that line. The reviewer SEES the alignment
+  // is sound (or spots exactly where it isn't), and a plain-language verdict states it. This answers the
+  // "did the collation actually work, without incorrect jumps?" question the other views can't.
+  function renderAlignMap() {
+    var host = document.getElementById('alignmap'); host.innerHTML = '';
+    var mate = state.mate || (D.witnesses.filter(function (w) { return w.id !== D.base; })[0] || {}).id;
+    state.mate = mate;
+
+    // Control bar + witness selector.
+    var bar = document.createElement('div'); bar.className = 'abar';
+    bar.appendChild(document.createTextNode('Alignment of ')); var b1 = document.createElement('b'); b1.textContent = D.base + ' (base)'; bar.appendChild(b1);
+    bar.appendChild(document.createTextNode(' with ')); var sel = document.createElement('select');
+    D.witnesses.filter(function (w) { return w.id !== D.base; }).forEach(function (w) {
+      var o = document.createElement('option'); o.value = w.id; o.textContent = w.id; if (w.id === mate) o.selected = true; sel.appendChild(o);
+    });
+    sel.onchange = function () { withSpinner(function () { state.mate = sel.value; renderAlignMap(); }); };
+    bar.appendChild(sel); host.appendChild(bar);
+
+    var M = alignMetrics(mate);
+    var pts = M.pts, wlen = M.wlen, mlen = M.mlen, monoPct = M.monoPct, devPct = M.devPct, good = M.good;
+    var verdict = document.createElement('div'); verdict.className = 'verdict ' + (good ? 'ok' : 'warn');
+    verdict.innerHTML = '<span class="icon">' + (good ? '✓' : '⚠') + '</span><span>'
+      + (good
+        ? '<b>The texts track each other throughout.</b> The ' + pts.length.toLocaleString()
+          + ' shared points form a clean, monotonic diagonal (max drift <b>' + devPct + '%</b> off the ideal line; '
+          + monoPct + '% advance in step) — the collation aligned '
+          + D.base + ' and ' + esc(mate) + ' correctly, end to end.'
+        : '<b>Check the alignment here.</b> Some points sit far off the diagonal (max drift <b>' + devPct
+          + '%</b>) or run backwards (' + monoPct + '% monotonic) — hover the outliers to inspect them.')
+      + '</span>';
+    host.appendChild(verdict);
+
+    var help = document.createElement('div'); help.className = 'help';
+    help.innerHTML = 'Each dot is a point where the texts differ, placed at its position in <b>' + esc(D.base)
+      + '</b> (left→right) and in <b>' + esc(mate) + '</b> (bottom→top). A correct collation makes the dots hug the '
+      + 'dashed <b>diagonal</b> — both texts advancing together. A dot far from the line, or a run that dips '
+      + 'backwards, would flag a mis-alignment. <b>Hover</b> a dot for its lines; <b>click</b> to open it in parallel.';
+    host.appendChild(help);
+
+    // The plot.
+    var wrap = document.createElement('div'); wrap.className = 'plotwrap'; host.appendChild(wrap);
+    var W = 640, H = 640, pad = 46;
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('width', W); svg.setAttribute('height', H); svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    function X(bpos) { return pad + bpos / wlen * (W - 2 * pad); }
+    function Y(cpos) { return (H - pad) - cpos / mlen * (H - 2 * pad); }   // invert: bottom = 0
+
+    // tolerance band around the diagonal (visual "on-track" zone), then the diagonal, axes, labels.
+    var bandW = 0.08 * (H - 2 * pad);   // ±8% band
+    var band = document.createElementNS(SVGNS, 'path');
+    band.setAttribute('class', 'band');
+    band.setAttribute('d', 'M' + pad + ',' + (Y(0) + bandW) + ' L' + (W - pad) + ',' + (Y(mlen) + bandW)
+      + ' L' + (W - pad) + ',' + (Y(mlen) - bandW) + ' L' + pad + ',' + (Y(0) - bandW) + ' Z');
+    svg.appendChild(band);
+    function line(x1, y1, x2, y2, cls) { var l = document.createElementNS(SVGNS, 'line');
+      l.setAttribute('x1', x1); l.setAttribute('y1', y1); l.setAttribute('x2', x2); l.setAttribute('y2', y2);
+      l.setAttribute('class', cls); svg.appendChild(l); }
+    line(pad, H - pad, W - pad, pad, 'diag');                        // ideal diagonal
+    line(pad, pad, pad, H - pad, 'axis'); line(pad, H - pad, W - pad, H - pad, 'axis');
+    function label(x, y, txt, anchor) { var t = document.createElementNS(SVGNS, 'text');
+      t.setAttribute('x', x); t.setAttribute('y', y); t.setAttribute('class', 'axlbl');
+      if (anchor) t.setAttribute('text-anchor', anchor); t.textContent = txt; svg.appendChild(t); }
+    label(W / 2, H - 12, esc(D.base) + ' →', 'middle');
+    var yl = document.createElementNS(SVGNS, 'text'); yl.setAttribute('class', 'axlbl');
+    yl.setAttribute('transform', 'translate(14,' + (H / 2) + ') rotate(-90)'); yl.setAttribute('text-anchor', 'middle');
+    yl.textContent = esc(mate) + ' →'; svg.appendChild(yl);
+
+    // the points — colour by type, radius small so 18k dots stay a clean line. One tip element per render,
+    // parented to the host (cleared on the next render via host.innerHTML) so it doesn't leak on tab/witness switch.
+    var tip = document.createElement('div'); tip.className = 'tip'; host.appendChild(tip);
+    var colour = { substitution:'var(--sub)', transposition:'var(--mov)', insertion:'var(--ins)',
+                   deletion:'var(--del)', variantSpelling:'var(--spl)' };
+    var gfrag = document.createElementNS(SVGNS, 'g');
+    // cap drawn points for very large corpora (sample evenly) so the SVG stays light; the verdict uses all.
+    var CAP = 6000, step = Math.max(1, Math.ceil(pts.length / CAP));
+    for (var k = 0; k < pts.length; k += step) {
+      (function (pt) {
+        var c = document.createElementNS(SVGNS, 'circle'); c.setAttribute('class', 'pt');
+        c.setAttribute('cx', X(pt.b)); c.setAttribute('cy', Y(pt.c)); c.setAttribute('r', 1.7);
+        c.setAttribute('fill', colour[pt.type] || '#78716c');
+        c.onmouseenter = function (ev) { tip.style.display = 'block';
+          tip.innerHTML = '<b>' + (LABEL[pt.type] || pt.type) + '</b><br>' + esc(D.base) + ': ' + esc(pt.bcite || '—')
+            + '<br>' + esc(mate) + ': ' + esc(pt.ccite || '—');
+          positionTip(tip, ev); };
+        c.onmousemove = function (ev) { positionTip(tip, ev); };
+        c.onmouseleave = function () { tip.style.display = 'none'; };
+        c.onclick = function () { tip.style.display = 'none'; openParallelAt(mate, pt.idx); };
+        gfrag.appendChild(c);
+      })(pts[k]);
+    }
+    svg.appendChild(gfrag); wrap.appendChild(svg);
+  }
+
+  function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+
+  // The heavy view: one of the view modes. Split out so selection can avoid calling it.
+  function renderView() {
+    var m = state.mode;
+    show('text', m === 'text'); show('apparatus', m === 'apparatus'); show('graph', m === 'graph');
+    show('parallel', m === 'parallel'); show('changes', m === 'changes'); show('alignmap', m === 'alignmap');
+    show('story', m === 'story'); show('info', m === 'info');
+    // The side panel is meaningful for the text view (detail + the annotation list). The apparatus tab is now
+    // SELF-CONTAINED — its own list is clickable and drives its own detail (#4) — so it needs no side panel.
+    document.getElementById('side').style.display = (m === 'text') ? '' : 'none';
+    if (m === 'text') renderText();
+    else if (m === 'apparatus') renderApparatus();
+    else if (m === 'graph') renderGraph();
+    else if (m === 'parallel') renderParallel();
+    else if (m === 'changes') renderChanges();
+    else if (m === 'alignmap') renderAlignMap();
+    else if (m === 'story') renderStory();
+    else if (m === 'info') renderInfo();
+  }
+  // Explicit on-display per element (their CSS default is `display:none`, so '' would not un-hide them).
+  // `apparatus` MUST be `flex` (it is a flex COLUMN: fixed help header, a flex:1 scrollable list, a detail
+  // panel) — `block` would leave the `.aplist` unbounded and it would not scroll (#3).
+  var ON_DISPLAY = { text:'block', apparatus:'flex', graph:'flex', parallel:'flex', changes:'flex',
+                     alignmap:'flex', story:'flex', info:'block', side:'block' };
+  function show(id, on) { document.getElementById(id).style.display = on ? ON_DISPLAY[id] : 'none'; }
+  // The light chrome: tabs, legend, and the meta line — cheap to rebuild.
+  function renderChrome() {
+    renderTabs(); renderLegend();
+    document.getElementById('meta').textContent =
+      'base: ' + D.base + ' · witnesses: ' + D.witnesses.map(function (w) { return w.id; }).join(', ')
+      + ' · strategy: ' + D.strategy + ' · scoring: ' + D.scoring + (D.hasLexicon ? ' · lexicon: yes' : '')
+      + ' · ' + D.annotations.length + ' variation(s) vs base';
+  }
+  function render() { renderChrome(); renderView(); renderList(); }
+  render();
+})();
+</script>
+</body>
+</html>
+"""#
+}

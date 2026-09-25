@@ -1,0 +1,144 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ancientlives.github.io/CollationKit/schema/collation.schema.json",
+  "title": "CollationKit interchange",
+  "description": "The cross-language JSON interchange emitted by `collate-demo --json`: the N-witness variant graph plus each successive pairwise collation. This is the wire contract a web/WASM consumer or a comparison harness reads, and the shape every conformance golden must validate against. Mirrors the CollationJSON DTOs in Sources/CollationKit/CollationJSON.swift; bump `schemaVersion` (and the matching const below) on any breaking change.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["graph", "pairs"],
+  "properties": {
+    "graph": { "$ref": "#/$defs/GraphDTO" },
+    "pairs": {
+      "type": "array",
+      "description": "One PairwiseDTO per successive (base, compared) pair of witnesses, in witness order.",
+      "items": { "$ref": "#/$defs/PairwiseDTO" }
+    }
+  },
+  "$defs": {
+    "schemaVersion": {
+      "type": "integer",
+      "description": "Wire-contract version. Constant for a given release; bump on any breaking shape change. v3 (B6c): the variant graph can now contain INSERTED nodes — `basePosition` may be -1 and a new optional `insertedAfter` records the base position an insertion follows.",
+      "const": 3
+    },
+    "VariationType": {
+      "type": "string",
+      "description": "The typed classification of a single point of variance.",
+      "enum": ["insertion", "deletion", "substitution", "transposition", "variantSpelling"]
+    },
+    "MoveConfidence": {
+      "type": "string",
+      "description": "For a transposition: how sure the engine is it is a real move. 'certain' = anchored or an exact displaced-word match (unique key, identical normalisation); 'likely' = a heuristic near-match (misspelling/synonym) to be surfaced as tentative. Always 'certain' for non-transposition variations.",
+      "enum": ["certain", "likely"]
+    },
+    "RangeDTO": {
+      "type": "object",
+      "description": "A half-open token-index range [from, to).",
+      "additionalProperties": false,
+      "required": ["from", "to"],
+      "properties": {
+        "from": { "type": "integer", "minimum": 0, "description": "Inclusive lower bound (token index)." },
+        "to": { "type": "integer", "minimum": 0, "description": "Exclusive upper bound." }
+      }
+    },
+    "LocationDTO": {
+      "type": "object",
+      "description": "Where a reading sits in its witness: 0-based coordinates plus the 1-based human citation.",
+      "additionalProperties": false,
+      "required": ["page", "line", "endLine", "firstWord", "lastWord", "charFrom", "charTo", "cite"],
+      "properties": {
+        "page": { "type": "integer", "minimum": 0, "description": "0-based page index." },
+        "line": { "type": "integer", "minimum": 0, "description": "0-based page-relative line (text lines only)." },
+        "endLine": { "type": "integer", "minimum": 0 },
+        "firstWord": { "type": "integer", "minimum": 0, "description": "0-based line-relative first word." },
+        "lastWord": { "type": "integer", "minimum": 0 },
+        "charFrom": { "type": "integer", "minimum": 0, "description": "UTF-16 source offset, inclusive." },
+        "charTo": { "type": "integer", "minimum": 0, "description": "UTF-16 source offset, exclusive." },
+        "cite": { "type": "string", "description": "1-based human citation, e.g. \"p.1 · line 2 · word 3\"." }
+      }
+    },
+    "VariationDTO": {
+      "type": "object",
+      "description": "A single typed, located point of variance between base and compared witness.",
+      "additionalProperties": false,
+      "required": ["type", "baseReading", "comparedReading", "crossesPage", "withinTransposition", "confidence"],
+      "properties": {
+        "type": { "$ref": "#/$defs/VariationType" },
+        "baseReading": { "type": "string" },
+        "comparedReading": { "type": "string" },
+        "baseTokens": { "oneOf": [{ "$ref": "#/$defs/RangeDTO" }, { "type": "null" }] },
+        "comparedTokens": { "oneOf": [{ "$ref": "#/$defs/RangeDTO" }, { "type": "null" }] },
+        "baseLocation": { "oneOf": [{ "$ref": "#/$defs/LocationDTO" }, { "type": "null" }] },
+        "comparedLocation": { "oneOf": [{ "$ref": "#/$defs/LocationDTO" }, { "type": "null" }] },
+        "crossesPage": { "type": "boolean", "description": "True when this variant spans a page boundary." },
+        "withinTransposition": { "type": "boolean", "description": "True when this variant sits inside a moved (transposed) span." },
+        "confidence": { "$ref": "#/$defs/MoveConfidence" }
+      }
+    },
+    "PairwiseDTO": {
+      "type": "object",
+      "description": "The located variant report for one (base, compared) pair.",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "base", "compared", "counts", "variations"],
+      "properties": {
+        "schemaVersion": { "$ref": "#/$defs/schemaVersion" },
+        "base": { "type": "string", "description": "Base witness id (siglum)." },
+        "compared": { "type": "string", "description": "Compared witness id (siglum)." },
+        "counts": {
+          "type": "object",
+          "description": "Per-type variant tallies.",
+          "additionalProperties": false,
+          "required": ["insertion", "deletion", "substitution", "transposition", "variantSpelling"],
+          "properties": {
+            "insertion": { "type": "integer", "minimum": 0 },
+            "deletion": { "type": "integer", "minimum": 0 },
+            "substitution": { "type": "integer", "minimum": 0 },
+            "transposition": { "type": "integer", "minimum": 0 },
+            "variantSpelling": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "variations": { "type": "array", "items": { "$ref": "#/$defs/VariationDTO" } }
+      }
+    },
+    "ReadingDTO": {
+      "type": "object",
+      "description": "One reading at a graph node and the sorted sigla that carry it.",
+      "additionalProperties": false,
+      "required": ["reading", "witnesses"],
+      "properties": {
+        "reading": { "type": "string" },
+        "witnesses": {
+          "type": "array",
+          "description": "Sigla carrying this reading, sorted (determinism rule §9.5).",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "GraphNodeDTO": {
+      "type": "object",
+      "description": "One position in the variant graph. Normally keyed to a base position; an INSERTED node (B6c) — text some witnesses add where the base has nothing — has basePosition -1 and carries `insertedAfter`.",
+      "additionalProperties": false,
+      "required": ["basePosition", "isVariant", "readings"],
+      "properties": {
+        "basePosition": { "type": "integer", "minimum": -1, "description": "Position in the base witness, or -1 for an inserted node (text absent from the base)." },
+        "insertedAfter": { "type": "integer", "minimum": -1, "description": "For an inserted node: the base position this insertion follows (-1 = before all base text). Absent for a normal base-anchored node." },
+        "isVariant": { "type": "boolean", "description": "True when witnesses disagree at this node." },
+        "readings": {
+          "type": "array",
+          "description": "Distinct readings at this node, sorted by reading (deterministic). For an inserted node, the witnesses that omit the insertion carry the reading \"∅\".",
+          "items": { "$ref": "#/$defs/ReadingDTO" }
+        }
+      }
+    },
+    "GraphDTO": {
+      "type": "object",
+      "description": "The N-witness variant graph, aligned against a base witness.",
+      "additionalProperties": false,
+      "required": ["schemaVersion", "baseID", "nodes"],
+      "properties": {
+        "schemaVersion": { "$ref": "#/$defs/schemaVersion" },
+        "baseID": { "type": "string", "description": "Siglum of the base witness the graph is aligned to." },
+        "nodes": { "type": "array", "items": { "$ref": "#/$defs/GraphNodeDTO" } }
+      }
+    }
+  }
+}

@@ -1,0 +1,2615 @@
+{
+  "graph" : {
+    "baseID" : "fr-5097",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "L'année",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "The",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "1866",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter",
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "fut",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "was",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "marked",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "marquée",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "signalised",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "by",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "par",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "un",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "bizarre",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "remarkable",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "événement",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "bizarre",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "development",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "incident",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "an",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "un",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "mysterious",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "phénomène",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "unexplained",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 11,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "inexpliqué",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 12,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "downright",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "et",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "puzzling",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 13,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "inexplicable",
+            "witnesses" : [
+              "en-walter",
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "phenomenon",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 14,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "phenomenon",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "que",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 15,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "personne",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "which",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 16,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "doubtless",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "n'a",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "surely",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 17,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "no",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "sans",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 18,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "doute",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "one",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 19,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "has",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "oublié",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 21,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ".",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "Sans",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "forgotten",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 22,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ".",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "Without",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "parler",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 23,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "Not",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "getting",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 24,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "into",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "rumeurs",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 25,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "mention",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "qui",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "those",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 26,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "agitaient",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "rumors",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "rumours",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 27,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "les",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "which",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 28,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "agitated",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "populations",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "upset",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 29,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "civilians",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 30,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "in",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "maritime",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "ports",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 31,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "et",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "population",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 32,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "seaports",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "surexcitaient",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 33,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "excited",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "l'esprit",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 34,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "deranged",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "public",
+            "witnesses" : [
+              "en-mercier",
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 35,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "mind",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "à",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 36,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "l'intérieur",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "public",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 37,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "even",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "mind",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 38,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "continents",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "even",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "in",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 39,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "far",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "les",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 40,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "gens",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "inland",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "interior",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 41,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 42,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "continents",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "it",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "mer",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 43,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "furent",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "must",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 44,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "be",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "particulièrement",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "seafaring",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 45,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "men",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "said",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "émus",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 47,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "Les",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "particularly",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "professional",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 48,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "excited",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "négociants",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "seamen",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 50,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "Merchants",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "armateurs",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "especially",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 52,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ".",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "capitaines",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "common",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 53,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "Traders",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "sailors",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 54,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "navires",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 56,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "skippers",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 57,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "captains",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "et",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "vessels",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 58,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "masters",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 59,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "skippers",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "vessels",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 60,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "l'Europe",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 61,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "both",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "et",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "skippers",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 62,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 63,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "Europe",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "l'Amérique",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 65,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "America",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "mariners",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "officiers",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 66,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "from",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 67,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "Europe",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "marines",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "naval",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 68,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "militaires",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "officers",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 69,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "America",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 70,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "all",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "tous",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 71,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "countries",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "naval",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "pays",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 73,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "et",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "from",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 75,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "Governments",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "après",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "country",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 76,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "eux",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 78,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "at",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "les",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "states",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 79,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "gouvernements",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "on",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "their",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 80,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "heels",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 81,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "divers",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "two",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 82,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "two",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "various",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "États",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 83,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "des",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "national",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "two",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 84,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "deux",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "governments",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "two",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 85,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "continents",
+            "witnesses" : [
+              "en-mercier",
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "on",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 87,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "se",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "two",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "were",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 88,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "continents",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "deeply",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "préoccupèrent",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 89,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : ",",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "interested",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 90,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "ce",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "in",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "were",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 91,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "all",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "fait",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 92,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "au",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "extremely",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "matter",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 93,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "disturbed",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "matter",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "plus",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 94,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "by",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "haut",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "matter",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 95,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "matter",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "point",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "fr-5097",
+      "compared" : "en-mercier",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 4,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 0,
+            "charTo" : 7,
+            "cite" : "p.1 · line 1 · word 1",
+            "endLine" : 0,
+            "firstWord" : 0,
+            "lastWord" : 0,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "L'année",
+          "baseTokens" : {
+            "from" : 0,
+            "to" : 1
+          },
+          "comparedLocation" : {
+            "charFrom" : 0,
+            "charTo" : 8,
+            "cite" : "p.1 · line 1 · words 1–2",
+            "endLine" : 0,
+            "firstWord" : 0,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "The year",
+          "comparedTokens" : {
+            "from" : 0,
+            "to" : 2
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 13,
+            "charTo" : 216,
+            "cite" : "p.1 · lines 1–4 · words 3…2",
+            "endLine" : 3,
+            "firstWord" : 2,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "fut marquée par un événement bizarre , un phénomène inexpliqué et inexplicable que personne n'a sans doute oublié . Sans parler des rumeurs qui agitaient les populations des ports et surexcitaient l'esprit",
+          "baseTokens" : {
+            "from" : 2,
+            "to" : 34
+          },
+          "comparedLocation" : {
+            "charFrom" : 14,
+            "charTo" : 212,
+            "cite" : "p.1 · lines 1–3 · words 4…10",
+            "endLine" : 2,
+            "firstWord" : 3,
+            "lastWord" : 9,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "was signalised by a remarkable incident , a mysterious and puzzling phenomenon , which doubtless no one has yet forgotten . Not to mention rumours which agitated the maritime population and excited the",
+          "comparedTokens" : {
+            "from" : 3,
+            "to" : 36
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 224,
+            "charTo" : 504,
+            "cite" : "p.1 · lines 4–8 · words 4…5",
+            "endLine" : 7,
+            "firstWord" : 3,
+            "lastWord" : 4,
+            "line" : 3,
+            "page" : 0
+          },
+          "baseReading" : "à l'intérieur des continents les gens de mer furent particulièrement émus . Les négociants , armateurs , capitaines de navires , skippers et masters de l'Europe et de l'Amérique , officiers des marines militaires de tous pays , et , après eux , les gouvernements des divers États des deux",
+          "baseTokens" : {
+            "from" : 35,
+            "to" : 85
+          },
+          "comparedLocation" : {
+            "charFrom" : 220,
+            "charTo" : 470,
+            "cite" : "p.1 · lines 4–7 · words 2…9",
+            "endLine" : 6,
+            "firstWord" : 1,
+            "lastWord" : 8,
+            "line" : 3,
+            "page" : 0
+          },
+          "comparedReading" : "mind , even in the interior of continents , seafaring men were particularly excited . Merchants , common sailors , captains of vessels , skippers , both of Europe and America , naval officers of all countries , and the Governments of several states on the two",
+          "comparedTokens" : {
+            "from" : 37,
+            "to" : 84
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 517,
+            "charTo" : 563,
+            "cite" : "p.1 · lines 8–9 · words 8…3",
+            "endLine" : 8,
+            "firstWord" : 7,
+            "lastWord" : 2,
+            "line" : 7,
+            "page" : 0
+          },
+          "baseReading" : "se préoccupèrent de ce fait au plus haut point",
+          "baseTokens" : {
+            "from" : 87,
+            "to" : 96
+          },
+          "comparedLocation" : {
+            "charFrom" : 483,
+            "charTo" : 519,
+            "cite" : "p.1 · lines 7–8 · words 12…5",
+            "endLine" : 7,
+            "firstWord" : 11,
+            "lastWord" : 4,
+            "line" : 6,
+            "page" : 0
+          },
+          "comparedReading" : "were deeply interested in the matter",
+          "comparedTokens" : {
+            "from" : 86,
+            "to" : 92
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    },
+    {
+      "base" : "en-mercier",
+      "compared" : "en-walter",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 13,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 18,
+            "charTo" : 28,
+            "cite" : "p.1 · line 1 · word 5",
+            "endLine" : 0,
+            "firstWord" : 4,
+            "lastWord" : 4,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "signalised",
+          "baseTokens" : {
+            "from" : 4,
+            "to" : 5
+          },
+          "comparedLocation" : {
+            "charFrom" : 18,
+            "charTo" : 24,
+            "cite" : "p.1 · line 1 · word 5",
+            "endLine" : 0,
+            "firstWord" : 4,
+            "lastWord" : 4,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "marked",
+          "comparedTokens" : {
+            "from" : 4,
+            "to" : 5
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 34,
+            "charTo" : 67,
+            "cite" : "p.1 · line 1 · words 8–12",
+            "endLine" : 0,
+            "firstWord" : 7,
+            "lastWord" : 11,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "remarkable incident , a mysterious",
+          "baseTokens" : {
+            "from" : 7,
+            "to" : 12
+          },
+          "comparedLocation" : {
+            "charFrom" : 30,
+            "charTo" : 65,
+            "cite" : "p.1 · line 1 · words 8–12",
+            "endLine" : 0,
+            "firstWord" : 7,
+            "lastWord" : 11,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "bizarre development , an unexplained",
+          "comparedTokens" : {
+            "from" : 7,
+            "to" : 12
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 72,
+            "charTo" : 80,
+            "cite" : "p.1 · line 2 · word 1",
+            "endLine" : 1,
+            "firstWord" : 0,
+            "lastWord" : 0,
+            "line" : 1,
+            "page" : 0
+          },
+          "baseReading" : "puzzling",
+          "baseTokens" : {
+            "from" : 13,
+            "to" : 14
+          },
+          "comparedLocation" : {
+            "charFrom" : 70,
+            "charTo" : 92,
+            "cite" : "p.1 · line 2 · words 1–2",
+            "endLine" : 1,
+            "firstWord" : 0,
+            "lastWord" : 1,
+            "line" : 1,
+            "page" : 0
+          },
+          "comparedReading" : "downright inexplicable",
+          "comparedTokens" : {
+            "from" : 13,
+            "to" : 15
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 93,
+            "charTo" : 108,
+            "cite" : "p.1 · line 2 · words 4–5",
+            "endLine" : 1,
+            "firstWord" : 3,
+            "lastWord" : 4,
+            "line" : 1,
+            "page" : 0
+          },
+          "baseReading" : "which doubtless",
+          "baseTokens" : {
+            "from" : 16,
+            "to" : 18
+          },
+          "comparedLocation" : {
+            "charFrom" : 104,
+            "charTo" : 115,
+            "cite" : "p.1 · line 2 · words 4–5",
+            "endLine" : 1,
+            "firstWord" : 3,
+            "lastWord" : 4,
+            "line" : 1,
+            "page" : 0
+          },
+          "comparedReading" : "that surely",
+          "comparedTokens" : {
+            "from" : 16,
+            "to" : 18
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 120,
+            "charTo" : 196,
+            "cite" : "p.1 · lines 2–3 · words 9…7",
+            "endLine" : 2,
+            "firstWord" : 8,
+            "lastWord" : 6,
+            "line" : 1,
+            "page" : 0
+          },
+          "baseReading" : "yet forgotten . Not to mention rumours which agitated the maritime population",
+          "baseTokens" : {
+            "from" : 21,
+            "to" : 33
+          },
+          "comparedLocation" : {
+            "charFrom" : 127,
+            "charTo" : 208,
+            "cite" : "p.1 · lines 3–4 · words 1…2",
+            "endLine" : 3,
+            "firstWord" : 0,
+            "lastWord" : 1,
+            "line" : 2,
+            "page" : 0
+          },
+          "comparedReading" : "forgotten . Without getting into those rumors that upset civilians in the seaports",
+          "comparedTokens" : {
+            "from" : 21,
+            "to" : 34
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 201,
+            "charTo" : 208,
+            "cite" : "p.1 · line 3 · word 9",
+            "endLine" : 2,
+            "firstWord" : 8,
+            "lastWord" : 8,
+            "line" : 2,
+            "page" : 0
+          },
+          "baseReading" : "excited",
+          "baseTokens" : {
+            "from" : 34,
+            "to" : 35
+          },
+          "comparedLocation" : {
+            "charFrom" : 213,
+            "charTo" : 221,
+            "cite" : "p.1 · line 4 · word 4",
+            "endLine" : 3,
+            "firstWord" : 3,
+            "lastWord" : 3,
+            "line" : 3,
+            "page" : 0
+          },
+          "comparedReading" : "deranged",
+          "comparedTokens" : {
+            "from" : 35,
+            "to" : 36
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 231,
+            "charTo" : 328,
+            "cite" : "p.1 · lines 4–5 · words 5…7",
+            "endLine" : 4,
+            "firstWord" : 4,
+            "lastWord" : 6,
+            "line" : 3,
+            "page" : 0
+          },
+          "baseReading" : "in the interior of continents , seafaring men were particularly excited . Merchants , common sailors",
+          "baseTokens" : {
+            "from" : 40,
+            "to" : 56
+          },
+          "comparedLocation" : {
+            "charFrom" : 243,
+            "charTo" : 340,
+            "cite" : "p.1 · lines 4–6 · words 9…1",
+            "endLine" : 5,
+            "firstWord" : 8,
+            "lastWord" : 0,
+            "line" : 3,
+            "page" : 0
+          },
+          "comparedReading" : "far inland , it must be said that professional seamen were especially alarmed . Traders , shipowners",
+          "comparedTokens" : {
+            "from" : 40,
+            "to" : 57
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 361,
+            "charTo" : 368,
+            "cite" : "p.1 · line 6 · words 3–4",
+            "endLine" : 5,
+            "firstWord" : 2,
+            "lastWord" : 3,
+            "line" : 5,
+            "page" : 0
+          },
+          "baseReading" : "both of",
+          "baseTokens" : {
+            "from" : 63,
+            "to" : 65
+          },
+          "comparedLocation" : {
+            "charFrom" : 373,
+            "charTo" : 397,
+            "cite" : "p.1 · line 6 · words 9–12",
+            "endLine" : 5,
+            "firstWord" : 8,
+            "lastWord" : 11,
+            "line" : 5,
+            "page" : 0
+          },
+          "comparedReading" : "and master mariners from",
+          "comparedTokens" : {
+            "from" : 64,
+            "to" : 68
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 404,
+            "charTo" : 420,
+            "cite" : "p.1 · line 6 · words 11–13",
+            "endLine" : 5,
+            "firstWord" : 10,
+            "lastWord" : 12,
+            "line" : 5,
+            "page" : 0
+          },
+          "baseReading" : "of all countries",
+          "baseTokens" : {
+            "from" : 71,
+            "to" : 74
+          },
+          "comparedLocation" : {
+            "charFrom" : 433,
+            "charTo" : 451,
+            "cite" : "p.1 · line 7 · words 7–9",
+            "endLine" : 6,
+            "firstWord" : 6,
+            "lastWord" : 8,
+            "line" : 6,
+            "page" : 0
+          },
+          "comparedReading" : "from every country",
+          "comparedTokens" : {
+            "from" : 74,
+            "to" : 77
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 426,
+            "charTo" : 459,
+            "cite" : "p.1 · line 7 · words 2–6",
+            "endLine" : 6,
+            "firstWord" : 1,
+            "lastWord" : 5,
+            "line" : 6,
+            "page" : 0
+          },
+          "baseReading" : "the Governments of several states",
+          "baseTokens" : {
+            "from" : 76,
+            "to" : 81
+          },
+          "comparedLocation" : {
+            "charFrom" : 457,
+            "charTo" : 504,
+            "cite" : "p.1 · lines 7–8 · words 12…5",
+            "endLine" : 7,
+            "firstWord" : 11,
+            "lastWord" : 4,
+            "line" : 6,
+            "page" : 0
+          },
+          "comparedReading" : "at their heels the various national governments",
+          "comparedTokens" : {
+            "from" : 79,
+            "to" : 86
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 463,
+            "charTo" : 466,
+            "cite" : "p.1 · line 7 · word 8",
+            "endLine" : 6,
+            "firstWord" : 7,
+            "lastWord" : 7,
+            "line" : 6,
+            "page" : 0
+          },
+          "baseReading" : "the",
+          "baseTokens" : {
+            "from" : 82,
+            "to" : 83
+          },
+          "comparedLocation" : {
+            "charFrom" : 508,
+            "charTo" : 513,
+            "cite" : "p.1 · line 8 · word 7",
+            "endLine" : 7,
+            "firstWord" : 6,
+            "lastWord" : 6,
+            "line" : 7,
+            "page" : 0
+          },
+          "comparedReading" : "these",
+          "comparedTokens" : {
+            "from" : 87,
+            "to" : 88
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 488,
+            "charTo" : 508,
+            "cite" : "p.1 · line 8 · words 1–3",
+            "endLine" : 7,
+            "firstWord" : 0,
+            "lastWord" : 2,
+            "line" : 7,
+            "page" : 0
+          },
+          "baseReading" : "deeply interested in",
+          "baseTokens" : {
+            "from" : 87,
+            "to" : 90
+          },
+          "comparedLocation" : {
+            "charFrom" : 535,
+            "charTo" : 561,
+            "cite" : "p.1 · line 9 · words 1–4",
+            "endLine" : 8,
+            "firstWord" : 0,
+            "lastWord" : 3,
+            "line" : 8,
+            "page" : 0
+          },
+          "comparedReading" : "all extremely disturbed by",
+          "comparedTokens" : {
+            "from" : 92,
+            "to" : 96
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 513,
+            "charTo" : 519,
+            "cite" : "p.1 · line 8 · word 5",
+            "endLine" : 7,
+            "firstWord" : 4,
+            "lastWord" : 4,
+            "line" : 7,
+            "page" : 0
+          },
+          "baseReading" : "matter",
+          "baseTokens" : {
+            "from" : 91,
+            "to" : 92
+          },
+          "comparedLocation" : {
+            "charFrom" : 566,
+            "charTo" : 574,
+            "cite" : "p.1 · line 9 · word 6",
+            "endLine" : 8,
+            "firstWord" : 5,
+            "lastWord" : 5,
+            "line" : 8,
+            "page" : 0
+          },
+          "comparedReading" : "business",
+          "comparedTokens" : {
+            "from" : 97,
+            "to" : 98
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

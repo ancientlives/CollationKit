@@ -1,0 +1,299 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "first",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "line",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "text",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "second",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "line",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 8,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "here",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "third",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 11,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "line",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 12,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 13,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "text",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 14,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 15,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "fourth",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 16,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "blue",
+            "witnesses" : [
+              "B"
+            ]
+          },
+          {
+            "reading" : "red",
+            "witnesses" : [
+              "A"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 17,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "line",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 78,
+            "charTo" : 81,
+            "cite" : "p.2 · line 2 · word 3",
+            "endLine" : 1,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 1,
+            "page" : 1
+          },
+          "baseReading" : "red",
+          "baseTokens" : {
+            "from" : 16,
+            "to" : 17
+          },
+          "comparedLocation" : {
+            "charFrom" : 78,
+            "charTo" : 82,
+            "cite" : "p.2 · line 2 · word 3",
+            "endLine" : 1,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 1,
+            "page" : 1
+          },
+          "comparedReading" : "blue",
+          "comparedTokens" : {
+            "from" : 16,
+            "to" : 17
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

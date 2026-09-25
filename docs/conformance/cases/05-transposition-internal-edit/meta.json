@@ -1,0 +1,9 @@
+{
+  "name": "transposition-internal-edit",
+  "description": "A moved span that also carries a substantive edit inside it (move-with-internal-edit).",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

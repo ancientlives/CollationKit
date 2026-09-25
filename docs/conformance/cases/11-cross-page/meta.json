@@ -1,0 +1,9 @@
+{
+  "name": "cross-page",
+  "description": "A printed-page pagination of 2 text lines per page, so citations and crossesPage exercise page-aware location.",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": { "linesPerPage": 2 },
+  "normalizer": "substantive"
+}

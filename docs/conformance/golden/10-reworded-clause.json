@@ -1,0 +1,161 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "she",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "was",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "quite",
+            "witnesses" : [
+              "B"
+            ]
+          },
+          {
+            "reading" : "very",
+            "witnesses" : [
+              "A"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "content",
+            "witnesses" : [
+              "B"
+            ]
+          },
+          {
+            "reading" : "happy",
+            "witnesses" : [
+              "A"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "indeed",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "morning",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 8,
+            "charTo" : 18,
+            "cite" : "p.1 · line 1 · words 3–4",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 3,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "very happy",
+          "baseTokens" : {
+            "from" : 2,
+            "to" : 4
+          },
+          "comparedLocation" : {
+            "charFrom" : 8,
+            "charTo" : 21,
+            "cite" : "p.1 · line 1 · words 3–4",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 3,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "quite content",
+          "comparedTokens" : {
+            "from" : 2,
+            "to" : 4
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "earth-to-moon-translations",
+  "work": "Jules Verne, From the Earth to the Moon (De la Terre à la Lune, 1865)",
+  "description": "Two competing 19th-century English TRANSLATIONS of the same opening chapter ('The Gun Club'), from two different public-domain English editions of the novel. base = the Mercier & King translation. Chapter-1 excerpts; a good mid-difficulty substantive-variation case (the translations diverge in wording but share the narrative).",
+  "base": "towle",
+  "witnessOrder": ["towle", "moonvoyage"],
+  "_siglumNote": "The siglum 'towle' is a LEGACY LABEL, not the translator. Attribution corrected 2026-07-24 (Evans/Sherwood bibliographies): PG83 is the Lewis (Louis) Page Mercier & Eleanor E. King translation, NOT George M. Towle (Towle translated 'Around the World in Eighty Days', not this novel). The siglum is kept to avoid renaming files/build-script references; treat it as an opaque id. See ../BIBLIOGRAPHY.md §2.2.",
+  "witnesses": {
+    "towle": {
+      "translation": "Lewis (Louis) Page Mercier & Eleanor E. King, 'From the Earth to the Moon; and, Round the Moon' — the Sampson Low 'standard' English translation (Oct. 1873). [siglum 'towle' is a legacy misattribution; corrected 2026-07-24]",
+      "source": "Project Gutenberg eBook #83 (pg83.txt)",
+      "excerpt": "Chapter I 'The Gun Club' (between '^CHAPTER I\\.' and '^CHAPTER II\\.')"
+    },
+    "moonvoyage": {
+      "translation": "'The Moon-Voyage' (Ward, Lock & Co. edition, illustrated by Henry Austin) — a DIFFERENT English translation of the same two novels; likely the T. H. Linklater translation (George Routledge & Sons, 1877, 'From the Earth to the Moon Direct and Round the Moon'), reissued under this title. Translator attribution PROBABLE, not confirmed.",
+      "source": "Project Gutenberg eBook #12901 (pg12901.txt)",
+      "excerpt": "Chapter 'The Gun Club' (between '^THE GUN CLUB\\.' and '^PRESIDENT BARBICANE')"
+    }
+  },
+  "full": {
+    "description": "Whole-novel witnesses under full/ for scale collation testing. BOTH source eBooks bundle two novels ('From the Earth to the Moon' then its sequel 'Round the Moon'); the full witnesses take ONLY the first novel (from the Gun-Club opening up to '^ROUND THE MOON') so the pair is like-for-like.",
+    "witnesses": {
+      "full/towle.txt": "~40.7k words, from PG83 (Mercier & King tr., 1873; siglum 'towle' is legacy), Ch.I to just before 'ROUND THE MOON'",
+      "full/moonvoyage.txt": "~51.5k words, from PG12901 ('The Moon-Voyage', Ward Lock / likely Linklater tr., 1877), 'THE GUN CLUB.' to just before 'ROUND THE MOON.'"
+    },
+    "collationResult": "~7,362 variants (5,684 substitutions, 741 deletions, 825 insertions, 112 moved); ~2.2 s (release). Alignment: 5,796 shared points, 9.4% max off-diagonal drift, 98.3% monotonic — a smooth diagonal (the honest divergence of two different translations)."
+  },
+  "collate": {
+    "recordAccidentals": false,
+    "recordPunctuation": false,
+    "pagination": "default",
+    "normalizer": "substantive"
+  },
+  "notes": "Excerpt pair yields ~329 variants (246 substitutions, 36 deletions, 31 insertions, 16 transpositions) — the same Gun-Club/Baltimore opening rendered by two translators ('War of the Rebellion' vs 'Federal war', etc.). Both excerpt witnesses collate cleanly. The full/ witnesses (whole first novel) are for scale testing — see the 'full' block.",
+  "licence": "public domain (Project Gutenberg)",
+  "retrieved": "2026-07-01"
+}

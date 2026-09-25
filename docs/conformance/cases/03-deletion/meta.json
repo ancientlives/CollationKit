@@ -1,0 +1,9 @@
+{
+  "name": "deletion",
+  "description": "A word present only in the base witness (a deletion).",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

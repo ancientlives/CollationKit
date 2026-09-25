@@ -1,0 +1,9 @@
+{
+  "name": "agreement-only",
+  "description": "Identical witnesses: no points of variance (empty variations, all nodes agree).",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

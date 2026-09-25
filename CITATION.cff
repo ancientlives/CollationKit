@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use CollationKit in your research, please cite it as below."
+title: "CollationKit: transposition-aware scholarly textual collation"
+type: software
+authors:
+  - name: "ancientlives"
+repository-code: "https://github.com/ancientlives/CollationKit"
+url: "https://ancientlives.github.io/CollationKit/"
+license: MIT
+version: "0.1.0"
+date-released: "2026-09-25"
+keywords:
+  - textual collation
+  - textual scholarship
+  - digital humanities
+  - critical apparatus
+  - sequence alignment
+  - variant graph
+  - Swift
+abstract: >-
+  CollationKit is a deterministic, pure-Swift engine for scholarly textual collation.
+  It compares several witnesses of one work and reports insertions, deletions,
+  substitutions and transpositions (including moves across page boundaries), each
+  with a page, line and word citation. It separates substantive from accidental
+  variants, supports base-anchored and peer (base-free) multi-witness merges and
+  cross-language anchoring, and ships a command-line tool, an interactive HTML
+  viewer, and a language-neutral conformance corpus with a JSON Schema.

@@ -1,0 +1,16 @@
+{
+  "name": "verne-french-editions",
+  "description": "Real public-domain French-language edition pair (BACKLOG B4 / tokeniser parity B6): the opening paragraph of Jules Verne's 'Vingt mille lieues sous les mers' (Part 1, Ch.1) in two independent French Project Gutenberg editions. Same-language, same-author edition variation — the two transcriptions differ only by an accidental (a comma at 'continents, les gens' present in one edition, absent in the other). Its value is exercising the tokeniser on FRENCH: accented characters (é, à, È) and elision apostrophes (L'année, n'a, l'esprit, l'intérieur, l'Europe) — the cross-script/parity concern of B6. See docs/development/CASE_STUDY.md.",
+  "base": "ed5097",
+  "witnessOrder": ["ed5097", "ed54873"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "source": {
+    "work": "Jules Verne, Vingt mille lieues sous les mers, Partie 1, Ch.1 ('L'année 1866…'), premier paragraphe",
+    "ed5097": "Project Gutenberg eBook #5097 (Vingt mille Lieues Sous Les Mers — Complete), verbatim",
+    "ed54873": "Project Gutenberg eBook #54873 (Vingt mille lieues sous les mers), verbatim",
+    "licence": "public domain",
+    "retrieved": "2026-06-29"
+  }
+}

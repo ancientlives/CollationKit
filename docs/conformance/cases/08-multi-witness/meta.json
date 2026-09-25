@@ -1,0 +1,9 @@
+{
+  "name": "multi-witness",
+  "description": "Three witnesses with overlapping and divergent readings, exercising the N-witness variant graph.",
+  "base": "MS",
+  "witnessOrder": ["MS", "TS", "PR"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

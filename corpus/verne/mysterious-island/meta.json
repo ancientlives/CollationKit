@@ -1,0 +1,36 @@
+{
+  "name": "mysterious-island-translations",
+  "work": "Jules Verne, The Mysterious Island (L'Île mystérieuse, 1875)",
+  "description": "Two English TRANSLATIONS of the opening chapter ('The Hurricane of 1865'), which begins in medias res with rapid balloon-crew dialogue. base = the Kingston translation.",
+  "base": "kingston",
+  "witnessOrder": ["kingston", "white"],
+  "witnesses": {
+    "kingston": {
+      "translation": "Agnes Kinloch Kingston translation",
+      "source": "Project Gutenberg eBook #1268 (pg1268.txt)",
+      "excerpt": "Part 1, Chapter 1 (between '^Chapter 1$' and '^Chapter 2$')"
+    },
+    "white": {
+      "translation": "Stephen W. White translation",
+      "source": "Project Gutenberg eBook #8993 (pg8993.txt)",
+      "excerpt": "Part I, Chapter I 'The Hurricane of 1865' (between '^CHAPTER I\\.' and '^CHAPTER II\\.')"
+    }
+  },
+  "full": {
+    "description": "Whole-novel witnesses under full/ for scale collation testing — the LARGEST real pair in the corpus (a 3-part novel; ~195k / ~167k words, larger than 20,000 Leagues). Each witness's front matter (title / redactor's note / part heading) is wrapped in a <!-- no_collate --> region so only the novel body is collated.",
+    "witnesses": {
+      "full/kingston.txt": "~195.0k words, from PG1268 (whole novel; front matter excluded before '^Chapter 1')",
+      "full/white.txt": "~167.5k words, from PG8993 (whole novel; front matter excluded before '^CHAPTER I.')"
+    },
+    "collationResult": "~31,809 variants (25,381 substitutions, 4,192 deletions, 1,710 insertions, 526 moved); ~14.7 s (release) — the corpus's largest-scale timing test. Alignment: 25,919 shared points, 4.9% max drift, 98.0% monotonic — a clean diagonal; the collation holds end to end (the length difference is honest, not a mis-alignment)."
+  },
+  "collate": {
+    "recordAccidentals": false,
+    "recordPunctuation": false,
+    "pagination": "default",
+    "normalizer": "substantive"
+  },
+  "notes": "Excerpt pair yields ~388 variants (296 substitutions, 41 deletions, 28 insertions, 23 transpositions) — a demanding case; the opening dialogue is rendered quite differently by the two translators. The full/ witnesses are the corpus's LARGEST scale test — see the 'full' block.",
+  "licence": "public domain (Project Gutenberg)",
+  "retrieved": "2026-07-01"
+}

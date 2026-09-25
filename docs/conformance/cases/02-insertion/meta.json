@@ -1,0 +1,9 @@
+{
+  "name": "insertion",
+  "description": "A word present only in the compared witness (an insertion).",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

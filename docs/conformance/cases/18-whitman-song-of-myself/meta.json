@@ -1,0 +1,16 @@
+{
+  "name": "whitman-song-of-myself",
+  "description": "Real public-domain multi-edition witness pair (BACKLOG B4): the opening of Walt Whitman's 'Song of Myself' (Leaves of Grass), 1855 first edition versus the 1891-92 'deathbed' edition. Unlike the Frankenstein case, this passage carries genuine SUBSTANTIVE revision: 1855 'I celebrate myself,' becomes 1891 'I celebrate myself, and sing myself,' (an insertion), and 1891 inserts two whole stanzas ('My tongue...' and 'Creeds and schools...') absent from 1855. Substantive view. See docs/development/CASE_STUDY.md.",
+  "base": "1855",
+  "witnessOrder": ["1855", "1891"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "source": {
+    "work": "Walt Whitman, 'Song of Myself' (Leaves of Grass), opening (sections 1-2)",
+    "1855": "Internet Archive 'whitmanleavesofgrass' (1855 first edition) OCR, hand-corrected against the canonical 1855 transcription (Univ. of Pennsylvania / Whitman Archive); the four-dot ' . . . . ' ellipses are an authentic 1855 feature retained verbatim",
+    "1891": "Project Gutenberg eBook #1322 (1891-92 'deathbed' edition), verbatim (presentational indent/soft-wrap/CRLF normalised)",
+    "licence": "public domain",
+    "retrieved": "2026-06-29"
+  }
+}

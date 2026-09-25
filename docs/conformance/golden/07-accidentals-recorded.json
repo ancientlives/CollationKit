@@ -1,0 +1,210 @@
+{
+  "graph" : {
+    "baseID" : "GB",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "GB",
+              "US"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "grey",
+            "witnesses" : [
+              "GB",
+              "US"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "harbour",
+            "witnesses" : [
+              "GB",
+              "US"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "GB",
+              "US"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "its",
+            "witnesses" : [
+              "GB",
+              "US"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "colour",
+            "witnesses" : [
+              "GB",
+              "US"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "GB",
+      "compared" : "US",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 3
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 4,
+            "charTo" : 8,
+            "cite" : "p.1 · line 1 · word 2",
+            "endLine" : 0,
+            "firstWord" : 1,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "grey",
+          "baseTokens" : {
+            "from" : 1,
+            "to" : 2
+          },
+          "comparedLocation" : {
+            "charFrom" : 4,
+            "charTo" : 8,
+            "cite" : "p.1 · line 1 · word 2",
+            "endLine" : 0,
+            "firstWord" : 1,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "gray",
+          "comparedTokens" : {
+            "from" : 1,
+            "to" : 2
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "variantSpelling",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 9,
+            "charTo" : 16,
+            "cite" : "p.1 · line 1 · word 3",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "harbour",
+          "baseTokens" : {
+            "from" : 2,
+            "to" : 3
+          },
+          "comparedLocation" : {
+            "charFrom" : 9,
+            "charTo" : 15,
+            "cite" : "p.1 · line 1 · word 3",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "harbor",
+          "comparedTokens" : {
+            "from" : 2,
+            "to" : 3
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "variantSpelling",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 25,
+            "charTo" : 31,
+            "cite" : "p.1 · line 1 · word 6",
+            "endLine" : 0,
+            "firstWord" : 5,
+            "lastWord" : 5,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "colour",
+          "baseTokens" : {
+            "from" : 5,
+            "to" : 6
+          },
+          "comparedLocation" : {
+            "charFrom" : 24,
+            "charTo" : 29,
+            "cite" : "p.1 · line 1 · word 6",
+            "endLine" : 0,
+            "firstWord" : 5,
+            "lastWord" : 5,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "color",
+          "comparedTokens" : {
+            "from" : 5,
+            "to" : 6
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "variantSpelling",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

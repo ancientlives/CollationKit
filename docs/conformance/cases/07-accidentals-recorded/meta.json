@@ -1,0 +1,9 @@
+{
+  "name": "accidentals-recorded",
+  "description": "Same GB/US witnesses, but recordAccidentals=true so the folded spellings surface as variantSpelling.",
+  "base": "GB",
+  "witnessOrder": ["GB", "US"],
+  "recordAccidentals": true,
+  "pagination": "default",
+  "normalizer": "gbUS"
+}

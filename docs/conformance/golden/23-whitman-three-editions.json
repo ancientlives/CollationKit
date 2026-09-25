@@ -1,0 +1,1336 @@
+{
+  "graph" : {
+    "baseID" : "ed1855",
+    "nodes" : [
+      {
+        "basePosition" : -1,
+        "insertedAfter" : -1,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "1",
+            "witnesses" : [
+              "ed1860"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "ed1855",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "celebrate",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "myself",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 2,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "and sing myself",
+            "witnesses" : [
+              "ed1891"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "ed1855",
+              "ed1860"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "And",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "what",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "assume",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 8,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "you",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "shall",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "assume",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 12,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "For",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 13,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "every",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 14,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "atom",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 15,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "belonging",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 16,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 17,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "me",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 18,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "as",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 19,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "good",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 20,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "belongs",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 21,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 22,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "you",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 22,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "2",
+            "witnesses" : [
+              "ed1860"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "ed1855",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 24,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 25,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "loafe",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 26,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 27,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "invite",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 28,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "my",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 29,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "soul",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 31,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 32,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "lean",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 33,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 34,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "loafe",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 35,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "at",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 36,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "my",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 37,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ease",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 42,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "observing",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 43,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 44,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "spear",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 45,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 46,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "summer",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 47,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "grass",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 47,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "3",
+            "witnesses" : [
+              "ed1860"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "ed1855",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 49,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Houses",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 50,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 51,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "rooms",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 52,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "are",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 53,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "full",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 54,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 55,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "perfumes",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 60,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 61,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "shelves",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 62,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "are",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 63,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "crowded",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 64,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "with",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 65,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "perfumes",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 67,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 68,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "breathe",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 69,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 70,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "fragrance",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 71,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "myself",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 73,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 74,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "know",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 75,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "it",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 76,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 77,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "like",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 78,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "it",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 80,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "The",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 81,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "distillation",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 82,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "would",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 83,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "intoxicate",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 84,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "me",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 85,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "also",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 87,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "but",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 88,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 89,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "shall",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 90,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "not",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 91,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "let",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 92,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "it",
+            "witnesses" : [
+              "ed1855",
+              "ed1860",
+              "ed1891"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "ed1855",
+      "compared" : "ed1860",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 3,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseReading" : "",
+          "comparedLocation" : {
+            "charFrom" : 0,
+            "charTo" : 1,
+            "cite" : "p.1 · line 1 · word 1",
+            "endLine" : 0,
+            "firstWord" : 0,
+            "lastWord" : 0,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "1",
+          "comparedTokens" : {
+            "from" : 0,
+            "to" : 1
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "insertion",
+          "withinTransposition" : false
+        },
+        {
+          "baseReading" : "",
+          "comparedLocation" : {
+            "charFrom" : 116,
+            "charTo" : 117,
+            "cite" : "p.1 · line 4 · word 1",
+            "endLine" : 3,
+            "firstWord" : 0,
+            "lastWord" : 0,
+            "line" : 3,
+            "page" : 0
+          },
+          "comparedReading" : "2",
+          "comparedTokens" : {
+            "from" : 27,
+            "to" : 28
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "insertion",
+          "withinTransposition" : false
+        },
+        {
+          "baseReading" : "",
+          "comparedLocation" : {
+            "charFrom" : 212,
+            "charTo" : 213,
+            "cite" : "p.1 · line 6 · word 1",
+            "endLine" : 5,
+            "firstWord" : 0,
+            "lastWord" : 0,
+            "line" : 5,
+            "page" : 0
+          },
+          "comparedReading" : "3",
+          "comparedTokens" : {
+            "from" : 51,
+            "to" : 52
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "insertion",
+          "withinTransposition" : false
+        }
+      ]
+    },
+    {
+      "base" : "ed1860",
+      "compared" : "ed1891",
+      "counts" : {
+        "deletion" : 3,
+        "insertion" : 1,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 0,
+            "charTo" : 1,
+            "cite" : "p.1 · line 1 · word 1",
+            "endLine" : 0,
+            "firstWord" : 0,
+            "lastWord" : 0,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "1",
+          "baseTokens" : {
+            "from" : 0,
+            "to" : 1
+          },
+          "comparedReading" : "",
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "deletion",
+          "withinTransposition" : false
+        },
+        {
+          "baseReading" : "",
+          "comparedLocation" : {
+            "charFrom" : 20,
+            "charTo" : 35,
+            "cite" : "p.1 · line 1 · words 5–7",
+            "endLine" : 0,
+            "firstWord" : 4,
+            "lastWord" : 6,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "and sing myself",
+          "comparedTokens" : {
+            "from" : 4,
+            "to" : 7
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "insertion",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 116,
+            "charTo" : 117,
+            "cite" : "p.1 · line 4 · word 1",
+            "endLine" : 3,
+            "firstWord" : 0,
+            "lastWord" : 0,
+            "line" : 3,
+            "page" : 0
+          },
+          "baseReading" : "2",
+          "baseTokens" : {
+            "from" : 27,
+            "to" : 28
+          },
+          "comparedReading" : "",
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "deletion",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 212,
+            "charTo" : 213,
+            "cite" : "p.1 · line 6 · word 1",
+            "endLine" : 5,
+            "firstWord" : 0,
+            "lastWord" : 0,
+            "line" : 5,
+            "page" : 0
+          },
+          "baseReading" : "3",
+          "baseTokens" : {
+            "from" : 51,
+            "to" : 52
+          },
+          "comparedReading" : "",
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "deletion",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

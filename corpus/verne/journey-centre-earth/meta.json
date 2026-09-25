@@ -1,0 +1,36 @@
+{
+  "name": "journey-centre-earth-translations",
+  "work": "Jules Verne, Journey to the Centre of the Earth (Voyage au centre de la Terre, 1864/1867)",
+  "description": "Two famously divergent English TRANSLATIONS of the opening chapter. The differences are large and characterful — the two translators even give the professor different names (Liedenbrock vs Von Hardwigg) — so this is a strong heavy-substitution case. base = the Malleson translation.",
+  "base": "malleson",
+  "witnessOrder": ["malleson", "ward"],
+  "witnesses": {
+    "malleson": {
+      "translation": "F. A. Malleson translation, 'A Journey into the Interior of the Earth' (Professor Liedenbrock)",
+      "source": "Project Gutenberg eBook #3748 (pg3748.txt)",
+      "excerpt": "Chapter I 'The Professor and His Family' (between '^CHAPTER I\\.' and '^CHAPTER II\\.')"
+    },
+    "ward": {
+      "translation": "The 'A Journey to the Centre of the Earth' translation (Professor Von Hardwigg); body chapters headed by title only",
+      "source": "Project Gutenberg eBook #18857 (pg18857.txt)",
+      "excerpt": "Chapter 1 'My Uncle Makes a Great Discovery' (between '^MY UNCLE MAKES A GREAT DISCOVERY$' and '^THE MYSTERIOUS PARCHMENT$')"
+    }
+  },
+  "full": {
+    "description": "Whole-novel witnesses under full/ for scale collation testing. A DEMANDING structural-divergence case: the ward edition is (by its own redactor's note) 'not a translation … but a complete re-write of the novel, with portions added and omitted, and names changed' — so it runs ~16% longer than malleson and diverges structurally, not just in wording. Each witness's front matter (title / redactor's note / TOC) is wrapped in a <!-- no_collate --> region so only the novel body is collated.",
+    "witnesses": {
+      "full/malleson.txt": "~74.6k words, from PG3748 (whole novel; front matter excluded before '^CHAPTER I.')",
+      "full/ward.txt": "~86.6k words, from PG18857 (whole novel; front matter excluded before the first body title)"
+    },
+    "collationResult": "~12,789 variants (10,283 substitutions, 562 deletions, 1,811 insertions, 133 moved); ~4.5 s (release). Alignment: 10,368 shared points, 12% max drift, 98.6% monotonic — the dot-plot is a clean, monotonic line that runs consistently below the diagonal (ward is systematically longer): a correct alignment of two substantially divergent editions, NOT a mis-alignment. A good test of the engine + alignment-map on honest large divergence."
+  },
+  "collate": {
+    "recordAccidentals": false,
+    "recordPunctuation": false,
+    "pagination": "default",
+    "normalizer": "substantive"
+  },
+  "notes": "Excerpt pair yields ~157 variants (120 substitutions, 16 deletions, 14 transpositions, 7 insertions). The two translations diverge strongly (different character names, reworded clauses) — a good heavy-substitution + transposition test. The full/ witnesses are the corpus's structural-divergence scale case — see the 'full' block.",
+  "licence": "public domain (Project Gutenberg)",
+  "retrieved": "2026-07-01"
+}

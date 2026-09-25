@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Start here — research introduction
+    url: https://github.com/ancientlives/CollationKit/blob/main/docs/RESEARCH_INTRO.md
+    about: What the project is, what it has achieved, and the open research questions.
+  - name: Contributor onboarding
+    url: https://github.com/ancientlives/CollationKit/blob/main/docs/ONBOARDING.md
+    about: How to build, run and navigate the code.

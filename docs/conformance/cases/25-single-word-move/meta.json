@@ -1,0 +1,9 @@
+{
+  "name": "single-word-move",
+  "description": "Regression for single-word move recovery: 'the well-known author' -> 'the author is well known'. The word 'author' MOVED (it was not deleted); 'is' was inserted; 'well-known'/'well known' is an orthographic accidental (B6, folded). The anchor pass cannot see a lone move (it needs n>=2-gram anchors), so the displaced-reading post-pass recovers it: the engine must report ONE transposition ('author', confidence certain) plus ONE insertion ('is'), NOT a deletion+insertion. This is the case a user flagged as fundamentally wrong before the fix. See docs/development/CASE_STUDY.md and ALGORITHMS §6.",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

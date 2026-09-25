@@ -1,0 +1,153 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 0,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "is",
+            "witnesses" : [
+              "B"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "A"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "well",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "known",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "author",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 1,
+        "substitution" : 0,
+        "transposition" : 1,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseReading" : "",
+          "comparedLocation" : {
+            "charFrom" : 11,
+            "charTo" : 13,
+            "cite" : "p.1 · line 1 · word 3",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "is",
+          "comparedTokens" : {
+            "from" : 2,
+            "to" : 3
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "insertion",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 15,
+            "charTo" : 21,
+            "cite" : "p.1 · line 1 · word 5",
+            "endLine" : 0,
+            "firstWord" : 4,
+            "lastWord" : 4,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "author",
+          "baseTokens" : {
+            "from" : 4,
+            "to" : 5
+          },
+          "comparedLocation" : {
+            "charFrom" : 4,
+            "charTo" : 10,
+            "cite" : "p.1 · line 1 · word 2",
+            "endLine" : 0,
+            "firstWord" : 1,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "author",
+          "comparedTokens" : {
+            "from" : 1,
+            "to" : 2
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "transposition",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

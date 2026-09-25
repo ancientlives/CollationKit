@@ -1,0 +1,16 @@
+{
+  "name": "whitman-transposition",
+  "description": "SEMI-SYNTHETIC transposition case (BACKLOG B4): witness A is a verbatim real passage — two stanzas from Walt Whitman's 'Song of Myself' (1891-92 'deathbed' edition, Gutenberg #1322). Witness B is constructed from A by RELOCATING one intact line ('We have had ducking and deprecating about enough,') to an earlier position, producing a single clean transposition. CAVEAT: this is NOT a found authorial move — a survey of Whitman 1855 vs 1891 (poet-of-the-body stanza, the 'kosmos' lines, the catalogues) found substitutions and line-merges but no clean authorial transposition of an intact passage; genuine passage-relocation between editions is rare in the wild (itself a finding reported in CASE_STUDY.md). This case therefore tests the engine's headline transposition feature on REAL prose with a controlled, documented, unambiguous move, rather than on a crafted fixture. The engine should report a TRANSPOSITION (the moved line), not a deletion+insertion. See docs/development/CASE_STUDY.md.",
+  "base": "A-1891",
+  "witnessOrder": ["A-1891", "B-moved"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "source": {
+    "work": "Walt Whitman, 'Song of Myself' (Leaves of Grass), two stanzas",
+    "A-1891": "Project Gutenberg eBook #1322 (1891-92 'deathbed' edition), verbatim (presentational indent/CRLF normalised)",
+    "B-moved": "constructed from A-1891 by relocating one intact line (semi-synthetic; documented controlled transposition)",
+    "licence": "public domain (base text)",
+    "retrieved": "2026-06-29"
+  }
+}

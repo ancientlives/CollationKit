@@ -1,0 +1,715 @@
+{
+  "graph" : {
+    "baseID" : "canonical",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Я",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "вас",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "любил",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "любовь",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ещё",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "быть",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 8,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "может",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "В",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 11,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "душе",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 12,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "моей",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 13,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "угасла",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 14,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "не",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 15,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "совсем",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 17,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Но",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 18,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "пусть",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 19,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "она",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 20,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "вас",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 21,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "больше",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 22,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "не",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 23,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "тревожит",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 25,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Я",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 26,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "не",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 27,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "хочу",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 28,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "печалить",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 29,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "вас",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 30,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ничем",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 32,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Я",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 33,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "вас",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 34,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "любил",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 35,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "безмолвно",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 37,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "безнадежно",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 39,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "То",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 40,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "робостью",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 42,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "то",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 43,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ревностью",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 44,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "томим",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 46,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Я",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 47,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "вас",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 48,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "любил",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 49,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "так",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 50,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "искренно",
+            "witnesses" : [
+              "canonical"
+            ]
+          },
+          {
+            "reading" : "сердечно",
+            "witnesses" : [
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 52,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "так",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 53,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "нежно",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 55,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Как",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 56,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "дай",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 57,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "вам",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 58,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Бог",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 59,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "любимой",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 60,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "быть",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 61,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "другим",
+            "witnesses" : [
+              "canonical",
+              "variant"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "canonical",
+      "compared" : "variant",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 218,
+            "charTo" : 226,
+            "cite" : "p.1 · line 7 · word 5",
+            "endLine" : 6,
+            "firstWord" : 4,
+            "lastWord" : 4,
+            "line" : 6,
+            "page" : 0
+          },
+          "baseReading" : "искренно",
+          "baseTokens" : {
+            "from" : 50,
+            "to" : 51
+          },
+          "comparedLocation" : {
+            "charFrom" : 218,
+            "charTo" : 226,
+            "cite" : "p.1 · line 7 · word 5",
+            "endLine" : 6,
+            "firstWord" : 4,
+            "lastWord" : 4,
+            "line" : 6,
+            "page" : 0
+          },
+          "comparedReading" : "сердечно",
+          "comparedTokens" : {
+            "from" : 50,
+            "to" : 51
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

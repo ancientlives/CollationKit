@@ -1,0 +1,9 @@
+{
+  "name": "mixed-variants",
+  "description": "Insertion, deletion and substitution together in a single pair, to exercise the typed counts.",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

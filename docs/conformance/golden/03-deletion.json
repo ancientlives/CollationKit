@@ -1,0 +1,103 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "black",
+            "witnesses" : [
+              "A"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "cat",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "sat",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 1,
+        "insertion" : 0,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 4,
+            "charTo" : 9,
+            "cite" : "p.1 · line 1 · word 2",
+            "endLine" : 0,
+            "firstWord" : 1,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "black",
+          "baseTokens" : {
+            "from" : 1,
+            "to" : 2
+          },
+          "comparedReading" : "",
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "deletion",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

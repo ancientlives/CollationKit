@@ -1,0 +1,130 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ἐν",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ἀρχῇ",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "ἔσται",
+            "witnesses" : [
+              "B"
+            ]
+          },
+          {
+            "reading" : "ἦν",
+            "witnesses" : [
+              "A"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ὁ",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "λόγος",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 8,
+            "charTo" : 10,
+            "cite" : "p.1 · line 1 · word 3",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "ἦν",
+          "baseTokens" : {
+            "from" : 2,
+            "to" : 3
+          },
+          "comparedLocation" : {
+            "charFrom" : 8,
+            "charTo" : 13,
+            "cite" : "p.1 · line 1 · word 3",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "ἔσται",
+          "comparedTokens" : {
+            "from" : 2,
+            "to" : 3
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

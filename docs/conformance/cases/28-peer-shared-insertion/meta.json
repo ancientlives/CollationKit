@@ -1,0 +1,10 @@
+{
+  "name": "peer-shared-insertion",
+  "description": "PEER-MSA strategy case (BACKLOG B14): pins the base-sensitivity gap the peer merge closes. Witnesses B and C each insert a phrase the base lacks, PARTIALLY shared ('the red rose' vs 'a red rose'). Under the base-anchored lift each insertion is keyed by its whole text against the base, producing two unrelated inserted nodes — B and C never see each other. Under peer-msa (this case pins strategy: peer-msa), witness C aligns against a consensus that already contains B's insertion, so the shared run 'red rose' is ONE reading carried by B and C, and only the article diverges ('the' B | 'a' C | omitted A). This golden is the conformance corpus's peer-strategy dimension: a port implementing the peer merge must reproduce it byte-for-byte; a port implementing only base-anchored skips strategy-pinned cases.",
+  "base": "A",
+  "witnessOrder": ["A", "B", "C"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "strategy": "peer-msa"
+}

@@ -1,0 +1,243 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "old",
+            "witnesses" : [
+              "A"
+            ]
+          },
+          {
+            "reading" : "young",
+            "witnesses" : [
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "grey",
+            "witnesses" : [
+              "A"
+            ]
+          },
+          {
+            "reading" : "young",
+            "witnesses" : [
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "wolf",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ran",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 4,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "very",
+            "witnesses" : [
+              "B"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "A"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "swiftly",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 5,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "back",
+            "witnesses" : [
+              "B"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "A"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "home",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 2,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 4,
+            "charTo" : 12,
+            "cite" : "p.1 · line 1 · words 2–3",
+            "endLine" : 0,
+            "firstWord" : 1,
+            "lastWord" : 2,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "old grey",
+          "baseTokens" : {
+            "from" : 1,
+            "to" : 3
+          },
+          "comparedLocation" : {
+            "charFrom" : 4,
+            "charTo" : 9,
+            "cite" : "p.1 · line 1 · word 2",
+            "endLine" : 0,
+            "firstWord" : 1,
+            "lastWord" : 1,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "young",
+          "comparedTokens" : {
+            "from" : 1,
+            "to" : 2
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseReading" : "",
+          "comparedLocation" : {
+            "charFrom" : 19,
+            "charTo" : 23,
+            "cite" : "p.1 · line 1 · word 5",
+            "endLine" : 0,
+            "firstWord" : 4,
+            "lastWord" : 4,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "very",
+          "comparedTokens" : {
+            "from" : 4,
+            "to" : 5
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "insertion",
+          "withinTransposition" : false
+        },
+        {
+          "baseReading" : "",
+          "comparedLocation" : {
+            "charFrom" : 32,
+            "charTo" : 36,
+            "cite" : "p.1 · line 1 · word 7",
+            "endLine" : 0,
+            "firstWord" : 6,
+            "lastWord" : 6,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "back",
+          "comparedTokens" : {
+            "from" : 6,
+            "to" : 7
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "insertion",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

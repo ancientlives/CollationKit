@@ -1,0 +1,9 @@
+{
+  "name": "six-editions",
+  "description": "The built-in six-edition fixture, recorded as a corpus case via the gbUS normalizer (matches Samples.gbUSNormalizer). Provided by Samples.sixEditions in-engine; witness files mirror it for a port that has no Swift sources.",
+  "base": "MS",
+  "witnessOrder": ["MS", "TS", "PR", "GB1", "US1", "UNI"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "gbUS"
+}

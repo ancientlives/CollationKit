@@ -1,0 +1,17 @@
+{
+  "name": "verne-trilingual-graph",
+  "description": "Real N-WITNESS case (BACKLOG B4, ≥3 witnesses to exercise the variant graph on real text): the opening paragraph of Jules Verne's '20,000 Leagues' (Pt 1, Ch.1) in THREE witnesses — the French original plus two competing English translations (Mercier 1872, Walter unabridged). Base = the French source. This is a deliberate cross-language graph: it models the structure of the planned Verne digital corpus (one French source text + its English translations collated together), and stress-tests the N-witness fold on heavily divergent witnesses. NOTE: because two witnesses are translations of the third, expect the graph to show wide divergence; the value is whether the engine produces a stable, deterministic graph and locates agreement vs. variant positions, not a tidy apparatus. See docs/development/CASE_STUDY.md.",
+  "base": "fr-5097",
+  "witnessOrder": ["fr-5097", "en-mercier", "en-walter"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive",
+  "source": {
+    "work": "Jules Verne, 20,000 Leagues Under the Seas, Part 1, Ch.1, first paragraph",
+    "fr-5097": "Project Gutenberg eBook #5097 (Vingt mille lieues sous les mers — French), verbatim",
+    "en-mercier": "Project Gutenberg eBook #164 (Lewis Page Mercier translation, 1872), verbatim",
+    "en-walter": "Project Gutenberg eBook #2488 (F. P. Walter translation, complete), verbatim",
+    "licence": "fr/Mercier witnesses public domain; the Walter witness (PG2488) is (c) 1999 Frederick Paul Walter, used here as a short 87-word quotation for research and testing only (see LICENSE-docs.md)",
+    "retrieved": "2026-06-29"
+  }
+}

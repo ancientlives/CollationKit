@@ -1,0 +1,169 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "well",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "known",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "mother",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "in",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 8,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "law",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "couldn't",
+            "witnesses" : [
+              "A"
+            ]
+          },
+          {
+            "reading" : "wouldn't",
+            "witnesses" : [
+              "B"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "wait",
+            "witnesses" : [
+              "A",
+              "B"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 29,
+            "charTo" : 37,
+            "cite" : "p.1 · line 1 · word 10",
+            "endLine" : 0,
+            "firstWord" : 9,
+            "lastWord" : 9,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "couldn't",
+          "baseTokens" : {
+            "from" : 9,
+            "to" : 10
+          },
+          "comparedLocation" : {
+            "charFrom" : 29,
+            "charTo" : 37,
+            "cite" : "p.1 · line 1 · word 10",
+            "endLine" : 0,
+            "firstWord" : 9,
+            "lastWord" : 9,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "wouldn't",
+          "comparedTokens" : {
+            "from" : 9,
+            "to" : 10
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

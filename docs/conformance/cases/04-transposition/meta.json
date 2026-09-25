@@ -1,0 +1,9 @@
+{
+  "name": "transposition",
+  "description": "A clause that has moved position between witnesses (a clean transposition).",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

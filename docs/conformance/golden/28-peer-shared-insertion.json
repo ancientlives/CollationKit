@@ -1,0 +1,197 @@
+{
+  "graph" : {
+    "baseID" : "A",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "alpha",
+            "witnesses" : [
+              "A",
+              "B",
+              "C"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "beta",
+            "witnesses" : [
+              "A",
+              "B",
+              "C"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 1,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "C"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "B"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "A"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 1,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "red rose",
+            "witnesses" : [
+              "B",
+              "C"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "A"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "gamma",
+            "witnesses" : [
+              "A",
+              "B",
+              "C"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "delta",
+            "witnesses" : [
+              "A",
+              "B",
+              "C"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A",
+      "compared" : "B",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 1,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseReading" : "",
+          "comparedLocation" : {
+            "charFrom" : 11,
+            "charTo" : 23,
+            "cite" : "p.1 · line 1 · words 3–5",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 4,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "the red rose",
+          "comparedTokens" : {
+            "from" : 2,
+            "to" : 5
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "insertion",
+          "withinTransposition" : false
+        }
+      ]
+    },
+    {
+      "base" : "B",
+      "compared" : "C",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 1,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 11,
+            "charTo" : 14,
+            "cite" : "p.1 · line 1 · word 3",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 0,
+            "page" : 0
+          },
+          "baseReading" : "the",
+          "baseTokens" : {
+            "from" : 2,
+            "to" : 3
+          },
+          "comparedLocation" : {
+            "charFrom" : 11,
+            "charTo" : 12,
+            "cite" : "p.1 · line 1 · word 3",
+            "endLine" : 0,
+            "firstWord" : 2,
+            "lastWord" : 2,
+            "line" : 0,
+            "page" : 0
+          },
+          "comparedReading" : "a",
+          "comparedTokens" : {
+            "from" : 2,
+            "to" : 3
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

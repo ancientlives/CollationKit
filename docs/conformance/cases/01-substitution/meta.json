@@ -1,0 +1,9 @@
+{
+  "name": "substitution",
+  "description": "A single substantive substitution at one word (brown -> red).",
+  "base": "A",
+  "witnessOrder": ["A", "B"],
+  "recordAccidentals": false,
+  "pagination": "default",
+  "normalizer": "substantive"
+}

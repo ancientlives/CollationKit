@@ -1,0 +1,2690 @@
+{
+  "graph" : {
+    "baseID" : "1818",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "It",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "was",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "on",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "dreary",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "night",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "November",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 11,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "beheld",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 12,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 13,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "accomplishment",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 14,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 15,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "my",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 16,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "toils",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 18,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "With",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 19,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "an",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 20,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "anxiety",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 21,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 22,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "almost",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 23,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "amounted",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 24,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 25,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "agony",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 27,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 28,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "collected",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 29,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 30,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "instruments",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 31,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 32,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "life",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 33,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "around",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 34,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "me",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 36,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 37,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 38,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "might",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 39,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "infuse",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 40,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 41,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "spark",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 42,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 43,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "being",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 44,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "into",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 45,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 46,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "lifeless",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 47,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "thing",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 48,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 49,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "lay",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 50,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "at",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 51,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "my",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 52,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "feet",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 54,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "It",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 55,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "was",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 56,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "already",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 57,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "one",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 58,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "in",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 59,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 60,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "morning",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 62,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 63,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "rain",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 64,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "pattered",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 65,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "dismally",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 66,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "against",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 67,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 68,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "panes",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 70,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 71,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "my",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 72,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "candle",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 73,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "was",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 74,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "nearly",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 75,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "burnt",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 76,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "out",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 78,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "when",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 80,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "by",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 81,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 82,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "glimmer",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 83,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 84,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 85,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "half",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 87,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "extinguished",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 88,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "light",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 90,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 91,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "saw",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 92,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 93,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "dull",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 94,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "yellow",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 95,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "eye",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 96,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 97,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 98,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "creature",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 99,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "open",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 101,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "it",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 102,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "breathed",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 103,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "hard",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 105,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 106,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 107,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "convulsive",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 108,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "motion",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 109,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "agitated",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 110,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "its",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 111,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "limbs",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 113,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "How",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 114,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "can",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 115,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 116,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "describe",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 117,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "my",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 118,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "emotions",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 119,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "at",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 120,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "this",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 121,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "catastrophe",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 123,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "or",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 124,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "how",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 125,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "delineate",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 126,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 127,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "wretch",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 128,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "whom",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 129,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "with",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 130,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "such",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 131,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "infinite",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 132,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "pains",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 133,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 134,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "care",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 135,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 136,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "had",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 137,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "endeavoured",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 138,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 139,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "form",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 141,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "His",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 142,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "limbs",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 143,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "were",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 144,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "in",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 145,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "proportion",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 147,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 148,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 149,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "had",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 150,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "selected",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 151,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "his",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 152,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "features",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 153,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "as",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 154,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "beautiful",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 156,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Beautiful",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 158,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "Great",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 159,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "God",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 161,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "His",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 162,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "yellow",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 163,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "skin",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 164,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "scarcely",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 165,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "covered",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 166,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 167,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "work",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 168,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 169,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "muscles",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 170,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 171,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "arteries",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 172,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "beneath",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 174,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "his",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 175,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "hair",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 176,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "was",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 177,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 178,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 179,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "lustrous",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 180,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "black",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 182,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 183,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "flowing",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 185,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "his",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 186,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "teeth",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 187,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 188,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 189,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "pearly",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 190,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "whiteness",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 192,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "but",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 193,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "these",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 194,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "luxuriances",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 195,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "only",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 196,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "formed",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 197,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 198,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "more",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 199,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "horrid",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 200,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "contrast",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 201,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "with",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 202,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "his",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 203,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "watery",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 204,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "eyes",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 206,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 207,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "seemed",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 208,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "almost",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 209,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 210,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 211,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "same",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 212,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "colour",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 213,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "as",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 214,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 215,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "dun",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 216,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "white",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 217,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "sockets",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 218,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "in",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 219,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "which",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 220,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "they",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 221,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "were",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 222,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "set",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 224,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "his",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 225,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "shrivelled",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 226,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "complexion",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 228,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 229,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "straight",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 230,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "black",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 231,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "lips",
+            "witnesses" : [
+              "1818",
+              "1831"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "1818",
+      "compared" : "1831",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 0,
+        "transposition" : 0,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+
+      ]
+    }
+  ]
+}

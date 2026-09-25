@@ -1,0 +1,879 @@
+{
+  "graph" : {
+    "baseID" : "A-1891",
+    "nodes" : [
+      {
+        "basePosition" : 0,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 1,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "am",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 2,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 3,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "poet",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 4,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 5,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 6,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "woman",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 7,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 8,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "same",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 9,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "as",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 10,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 11,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "man",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 13,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "And",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 14,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 15,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "say",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 16,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "it",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 17,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "is",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 18,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "as",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 19,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "great",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 20,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 21,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "be",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 22,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 23,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "woman",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 24,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "as",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 25,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 26,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "be",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 27,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "a",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 28,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "man",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 30,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "And",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 31,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 32,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "say",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 33,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "there",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 34,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "is",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 35,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "nothing",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 36,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "greater",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 37,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "than",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 38,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 39,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "mother",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 40,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 41,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "men",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 43,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 44,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "chant",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 45,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 46,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "chant",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 47,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 48,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "dilation",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 49,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "or",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 50,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "pride",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 52,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "We",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 53,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "have",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 54,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "had",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 55,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "ducking",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 56,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 57,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "deprecating",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 58,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "about",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 59,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "enough",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 61,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "I",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 62,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "show",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 63,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 64,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "size",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 65,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "is",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 66,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "only",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 67,
+        "isVariant" : false,
+        "readings" : [
+          {
+            "reading" : "development",
+            "witnesses" : [
+              "A-1891",
+              "B-moved"
+            ]
+          }
+        ]
+      }
+    ],
+    "schemaVersion" : 3
+  },
+  "pairs" : [
+    {
+      "base" : "A-1891",
+      "compared" : "B-moved",
+      "counts" : {
+        "deletion" : 0,
+        "insertion" : 0,
+        "substitution" : 0,
+        "transposition" : 1,
+        "variantSpelling" : 0
+      },
+      "schemaVersion" : 3,
+      "variations" : [
+        {
+          "baseLocation" : {
+            "charFrom" : 203,
+            "charTo" : 251,
+            "cite" : "p.1 · line 5 · words 1–8",
+            "endLine" : 4,
+            "firstWord" : 0,
+            "lastWord" : 7,
+            "line" : 4,
+            "page" : 0
+          },
+          "baseReading" : "We have had ducking and deprecating about enough",
+          "baseTokens" : {
+            "from" : 52,
+            "to" : 60
+          },
+          "comparedLocation" : {
+            "charFrom" : 48,
+            "charTo" : 96,
+            "cite" : "p.1 · line 2 · words 1–8",
+            "endLine" : 1,
+            "firstWord" : 0,
+            "lastWord" : 7,
+            "line" : 1,
+            "page" : 0
+          },
+          "comparedReading" : "We have had ducking and deprecating about enough",
+          "comparedTokens" : {
+            "from" : 13,
+            "to" : 21
+          },
+          "confidence" : "likely",
+          "crossesPage" : false,
+          "type" : "transposition",
+          "withinTransposition" : false
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "frankenstein-diplomatic",
+  "description": "Diplomatic (punctuation) view of the real Frankenstein 1818 vs 1831 creation-scene passage (same witnesses as case 17). With recordPunctuation=true the engine's OVERLAY surfaces the punctuation-only differences that the substantive view (case 17 → no variants) correctly hides — comma drops, the dun-white hyphenation context, etc. This is the diplomatic-collation use case (BACKLOG B6b): the 1818→1831 changes in this passage are almost entirely accidental punctuation, invisible to a substantive apparatus. Demonstrates that the substantive and diplomatic views are complementary, produced by the same engine. See docs/development/CASE_STUDY.md.",
+  "base": "1818",
+  "witnessOrder": ["1818", "1831"],
+  "recordAccidentals": false,
+  "recordPunctuation": true,
+  "pagination": "default",
+  "normalizer": "substantive"
+}
