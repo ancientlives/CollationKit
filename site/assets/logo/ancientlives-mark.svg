@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32.00 32.00" width="32" height="32" role="img" aria-label="ancientlives"><title>ancientlives</title><style>.ink-s{stroke:#2e3440}.ink-f{fill:#2e3440}.acc-s{stroke:#5e81ac}.acc-f{fill:#5e81ac}.mut-f{fill:#7b8394}@media (prefers-color-scheme: dark){.ink-s{stroke:#eceff4}.ink-f{fill:#eceff4}.acc-s{stroke:#88c0d0}.acc-f{fill:#88c0d0}.mut-f{fill:#9aa1ad}}</style>
+  <path class="ink-s" d="M27.07 8.81A13.2 13.2 0 1 1 21.16 3.85" fill="none" stroke-width="1.9" stroke-linecap="round"/>
+  <path class="ink-s" d="M22.98 11.58A9.4 9.4 0 1 1 18.77 8.05" fill="none" stroke-width="1.9" stroke-linecap="round"/>
+  <path class="ink-s" d="M19.18 14.20A5.7 5.7 0 1 1 16.63 12.05" fill="none" stroke-width="1.9" stroke-linecap="round"/>
+  <circle class="acc-f" cx="13.9" cy="17.7" r="2.3"/>
+</svg>

@@ -208,3 +208,17 @@ ul.links span { color: var(--muted); font-size: 15px; }
   display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: space-between; }
 .site-footer a { color: var(--muted); }
 .site-footer a:hover { color: var(--text-strong); }
+
+/* ── logos (inline SVG marks; colours follow the theme) ─────────────────── */
+:root { --logo-accent: #5e81ac; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --logo-accent: #88c0d0; } }
+:root[data-theme="dark"] { --logo-accent: #88c0d0; }
+.logo .ink-s { stroke: var(--text-strong); } .logo .ink-f { fill: var(--text-strong); }
+.logo .acc-s { stroke: var(--logo-accent); } .logo .acc-f { fill: var(--logo-accent); }
+.brand { display: inline-flex; align-items: center; gap: 9px; }
+.logo-sm { width: 22px; height: 22px; flex: none; }
+.hero-title { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+.hero-title h1 { margin: 0; }
+.logo-lg { width: clamp(44px, 8vw, 58px); height: clamp(44px, 8vw, 58px); flex: none; }
+.project h3 { display: flex; align-items: center; gap: 10px; }
+.logo-md { width: 26px; height: 26px; flex: none; }

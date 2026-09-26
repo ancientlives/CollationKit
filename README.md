@@ -1,4 +1,9 @@
-# CollationKit
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="site/assets/logo/collationkit-logo-dark.svg">
+    <img src="site/assets/logo/collationkit-logo-light.svg" alt="CollationKit" height="48">
+  </picture>
+</h1>
 
 [![CI](https://github.com/ancientlives/CollationKit/actions/workflows/ci.yml/badge.svg)](https://github.com/ancientlives/CollationKit/actions/workflows/ci.yml)
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
