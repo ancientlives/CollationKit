@@ -209,16 +209,18 @@ ul.links span { color: var(--muted); font-size: 15px; }
 .site-footer a { color: var(--muted); }
 .site-footer a:hover { color: var(--text-strong); }
 
-/* ── logos (inline SVG marks; colours follow the theme) ─────────────────── */
-:root { --logo-accent: #5e81ac; }
-@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --logo-accent: #88c0d0; } }
-:root[data-theme="dark"] { --logo-accent: #88c0d0; }
-.logo .ink-s { stroke: var(--text-strong); } .logo .ink-f { fill: var(--text-strong); }
-.logo .acc-s { stroke: var(--logo-accent); } .logo .acc-f { fill: var(--logo-accent); }
+/* ── logos (inline SVG marks; colours follow the theme, Nord palette) ───── */
+:root { --logo-ink: var(--text-strong); --logo-blue: #5e81ac; --logo-teal: #4f8a8b; --logo-yellow: #c49a3c; --logo-orange: #c0694e; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --logo-blue: #88c0d0; --logo-teal: #8fbcbb; --logo-yellow: #ebcb8b; --logo-orange: #d08770; } }
+:root[data-theme="dark"] { --logo-blue: #88c0d0; --logo-teal: #8fbcbb; --logo-yellow: #ebcb8b; --logo-orange: #d08770; }
+svg.logo { display: block; flex: none; overflow: visible; }
+.logo .ink-s { stroke: var(--logo-ink); } .logo .ink-f { fill: var(--logo-ink); }
+.logo .acc-s { stroke: var(--logo-blue); } .logo .acc-f { fill: var(--logo-blue); }
+.logo .teal-s { stroke: var(--logo-teal); } .logo .yel-f { fill: var(--logo-yellow); } .logo .ora-f { fill: var(--logo-orange); }
 .brand { display: inline-flex; align-items: center; gap: 9px; }
-.logo-sm { width: 22px; height: 22px; flex: none; }
+.logo-sm { width: 22px; height: 22px; }
 .hero-title { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
 .hero-title h1 { margin: 0; }
-.logo-lg { width: clamp(44px, 8vw, 58px); height: clamp(44px, 8vw, 58px); flex: none; }
+.logo-lg { width: clamp(44px, 8vw, 56px); height: clamp(44px, 8vw, 56px); }
 .project h3 { display: flex; align-items: center; gap: 10px; }
-.logo-md { width: 26px; height: 26px; flex: none; }
+.logo-md { width: 26px; height: 26px; }
