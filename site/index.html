@@ -9,288 +9,224 @@
 <meta property="og:description" content="Transposition-aware scholarly textual collation, with citations. Open source, MIT.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ancientlives.github.io/CollationKit/">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%230a0d0a'/%3E%3Ctext x='1' y='12' font-family='monospace' font-size='11' fill='%23ffb347'%3E%C2%B6_%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%232e3440'/%3E%3Cpath d='M4 5h8M4 8h5M4 11h8' stroke='%2388c0d0' stroke-width='1.6'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,600;1,400&family=VT323&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/retro.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
 <script>
   try { var t = localStorage.getItem("al-theme"); if (t === "light" || t === "dark") document.documentElement.dataset.theme = t; } catch (e) {}
 </script>
 </head>
 <body>
 
-<header class="topbar">
+<header class="site-header">
   <div class="wrap">
-    <div class="crumb">
-      <a href="https://ancientlives.github.io/"><span class="host">ancientlives</span></a><span class="sep">:</span><a href="https://ancientlives.github.io/#projects">~/projects</a><span class="sep">/</span><a href="./">CollationKit</a><span class="sep"> $</span> man collationkit
-    </div>
+    <a class="brand" href="https://ancientlives.github.io/">ancientlives<span class="sep">/</span><span class="sub">CollationKit</span></a>
     <nav class="nav" aria-label="Site">
-      <a href="https://ancientlives.github.io/">home</a>
-      <a href="#demos">demos</a>
-      <a href="#documentation">docs</a>
-      <a href="https://github.com/ancientlives/CollationKit">github</a>
-      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light or dark theme">[theme]</button>
+      <a href="#demos">Demos</a>
+      <a href="#docs">Docs</a>
+      <a href="https://github.com/ancientlives/CollationKit">GitHub</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle light or dark theme">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 1.8a6.2 6.2 0 0 1 0 12.4z" fill="currentColor"/></svg>
+      </button>
     </nav>
   </div>
 </header>
 
 <main class="wrap">
 
-  <div class="manhead" aria-hidden="true">
-    <span>COLLATIONKIT(1)</span><span class="mid">Research Tools Manual</span><span>COLLATIONKIT(1)</span>
+  <div class="hero">
+    <h1>CollationKit</h1>
+    <p class="lede">Scholarly textual collation for editions and translations. It finds every insertion, deletion,
+    substitution and moved passage, and cites each one by page, line and word.</p>
+    <div class="actions">
+      <a class="btn primary" href="#demos">Try the demos</a>
+      <a class="btn" href="https://github.com/ancientlives/CollationKit">View on GitHub</a>
+      <a class="btn" href="https://github.com/ancientlives/CollationKit/blob/main/docs/RESEARCH_INTRO.md">Research introduction</a>
+    </div>
   </div>
 
-  <section class="sect" aria-labelledby="name">
-    <h2 id="name">Name</h2>
-    <div class="body">
-      <p class="display cursor">CollationKit</p>
-      <p><strong>collationkit</strong> — transposition-aware scholarly textual collation, with citations.</p>
+  <section aria-labelledby="about">
+    <h2 id="about">What it is</h2>
+    <p>Scholars who study a work that survives in several forms (a manuscript, corrected proofs, a first edition,
+    a revised edition, rival translations) need to know precisely how those versions differ. This is
+    <em>textual collation</em>, and its product is an <em>apparatus criticus</em>: a citable record of every
+    variant.</p>
+    <p>CollationKit is a deterministic, pure-Swift engine for that job. Given several <em>witnesses</em> of one work,
+    it reports each difference as a typed variant, including passages that moved across a page boundary.
+    <mark>Every finding carries a citation.</mark> It separates substantive changes of wording from accidentals
+    (spelling, punctuation, case). It merges many witnesses into one variant graph, with or without a privileged
+    base text, and can anchor witnesses across languages.</p>
+    <p>It ships with the <code>collate</code> command-line tool, a self-contained interactive HTML viewer, a
+    language-neutral conformance corpus with a JSON Schema, and complete novels in rival translations for
+    evaluation.</p>
+  </section>
+
+  <section aria-labelledby="why">
+    <h2 id="why">Why not diff?</h2>
+    <div class="features">
+      <div>
+        <h3>Words, not lines</h3>
+        <p>Prose reflows and revision happens at the level of the phrase. Needleman–Wunsch alignment over tokens
+        makes a reworded clause one substitution, not a deleted block plus an inserted one.</p>
+      </div>
+      <div>
+        <h3>Moves are moves</h3>
+        <p>A passage relocated across a page, even one revised in transit, is reported once as a transposition,
+        with <code>certain</code> or <code>likely</code> confidence.</p>
+      </div>
+      <div>
+        <h3>Not every difference matters</h3>
+        <p>Substantive variants are separated from accidentals, so a GB/US spelling doesn't drown the finding.
+        Accidentals can still be recorded for a diplomatic view.</p>
+      </div>
+      <div>
+        <h3>A citation, not a patch</h3>
+        <p>Every variant is located as <code>p. 2 · line 1 · words 1–10</code>, under an explicit pagination
+        model.</p>
+      </div>
     </div>
   </section>
 
-  <section class="sect" aria-labelledby="synopsis">
-    <h2 id="synopsis">Synopsis</h2>
-    <div class="body">
-<pre><span class="k">collate</span>                                       <span class="c"># interactive menu</span>
-<span class="k">collate run</span> [options] <u>base</u> <u>witness</u> …           <span class="c"># scriptable</span>
-<span class="k">collate run</span> --dir <u>folder</u> --all --out <u>results</u>   <span class="c"># + collation.html viewer</span>
-<span class="k">collate run</span> --strategy peer-msa --lexicon <u>fr-en.lex</u> fr.txt en1.txt en2.txt</pre>
-    </div>
-  </section>
-
-  <section class="sect" aria-labelledby="description">
-    <h2 id="description">Description</h2>
-    <div class="body">
-      <p>Scholars who study a work that survives in several forms (a manuscript, corrected proofs, a first
-      edition, a revised edition, rival translations) need to know precisely how those versions differ. This is
-      <em>textual collation</em>, and its product is an <em>apparatus criticus</em>: a citable record of every
-      variant, located by page, line and word.</p>
-      <p><strong>CollationKit</strong> is a deterministic, pure-Swift engine for that job. Given several
-      <em>witnesses</em> of one work, it reports every <strong>insertion</strong>, <strong>deletion</strong>,
-      <strong>substitution</strong> and <strong>transposition</strong>, including a passage that moved across
-      a page boundary. Each finding carries a citation. It separates substantive changes of wording from
-      accidentals (spelling, punctuation, case). It merges many witnesses into one variant graph, with or
-      without a privileged base text, and can anchor witnesses across languages.</p>
-      <p>It ships with the <code>collate</code> command-line tool, a self-contained interactive HTML viewer, a
-      language-neutral conformance corpus with a JSON Schema, and a corpus of complete novels in rival
-      translations for evaluation.</p>
-    </div>
-  </section>
-
-  <section class="sect" aria-labelledby="why">
-    <h2 id="why">Why not diff</h2>
-    <div class="body">
-      <dl class="opts">
-        <dt>Words, not lines</dt>
-        <dd>Prose reflows, and revision happens at the level of the word and phrase. Alignment is
-        Needleman–Wunsch over tokens, so a reworded clause is one substitution rather than a deleted block plus an
-        inserted block.</dd>
-        <dt>Moves are moves</dt>
-        <dd>An anchor and transposition pass recognises a passage that was relocated, even across a page and even
-        when revised in transit, and reports it once, as a move with <code>certain</code> or <code>likely</code>
-        confidence.</dd>
-        <dt>Not every difference matters equally</dt>
-        <dd>Normalisation separates <em>substantive</em> variants from <em>accidentals</em>, so a GB/US spelling
-        change doesn't drown the finding. Accidentals can be recorded on request for a diplomatic view.</dd>
-        <dt>The output is a citation, not a patch</dt>
-        <dd>Every variant is located: <code>p. 2 · line 1 · words 1–10</code>, under an explicit pagination
-        model.</dd>
-      </dl>
-    </div>
-  </section>
-
-  <section class="sect" aria-labelledby="example">
+  <section aria-labelledby="example">
     <h2 id="example">Example</h2>
-    <div class="body">
-      <p>Excerpt from the located variant report for two witnesses of the bundled six-edition example, the
-      manuscript (MS) and the Uniform edition (UNI):</p>
-<pre><span class="c">$ collate run MS.txt UNI.txt</span>
-MS vs UNI: 5 variant(s)
-  [1] <span class="mov">TRANSPOSITION (moved)  (ACROSS PAGES)</span>
-      MS:  “The lamps were lit along the quay one by one” @ p.2 · line 1 · words 1–10
-      UNI: “The lamps were lit along the quay one by one” @ p.1 · line 2 · words 1–10
-  …
-  [4] <span class="k">SUBSTITUTION</span>
+    <p>From the located variant report for the bundled six-edition example, comparing the manuscript (MS) with
+    the Uniform edition (UNI):</p>
+<pre><span class="c">$</span> <span class="f">collate</span> run MS.txt UNI.txt
+MS vs UNI: <span class="n">5</span> variant(s)
+  [<span class="n">1</span>] <span class="mov">TRANSPOSITION (moved)  (ACROSS PAGES)</span>
+      MS:  <span class="s">“The lamps were lit along the quay one by one”</span> @ p.2 · line 1 · words 1–10
+      UNI: <span class="s">“The lamps were lit along the quay one by one”</span> @ p.1 · line 2 · words 1–10
+  <span class="c">…</span>
+  [<span class="n">4</span>] <span class="k">SUBSTITUTION</span>
       MS:  “<span class="del">tired</span>”  @ p.1 · line 2 · word 3
       UNI: “<span class="add">weary</span>”  @ p.1 · line 3 · word 3
-  [5] <span class="k">SUBSTITUTION</span>
+  [<span class="n">5</span>] <span class="k">SUBSTITUTION</span>
       MS:  “<span class="del">cold</span>”   @ p.2 · line 2 · word 2
       UNI: “<span class="add">bitter</span>” @ p.2 · line 1 · word 2</pre>
-      <p class="dim">A line diff would report the moved sentence as a deletion on page 2 and an unrelated
-      insertion on page 1.</p>
-    </div>
+    <p class="muted">A line diff would report the moved sentence twice: as a deletion on page 2 and an unrelated
+    insertion on page 1.</p>
   </section>
 
-  <section class="sect" id="demos" aria-labelledby="demos-h">
+  <section id="demos" aria-labelledby="demos-h">
     <h2 id="demos-h">Demos</h2>
-    <div class="body">
-      <p>Each link opens the interactive viewer exactly as <code>collate</code> exports it: one self-contained HTML
-      file with an overview dashboard, the annotated text of each witness, a variant graph, parallel columns, a
-      redline of changes, a prose story of the differences, an alignment map, and a traditional apparatus.</p>
-      <div class="cards">
-        <article class="card">
-          <h3>Six editions of one passage</h3>
-          <div class="meta"><span class="tag">6 witnesses</span><span class="tag">cross-page move</span></div>
-          <p>Manuscript → typescript → proofs → GB and US first editions → Uniform edition. The worked example
-          behind the test suite.</p>
-          <a class="go" href="demos/six-editions.html">open viewer →</a>
-        </article>
-        <article class="card">
-          <h3>Frankenstein, 1818 vs 1831</h3>
-          <div class="meta"><span class="tag">authorial revision</span><span class="tag">diplomatic</span></div>
-          <p>Mary Shelley's revision, with punctuation and spelling variants recorded alongside substantive
-          ones.</p>
-          <a class="go" href="demos/frankenstein.html">open viewer →</a>
-        </article>
-        <article class="card">
-          <h3>Whitman, “Song of Myself”</h3>
-          <div class="meta"><span class="tag">1855 · 1860 · 1891</span><span class="tag">variant graph</span></div>
-          <p>The opening stanzas across three editions of <em>Leaves of Grass</em>, merged into one graph.</p>
-          <a class="go" href="demos/whitman-three-editions.html">open viewer →</a>
-        </article>
-        <article class="card">
-          <h3>Whitman, the “Calamus” cluster</h3>
-          <div class="meta"><span class="tag">1860 vs 1867</span><span class="tag">found transposition</span></div>
-          <p>A genuine authorial relocation of a whole poem within the cluster, recovered as a single move.</p>
-          <a class="go" href="demos/whitman-calamus.html">open viewer →</a>
-        </article>
-        <article class="card">
-          <h3>Verne in three voices</h3>
-          <div class="meta"><span class="tag">French + 2 English</span><span class="tag">cross-language</span></div>
-          <p>The French original of <em>Vingt mille lieues sous les mers</em> and two English translations, aligned
-          with the peer merge and a small translation lexicon.</p>
-          <a class="go" href="demos/verne-trilingual.html">open viewer →</a>
-        </article>
-        <article class="card">
-          <h3>Journey to the Centre of the Earth, ch. 1</h3>
-          <div class="meta"><span class="tag">rival translations</span><span class="tag">heavy rewording</span></div>
-          <p>Two Victorian translations that share meaning but little sentence-level wording. Even the professor's
-          name differs: Liedenbrock in one, Hardwigg in the other.</p>
-          <a class="go" href="demos/verne-journey-ch1.html">open viewer →</a>
-        </article>
-      </div>
-      <p class="dim">The engine also collates complete novels (about 100–200k words per witness) in seconds with a
-      release build. Those viewers run to tens of megabytes, so they aren't hosted here. Reproduce one with
-      <code>collate run corpus/verne/journey-centre-earth/full/{malleson,ward}.txt --out results</code>.</p>
+    <p>Each demo is the interactive viewer exactly as <code>collate</code> exports it: one self-contained HTML file
+    with an overview, the annotated text of each witness, a variant graph, parallel columns, a redline of changes,
+    a prose story of the differences, an alignment map and a traditional apparatus.</p>
+    <div class="cards">
+      <a class="card" href="demos/six-editions.html">
+        <h3>Six editions of one passage</h3>
+        <p>Manuscript to Uniform edition, with a sentence moved across a page. The worked example behind the tests.</p>
+        <div class="tags"><span class="tag">6 witnesses</span><span class="tag">cross-page move</span></div>
+      </a>
+      <a class="card" href="demos/frankenstein.html">
+        <h3>Frankenstein, 1818 / 1831</h3>
+        <p>Mary Shelley's revision, with punctuation and spelling variants recorded alongside substantive ones.</p>
+        <div class="tags"><span class="tag">revision</span><span class="tag">diplomatic</span></div>
+      </a>
+      <a class="card" href="demos/whitman-three-editions.html">
+        <h3>Whitman, “Song of Myself”</h3>
+        <p>The opening stanzas of <em>Leaves of Grass</em> in 1855, 1860 and 1891, merged into one variant graph.</p>
+        <div class="tags"><span class="tag">3 witnesses</span><span class="tag">variant graph</span></div>
+      </a>
+      <a class="card" href="demos/whitman-calamus.html">
+        <h3>Whitman, “Calamus”</h3>
+        <p>A genuine authorial relocation of a whole poem between 1860 and 1867, recovered as a single move.</p>
+        <div class="tags"><span class="tag">found transposition</span></div>
+      </a>
+      <a class="card" href="demos/verne-trilingual.html">
+        <h3>Verne in three voices</h3>
+        <p>The French original and two English translations, aligned with the peer merge and a small lexicon.</p>
+        <div class="tags"><span class="tag">cross-language</span><span class="tag">peer merge</span></div>
+      </a>
+      <a class="card" href="demos/verne-journey-ch1.html">
+        <h3>Journey to the Centre of the Earth</h3>
+        <p>Two Victorian translations of chapter 1. Even the professor's name differs: Liedenbrock or Hardwigg.</p>
+        <div class="tags"><span class="tag">rival translations</span></div>
+      </a>
     </div>
+    <p class="muted small">Complete novels (100–200k words per witness) collate in seconds with a release build, but
+    their viewers run to tens of megabytes, so they aren't hosted here. To reproduce one, run
+    <code>collate run corpus/verne/journey-centre-earth/full/{malleson,ward}.txt --out results</code>.</p>
   </section>
 
-  <section class="sect" aria-labelledby="install">
-    <h2 id="install">Installation</h2>
-    <div class="body">
-      <p>Requires macOS 13 or later and Swift 5.9+ (Xcode 15 or later). No third-party dependencies.</p>
-<pre>git clone https://github.com/ancientlives/CollationKit.git
-cd CollationKit
-swift test                    <span class="c"># 222 tests</span>
-swift build -c release        <span class="c"># use release builds for full-length texts</span>
-.build/release/collate run --dir corpus/verne/journey-centre-earth --all --out results
-open results/collation.html</pre>
-    </div>
+  <section aria-labelledby="start">
+    <h2 id="start">Get started</h2>
+    <p>Requires macOS 13 or later and Swift 5.9+ (Xcode 15 or later). No third-party dependencies.</p>
+<pre><span class="f">git</span> clone https://github.com/ancientlives/CollationKit.git
+<span class="f">cd</span> CollationKit
+<span class="f">swift</span> test                <span class="c"># 222 tests</span>
+<span class="f">swift</span> build -c release    <span class="c"># use release builds for full-length texts</span>
+.build/release/<span class="f">collate</span> run --dir corpus/verne/journey-centre-earth --all --out results
+<span class="f">open</span> results/collation.html</pre>
+<pre><span class="f">collate</span>                                         <span class="c"># interactive menu</span>
+<span class="f">collate</span> run <u>base.txt</u> <u>witness.txt</u> …              <span class="c"># scriptable</span>
+<span class="f">collate</span> run --strategy peer-msa --lexicon <u>fr-en.lex</u> fr.txt en1.txt en2.txt</pre>
   </section>
 
-  <section class="sect" aria-labelledby="research">
+  <section aria-labelledby="research">
     <h2 id="research">Research</h2>
-    <div class="body">
-      <p>The deterministic core is mature and evaluated on complete novels in independent translations, on verse,
-      and on non-Latin scripts. The open questions are above it and around it:</p>
-      <dl class="opts">
-        <dt>A semantic layer, carefully gated</dt>
-        <dd>Can learned signals such as sentence-level cross-language anchoring or corpus-wide phrase commonness
-        sharpen alignment and move confidence, while keeping the engine deterministic, auditable and faithful to
-        each witness's own words?</dd>
-        <dt>The irreducible residual</dt>
-        <dd>Short passages that sit near their original position can't be told from coincidence by geometry alone.
-        Word and phrase rarity have already been shown <em>not</em> to help (a documented negative result). What
-        can?</dd>
-        <dt>Visualisation and trust</dt>
-        <dd>The viewer's design is argued from principles but hasn't been evaluated with users. Which views do
-        scholars rely on? Does the alignment map let a reader verify an alignment? How should calibrated
-        uncertainty be shown to an expert who is entitled to overrule the tool?</dd>
-      </dl>
-      <p>Read the <a href="https://github.com/ancientlives/CollationKit/blob/main/docs/RESEARCH_INTRO.md">research
-      introduction</a> for the full picture. Two papers are in preparation, one on the collation algorithms and
-      their evaluation and one on visualising collation results.</p>
-    </div>
+    <p>The deterministic core is mature and has been evaluated on complete novels in independent translations,
+    on verse, and on non-Latin scripts. The open questions sit above it and around it.</p>
+    <dl class="defs">
+      <dt>A semantic layer, carefully gated</dt>
+      <dd>Can learned signals such as sentence-level cross-language anchoring or phrase commonness sharpen alignment
+      and move confidence, while the engine stays deterministic, auditable and faithful to each witness's words?</dd>
+      <dt>The irreducible residual</dt>
+      <dd>Short passages near their original position can't be told from coincidence by geometry alone. Word and
+      phrase rarity have already been shown <em>not</em> to help. What can?</dd>
+      <dt>Visualisation and trust</dt>
+      <dd>Which views do scholars actually rely on? Does the alignment map let a reader verify an alignment? How
+      should calibrated uncertainty be shown to an expert entitled to overrule the tool?</dd>
+    </dl>
+    <p style="margin-top:18px">Two papers are in preparation, one on the algorithms and their evaluation and one on
+    visualising collation results. The <a href="https://github.com/ancientlives/CollationKit/blob/main/docs/RESEARCH_INTRO.md">research
+    introduction</a> gives the full picture.</p>
   </section>
 
-  <section class="sect" id="documentation" aria-labelledby="docs-h">
+  <section id="docs" aria-labelledby="docs-h">
     <h2 id="docs-h">Documentation</h2>
-    <div class="body">
-      <dl class="opts">
-        <dt><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/RESEARCH_INTRO.md">RESEARCH_INTRO.md</a></dt>
-        <dd>What the project is, what it has achieved, and where the research is heading. Start here.</dd>
-        <dt><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/ONBOARDING.md">ONBOARDING.md</a></dt>
-        <dd>Building and running it, the code map, the working culture, and a suggested first week.</dd>
-        <dt><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/reference/ALGORITHMS.md">ALGORITHMS.md</a></dt>
-        <dd>A language-neutral specification with pseudocode, invariants, determinism rules and a porting checklist.</dd>
-        <dt><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/reference/ALGORITHM_SURVEY.md">ALGORITHM_SURVEY.md</a></dt>
-        <dd>Every algorithm's role, cost and weaknesses, and a ranked catalogue of candidate improvements.</dd>
-        <dt><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/development/CASE_STUDY.md">CASE_STUDY.md</a></dt>
-        <dd>The engine on real editions: Shelley, Whitman, Verne and Pushkin.</dd>
-        <dt><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/development/DEVELOPMENT_LOG.md">DEVELOPMENT_LOG.md</a></dt>
-        <dd>The dated design history, including dead ends and negative results.</dd>
-        <dt><a href="https://github.com/ancientlives/CollationKit/tree/main/docs/conformance">conformance/</a></dt>
-        <dd>The golden corpus and <a href="schema/collation.schema.json">JSON Schema</a>: how a port in another language
-        proves it agrees.</dd>
-        <dt><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/INDEX.md">INDEX.md</a></dt>
-        <dd>The full map of the documentation.</dd>
-      </dl>
-    </div>
+    <ul class="links">
+      <li><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/RESEARCH_INTRO.md">RESEARCH_INTRO</a><span>What the project is and where the research is heading. Start here.</span></li>
+      <li><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/ONBOARDING.md">ONBOARDING</a><span>Building, running, the code map and a suggested first week.</span></li>
+      <li><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/reference/ALGORITHMS.md">ALGORITHMS</a><span>A language-neutral specification with a porting checklist.</span></li>
+      <li><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/reference/ALGORITHM_SURVEY.md">ALGORITHM_SURVEY</a><span>Each algorithm's cost and weaknesses, and candidate improvements.</span></li>
+      <li><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/development/CASE_STUDY.md">CASE_STUDY</a><span>The engine on Shelley, Whitman, Verne and Pushkin.</span></li>
+      <li><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/development/DEVELOPMENT_LOG.md">DEVELOPMENT_LOG</a><span>The design history, including dead ends and negative results.</span></li>
+      <li><a href="https://github.com/ancientlives/CollationKit/tree/main/docs/conformance">conformance/</a><span>Golden corpus and <a href="schema/collation.schema.json">JSON Schema</a> for verifying ports.</span></li>
+      <li><a href="https://github.com/ancientlives/CollationKit/blob/main/docs/INDEX.md">INDEX</a><span>The full map of the documentation.</span></li>
+    </ul>
   </section>
 
-  <section class="sect" aria-labelledby="contributing">
-    <h2 id="contributing">Contributing</h2>
-    <div class="body">
-      <p>Contributions of code, evaluation texts, bug reports and research questions are welcome through pull
-      requests. Read <a href="https://github.com/ancientlives/CollationKit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
-      for the workflow and the engine's invariants: purity, determinism, and never hand-editing a golden. A
-      collation that looks wrong on a real text is useful evaluation data, so please
-      <a href="https://github.com/ancientlives/CollationKit/issues/new/choose">open an issue</a>.</p>
-    </div>
+  <section aria-labelledby="contrib">
+    <h2 id="contrib">Contributing</h2>
+    <p>Code, evaluation texts, bug reports and research questions are all welcome through pull requests. Read
+    <a href="https://github.com/ancientlives/CollationKit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for the workflow
+    and the engine's invariants. A collation that looks wrong on a real text is useful evaluation data, so please
+    <a href="https://github.com/ancientlives/CollationKit/issues/new/choose">open an issue</a>.</p>
   </section>
 
-  <section class="sect" aria-labelledby="citing">
-    <h2 id="citing">Citing</h2>
-    <div class="body">
-<pre>@software{collationkit,
-  title  = {CollationKit: transposition-aware scholarly textual collation},
-  author = {ancientlives},
-  year   = {2026},
-  url    = {https://github.com/ancientlives/CollationKit}
+  <section aria-labelledby="cite">
+    <h2 id="cite">Citing</h2>
+<pre><span class="k">@software</span>{collationkit,
+  title  = {<span class="s">CollationKit: transposition-aware scholarly textual collation</span>},
+  author = {<span class="s">ancientlives</span>},
+  year   = {<span class="n">2026</span>},
+  url    = {<span class="s">https://github.com/ancientlives/CollationKit</span>}
 }</pre>
-      <p class="dim">GitHub's “Cite this repository” button produces APA and BibTeX from
-      <code>CITATION.cff</code>.</p>
-    </div>
+    <p class="muted small">Code is MIT-licensed and documentation CC BY 4.0. The literary texts are public domain,
+    except for one short attributed quotation (see <a href="https://github.com/ancientlives/CollationKit/blob/main/LICENSE-docs.md">LICENSE-docs</a>).
+    Related tools: <a href="https://collatex.net/">CollateX</a>, Juxta, and the <a href="https://tei-c.org/">TEI</a>
+    critical apparatus module (<a href="https://github.com/ancientlives/CollationKit/blob/main/docs/reference/COMPARISON.md">comparison</a>).</p>
   </section>
 
-  <section class="sect" aria-labelledby="license">
-    <h2 id="license">License</h2>
-    <div class="body">
-      <p>Code: <a href="https://github.com/ancientlives/CollationKit/blob/main/LICENSE">MIT</a>. Documentation:
-      <a href="https://github.com/ancientlives/CollationKit/blob/main/LICENSE-docs.md">CC BY 4.0</a>. Literary texts in
-      the corpora are in the public domain.</p>
-    </div>
-  </section>
-
-  <section class="sect" aria-labelledby="seealso">
-    <h2 id="seealso">See also</h2>
-    <div class="body">
-      <p><a href="https://collatex.net/">CollateX</a>, Juxta,
-      and the <a href="https://tei-c.org/">TEI</a> critical apparatus module. How CollationKit relates to them is set out in
-      <a href="https://github.com/ancientlives/CollationKit/blob/main/docs/reference/COMPARISON.md">COMPARISON.md</a>.</p>
-    </div>
-  </section>
-
-  <div class="manfoot" aria-hidden="true">
-    <span>CollationKit 0.1.0</span><span>2026-09-25</span><span>COLLATIONKIT(1)</span>
-  </div>
 </main>
 
-<footer class="site">
+<footer class="site-footer">
   <div class="wrap">
-    A project of <a href="https://ancientlives.github.io/">ancientlives</a> ·
-    <a href="https://github.com/ancientlives/CollationKit">source on GitHub</a>
+    <span>A project of <a href="https://ancientlives.github.io/">ancientlives</a></span>
+    <a href="https://github.com/ancientlives/CollationKit">Source on GitHub</a>
   </div>
 </footer>
 
@@ -300,8 +236,8 @@ open results/collation.html</pre>
     if (!btn) return;
     btn.addEventListener("click", function () {
       var root = document.documentElement;
-      var cur = root.dataset.theme || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
-      var next = cur === "light" ? "dark" : "light";
+      var cur = root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      var next = cur === "dark" ? "light" : "dark";
       root.dataset.theme = next;
       try { localStorage.setItem("al-theme", next); } catch (e) {}
     });
