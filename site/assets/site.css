@@ -216,6 +216,7 @@ ul.links span { color: var(--muted); font-size: 15px; }
 svg.logo { display: block; flex: none; overflow: visible; }
 .logo .ink-s { stroke: var(--logo-ink); } .logo .ink-f { fill: var(--logo-ink); }
 .logo .acc-s { stroke: var(--logo-blue); } .logo .acc-f { fill: var(--logo-blue); }
+.logo .ora-s { stroke: var(--logo-orange); }
 .logo .teal-s { stroke: var(--logo-teal); } .logo .yel-f { fill: var(--logo-yellow); } .logo .ora-f { fill: var(--logo-orange); }
 .brand { display: inline-flex; align-items: center; gap: 9px; }
 .logo-sm { width: 22px; height: 22px; }
