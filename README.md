@@ -9,7 +9,7 @@
 [![Code licence: MIT](https://img.shields.io/badge/code-MIT-blue.svg)](LICENSE)
 [![Docs licence: CC BY 4.0](https://img.shields.io/badge/docs-CC%20BY%204.0-lightgrey.svg)](LICENSE-docs.md)
 
-**A pure-Swift engine for scholarly textual collation.** Give it several versions (*witnesses*) of one work,
+**A Swift based engine for scholarly textual collation.** Give it several versions (*witnesses*) of one work,
 such as a manuscript, proofs, a first edition, a revised edition, or rival translations. It reports every
 **insertion, deletion, substitution and transposition** (moved passage, including one that crosses a page
 boundary), each with a scholarly citation (page, line, word). It is explicitly **not** a line-oriented `diff`.
