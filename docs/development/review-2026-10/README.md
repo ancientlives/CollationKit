@@ -3,7 +3,7 @@
 A review of the whole project (code, tests, documentation, notes and research direction) to define the core of a
 first tagged release, what is not ready yet, and what belongs to later releases.
 
-**Status:** draft for the maintainer's review, 3 October 2026. Nothing here has been acted on yet.
+**Status:** complete, for the maintainer's review, 3 October 2026. Nothing here has been acted on yet.
 
 ## 1. Verdict
 
@@ -13,6 +13,8 @@ first tagged release, what is not ready yet, and what belongs to later releases.
 - **But the engine has correctness bugs that silently produce a wrong apparatus.** Fuzzing found no crashes;
   the failures are quiet. Some differences between witnesses are never reported, and some reported readings are
   wrong. For a tool whose purpose is a citable record of every variant, these are release blockers (section 3).
+- **The scripted CLI is in good shape; the HTML viewer is not yet shippable.** Three small viewer defects break,
+  compromise or freeze it, one of them a script-injection route through witness filenames.
 - **Recommendation:** make the first tagged release a **research preview, v0.3.0**, once the blockers are fixed
   and the documentation is reorganised. Reserve **1.0** for when the Swift API, the JSON schema and the
   conformance contract are deliberately frozen (section 5).
@@ -26,15 +28,15 @@ first tagged release, what is not ready yet, and what belongs to later releases.
 | N-witness merge, peer (`--strategy peer-msa`) | Yes, documented as an approximation of full graph alignment | None |
 | Apparatus, synopsis, located report | Yes | Fix B3 (apparatus omits moves) |
 | JSON interchange (schema v3), JSON Schema, conformance corpus (29 cases), `validate.py` | Yes, the portability contract | Tighten the schema; add the missing cases (section 7) |
-| `collate` CLI: `run`, `list`, interactive menu; text, JSON, CSV and HTML output | Yes | *Pending the CLI review* |
-| Interactive HTML viewer (eight views) | Yes | *Pending the viewer review* |
+| `collate` CLI: `run`, `list`, interactive menu; text, JSON, CSV and HTML output | Yes | Fix B13, B14 |
+| Interactive HTML viewer (eight views) | Yes, with documented limits for full novels and accessibility | Fix B11, B12, B15 |
 | Verne corpus (four works; excerpts and full novels) and its build script | Yes | Refresh the stale figures |
 | Documentation: README, RESEARCH_INTRO, ONBOARDING, CONTRIBUTING, TESTING, ALGORITHMS, PAPER_NOTES, ALGORITHM_SURVEY, COMPARISON, CASE_STUDY, BENCHMARKS, conformance and corpus READMEs | Yes | Updates and reorganisation in section 6 |
 | macOS 13+; Linux | macOS supported; Linux "builds and passes tests, not yet in CI" | Linux CI is a 0.4 item |
 
 ## 3. Release blockers (fix before tagging)
 
-All of these were reproduced with minimal inputs during the review; the four most serious were re-verified
+All of these were reproduced with minimal inputs during the review; the most serious (B1–B5, B9–B12) were re-verified
 independently. Details and reproductions are in the linked files.
 
 | # | Problem | Severity | Where | Evidence |
@@ -49,7 +51,11 @@ independently. Details and reproductions are in the linked files.
 | B8 | **`--diplomatic` reports every punctuation change twice**; a recovered single-word move is reported twice; moved blocks can overlap. | Medium | `Variation.swift`, `Transposition.swift` | engine A6, A7, A9 |
 | B9 | **Two tests assert nothing** (one loops over an empty list and takes 68% of the suite's time; one compares identical texts). | Medium (false confidence) | `MoveRecoveryTests:302`, `PerformanceTests:73` | tests B |
 | B10 | **Version and licence inconsistencies.** `collate --version` says 0.2.0, `CITATION.cff` says 0.1.0, and there are no tags. The Walter licence notice does not cover the published `verne-trilingual` demo, which contains the same 87-word paragraph. | Release hygiene | `CollateCLI.swift`, `CITATION.cff`, `LICENSE-docs.md` | docs-audit A |
-| B11 | *Pending the CLI and viewer review.* | | | cli-viewer |
+| B11 | **Script injection in the viewer.** Witness ids come from filenames and are inserted into `innerHTML` unescaped, so a file named `<img onerror=…>.txt` runs script when the page opens. A file named `%%DATA%%.txt` pastes the data payload into the page. | High (security) | `HTMLExport.swift:1231`, `:2035`, `:2118` | cli-viewer D |
+| B12 | **A witness containing `<!--<script` blanks the whole viewer** with no error, because the embedded data escapes only `</`. Escaping `<`, `>` and `&` fixes it. | High | `HTMLExport.swift:266` | cli-viewer D |
+| B13 | **Duplicate witness ids are accepted silently.** `e1818/text.txt` and `e1831/text.txt` both become `text`, corrupting the reports and viewer tabs (the engine accepts duplicate sigla too). | High | `WitnessLoader.swift`, engine | cli-viewer A, tests |
+| B14 | **The menu runs the collation when you answer "no"** (or stdin ends) at the confirm prompt; a mistyped base is caught only after confirming. An unwritable `--out` is detected only after the whole run. | Medium | `Menu.swift`, `CollateCLI.swift` | cli-viewer A |
+| B15 | **The Changes tab freezes Safari for about a minute on a full novel** (0.7 s in Chromium), caused by `opacity` on about 26,000 spans. | Medium | `HTMLExport.swift:541` | cli-viewer D |
 
 ## 4. Not ready for release 1
 
@@ -61,14 +67,17 @@ Ship these as **experimental** (clearly labelled in `--help`, README and docs), 
 | Prose narrative (`summary.txt`, the viewer's Story view) | Numbers depend on the machine's locale; it claims accidentals were "checked" when they were off; one wording bug. | Fix the false claim; label **experimental** |
 | `--scoring verse` | Works, but validated only on synthetic cases and one Whitman pair. | Keep; document its limits |
 | `--lines-per-page` / `--through-numbered` | Page-break markers become text under these models (engine A11). | Fix, or label **experimental** |
-| `collate-demo` executable | Superseded by `collate`. | **Deprecate** in release 1; remove in 0.4 |
+| `collate-demo` executable | Superseded by `collate`; silently falls back to the built-in sample when given one file; its JSON differs from `collate`'s despite comments saying otherwise. | **Deprecate** in release 1 (point to a `collate` sample command); remove in 0.4 |
+| Viewer on full novels | Usable but slow: a 70 MB page; the text tab takes 3–6 s and the parallel tab 6–9 s; a span click takes about 1 s. The full run takes 19 s and 1.3 GB of memory. | Ship with a documented limit; speed work in 0.4 |
+| Viewer accessibility | Only tab buttons and checkboxes take keyboard focus; no ARIA; variation type shown by colour alone; two greys fail contrast. | Document as a known limitation; keyboard, ARIA and contrast pass in 0.4 |
+| `collate --no-input run …`, `collate run --help` | Documented but fail. | Fix, or remove from the docs |
 | CJK and other unsegmented scripts (B6) | Whole sentences become one token. | Document as **not supported** |
 
 ## 5. Future releases
 
 | Release | Theme | Main content |
 | --- | --- | --- |
-| **0.4** | Robustness and platform | Linux in CI (Swift 5.9 and 6.x); remove `TestCountGuardTests`; schema tightening and the missing conformance cases; `.gitattributes`; performance hot spots (`projectedVariantGraph` O(N²) → linear; O(P²) spine selection → O(P log P); the NW bound); remove `collate-demo` and the dead code |
+| **0.4** | Robustness, platform and viewer | Viewer keyboard/ARIA/contrast pass and full-novel speed (quadratic text slicing, list rebuilt on each tab switch, a smaller payload); Linux in CI (Swift 5.9 and 6.x); remove `TestCountGuardTests`; schema tightening and the missing conformance cases; `.gitattributes`; performance hot spots (`projectedVariantGraph` O(N²) → linear; O(P²) spine selection → O(P log P); the NW bound); remove `collate-demo` and the dead code |
 | **0.5** | Library API | One `CollationOptions` value; validation that `throws`; a smaller public surface (238 public declarations today); `Sendable`; an enum for omitted readings instead of the `"∅"` sentinel; a `diagnostics` field reporting fallbacks and gated moves; original-text readings rather than space-joined tokens; a library guide |
 | **0.6** | Interoperability | TEI P5 apparatus export that keeps located transpositions and confidence (backlog B12; research I1); a CLI guide and viewer guide |
 | **1.0** | Stability | A frozen public API, schema and conformance contract; a written versioning policy |
@@ -156,9 +165,11 @@ Each step is roughly one pull request:
 4. Fix B4 and B5 in the tokeniser and normaliser, with new conformance cases.
 5. Fix B6, B7 and B8.
 6. Fix the tests (B9), remove `TestCountGuardTests`, and fix the test warnings.
-7. Version and licence hygiene (B10); CHANGELOG; SECURITY; input-format guide.
-8. Reorganise the documentation (section 6) and refresh the stale figures and benchmarks.
-9. Regenerate the site demos, tag **v0.3.0**, and publish a GitHub release.
+7. Fix the viewer: escaping (B11, B12) with injection tests, and the Safari freeze (B15).
+8. Fix the CLI: reject duplicate witness ids (B13); the menu confirm, base check and early `--out` check (B14).
+9. Version and licence hygiene (B10); CHANGELOG; SECURITY; input-format guide.
+10. Reorganise the documentation (section 6) and refresh the stale figures and benchmarks.
+11. Regenerate the site demos, tag **v0.3.0**, and publish a GitHub release.
 
 ## Files
 
@@ -166,7 +177,7 @@ Each step is roughly one pull request:
 | --- | --- |
 | [`baseline.md`](baseline.md) | The measured state of the repository at review time |
 | [`engine.md`](engine.md) | Engine code review: 18 confirmed bugs, dead code, spec mismatches, API for 1.0, performance |
-| `cli-viewer.md` | CLI and HTML viewer review (*pending*) |
+| [`cli-viewer.md`](cli-viewer.md) | CLI and HTML viewer review: defects, full-novel measurements, accessibility, release verdict |
 | [`tests.md`](tests.md) | Test suite, conformance corpus and CI review |
 | [`docs-audit.md`](docs-audit.md) | Documentation audit (keep, update, archive, remove), missing documents, backlog triage |
 | [`research.md`](research.md) | Research agenda for the next phase, with a verified bibliography |
@@ -175,4 +186,4 @@ Each step is roughly one pull request:
 
 1. The baseline was measured directly: clean build, warnings, tests, schema validation and sizes.
 2. Five independent reviews ran in parallel, each read-only, each reproducing suspected bugs with minimal inputs.
-3. The most serious findings (B1–B5, B9, B10) were re-verified independently before inclusion here.
+3. The most serious findings (B1–B5, B9–B12) were re-verified independently before inclusion here.
