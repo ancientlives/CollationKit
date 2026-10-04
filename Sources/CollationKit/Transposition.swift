@@ -94,9 +94,24 @@ public enum Transposition {
         // tokens fall back into ordinary region alignment (where a coincidental phrase is correctly a
         // substitution, not a move). See DEVELOPMENT_LOG 2026-07-08.
         let stablePinsByA = stableIdx.map { byA[$0] }
+
+        // Tokens belonging to the stable spine — in-order backbone, never part of any move. Computed before the
+        // moved pins are selected because a moved pin may OVERLAP the spine in B: anchors are de-overlapped in A
+        // only (`uniqueCommonAnchors`), so an off-spine anchor can share B tokens with a spine anchor. Matching
+        // those tokens twice silently hides real differences (release 1 review, B1), so moved pins are trimmed
+        // to the tokens the spine does not own (`trimmedOffSpine`).
+        var onSpine = [Bool](repeating: false, count: max(a.count, b.count))
+        var onSpineB = [Bool](repeating: false, count: b.count)
+        for pin in stablePinsByA {
+            for k in 0..<pin.length {
+                if pin.aStart + k < onSpine.count { onSpine[pin.aStart + k] = true }
+                if pin.bStart + k < onSpineB.count { onSpineB[pin.bStart + k] = true }
+            }
+        }
+
         let movedPins = byA.enumerated()
             .filter { !stableSet.contains($0.offset) }
-            .map { $0.element }
+            .compactMap { trimmedOffSpine($0.element, onSpineA: onSpine, onSpineB: onSpineB) }
             .filter { displacementIsPlausible($0, spine: stablePinsByA, aCount: a.count, bCount: b.count) }
         // Coalesce moved anchors that are contiguous (or adjacent) in BOTH witnesses into one block, so a
         // moved sentence reads as a single transposition rather than several length-n fragments. Anchors are
@@ -112,22 +127,14 @@ public enum Transposition {
                 last.aRange = last.aRange.lowerBound..<max(last.aRange.upperBound, aR.upperBound)
                 last.bRange = last.bRange.lowerBound..<max(last.bRange.upperBound, bR.upperBound)
                 transpositions[transpositions.count - 1] = last
+            } else if transpositions.contains(where: { $0.bRange.overlaps(bR) }) {
+                // A separate (non-adjacent) moved pin whose B span is already claimed by an earlier move: taking it
+                // would match those B tokens twice. Leave its tokens to region alignment instead.
+                continue
             } else {
                 transpositions.append((aR, bR))
             }
         }
-        // Tokens belonging to the stable spine — a block must never grow into these (they're the in-order
-        // backbone, not part of any move).
-        var onSpine = [Bool](repeating: false, count: max(a.count, b.count))
-        var onSpineB = [Bool](repeating: false, count: b.count)
-        for idx in stableIdx {
-            let pin = byA[idx]
-            for k in 0..<pin.length {
-                if pin.aStart + k < onSpine.count { onSpine[pin.aStart + k] = true }
-                if pin.bStart + k < onSpineB.count { onSpineB[pin.bStart + k] = true }
-            }
-        }
-
         // Grow each moved block to match the real passage boundary. Two growth modes:
         //   1. Absorb identical tokens immediately adjacent (a repeated word like "…one by one").
         //   2. BRIDGE a bounded run of MISMATCHED tokens (recursive anchoring) when identical content resumes
@@ -135,11 +142,20 @@ public enum Transposition {
         //      *tired*" → "*weary*") into the transposition, instead of leaving the head as delete+insert
         //      churn outside it. The bridged tokens become internal edits, recovered by `innerAlignment`.
         let bridgeGap = 4   // max mismatched tokens to bridge on one side (keeps unrelated text out)
+        // A block may grow only into tokens that neither the spine nor ANOTHER moved block owns; otherwise two
+        // blocks grow into each other and the shared tokens are reported in two transpositions (review B1/A7).
+        // `blockedA`/`blockedB` start as the spine plus every block's initial span, and each block's grown span
+        // is added as soon as it is final.
+        var blockedA = onSpine, blockedB = onSpineB
+        for t in transpositions {
+            for k in t.aRange { blockedA[k] = true }
+            for k in t.bRange { blockedB[k] = true }
+        }
         for i in transpositions.indices {
             var (aR, bR) = transpositions[i]
 
             func canTake(_ ai: Int, _ bi: Int) -> Bool {
-                ai >= 0 && bi >= 0 && ai < a.count && bi < b.count && !onSpine[ai] && !onSpineB[bi]
+                ai >= 0 && bi >= 0 && ai < a.count && bi < b.count && !blockedA[ai] && !blockedB[bi]
             }
             // Extend backward: identical step, else bridge up to `bridgeGap` mismatches to a resync point.
             var changed = true
@@ -150,7 +166,7 @@ public enum Transposition {
                     if a[la] == b[lb] {                                  // mode 1: identical
                         aR = la..<aR.upperBound; bR = lb..<bR.upperBound; changed = true
                     } else if let (na, nb) = resync(a, b, beforeA: la, beforeB: lb,
-                                                    gap: bridgeGap, onSpine: onSpine, onSpineB: onSpineB) {
+                                                    gap: bridgeGap, onSpine: blockedA, onSpineB: blockedB) {
                         aR = na..<aR.upperBound; bR = nb..<bR.upperBound; changed = true   // mode 2: bridge
                     }
                 }
@@ -164,12 +180,14 @@ public enum Transposition {
                     if a[ua] == b[ub] {
                         aR = aR.lowerBound..<(ua + 1); bR = bR.lowerBound..<(ub + 1); changed = true
                     } else if let (na, nb) = resyncForward(a, b, fromA: ua, fromB: ub,
-                                                           gap: bridgeGap, onSpine: onSpine, onSpineB: onSpineB) {
+                                                           gap: bridgeGap, onSpine: blockedA, onSpineB: blockedB) {
                         aR = aR.lowerBound..<na; bR = bR.lowerBound..<nb; changed = true
                     }
                 }
             }
             transpositions[i] = (aR, bR)
+            for k in aR { blockedA[k] = true }
+            for k in bR { blockedB[k] = true }
         }
 
         // DISTINCTIVENESS GATE (post-growth): now that each block has absorbed its surrounding identical run, we
@@ -320,12 +338,9 @@ public enum Transposition {
     private static func appendRegion(_ segments: inout [SegmentKind], a: [String], b: [String],
                                      aFrom: Int, aTo: Int, bFrom: Int, bTo: Int,
                                      consumedA: [Bool], consumedB: [Bool], scores: AlignmentScores) {
-        // Take BOUNDS, not pre-built ranges, and clamp here — because two spine anchors can overlap in B (B
-        // positions aren't monotonic in A-order; anchors are de-overlapped in A only), so `bFrom` can exceed
-        // `bTo`. Constructing `bFrom..<bTo` at the call site would trap (`Range requires lowerBound <=
-        // upperBound`) BEFORE this function runs; building the range here, clamped to empty, avoids that. An
-        // overlap simply means there's no gap region between the anchors. (Found via the Verne full-novel
-        // corpus: large, repetitive real translations produce B-overlapping unique anchors.)
+        // Take BOUNDS, not pre-built ranges, and clamp here. Since the B1 fix (2026-10) the spine is non-overlapping
+        // in B, so `bFrom <= bTo` always holds; the clamp is kept as a defensive guard against the inverted-Range
+        // trap first found on the Verne full novels (`Range requires lowerBound <= upperBound`).
         let aSpan = min(aFrom, aTo)..<aTo
         let bSpan = min(bFrom, bTo)..<bTo
         var aKeys: [String] = [], aIdx: [Int] = []
@@ -640,6 +655,22 @@ public enum Transposition {
         return fallback
     }
 
+    /// Trim an off-spine (moved) anchor to the tokens the spine does not own in EITHER witness. Spine tokens can only
+    /// sit at the pin's ends (spine anchors are contiguous runs and cannot nest inside a shorter moved pin's span in
+    /// both witnesses at once), so trimming the ends suffices; if anything inside is still on the spine, or fewer
+    /// than `minAnchorLength` tokens remain, the pin is dropped and its tokens fall back to region alignment.
+    static func trimmedOffSpine(_ pin: AnchorPin, onSpineA: [Bool], onSpineB: [Bool]) -> AnchorPin? {
+        func owned(_ k: Int) -> Bool {
+            let ai = pin.aStart + k, bi = pin.bStart + k
+            return (ai < onSpineA.count && onSpineA[ai]) || (bi < onSpineB.count && onSpineB[bi])
+        }
+        var lo = 0, hi = pin.length
+        while lo < hi && owned(lo) { lo += 1 }
+        while hi > lo && owned(hi - 1) { hi -= 1 }
+        guard hi - lo >= minAnchorLength, !(lo..<hi).contains(where: owned) else { return nil }
+        return AnchorPin(aStart: pin.aStart + lo, bStart: pin.bStart + lo, length: hi - lo)
+    }
+
     /// n-grams (joined comparable keys) that appear EXACTLY ONCE in `a` AND exactly once in `b`. These are
     /// unambiguous shared landmarks. Returns one `AnchorPin` per such n-gram.
     static func uniqueCommonAnchors(_ a: [String], _ b: [String], n: Int) -> [AnchorPin] {
@@ -654,8 +685,8 @@ public enum Transposition {
         // Drop overlapping anchors (keep the earliest in A) so anchor regions don't intersect. NOTE: this
         // dedupes in A only — B positions are intentionally NOT monotonic here (moved blocks run backwards in
         // B), so we must not filter on B or we'd discard legitimate moved-block anchors. Two kept anchors can
-        // therefore still overlap in B; the spine builder tolerates that and the region spans are clamped
-        // defensively in `appendRegion` so an overlap yields an empty region, never an inverted range.
+        // therefore still overlap in B; the spine chain excludes B-overlap (`maxWeightIncreasingByB`) and moved
+        // pins are trimmed against the spine (`trimmedOffSpine`), so no B token is ever matched twice.
         let sorted = pins.sorted { $0.aStart < $1.aStart }
         var result: [AnchorPin] = []
         var lastEnd = -1
@@ -702,7 +733,7 @@ public enum Transposition {
         return seq.reversed()
     }
 
-    /// Maximum-WEIGHT strictly-increasing-by-B subsequence (O(n²) DP). Generalizes `longestIncreasingByB`:
+    /// Maximum-WEIGHT strictly-increasing, B-non-overlapping subsequence (O(n²) DP). Generalizes `longestIncreasingByB`:
     /// each anchor contributes `weights[i]` rather than 1, so a page-aware weighting can prefer a spine of
     /// page-stable anchors over an equally-long page-crossing one. With all weights equal this returns a
     /// maximum-cardinality spine (same set the plain LIS would yield, up to ties).
@@ -713,7 +744,10 @@ public enum Transposition {
         var best = weights                          // best[i] = max weight of a chain ending at i
         var prev = [Int](repeating: -1, count: nP)
         for i in 0..<nP {
-            for j in 0..<i where bs[j] < bs[i] {
+            // Chain j → i only when j's B span ENDS before i's begins: strictly increasing AND non-overlapping in B.
+            // (A-overlap is already excluded by `uniqueCommonAnchors`.) Two spine anchors sharing B tokens would
+            // emit the shared tokens as matches twice and silently drop the base tokens they displace (B1).
+            for j in 0..<i where bs[j] + pins[j].length <= bs[i] {
                 if best[j] + weights[i] > best[i] {
                     best[i] = best[j] + weights[i]
                     prev[i] = j

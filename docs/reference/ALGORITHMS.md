@@ -180,10 +180,11 @@ align(a, b, aPages, bPages, params):
 
     byA = anchors sorted by aStart
     weights[k] = (aPages[byA[k].aStart] == bPages[byA[k].bStart]) ? 2 : 1   // page-aware (§5.3)
-    spine = maxWeightIncreasingByB(byA, weights)             // §5.2 — the in-order backbone
-    moved = byA not in spine
+    spine = maxWeightIncreasingByB(byA, weights)             // §5.2 — the in-order backbone (B-non-overlapping)
+    moved = [ trimmedOffSpine(p, spine) for p in byA not in spine ]   // §5.2 — drop spine-owned ends; may drop p
 
-    transpositions = coalesce(moved)                         // merge anchors contiguous in BOTH witnesses
+    transpositions = coalesce(moved)                         // merge anchors contiguous in BOTH witnesses;
+                                                             // skip a non-adjacent pin whose B span is already claimed
     transpositions = grow(transpositions, a, b, spine)       // §5.4 — identical-neighbour + bounded bridge
     mark consumed = all tokens in transposition ranges (both sides)
 
@@ -225,12 +226,23 @@ adaptiveAnchors(a, b, startN):                   // mitigate low lexical diversi
 ```
 maxWeightIncreasingByB(pins, weights):           // O(k²) DP; pins already sorted by aStart
     best[i] = weights[i];  prev[i] = -1
-    for i: for j < i with pins[j].bStart < pins[i].bStart:
+    for i: for j < i with pins[j].bStart + pins[j].length <= pins[i].bStart:   // increasing AND non-overlapping in B
         if best[j]+weights[i] > best[i]: best[i]=best[j]+weights[i]; prev[i]=j
     return chain ending at argmax(best), reconstructed via prev   // ties → earliest end (determinism)
+
+trimmedOffSpine(pin, spine):                     // a moved pin may share B tokens with the spine (pins are
+    lo, hi = 0, pin.length                       // de-overlapped in A only, §5.1)
+    while lo < hi and token lo of pin is on the spine in a OR b: lo += 1
+    while hi > lo and token hi-1 of pin is on the spine in a OR b: hi -= 1
+    if hi - lo < minAnchorLength or any token in lo..<hi is on the spine: drop the pin
+    else return (pin.aStart+lo, pin.bStart+lo, hi-lo)
 ```
 
-With equal weights this is a longest-increasing-subsequence; weighting (§5.3) breaks ties.
+With equal weights this is a longest-increasing-subsequence; weighting (§5.3) breaks ties. **Invariant (since the
+2026-10 fix for review blocker B1): no token of either witness is used twice** — not by two spine anchors, not by a
+move and the spine, not by two moves. Before the fix, spine anchors were only required to *start* in increasing B
+order, so two could share B tokens; the shared tokens were matched twice and the base tokens they displaced were
+silently never reported.
 
 ### 5.3 Page-aware tie-break
 Weighting page-stable anchors `2` vs `1` makes the spine prefer them, so the block left *off* the spine — the
@@ -238,7 +250,8 @@ reported move — is the one that **changed page**. Resolves the symmetry of a t
 absent, all weights are 1 ⇒ plain LIS.)
 
 ### 5.4 Block growth (identical neighbours + bounded bridging)
-Grow each moved block outward on both ends, never onto a spine token:
+Grow each moved block outward on both ends, never onto a spine token **and never onto a token another moved block
+owns** (blocks are grown in A order; each block's final span is claimed before the next grows):
 
 ```
 mode 1 (identical): if a[edge] == b[edge]: absorb it
@@ -246,7 +259,7 @@ mode 2 (bridge):    else find a resync within `bridgeGap` tokens and absorb the 
                     (this pulls an edit INSIDE a moved sentence into the block — recursive anchoring)
 
 resync(a, b, beforeA, beforeB, gap):             // backward; forward is symmetric
-    search ai in [beforeA-gap, beforeA], bi in [beforeB-gap, beforeB], not on spine
+    search ai in [beforeA-gap, beforeA], bi in [beforeB-gap, beforeB], not on spine or owned by another block
     among identical pairs a[ai]==b[bi], choose min penalty = stepsA + stepsB + |stepsA - stepsB|
     return (ai, bi) or none                       // prefers near, balanced resyncs ⇒ bridge edits, not unrelated text
 ```
@@ -606,7 +619,7 @@ against the reference implementation on shared witnesses.
 
 1. NW traceback preference: **diagonal > up(delete) > left(insert)**.
 2. Anchor overlap pruning: keep the **earliest in A**.
-3. Max-weight subsequence ties: end at the **earliest** maximal chain.
+3. Max-weight subsequence ties: end at the **earliest** maximal chain. Chain only B-non-overlapping pins (§5.2).
 4. `resync`: minimise `stepsA + stepsB + |stepsA − stepsB|`; ties → nearest.
 5. All emitted collections that came from a set/map (graph readings, sigla) are **sorted** before output.
 6. Displaced-reading recovery (§6.1): process keys in **sorted** order; merge only keys unique-among-unmatched
