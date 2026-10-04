@@ -28,6 +28,7 @@ The suites:
 
 | suite | covers |
 |-------|--------|
+| `TokenizerUnicodeTests` | characters above U+FFFF (blocker B4), and quotes, apostrophes and dashes as punctuation rather than word characters (blocker B5), in substantive and diplomatic modes |
 | `TokenizerTests` | word/punctuation segmentation, normalisation (substantive vs accidental), GB/US folding, page/line/word coordinates |
 | `AlignmentTests` | Needleman–Wunsch operations; anchor detection, LIS, transposition segmentation |
 | `CollationTests` | pairwise classification: typed insertion/deletion/substitution, a reworded clause as one substitution, accidental suppression |

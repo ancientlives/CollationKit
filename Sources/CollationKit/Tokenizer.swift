@@ -19,6 +19,10 @@ public struct Normalizer {
     /// study (Frankenstein 1818→1831 `dun white`→`dun-white`; BACKLOG B6). On for substantive collation;
     /// **off for `.diplomatic`**, which keeps the compound intact for an exact comparison.
     public var splitHyphenatedWords: Bool
+    /// Fold typographic apostrophes (`’` U+2019, `‘` U+2018, `ʼ` U+02BC) to the ASCII `'` inside words, so
+    /// `don't` and `don’t` are the same reading. A typesetting difference, not a change of wording (release 1
+    /// review, B5). On for substantive collation; **off for `.diplomatic`**, which records it.
+    public var foldTypographicApostrophes: Bool
     /// Spelling equivalences (e.g. "colour" → "color", "honour" → "honor") to treat GB/US spelling variants
     /// as the SAME reading rather than substitutions. Applied to the lowercased word. Keys are normalized.
     public var spellingEquivalents: [String: String]
@@ -28,23 +32,27 @@ public struct Normalizer {
                 dropPunctuation: Bool = true,
                 foldWhitespace: Bool = true,
                 splitHyphenatedWords: Bool = true,
-                spellingEquivalents: [String: String] = [:]) {
+                spellingEquivalents: [String: String] = [:],
+                foldTypographicApostrophes: Bool = true) {
         self.lowercase = lowercase
         self.stripAccents = stripAccents
         self.dropPunctuation = dropPunctuation
         self.foldWhitespace = foldWhitespace
         self.splitHyphenatedWords = splitHyphenatedWords
         self.spellingEquivalents = spellingEquivalents
+        self.foldTypographicApostrophes = foldTypographicApostrophes
     }
 
     /// Records every difference, including accidentals: nothing folded except whitespace. Use for a
     /// diplomatic (exact) comparison. Hyphenated compounds are kept intact (no splitting).
     public static let diplomatic = Normalizer(lowercase: false, stripAccents: false,
                                               dropPunctuation: false, foldWhitespace: true,
-                                              splitHyphenatedWords: false)
+                                              splitHyphenatedWords: false, foldTypographicApostrophes: false)
 
     /// The default scholarly normalization: case/accents/punctuation folded so only substantives remain.
     public static let substantive = Normalizer()
+
+    static let typographicApostrophes: Set<UnicodeScalar> = ["\u{2019}", "\u{2018}", "\u{02BC}"]
 
     /// A small GB/US spelling table so the two 1st editions don't read as wall-to-wall substitutions. Not
     /// exhaustive — a prototype seed; a host-app integration would ship a fuller list / user dictionary.
@@ -59,6 +67,9 @@ public struct Normalizer {
 
     func normalize(word: String) -> String {
         var s = word
+        if foldTypographicApostrophes, s.unicodeScalars.contains(where: { Self.typographicApostrophes.contains($0) }) {
+            s = String(String.UnicodeScalarView(s.unicodeScalars.map { Self.typographicApostrophes.contains($0) ? "'" : $0 }))
+        }
         if lowercase { s = s.lowercased() }
         if stripAccents {
             s = s.folding(options: .diacriticInsensitive, locale: Locale(identifier: "en_US"))
@@ -157,8 +168,10 @@ public enum Tokenizer {
                 nextExplicitIdx += 1
                 continue
             }
-            let ch = ns.character(at: i)
-            let scalar = UnicodeScalar(ch)
+            // Decode the scalar at `i`, including a surrogate pair (characters above U+FFFF: rare CJK, historic
+            // scripts, mathematical letters, emoji). Building it from one UTF-16 unit returned nil for each half, so
+            // such characters were silently dropped (release 1 review, B4).
+            let (scalar, width) = scalarAt(ns, i)
 
             // Newline: end the current line. The NEXT text-bearing line will advance `pageLine` lazily (so
             // blank lines never consume a line number). Paragraph breaks (blank line) bump `paragraph`.
@@ -171,18 +184,21 @@ public enum Tokenizer {
                 continue
             }
             if scalar != nil && CharacterSet.whitespaces.contains(scalar!) {
-                i += 1
+                i += width
                 continue
             }
 
-            // Word run: letters/digits/intra-word apostrophes & hyphens.
-            if scalar != nil && isWordScalar(scalar!) {
+            // Word run: starts with a letter or digit; may contain intra-word apostrophes and hyphens. A trailing
+            // apostrophe or hyphen run is trimmed back off (it is a closing quote or a dash, not part of the word),
+            // so `'Hello,'` tokenises as quote + `Hello` + punctuation, the same words as `"Hello,"` (B5).
+            if let s = scalar, isWordStart(s) {
                 let start = i
                 while i < length {
-                    let c = UnicodeScalar(ns.character(at: i))
+                    let (c, w) = scalarAt(ns, i)
                     guard let c, isWordScalar(c) else { break }
-                    i += 1
+                    i += w
                 }
+                while i > start + 1, let c = UnicodeScalar(ns.character(at: i - 1)), isWordJoiner(c) { i -= 1 }
                 // `.linesPerPage`: a new text line that would overflow the page starts a new page first.
                 if !lineHasText, let lpp = linesPerPage, linesThisPage >= lpp { startNewPage() }
                 if !lineHasText { pageLine += 1; lineHasText = true; linesThisPage += 1 }
@@ -192,7 +208,7 @@ public enum Tokenizer {
                 for tok in wordUnits(ns, start: start, end: i, split: normalizer.splitHyphenatedWords) {
                     let surface = ns.substring(with: NSRange(location: tok.lowerBound,
                                                              length: tok.upperBound - tok.lowerBound))
-                    let isHyphen = surface == "-"
+                    let isHyphen = surface.allSatisfy { $0 == "-" }   // a hyphen RUN (`--`) is a dash, i.e. punctuation
                     let norm = isHyphen ? (normalizer.dropPunctuation ? "" : surface)
                                         : normalizer.normalize(word: surface)
                     tokens.append(Token(surface: surface, normalized: norm,
@@ -205,12 +221,13 @@ public enum Tokenizer {
             }
 
             // Punctuation / symbol run: a single char each (so "..." → three units is avoided; group runs).
+            // An apostrophe or hyphen that does not continue a word (a leading quote, a dash) belongs here too.
             let start = i
             while i < length {
-                let c = UnicodeScalar(ns.character(at: i))
+                let (c, w) = scalarAt(ns, i)
                 guard let c else { break }
-                if isWordScalar(c) || CharacterSet.whitespacesAndNewlines.contains(c) { break }
-                i += 1
+                if isWordStart(c) || CharacterSet.whitespacesAndNewlines.contains(c) { break }
+                i += w
             }
             if i > start {
                 if !lineHasText, let lpp = linesPerPage, linesThisPage >= lpp { startNewPage() }
@@ -223,16 +240,35 @@ public enum Tokenizer {
                                     page: page, wordIndex: lineWord))
                 lineWord += 1
             } else {
-                i += 1   // safety: never stall
+                i += max(1, width)   // safety: never stall (e.g. a lone surrogate)
             }
         }
         return tokens
     }
 
-    // A scalar that belongs inside a word: letters, digits, marks, and intra-word ' and - .
-    private static func isWordScalar(_ s: UnicodeScalar) -> Bool {
-        if CharacterSet.alphanumerics.contains(s) { return true }
-        return s == "'" || s == "\u{2019}" /* ’ */ || s == "-"
+    // A scalar that can START a word: a letter, digit or mark.
+    private static func isWordStart(_ s: UnicodeScalar) -> Bool { CharacterSet.alphanumerics.contains(s) }
+
+    // An apostrophe or hyphen: part of a word only BETWEEN word characters (`don't`, `dun-white`).
+    private static func isWordJoiner(_ s: UnicodeScalar) -> Bool {
+        s == "'" || s == "\u{2019}" /* ’ */ || s == "\u{2018}" /* ‘ */ || s == "\u{02BC}" /* ʼ */ || s == "-"
+    }
+
+    // A scalar that belongs inside a word: letters, digits, marks, and intra-word apostrophes and hyphens.
+    private static func isWordScalar(_ s: UnicodeScalar) -> Bool { isWordStart(s) || isWordJoiner(s) }
+
+    /// The Unicode scalar starting at UTF-16 offset `i` and its width in UTF-16 units: 2 for a valid surrogate
+    /// pair, else 1. Returns nil for a lone surrogate.
+    private static func scalarAt(_ ns: NSString, _ i: Int) -> (UnicodeScalar?, Int) {
+        let u = ns.character(at: i)
+        if UTF16.isLeadSurrogate(u), i + 1 < ns.length {
+            let v = ns.character(at: i + 1)
+            if UTF16.isTrailSurrogate(v) {
+                let value = 0x10000 + ((UInt32(u) - 0xD800) << 10) + (UInt32(v) - 0xDC00)
+                return (UnicodeScalar(value), 2)
+            }
+        }
+        return (UnicodeScalar(u), 1)
     }
 
     /// Break a word run `[start, end)` into emit units. With `split` off (or no interior hyphen) this is the

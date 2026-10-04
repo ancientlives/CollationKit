@@ -68,10 +68,14 @@ final class TokenizerTests: XCTestCase {
         let r = Collation.collate(base: Witness(id: "A", text: "the dun white sockets"),
                                   compared: Witness(id: "B", text: "the dun-white sockets"))
         XCTAssertTrue(r.variations.isEmpty, "hyphenation is an accidental; the two should collate as identical")
-        // A leading/trailing hyphen (a dash abutting the word) must NOT split — only interior hyphens do, so
-        // the run stays a single word token.
-        let lead = Tokenizer.tokenize("-dash", with: .substantive).filter { $0.kind == .word }
-        XCTAssertEqual(lead.map { $0.surface }, ["-dash"])
+        // A leading/trailing hyphen is a dash abutting the word, not part of it (release 1 review, B5): it is
+        // punctuation, so `-dash` and `dash-` read the same word as `dash`. (Before 2026-10 the run stayed one word
+        // token `-dash`, which made it a substantive variant of `dash`.)
+        for text in ["-dash", "dash-", "--dash--"] {
+            let toks = Tokenizer.tokenize(text, with: .substantive)
+            XCTAssertEqual(toks.filter { $0.kind == .word }.map { $0.surface }, ["dash"], text)
+            XCTAssertTrue(toks.filter { $0.kind == .punctuation }.allSatisfy { $0.surface.allSatisfy { $0 == "-" } }, text)
+        }
     }
 
     func testHyphenationIsOrthogonalToWordReordering() {
