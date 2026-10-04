@@ -2393,3 +2393,27 @@ disappear. One existing test pinned the old behaviour (`-dash` as one word token
 New `TokenizerUnicodeTests` fail before the fix (13 assertion failures) and pass after. ALGORITHMS §2 updated.
 
 **State:** 241 tests green. No schema or golden change.
+
+---
+
+## 2026-10-03f — `implementation` + `test`: no_collate regions stay closed (release 1 review, blocker B6)
+
+Three defects let excluded matter leak into the collation (`Tokenizer.noCollateRanges` and the tokenise loop):
+
+1. **The two-comment form never worked.** The source documented `<!-- no_collate --> … <!-- /no_collate -->`, but the
+   close pattern accepted any bare `-->`, so the opener's own `-->` closed the region at once.
+2. **A nested comment ended a one-comment region.** A `<!-- page break -->` inside multi-page front matter supplied the
+   first `-->`, so the rest of the front matter was collated and the body's page numbers shifted.
+3. **A `---` or form-feed page break inside a region rewound the scanner.** After the jump past the region, the
+   page-break check still fired for the inner marker and reset the position to that marker's end, inside the region.
+
+**Fix.** A self-closed opener waits for the explicit end tag; the one-comment form ends at the first `-->` that does
+not close a comment nested inside it; page-break markers inside a region are ignored (they count no page); and a
+marker the scanner has already passed is never revisited. ALGORITHMS §2 documents both forms.
+
+**Evidence.** New `NoCollateRegionTests` (the three reproductions, page counting, the explicit end tag and unclosed
+regions, and the invariant that no token lies inside a region) fail before the fix with 19 assertion failures and
+pass after. The full-novel results are byte-identical (their regions use the plain one-comment form); no golden
+changed.
+
+**State:** 246 tests green.
