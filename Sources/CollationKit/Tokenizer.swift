@@ -113,22 +113,26 @@ public enum Tokenizer {
 
         // Page boundaries depend on the pagination model. Markers contribute spans we both break on AND skip
         // the text of; lines-per-page / explicit offsets break WITHOUT consuming text.
+        // Editorial exclusion: spans wrapped in a no_collate region emit no tokens at all (front matter, translator
+        // notes, etc.). Ascending, non-overlapping; walked in step with `i`.
+        let noCollate = noCollateRanges(in: text)
+        var nextNoCollateIdx = 0
+
         let markerBreaks: [Range<Int>]
         let explicitStarts: [Int]
         let linesPerPage: Int?
         switch pagination.pages {
-        case .markers:            markerBreaks = pageBreakRanges(in: text); explicitStarts = []; linesPerPage = nil
+        case .markers:
+            // A page-break marker INSIDE an excluded region is part of the excluded matter: it is ignored, so it
+            // neither counts a page nor (as it once did) moves the scanner back into the region (review B6).
+            markerBreaks = pageBreakRanges(in: text).filter { m in !noCollate.contains { $0.overlaps(m) } }
+            explicitStarts = []; linesPerPage = nil
         case .linesPerPage(let n): markerBreaks = []; explicitStarts = []; linesPerPage = max(1, n)
         case .explicit(let offs): markerBreaks = []; explicitStarts = offs.sorted(); linesPerPage = nil
         }
         var nextBreakIdx = 0
         var nextExplicitIdx = 0
         let resetLinesPerPage = (pagination.lineNumbering == .perPage)
-
-        // Editorial exclusion: spans wrapped in `<!-- no_collate --> … <!-- /no_collate -->` emit no tokens at
-        // all (front matter, translator notes, etc.). Ascending, non-overlapping; walked in step with `i`.
-        let noCollate = noCollateRanges(in: text)
-        var nextNoCollateIdx = 0
 
         // Begin a new page: bump page; reset per-page line numbering when the policy says so.
         func startNewPage() {
@@ -155,7 +159,10 @@ public enum Tokenizer {
                 if lineHasText { lineWord = 0; lineHasText = false }
                 continue
             }
-            // Marker-driven page break: at the START of a marker, start a new page and SKIP the marker text.
+            // Marker-driven page break: at the START of a marker, start a new page and SKIP the marker text. A marker
+            // the scanner has already passed (it jumped a region) is consumed without effect, never revisited.
+            while nextBreakIdx < markerBreaks.count && markerBreaks[nextBreakIdx].upperBound <= i
+                    && markerBreaks[nextBreakIdx].lowerBound < i { nextBreakIdx += 1 }
             if nextBreakIdx < markerBreaks.count && i >= markerBreaks[nextBreakIdx].lowerBound {
                 startNewPage()
                 i = markerBreaks[nextBreakIdx].upperBound
@@ -338,38 +345,75 @@ public enum Tokenizer {
     // front matter in two witnesses from being force-aligned into hundreds of junk "substitutions" and, worse,
     // giving the aligner unanchored common words to mis-match across the whole novel.
     //
-    // Syntax (case-insensitive, whitespace-tolerant). The natural, minimal form is a single HTML comment that
-    // brackets the block — the excluded matter lives *inside* one comment:
+    // Syntax (case-insensitive, whitespace-tolerant). Two forms:
     //
-    //     <!-- no_collate
-    //     …front matter, translator note, list of illustrations…
-    //     -->
+    //  • ONE COMMENT — the excluded matter lives inside the comment:
     //
-    // i.e. OPEN = `<!-- no_collate` (or `no-collate`), CLOSE = the comment's own `-->` (a bare `-->`, typically
-    // on its own line). An explicit `<!-- /no_collate -->` is also accepted as a close for authors who prefer a
-    // named end tag. An unclosed open runs to end-of-text (the common "everything after here is back matter").
-    // The open deliberately does NOT require a `-->` on its own line, so the one-comment form above works.
+    //        <!-- no_collate
+    //        …front matter, translator note, list of illustrations…
+    //        -->
+    //
+    //    The region ends at the comment's own `-->`. Comments NESTED inside it (a `<!-- page break -->` in
+    //    multi-page front matter) are skipped: their `-->` closes them, not the region.
+    //
+    //  • TWO COMMENTS — a self-closed opener and a named end tag, with the matter between them as ordinary text:
+    //
+    //        <!-- no_collate -->
+    //        …front matter…
+    //        <!-- /no_collate -->
+    //
+    // In either form an explicit `<!-- /no_collate -->` ends the region, and an unclosed region runs to end of
+    // text (the common "everything after here is back matter"). Before 2026-10 the close was simply the first
+    // `-->` after the opener, so the two-comment form closed at its own opener and an inner page-break comment
+    // ended the region early, leaking the rest of the excluded matter into the collation (release 1 review, B6).
     static let noCollateOpenPattern = #"<!--\s*no[_-]collate\b"#
-    static let noCollateClosePattern = #"(<!--\s*/\s*no[_-]collate\s*-->)|(-->)"#
+    static let noCollateSelfClosePattern = #"^\s*-->"#
+    static let noCollateMarkupPattern = #"(<!--\s*/\s*no[_-]collate\s*-->)|(<!--)|(-->)"#
 
     /// Character ranges (marker-inclusive) that must be excluded from tokenisation, in ascending order. Each
     /// runs from a `no_collate` open marker to its matching close (or end-of-text if unclosed).
     static func noCollateRanges(in text: String) -> [Range<Int>] {
         let ns = text as NSString
         guard let openRE = try? NSRegularExpression(pattern: noCollateOpenPattern, options: [.caseInsensitive]),
-              let closeRE = try? NSRegularExpression(pattern: noCollateClosePattern,
-                                                     options: [.caseInsensitive, .anchorsMatchLines])
+              let selfCloseRE = try? NSRegularExpression(pattern: noCollateSelfClosePattern, options: []),
+              let markupRE = try? NSRegularExpression(pattern: noCollateMarkupPattern, options: [.caseInsensitive])
         else { return [] }
         let full = NSRange(location: 0, length: ns.length)
         let opens = openRE.matches(in: text, range: full).map { $0.range }
-        let closes = closeRE.matches(in: text, range: full).map { $0.range }
+        // Every comment opener, comment closer and explicit end tag, in text order.
+        enum Markup { case explicitClose, open, close }
+        let markup: [(range: NSRange, kind: Markup)] = markupRE.matches(in: text, range: full).map { m in
+            if m.range(at: 1).location != NSNotFound { return (m.range, .explicitClose) }
+            if m.range(at: 2).location != NSNotFound { return (m.range, .open) }
+            return (m.range, .close)
+        }
         var ranges: [Range<Int>] = []
         var searchFrom = 0
         for open in opens where open.location >= searchFrom {
-            // The first close marker that starts at/after the END of this open marker; else run to end-of-text.
             let openEnd = open.location + open.length
-            let close = closes.first { $0.location >= openEnd }
-            let end = close.map { $0.location + $0.length } ?? ns.length
+            let rest = NSRange(location: openEnd, length: ns.length - openEnd)
+            let selfClosed = selfCloseRE.firstMatch(in: text, range: rest)
+            var end = ns.length
+            if let selfClosed {
+                // Two-comment form: only the explicit end tag closes the region.
+                let after = selfClosed.range.location + selfClosed.range.length
+                if let close = markup.first(where: { $0.kind == .explicitClose && $0.range.location >= after }) {
+                    end = close.range.location + close.range.length
+                }
+            } else {
+                // One-comment form: the first `-->` not belonging to a comment nested inside the region.
+                var depth = 0
+                for m in markup where m.range.location >= openEnd {
+                    switch m.kind {
+                    case .explicitClose where depth == 0: end = m.range.location + m.range.length
+                    case .explicitClose: continue
+                    case .open: depth += 1; continue
+                    case .close where depth > 0: depth -= 1; continue
+                    case .close: end = m.range.location + m.range.length
+                    }
+                    break
+                }
+            }
             ranges.append(open.location..<end)
             searchFrom = end
         }

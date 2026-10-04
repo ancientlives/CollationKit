@@ -43,6 +43,7 @@ The suites:
 | `PaginationTests` | the three page models × two line-numbering policies; citations follow the model |
 | `LexicalDiversityTests` | adaptive anchoring; banded NW equals full NW within the band; auto-widening; bounded cost |
 | `RenderingTests` | apparatus, synopsis, located report; sigla grouping |
+| `NoCollateRegionTests` | `no_collate` regions (blocker B6): the two-comment form, nested page-break comments, page breaks inside a region, and the invariant that no token lies inside one |
 | `NarrativeTests` | the `CollationNarrative` prose summary: extent, dominant kind, clustering, moves, alignment verdict |
 | `GraphInsertionTests` | pure insertions anchored into the N-witness graph as inserted nodes (B6c) |
 | `CollateCLITests` | the `collate` core: flag parsing and validation, witness discovery and ordering, text/JSON/CSV exporters (JSON export equals the conformance golden), dispatch and exit codes, determinism |
