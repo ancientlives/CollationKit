@@ -262,11 +262,53 @@ public enum HTMLExport {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.sortedKeys]
         let data = (try? encoder.encode(payload(for: run))) ?? Data("{}".utf8)
-        // `</` must not terminate the script block early; escaping it is the one required transform.
-        let json = String(decoding: data, as: UTF8.self).replacingOccurrences(of: "</", with: "<\\/")
-        return template
-            .replacingOccurrences(of: "%%TITLE%%", with: escapeHTML("Collation — \(run.witnessOrder.joined(separator: " · "))"))
-            .replacingOccurrences(of: "%%DATA%%", with: json)
+        let json = scriptSafeJSON(String(decoding: data, as: UTF8.self))
+        // One pass: a substituted value is never re-scanned, so a witness named `%%DATA%%` cannot pull the payload
+        // into the title, and witness text containing `%%TITLE%%` is left alone (release 1 review, B11).
+        return fillPlaceholders(template, [
+            "%%TITLE%%": escapeHTML("Collation — \(run.witnessOrder.joined(separator: " · "))"),
+            "%%DATA%%": json,
+        ])
+    }
+
+    /// JSON made safe to embed in an inline `<script>`: `<`, `>` and `&` become `\u003c`, `\u003e`, `\u0026`, and
+    /// U+2028/U+2029 become `\u2028`/`\u2029`. These are valid JSON string escapes, so the parsed data is unchanged.
+    /// Escaping only `</` (as before) let witness text containing `<!--<script` switch the HTML parser into its
+    /// "script data escaped" state, so the script never closed and the page rendered blank (review B12).
+    static func scriptSafeJSON(_ json: String) -> String {
+        var out = ""
+        out.reserveCapacity(json.utf8.count)
+        for scalar in json.unicodeScalars {
+            switch scalar {
+            case "<": out += "\\u003c"
+            case ">": out += "\\u003e"
+            case "&": out += "\\u0026"
+            case "\u{2028}": out += "\\u2028"
+            case "\u{2029}": out += "\\u2029"
+            default: out.unicodeScalars.append(scalar)
+            }
+        }
+        return out
+    }
+
+    /// Replace every `%%NAME%%` placeholder in `template` in a single left-to-right pass.
+    static func fillPlaceholders(_ template: String, _ values: [String: String]) -> String {
+        var out = ""
+        var rest = Substring(template)
+        while let open = rest.range(of: "%%") {
+            out += rest[..<open.lowerBound]
+            let afterOpen = rest[open.upperBound...]
+            if let close = afterOpen.range(of: "%%"),
+               let value = values["%%" + afterOpen[..<close.lowerBound] + "%%"] {
+                out += value
+                rest = afterOpen[close.upperBound...]
+            } else {
+                out += "%%"
+                rest = afterOpen
+            }
+        }
+        out += rest
+        return out
     }
 
     static func escapeHTML(_ s: String) -> String {
@@ -538,7 +580,8 @@ public enum HTMLExport {
                     font:15px/1.9 Georgia, "Times New Roman", serif; color:#1c1917; }
   #changes .cbody .kept { color:#1c1917; }
   /* substitution: struck base → new witness reading */
-  #changes .sub-old { color:#b91c1c; text-decoration:line-through; text-decoration-color:#f0a0a0; opacity:.75; }
+  /* a solid colour, not `opacity`: opacity on ~26k spans made WebKit take a minute to lay out a full novel (B15) */
+  #changes .sub-old { color:#cb5555; text-decoration:line-through; text-decoration-color:#f0a0a0; }
   #changes .sub-new { color:var(--ins); background:var(--insbg); border-radius:3px; padding:0 3px; }
   #changes .sub-arrow { color:#a8a29e; margin:0 2px; }
   /* deletion: struck base (witness omits it) */
@@ -596,7 +639,7 @@ public enum HTMLExport {
   #story .seg .sh .loc { color:#a8a29e; font-weight:400; margin-left:6px; }
   #story .seg p { margin:0 0 6px; font:14px/1.7 Georgia, serif; color:#292524; }
   /* an inline change rendered in the prose: struck old → new, etc. — reuse the redline vocabulary */
-  #story .c-sub .o { color:#b91c1c; text-decoration:line-through; text-decoration-color:#f0a0a0; opacity:.8; }
+  #story .c-sub .o { color:#c74949; text-decoration:line-through; text-decoration-color:#f0a0a0; }
   #story .c-sub .n { color:var(--ins); }
   #story .c-del { color:var(--del); text-decoration:line-through; text-decoration-color:#f0a0a0; }
   #story .c-ins { color:var(--ins); }
@@ -1228,8 +1271,8 @@ public enum HTMLExport {
       var domN = S.typeCounts[dom] || 0;
       var isec = sec('What kind of change?');
       var ins = document.createElement('div'); ins.className = 'insight';
-      ins.innerHTML = 'Across the whole work, <b>' + primaryMate + '</b> differs from <b>' + esc(D.base) + '</b> at <b>'
-        + fmt(totalVar) + '</b> points. The dominant kind is <b>' + (LABEL[dom] || dom) + '</b> ('
+      ins.innerHTML = 'Across the whole work, <b>' + esc(primaryMate) + '</b> differs from <b>' + esc(D.base) + '</b> at <b>'
+        + fmt(totalVar) + '</b> points. The dominant kind is <b>' + esc(LABEL[dom] || dom) + '</b> ('
         + Math.round(100 * domN / totalVar) + '% of changes)'
         + (S.moveEdges ? ', with <b>' + fmt(S.moveEdges) + '</b> passage' + (S.moveEdges === 1 ? '' : 's') + ' moved' : '')
         + '. ' + (S.typeCounts.variantSpelling ? '' : 'Spelling/accidental differences were checked and none were recorded (a substantive collation). ')
@@ -2032,7 +2075,7 @@ public enum HTMLExport {
       if (by.insertion) made.push(by.insertion + ' added');
       if (by.transposition) made.push(by.transposition + ' moved');
       var pcount = document.createElement('p');
-      pcount.innerHTML = capitalise(mate) + ' ' + joinListJS(made) + ' here. For example: ';
+      pcount.innerHTML = esc(capitalise(mate)) + ' ' + joinListJS(made) + ' here. For example: ';
       // a few representative inline examples
       var shown = inSeg.slice(0, STORY_EXAMPLES);
       shown.forEach(function (r, i) {
@@ -2115,7 +2158,7 @@ public enum HTMLExport {
         ? '<b>The texts track each other throughout.</b> The ' + pts.length.toLocaleString()
           + ' shared points form a clean, monotonic diagonal (max drift <b>' + devPct + '%</b> off the ideal line; '
           + monoPct + '% advance in step) — the collation aligned '
-          + D.base + ' and ' + esc(mate) + ' correctly, end to end.'
+          + esc(D.base) + ' and ' + esc(mate) + ' correctly, end to end.'
         : '<b>Check the alignment here.</b> Some points sit far off the diagonal (max drift <b>' + devPct
           + '%</b>) or run backwards (' + monoPct + '% monotonic) — hover the outliers to inspect them.')
       + '</span>';
@@ -2170,7 +2213,7 @@ public enum HTMLExport {
         c.setAttribute('cx', X(pt.b)); c.setAttribute('cy', Y(pt.c)); c.setAttribute('r', 1.7);
         c.setAttribute('fill', colour[pt.type] || '#78716c');
         c.onmouseenter = function (ev) { tip.style.display = 'block';
-          tip.innerHTML = '<b>' + (LABEL[pt.type] || pt.type) + '</b><br>' + esc(D.base) + ': ' + esc(pt.bcite || '—')
+          tip.innerHTML = '<b>' + esc(LABEL[pt.type] || pt.type) + '</b><br>' + esc(D.base) + ': ' + esc(pt.bcite || '—')
             + '<br>' + esc(mate) + ': ' + esc(pt.ccite || '—');
           positionTip(tip, ev); };
         c.onmousemove = function (ev) { positionTip(tip, ev); };
