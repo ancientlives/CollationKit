@@ -33,6 +33,7 @@ The suites:
 | `CollationTests` | pairwise classification: typed insertion/deletion/substitution, a reworded clause as one substitution, accidental suppression |
 | `PunctuationTests` | the diplomatic punctuation overlay (`recordPunctuation`): comma drops and `:`→`;` reported as accidentals; the substantive apparatus byte-identical with it off; a real *Frankenstein* passage |
 | `LiteraryEditionsTests` | the six-edition scenario (manuscript → typescript → proofs → GB 1st → US 1st → Uniform): a cross-page move, spelling-only GB/US differences, a genuine substantive revision, an N-witness graph |
+| `AnchorOverlapTests` | the invariant that no token of either witness is used twice by an alignment (spine anchors, moves, block growth), with the two minimal reproductions of blocker B1 and a seeded fuzz |
 | `RecursiveAnchoringTests` | move with internal edit; bounded-gap bridging; `resync` helpers |
 | `MoveRecoveryTests` | single-word and short-phrase move recovery; block coalescing; `certain` vs `likely` confidence; no false moves; the rarity/locality gate; the anchor-path distinctiveness gate (a short phrase unique in both witnesses by coincidence is not a move, while a long relocated passage survives, as in the Whitman *Calamus* case), recalibrated across four full-novel translation pairs; scale-relative move confidence for the irreducible near-diagonal residual |
 | `LocationTests` | `TextLocation` page/line/word span; single word vs range; character-range highlight |
