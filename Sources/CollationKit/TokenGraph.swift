@@ -100,6 +100,23 @@ public extension TokenGraph {
     /// `progress`: optional per-stage reporting so a long merge is never a silent black box — one line as each
     /// witness folds onto the spine (with whether its pairwise result was reused or freshly collated) and one
     /// for the finalisation. The callback is invoked synchronously on the calling thread; nil = no reporting.
+    /// The reading a compared witness contributes to the `k`-th of `n` base nodes covered by a substitution, given
+    /// the substitution's comparable compared tokens `compWords` (release 1 review, B2):
+    ///   • equal word counts → one-to-one;
+    ///   • otherwise one-to-one up to the last shared position, which carries ALL remaining compared words joined
+    ///     (so no compared text is lost), and any further base node reads `∅` (omitted).
+    /// `red green` → `blue, yellow` gives `red] blue`, `green] yellow`; `red` → `very bright blue` gives
+    /// `red] very bright blue`; `red green` → `crimson` gives `red] crimson`, `green] ∅`.
+    static func substitutionReading(forBaseNode k: Int, of n: Int, compWords: [Int],
+                                    compTokens: [Token]) -> (normalized: String, surface: String) {
+        let m = compWords.count
+        guard m > 0, k < m else { return ("∅", "∅") }
+        let lastShared = min(n, m) - 1
+        let span = k == lastShared ? Array(compWords[k...]) : [compWords[k]]
+        return (span.map { compTokens[$0].normalized }.joined(separator: " "),
+                span.map { compTokens[$0].surface }.joined(separator: " "))
+    }
+
     static func build(witnesses: [Witness],
                       normalizer: Normalizer = .substantive,
                       pagination: PaginationModel = .default,
@@ -162,16 +179,17 @@ public extension TokenGraph {
                     }
                 case .substitution:
                     if let r = v.baseTokenRange {
-                        let compIdx = v.comparedTokenRange.map { Array($0) } ?? []
-                        for (k, pos) in r.enumerated() {
+                        // Fold the substitution onto the base nodes using COMPARABLE tokens on both sides (release 1
+                        // review, B2). The ranges are full-token ranges, so they include punctuation; pairing by raw
+                        // offset paired "green" with a comma and silently dropped every compared token past the
+                        // base range's length.
+                        let baseNodes = r.filter { nodeIndexForBasePos[$0] != nil }
+                        let compWords = (v.comparedTokenRange.map { Array($0) } ?? [])
+                            .filter { $0 < compTokens.count && compTokens[$0].isComparable }
+                        for (k, pos) in baseNodes.enumerated() {
                             guard let ni = nodeIndexForBasePos[pos] else { continue }
-                            let norm: String, surf: String
-                            if compIdx.isEmpty { norm = "∅"; surf = "∅" }
-                            else {
-                                let ci = compIdx[min(k, compIdx.count - 1)]
-                                if ci < compTokens.count { norm = compTokens[ci].normalized; surf = compTokens[ci].surface }
-                                else { norm = "∅"; surf = "∅" }
-                            }
+                            let (norm, surf) = Self.substitutionReading(forBaseNode: k, of: baseNodes.count,
+                                                                        compWords: compWords, compTokens: compTokens)
                             addReading(&nodeReadings[ni], normalized: norm, surface: surf, witness: compared.id)
                             changed.insert(pos)
                         }
