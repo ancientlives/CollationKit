@@ -13,6 +13,11 @@ import Foundation
 // For your own files, each file is one witness; its id is the filename. With ≥2 files it prints the located
 // variant report for each successive pair plus the N-witness apparatus and synopsis.
 
+// DEPRECATED (2026-10, release 1 review): superseded by `collate`, which runs the same engine with validation,
+// exports and the viewer. Removed in 0.4.
+FileHandle.standardError.write(Data(("collate-demo is deprecated and will be removed in 0.4: use `collate run …` "
+    + "(or `collate` for the interactive menu).\n").utf8))
+
 let rawArgs = Array(CommandLine.arguments.dropFirst())
 let recordAccidentals = rawArgs.contains("--accidentals")
 let recordPunctuation = rawArgs.contains("--record-punctuation")   // diplomatic: report punctuation variants

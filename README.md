@@ -161,9 +161,21 @@ The main open fronts are summarised in [`docs/RESEARCH_INTRO.md`](docs/RESEARCH_
 - **Short near-diagonal moves are irreducible by geometry.** A short passage close to its original position
   cannot reliably be told apart from a coincidence, so such moves are reported as `likely`, not `certain`.
 - **Nesting.** A move nested inside another move is recovered at a single level only.
-- **Tokenisation.** Scripts without word spacing (CJK) are not yet segmented (B6).
+- **Tokenisation.** Scripts without word spacing (Chinese, Japanese, Thai) are **not supported** yet: a whole
+  sentence becomes one token (B6).
+- **Readings are rebuilt from tokens.** A reported reading joins its words and punctuation with single spaces
+  (`blue , yellow`); the character range in each citation points at the exact original text.
+- **Experimental features:** cross-language collation (`--lexicon`), printed-page citation (`--lines-per-page`,
+  `--through-numbered`) and the prose narrative (`summary.txt`, the viewer's Story view) work, but are validated
+  on little material.
 - **TEI.** TEI XML import and export is not yet built (B12).
-- The viewer's design has **not yet been evaluated with users**.
+- **The viewer** is not yet keyboard- or screen-reader-accessible, and is slow to switch views on a full novel. Its
+  design has **not yet been evaluated with users**.
+- `collate-demo` is **deprecated**; use `collate`.
+
+Input conventions (page breaks, `no_collate` regions, the lexicon format) are in
+[`docs/guides/INPUT_FORMAT.md`](docs/guides/INPUT_FORMAT.md). Changes between versions are in
+[`CHANGELOG.md`](CHANGELOG.md).
 
 ## Contributing
 
@@ -185,5 +197,5 @@ If you use CollationKit in research, please cite it using the metadata in [`CITA
 - The texts in `corpus/verne/` and the literary excerpts in `docs/conformance/cases/` are in the **public domain**
   in the US (sourced from Project Gutenberg and the Internet Archive), with one exception: the copyrighted
   F. P. Walter translation of *Twenty Thousand Leagues*. It is not distributed here beyond an 87-word quotation
-  in three test cases; `corpus/verne/scripts/build_corpus.sh` rebuilds it locally. See
+  in three test cases and the viewer demo built from one of them; `corpus/verne/scripts/build_corpus.sh` rebuilds it locally. See
   [`LICENSE-docs.md`](LICENSE-docs.md) and [`corpus/verne/README.md`](corpus/verne/README.md).
