@@ -21,7 +21,8 @@ appropriate credit, link to the licence, and indicate if changes were made. The 
 - **Exception: the F. P. Walter translation** of *Twenty Thousand Leagues Under the Seas* (Project Gutenberg
   #2488) is **© 1999 Frederick Paul Walter** and is not in the public domain. It is not distributed in this
   repository except for one 87-word paragraph (the novel's opening), which appears as a witness in conformance
-  cases 20, 22 and 29 (`walter.txt` / `en-walter.txt`) and in the readings of their goldens. It is quoted, with
+  cases 20, 22 and 29 (`walter.txt` / `en-walter.txt`), in the readings of their goldens, and in the published
+  viewer demo built from case 29 (`site/demos/verne-trilingual.html`). It is quoted, with
   attribution, for scholarly research and testing only, and is excluded from every licence granted here. The
   full Walter witnesses used by the project can be rebuilt locally from your own Project Gutenberg download with
   `corpus/verne/scripts/build_corpus.sh`, subject to Project Gutenberg's licence.

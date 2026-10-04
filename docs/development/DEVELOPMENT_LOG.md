@@ -2527,3 +2527,21 @@ pass. One `MenuTests` script was an answer short and had passed only because end
 it now confirms explicitly.
 
 **State:** 268 tests green. No engine, schema or golden change.
+
+---
+
+## 2026-10-03k — `usage`: release hygiene for v0.3.0 (release 1 review, blocker B10 and section 4)
+
+- **Version.** `collate --version` (0.2.0) and `CITATION.cff` (0.1.0) disagreed and there were no tags. Both are now
+  0.3.0, the planned first tagged release, and `VersionConsistencyTests` keeps them and the CHANGELOG in step.
+- **Licence.** The Walter-translation notice in `LICENSE-docs.md`, `README.md` and the corpus README now also names
+  the website's viewer demo built from case 29, which embeds the same 87-word quotation.
+- **New documents:** `CHANGELOG.md` (Keep a Changelog; the 0.3.0 entry lists every review fix), `SECURITY.md` (private
+  reporting; the viewer is the main surface) and `docs/guides/INPUT_FORMAT.md` (witness files and unique ids, what
+  counts as a word, page-break markers including the Markdown `---` caveat, `no_collate` forms, the lexicon format).
+- **Experimental and unsupported, said plainly.** `--lexicon`, `--lines-per-page` and `--through-numbered` are labelled
+  experimental in `--help` and the README; the narrative too. CJK is "not supported". The README restores the limit
+  that readings are re-joined with single spaces (lost in the move to the public repository).
+- **`collate-demo` is deprecated** (a notice on stderr; removal in 0.4).
+
+**State:** 270 tests green. No engine change.
