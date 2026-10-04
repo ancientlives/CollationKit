@@ -531,7 +531,16 @@ variantGraph(witnesses, params):                  // base = witnesses[0]
                                                          then reading) — so an insertion sits right after the
                                                          base position it follows
     variant nodes = those with >1 reading
+    // Moves (2026-10, review B3): each pairwise TRANSPOSITION is recorded as a move of its base span by
+    // compared.id with the pass's confidence; moves of the same span and confidence merge their witnesses.
+    moves = [ (basePositions, lemma = base surfaces joined, witnesses, confidence) ] sorted by basePositions
 ```
+
+**Apparatus.** One entry per variant node (lemma = the base's reading; variants = the other readings with their
+sigla), plus **one transposition entry per moved passage**: lemma = the passage's base text, variant reading =
+`(moved)` for a `certain` move or `(possible move)` for a `likely` one, sigla = the witnesses that moved it. Moved
+words agree with the base, so without the move entries a transposition never reaches the apparatus. (The JSON
+interchange, §8, encodes only the nodes; its pairwise results already carry every move with its citation.)
 
 Determinism (§9): anchors and readings are iterated in sorted order and the merge key is total, so the node
 order — including inserted nodes — is stable across runs and ports.

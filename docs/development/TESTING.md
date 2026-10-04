@@ -33,6 +33,7 @@ The suites:
 | `CollationTests` | pairwise classification: typed insertion/deletion/substitution, a reworded clause as one substitution, accidental suppression |
 | `PunctuationTests` | the diplomatic punctuation overlay (`recordPunctuation`): comma drops and `:`→`;` reported as accidentals; the substantive apparatus byte-identical with it off; a real *Frankenstein* passage |
 | `LiteraryEditionsTests` | the six-edition scenario (manuscript → typescript → proofs → GB 1st → US 1st → Uniform): a cross-page move, spelling-only GB/US differences, a genuine substantive revision, an N-witness graph |
+| `ApparatusMoveTests` | moved passages in the critical apparatus (blocker B3): move-only collations, the six-edition cross-page move, `(possible move)` for `.likely` moves, both merge strategies |
 | `AnchorOverlapTests` | the invariant that no token of either witness is used twice by an alignment (spine anchors, moves, block growth), with the two minimal reproductions of blocker B1 and a seeded fuzz |
 | `GraphSubstitutionTests` | the base-anchored graph's substitution fold: word tokens only, nothing dropped, surplus base words omitted (blocker B2), and no punctuation-only reading in any golden |
 | `RecursiveAnchoringTests` | move with internal edit; bounded-gap bridging; `resync` helpers |

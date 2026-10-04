@@ -355,7 +355,39 @@ public extension TokenGraph {
             let rb = b.readings.keys.filter { $0 != "∅" }.min() ?? ""
             return ra < rb
         }
-        return Collation.VariantGraph(baseID: baseID, nodes: ordered)
+        return Collation.VariantGraph(baseID: baseID, nodes: ordered, moves: projectedMoves(baseID: baseID))
+    }
+
+    /// The moves, read off the move edges. A move edge runs from the spine node BEFORE a moved block to the node
+    /// AFTER it (`-1` = before all text; an endpoint that is not a spine node, such as the virtual end, = after all
+    /// text), so the moved words are the spine nodes strictly between its endpoints. This holds for both merge
+    /// strategies, which record move edges this way. Moves with the same span and confidence merge their witnesses.
+    func projectedMoves(baseID: String) -> [Collation.GraphMove] {
+        var spineIndex: [TokenGraphNode.NodeID: Int] = [:]
+        for (i, id) in spine.enumerated() { spineIndex[id] = i }
+        var nodeByID: [TokenGraphNode.NodeID: TokenGraphNode] = [:]
+        for node in nodes { nodeByID[node.id] = node }
+        struct Key: Hashable { let lo: Int; let hi: Int; let confidence: MoveConfidence }
+        var witnessesByKey: [Key: Set<String>] = [:]
+        for edge in edges where edge.isMove {
+            let lo = edge.from < 0 ? 0 : (spineIndex[edge.from].map { $0 + 1 } ?? 0)
+            let hi = spineIndex[edge.to] ?? spine.count
+            guard lo < hi else { continue }
+            witnessesByKey[Key(lo: lo, hi: hi, confidence: edge.confidence), default: []].formUnion(edge.witnesses)
+        }
+        return witnessesByKey.map { key, witnesses -> Collation.GraphMove in
+            let positions = (key.lo..<key.hi).map { $0 < baseComparablePositions.count ? baseComparablePositions[$0] : $0 }
+            let words = (key.lo..<key.hi).compactMap { i -> String? in
+                nodeByID[spine[i]]?.readings.values.first { $0.witnesses.contains(baseID) }?.surface
+            }
+            return Collation.GraphMove(basePositions: positions, lemma: words.joined(separator: " "),
+                                       witnesses: witnesses, confidence: key.confidence)
+        }
+        .sorted { a, b in
+            if a.basePositions != b.basePositions { return a.basePositions.lexicographicallyPrecedes(b.basePositions) }
+            if a.confidence != b.confidence { return a.confidence == .certain }
+            return a.witnesses.sorted().lexicographicallyPrecedes(b.witnesses.sorted())
+        }
     }
 
     /// Turn graph readings (normalised → reading{surface,witnesses}) into the apparatus `surface → sigla`
