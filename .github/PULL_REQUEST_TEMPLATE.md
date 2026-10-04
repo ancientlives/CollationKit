@@ -27,7 +27,6 @@ novels before and after, benchmark numbers, or a case-study excerpt. For a bug f
 - [ ] `swift test` passes locally with 0 failures.
 - [ ] New or changed behaviour has a test that fails without this change.
 - [ ] The engine stays pure and deterministic (no I/O, no randomness, no ordering from hashing).
-- [ ] If the test count changed, `TestCountGuardTests`, `README.md`, `docs/development/TESTING.md` and the
-      development log `State:` line are updated.
+- [ ] A new test suite, if any, has a row in `docs/development/TESTING.md`.
 - [ ] Docs are updated where needed (`DEVELOPMENT_LOG.md` entry; `ALGORITHMS.md` / `PAPER_NOTES.md` for
       algorithm changes; `docs/INDEX.md` for a new doc).

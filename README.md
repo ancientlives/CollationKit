@@ -43,7 +43,7 @@ the optional JSON Schema validator.
 ```sh
 git clone https://github.com/ancientlives/CollationKit.git
 cd CollationKit
-swift test              # 222 tests
+swift test              # the full suite (200+ tests, a few seconds)
 swift run collate-demo  # the six-edition example: full texts, located report, apparatus, synopsis
 ```
 
@@ -125,7 +125,7 @@ The CLI is in [`Sources/CollateCLI/`](Sources/CollateCLI/): a testable core with
 
 ```
 Sources/            the engine (CollationKit), the CLI core and shells, demo and benchmark harnesses
-Tests/              222 XCTest tests across 27 suites (see docs/development/TESTING.md)
+Tests/              the XCTest suites (see docs/development/TESTING.md)
 docs/               research intro, onboarding, algorithm specification, design history, evaluation
 docs/conformance/   language-neutral golden corpus + JSON Schema: the executable portability contract
 corpus/verne/       public-domain Jules Verne translation pairs (chapter excerpts + full novels) + build scripts
