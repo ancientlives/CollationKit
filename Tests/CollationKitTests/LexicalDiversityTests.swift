@@ -56,7 +56,7 @@ final class LexicalDiversityTests: XCTestCase {
     func testBandedNWEqualsFullNWWhenWithinTheBand() {
         // The real win over positional chunking: when the true alignment stays within the band, banded NW is
         // GLOBALLY OPTIMAL — identical to full NW — including across what would have been chunk seams.
-        var a = (0..<600).map { "w\($0)" }             // distinctive, co-linear
+        let a = (0..<600).map { "w\($0)" }             // distinctive, co-linear
         var b = a
         b.insert("EXTRA", at: 50)                       // a single early insert → everything after drifts by 1
         b[400] = "CHANGED"                              // an edit well past any chunk boundary
@@ -79,7 +79,7 @@ final class LexicalDiversityTests: XCTestCase {
 
     func testBandWidensWhenPathHitsEdge() {
         // A drift larger than the initial band should be recovered by auto-widening (converges to full NW).
-        var a = (0..<400).map { "t\($0)" }
+        let a = (0..<400).map { "t\($0)" }
         var b = a
         for _ in 0..<30 { b.insert("pad", at: 10) }    // 30-token drift, beyond a band of 8
         let widened = Alignment.bandedAutoWidening(a, b, initialBand: 8, maxBand: 256)

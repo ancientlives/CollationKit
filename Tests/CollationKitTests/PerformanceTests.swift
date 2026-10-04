@@ -70,8 +70,13 @@ final class PerformanceTests: XCTestCase {
 
     func testLongCollationIsDeterministic() {
         let base = makeText(wordCount: 2000, pages: 10)
-        let compared = base.replacingOccurrences(of: "ship600", with: "vessel600")
+        // `ship621` is a real token (word 621: lexicon index 1, distinctive because 621 % 3 == 0). An earlier version
+        // replaced `ship600`, which never occurs, so the two witnesses were identical.
+        XCTAssertTrue(base.contains("ship621 "))
+        let compared = base.replacingOccurrences(of: "ship621 ", with: "vessel621 ")
         let a = Witness(id: "a", text: base), b = Witness(id: "b", text: compared)
-        XCTAssertEqual(Collation.collate(base: a, compared: b), Collation.collate(base: a, compared: b))
+        let first = Collation.collate(base: a, compared: b)
+        XCTAssertFalse(first.variations.isEmpty, "the substitution is detected")
+        XCTAssertEqual(first, Collation.collate(base: a, compared: b))
     }
 }

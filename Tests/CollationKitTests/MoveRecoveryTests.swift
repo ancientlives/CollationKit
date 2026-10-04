@@ -300,19 +300,19 @@ final class MoveRecoveryTests: XCTestCase {
     }
 
     func testShortNearDiagonalMoveOnLongPairIsLikelyNotCertain() {
-        // End-to-end: the same short phrase in unrelated context, near the diagonal, on a LONG pair — it passes the
-        // gate (near the diagonal) but must be reported as a POSSIBLE move, not asserted. (This is the "off the
-        // rocks" reported case: it survives as a move but should never be `.certain`.)
-        let phrase = "off the rocks"
-        let a = (0..<3000).map { "alpha\($0)" }.joined(separator: " ") + " pull moss \(phrase) below "
-              + (0..<3000).map { "gamma\($0)" }.joined(separator: " ")
-        let b = (0..<3015).map { "beta\($0)" }.joined(separator: " ") + " holding myself \(phrase) above "
-              + (0..<3000).map { "delta\($0)" }.joined(separator: " ")
+        // End-to-end: a short phrase displaced by a few tokens on a LONG pair (above the 4,000-token
+        // `confidentMoveWitnessFloor`). It passes the gate (near the diagonal) but must be reported as a POSSIBLE
+        // move, not asserted. (This is the "off the rocks" reported case.) The witnesses share a backbone so the
+        // phrase is genuinely off the spine; an earlier version shared nothing else, so no move was ever produced
+        // and the assertion loop never ran.
+        let phrase = ["off", "the", "rocks"]
+        let backbone = (0..<6000).map { "s\($0)" }
+        let a = (Array(backbone[..<3001]) + phrase + Array(backbone[3001...])).joined(separator: " ")
+        let b = (Array(backbone[..<3011]) + phrase + Array(backbone[3011...])).joined(separator: " ")
         let moves = collate(a, b).variations.filter { $0.type == .transposition && $0.baseReading.contains("rocks") }
-        for m in moves {
-            XCTAssertEqual(m.confidence, .likely,
-                "a short near-diagonal move on a long parallel pair is a possible move (.likely), not asserted")
-        }
+        XCTAssertEqual(moves.count, 1, "the displaced phrase is recovered as one move")
+        XCTAssertEqual(moves.first?.confidence, .likely,
+            "a short near-diagonal move on a long parallel pair is a possible move (.likely), not asserted")
     }
 
     // MARK: displacement gate — reject far-apart COINCIDENCES, keep genuine LOCAL moves
