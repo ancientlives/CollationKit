@@ -2500,3 +2500,30 @@ rendered no tabs; with the fix both pages render all nine tabs, nothing executes
 `ViewerSafetyTests`; one `HTMLExportTests` assertion that pinned the old `<\/` escaping now pins the stronger rule.
 
 **State:** 258 tests green. No engine, schema or golden change.
+
+---
+
+## 2026-10-03j — `implementation` + `test`: the CLI rejects ambiguous input and the menu does what you answer (release 1 review, blockers B13 and B14)
+
+**B13 — duplicate witness ids.** A witness id is its file name without extension, and nothing checked uniqueness:
+`e1818/text.txt` and `e1831/text.txt` (one folder per edition, a natural layout) both became `text`, their readings
+merged, and the viewer showed two `text (base)` tabs with the wrong text under one. `WitnessLoader.load` now rejects
+two files with one id (and says to rename one), a file given twice, and an `--order` that names a witness twice.
+
+**B14 — the menu and the command line.**
+- The confirm prompt ran the collation on "no", on anything unrecognised, and at end of input. Now only `y`/Enter
+  runs, `n` edits, `q` or end of input quits, and anything else asks again.
+- A mistyped base was accepted, shown in the summary, and rejected only after the confirm, which exited the menu.
+  Base and order are now validated at their prompts and re-asked.
+- "Edit options" now offers the previous witness selection, base and pagination as the defaults.
+- An unwritable `--out` folder was found only after the whole collation had run. `Exporter.preflight` now creates it
+  and tests a write before any work.
+- The documented `collate --no-input run …` and `collate run --help` failed; both work.
+- In the viewer's alignment map, two axis labels double-escaped ids (`A&B` showed as `A&amp;B`): `esc()` was applied
+  to text assigned to `textContent`.
+
+**Evidence.** New `CLIInputValidationTests`: on the previous branch all ten fail (19 assertion failures); here all
+pass. One `MenuTests` script was an answer short and had passed only because end of input at the confirm used to run;
+it now confirms explicitly.
+
+**State:** 268 tests green. No engine, schema or golden change.

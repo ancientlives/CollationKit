@@ -65,6 +65,21 @@ public enum WitnessLoader {
             let siglum = (path as NSString).lastPathComponent as NSString
             candidates.append(Discovered(siglum: siglum.deletingPathExtension, path: path))
         }
+        // Witness ids (file names without extension) must be unique: two witnesses with one id merged their
+        // readings and corrupted the reports and the viewer's tabs (release 1 review, B13).
+        var pathBySiglum: [String: String] = [:]
+        for c in candidates {
+            if let earlier = pathBySiglum[c.siglum] {
+                throw CLIError(.witnesses, earlier == c.path
+                    ? "'\(c.path)' is given twice"
+                    : "two witnesses have the id '\(c.siglum)' (\(earlier) and \(c.path)); "
+                      + "a witness id is the file name without its extension, so rename one of the files")
+            }
+            pathBySiglum[c.siglum] = c.path
+        }
+        if let order = opts.order, let dup = order.first(where: { s in order.filter { $0 == s }.count > 1 }) {
+            throw CLIError(.witnesses, "--order names '\(dup)' more than once")
+        }
         // A directory with neither --all nor --order/explicit files: default to all discovered (friendly).
         // (A subset selection by number is an interactive-menu feature, phase 3.)
 

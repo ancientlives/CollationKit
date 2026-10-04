@@ -93,8 +93,9 @@ final class MenuTests: XCTestCase {
         let good = try threeWitnessDir()
         defer { try? FileManager.default.removeItem(atPath: small); try? FileManager.default.removeItem(atPath: good) }
         // Browser starts at `small` (1 file): `u` is refused (warn) → type `good`'s path (navigate in) → `u`
-        // uses it; then accept the rest, export=1(no), confirm.
-        let io = ScriptedConsoleIO(["u", good, "u", "", "", "", "", "", "1", "y"])
+        // uses it; then accept the six option defaults, export=1(no), confirm. (This script was one answer short;
+        // it passed only because end of input at the confirm prompt used to RUN — the B14 bug.)
+        let io = ScriptedConsoleIO(["u", good, "u", "", "", "", "", "", "", "1", "y"])
         guard case .run(let o) = Menu.run(io: io, initial: CLIOptions(directory: small)) else {
             return XCTFail("expected .run after navigating past the small folder")
         }
