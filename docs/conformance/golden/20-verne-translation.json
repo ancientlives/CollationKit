@@ -188,7 +188,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "downright",
+            "reading" : "downright inexplicable",
             "witnesses" : [
               "walter"
             ]
@@ -312,7 +312,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ".",
+            "reading" : "Without",
             "witnesses" : [
               "walter"
             ]
@@ -480,7 +480,7 @@
             ]
           },
           {
-            "reading" : "the",
+            "reading" : "the seaports",
             "witnesses" : [
               "walter"
             ]
@@ -611,15 +611,15 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
-            "witnesses" : [
-              "walter"
-            ]
-          },
-          {
             "reading" : "interior",
             "witnesses" : [
               "mercier"
+            ]
+          },
+          {
+            "reading" : "it",
+            "witnesses" : [
+              "walter"
             ]
           }
         ]
@@ -629,7 +629,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "it",
+            "reading" : "must",
             "witnesses" : [
               "walter"
             ]
@@ -647,15 +647,15 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "continents",
+            "reading" : "be",
             "witnesses" : [
-              "mercier"
+              "walter"
             ]
           },
           {
-            "reading" : "must",
+            "reading" : "continents",
             "witnesses" : [
-              "walter"
+              "mercier"
             ]
           }
         ]
@@ -761,7 +761,7 @@
             ]
           },
           {
-            "reading" : "alarmed",
+            "reading" : "especially",
             "witnesses" : [
               "walter"
             ]
@@ -773,7 +773,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "Traders",
+            "reading" : "alarmed",
             "witnesses" : [
               "walter"
             ]
@@ -791,7 +791,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
+            "reading" : "Traders shipowners",
             "witnesses" : [
               "walter"
             ]
@@ -879,7 +879,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "master",
+            "reading" : "master mariners from",
             "witnesses" : [
               "walter"
             ]
@@ -1107,7 +1107,7 @@
             ]
           },
           {
-            "reading" : "various",
+            "reading" : "various national governments",
             "witnesses" : [
               "walter"
             ]
@@ -1225,7 +1225,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "disturbed",
+            "reading" : "disturbed by",
             "witnesses" : [
               "walter"
             ]

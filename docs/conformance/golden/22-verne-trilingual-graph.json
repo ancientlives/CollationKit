@@ -13,7 +13,7 @@
             ]
           },
           {
-            "reading" : "The",
+            "reading" : "The year",
             "witnesses" : [
               "en-mercier",
               "en-walter"
@@ -279,12 +279,6 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "phenomenon",
             "witnesses" : [
               "en-walter"
@@ -294,24 +288,6 @@
             "reading" : "que",
             "witnesses" : [
               "fr-5097"
-            ]
-          }
-        ]
-      },
-      {
-        "basePosition" : 15,
-        "isVariant" : true,
-        "readings" : [
-          {
-            "reading" : "personne",
-            "witnesses" : [
-              "fr-5097"
-            ]
-          },
-          {
-            "reading" : "that",
-            "witnesses" : [
-              "en-walter"
             ]
           },
           {
@@ -323,7 +299,7 @@
         ]
       },
       {
-        "basePosition" : 16,
+        "basePosition" : 15,
         "isVariant" : true,
         "readings" : [
           {
@@ -333,9 +309,33 @@
             ]
           },
           {
+            "reading" : "personne",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "that",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 16,
+        "isVariant" : true,
+        "readings" : [
+          {
             "reading" : "n'a",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "no",
+            "witnesses" : [
+              "en-mercier"
             ]
           },
           {
@@ -353,8 +353,13 @@
           {
             "reading" : "no",
             "witnesses" : [
-              "en-mercier",
               "en-walter"
+            ]
+          },
+          {
+            "reading" : "one",
+            "witnesses" : [
+              "en-mercier"
             ]
           },
           {
@@ -376,9 +381,14 @@
             ]
           },
           {
+            "reading" : "has",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
             "reading" : "one",
             "witnesses" : [
-              "en-mercier",
               "en-walter"
             ]
           }
@@ -391,7 +401,6 @@
           {
             "reading" : "has",
             "witnesses" : [
-              "en-mercier",
               "en-walter"
             ]
           },
@@ -399,6 +408,12 @@
             "reading" : "oublié",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "yet",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -408,12 +423,6 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ".",
-            "witnesses" : [
-              "en-walter"
-            ]
-          },
-          {
             "reading" : "Sans",
             "witnesses" : [
               "fr-5097"
@@ -422,7 +431,8 @@
           {
             "reading" : "forgotten",
             "witnesses" : [
-              "en-mercier"
+              "en-mercier",
+              "en-walter"
             ]
           }
         ]
@@ -432,7 +442,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ".",
+            "reading" : "Not",
             "witnesses" : [
               "en-mercier"
             ]
@@ -456,12 +466,6 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "Not",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "des",
             "witnesses" : [
               "fr-5097"
@@ -471,6 +475,12 @@
             "reading" : "getting",
             "witnesses" : [
               "en-walter"
+            ]
+          },
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -486,15 +496,15 @@
             ]
           },
           {
-            "reading" : "rumeurs",
+            "reading" : "mention",
             "witnesses" : [
-              "fr-5097"
+              "en-mercier"
             ]
           },
           {
-            "reading" : "to",
+            "reading" : "rumeurs",
             "witnesses" : [
-              "en-mercier"
+              "fr-5097"
             ]
           }
         ]
@@ -504,15 +514,15 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "mention",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "qui",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "rumours",
+            "witnesses" : [
+              "en-mercier"
             ]
           },
           {
@@ -540,7 +550,7 @@
             ]
           },
           {
-            "reading" : "rumours",
+            "reading" : "which",
             "witnesses" : [
               "en-mercier"
             ]
@@ -552,6 +562,12 @@
         "isVariant" : true,
         "readings" : [
           {
+            "reading" : "agitated",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
             "reading" : "les",
             "witnesses" : [
               "fr-5097"
@@ -562,12 +578,6 @@
             "witnesses" : [
               "en-walter"
             ]
-          },
-          {
-            "reading" : "which",
-            "witnesses" : [
-              "en-mercier"
-            ]
           }
         ]
       },
@@ -576,15 +586,15 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "agitated",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "populations",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-mercier"
             ]
           },
           {
@@ -612,7 +622,7 @@
             ]
           },
           {
-            "reading" : "the",
+            "reading" : "maritime",
             "witnesses" : [
               "en-mercier"
             ]
@@ -630,7 +640,7 @@
             ]
           },
           {
-            "reading" : "maritime",
+            "reading" : "population",
             "witnesses" : [
               "en-mercier"
             ]
@@ -648,15 +658,15 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "et",
+            "reading" : "and",
             "witnesses" : [
-              "fr-5097"
+              "en-mercier"
             ]
           },
           {
-            "reading" : "population",
+            "reading" : "et",
             "witnesses" : [
-              "en-mercier"
+              "fr-5097"
             ]
           },
           {
@@ -672,7 +682,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "and",
+            "reading" : "excited",
             "witnesses" : [
               "en-mercier"
             ]
@@ -702,15 +712,15 @@
             ]
           },
           {
-            "reading" : "excited",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "l'esprit",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -763,7 +773,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
+            "reading" : "even",
             "witnesses" : [
               "en-mercier"
             ]
@@ -793,7 +803,7 @@
             ]
           },
           {
-            "reading" : "even",
+            "reading" : "in",
             "witnesses" : [
               "en-mercier"
             ]
@@ -823,7 +833,7 @@
             ]
           },
           {
-            "reading" : "in",
+            "reading" : "the",
             "witnesses" : [
               "en-mercier"
             ]
@@ -841,15 +851,15 @@
             ]
           },
           {
-            "reading" : "les",
+            "reading" : "interior",
             "witnesses" : [
-              "fr-5097"
+              "en-mercier"
             ]
           },
           {
-            "reading" : "the",
+            "reading" : "les",
             "witnesses" : [
-              "en-mercier"
+              "fr-5097"
             ]
           }
         ]
@@ -871,7 +881,7 @@
             ]
           },
           {
-            "reading" : "interior",
+            "reading" : "of",
             "witnesses" : [
               "en-mercier"
             ]
@@ -883,9 +893,9 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
+            "reading" : "continents",
             "witnesses" : [
-              "en-walter"
+              "en-mercier"
             ]
           },
           {
@@ -895,9 +905,9 @@
             ]
           },
           {
-            "reading" : "of",
+            "reading" : "it",
             "witnesses" : [
-              "en-mercier"
+              "en-walter"
             ]
           }
         ]
@@ -907,37 +917,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "continents",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
-            "reading" : "it",
-            "witnesses" : [
-              "en-walter"
-            ]
-          },
-          {
             "reading" : "mer",
-            "witnesses" : [
-              "fr-5097"
-            ]
-          }
-        ]
-      },
-      {
-        "basePosition" : 43,
-        "isVariant" : true,
-        "readings" : [
-          {
-            "reading" : ",",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
-            "reading" : "furent",
             "witnesses" : [
               "fr-5097"
             ]
@@ -946,24 +926,6 @@
             "reading" : "must",
             "witnesses" : [
               "en-walter"
-            ]
-          }
-        ]
-      },
-      {
-        "basePosition" : 44,
-        "isVariant" : true,
-        "readings" : [
-          {
-            "reading" : "be",
-            "witnesses" : [
-              "en-walter"
-            ]
-          },
-          {
-            "reading" : "particulièrement",
-            "witnesses" : [
-              "fr-5097"
             ]
           },
           {
@@ -975,17 +937,65 @@
         ]
       },
       {
-        "basePosition" : 45,
+        "basePosition" : 43,
         "isVariant" : true,
         "readings" : [
+          {
+            "reading" : "be",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "furent",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
           {
             "reading" : "men",
             "witnesses" : [
               "en-mercier"
             ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 44,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "particulièrement",
+            "witnesses" : [
+              "fr-5097"
+            ]
           },
           {
             "reading" : "said",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "were",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 45,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "particularly",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "that",
             "witnesses" : [
               "en-walter"
             ]
@@ -1009,7 +1019,7 @@
             ]
           },
           {
-            "reading" : "particularly",
+            "reading" : "excited",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1027,7 +1037,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "excited",
+            "reading" : "Merchants",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1051,19 +1061,19 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "Merchants",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "armateurs",
             "witnesses" : [
               "fr-5097"
             ]
           },
           {
-            "reading" : "especially",
+            "reading" : "common",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "were",
             "witnesses" : [
               "en-walter"
             ]
@@ -1075,39 +1085,15 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ".",
-            "witnesses" : [
-              "en-walter"
-            ]
-          },
-          {
             "reading" : "capitaines",
             "witnesses" : [
               "fr-5097"
             ]
           },
           {
-            "reading" : "common",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          }
-        ]
-      },
-      {
-        "basePosition" : 53,
-        "isVariant" : true,
-        "readings" : [
-          {
-            "reading" : "Traders",
+            "reading" : "especially",
             "witnesses" : [
               "en-walter"
-            ]
-          },
-          {
-            "reading" : "de",
-            "witnesses" : [
-              "fr-5097"
             ]
           },
           {
@@ -1119,13 +1105,36 @@
         ]
       },
       {
+        "basePosition" : 53,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "alarmed",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "captains",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
         "basePosition" : 54,
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
+            "reading" : "Traders",
             "witnesses" : [
-              "en-mercier",
               "en-walter"
             ]
           },
@@ -1133,6 +1142,12 @@
             "reading" : "navires",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -1142,21 +1157,21 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
+            "reading" : "shipowners",
             "witnesses" : [
               "en-walter"
-            ]
-          },
-          {
-            "reading" : "of",
-            "witnesses" : [
-              "en-mercier"
             ]
           },
           {
             "reading" : "skippers",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "vessels",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -1178,7 +1193,7 @@
             ]
           },
           {
-            "reading" : "vessels",
+            "reading" : "skippers",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1190,7 +1205,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
+            "reading" : "both",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1220,7 +1235,7 @@
             ]
           },
           {
-            "reading" : "skippers",
+            "reading" : "of",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1238,32 +1253,13 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
-            "witnesses" : [
-              "en-mercier",
-              "en-walter"
-            ]
-          },
-          {
-            "reading" : "l'Europe",
-            "witnesses" : [
-              "fr-5097"
-            ]
-          }
-        ]
-      },
-      {
-        "basePosition" : 61,
-        "isVariant" : true,
-        "readings" : [
-          {
-            "reading" : "both",
+            "reading" : "Europe",
             "witnesses" : [
               "en-mercier"
             ]
           },
           {
-            "reading" : "et",
+            "reading" : "l'Europe",
             "witnesses" : [
               "fr-5097"
             ]
@@ -1277,47 +1273,18 @@
         ]
       },
       {
-        "basePosition" : 62,
+        "basePosition" : 61,
         "isVariant" : true,
         "readings" : [
-          {
-            "reading" : ",",
-            "witnesses" : [
-              "en-walter"
-            ]
-          },
-          {
-            "reading" : "de",
-            "witnesses" : [
-              "fr-5097"
-            ]
-          },
-          {
-            "reading" : "of",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          }
-        ]
-      },
-      {
-        "basePosition" : 63,
-        "isVariant" : true,
-        "readings" : [
-          {
-            "reading" : "Europe",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
           {
             "reading" : "and",
             "witnesses" : [
+              "en-mercier",
               "en-walter"
             ]
           },
           {
-            "reading" : "l'Amérique",
+            "reading" : "et",
             "witnesses" : [
               "fr-5097"
             ]
@@ -1325,7 +1292,7 @@
         ]
       },
       {
-        "basePosition" : 65,
+        "basePosition" : 62,
         "isVariant" : true,
         "readings" : [
           {
@@ -1335,9 +1302,57 @@
             ]
           },
           {
+            "reading" : "de",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "master",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 63,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "l'Amérique",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
             "reading" : "mariners",
             "witnesses" : [
               "en-walter"
+            ]
+          },
+          {
+            "reading" : "naval",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 65,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "from",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "officers",
+            "witnesses" : [
+              "en-mercier"
             ]
           },
           {
@@ -1353,85 +1368,13 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
-            "reading" : "des",
-            "witnesses" : [
-              "fr-5097"
-            ]
-          },
-          {
-            "reading" : "from",
-            "witnesses" : [
-              "en-walter"
-            ]
-          }
-        ]
-      },
-      {
-        "basePosition" : 67,
-        "isVariant" : true,
-        "readings" : [
-          {
             "reading" : "Europe",
             "witnesses" : [
               "en-walter"
             ]
           },
           {
-            "reading" : "marines",
-            "witnesses" : [
-              "fr-5097"
-            ]
-          },
-          {
-            "reading" : "naval",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          }
-        ]
-      },
-      {
-        "basePosition" : 68,
-        "isVariant" : true,
-        "readings" : [
-          {
-            "reading" : "and",
-            "witnesses" : [
-              "en-walter"
-            ]
-          },
-          {
-            "reading" : "militaires",
-            "witnesses" : [
-              "fr-5097"
-            ]
-          },
-          {
-            "reading" : "officers",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          }
-        ]
-      },
-      {
-        "basePosition" : 69,
-        "isVariant" : true,
-        "readings" : [
-          {
-            "reading" : "America",
-            "witnesses" : [
-              "en-walter"
-            ]
-          },
-          {
-            "reading" : "de",
+            "reading" : "des",
             "witnesses" : [
               "fr-5097"
             ]
@@ -1445,17 +1388,89 @@
         ]
       },
       {
-        "basePosition" : 70,
+        "basePosition" : 67,
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
+            "reading" : "all",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "and",
             "witnesses" : [
               "en-walter"
             ]
           },
           {
-            "reading" : "all",
+            "reading" : "marines",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 68,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "America",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "countries",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "militaires",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 69,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "de",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "naval",
+            "witnesses" : [
+              "en-walter"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 70,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "officers",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "the",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1473,13 +1488,13 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "countries",
+            "reading" : "Governments",
             "witnesses" : [
               "en-mercier"
             ]
           },
           {
-            "reading" : "naval",
+            "reading" : "from",
             "witnesses" : [
               "en-walter"
             ]
@@ -1497,21 +1512,21 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "and",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "et",
             "witnesses" : [
               "fr-5097"
             ]
           },
           {
-            "reading" : "from",
+            "reading" : "every",
             "witnesses" : [
               "en-walter"
+            ]
+          },
+          {
+            "reading" : "of",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -1520,12 +1535,6 @@
         "basePosition" : 75,
         "isVariant" : true,
         "readings" : [
-          {
-            "reading" : "Governments",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
           {
             "reading" : "après",
             "witnesses" : [
@@ -1537,6 +1546,12 @@
             "witnesses" : [
               "en-walter"
             ]
+          },
+          {
+            "reading" : "several",
+            "witnesses" : [
+              "en-mercier"
+            ]
           }
         ]
       },
@@ -1545,7 +1560,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
+            "reading" : "and",
             "witnesses" : [
               "en-walter"
             ]
@@ -1557,7 +1572,7 @@
             ]
           },
           {
-            "reading" : "of",
+            "reading" : "states",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1581,7 +1596,7 @@
             ]
           },
           {
-            "reading" : "states",
+            "reading" : "on",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1599,7 +1614,7 @@
             ]
           },
           {
-            "reading" : "on",
+            "reading" : "the",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1629,7 +1644,7 @@
             ]
           },
           {
-            "reading" : "the",
+            "reading" : "two",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1653,7 +1668,7 @@
             ]
           },
           {
-            "reading" : "two",
+            "reading" : "∅",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1665,12 +1680,6 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "two",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "various",
             "witnesses" : [
               "en-walter"
@@ -1680,6 +1689,12 @@
             "reading" : "États",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -1701,7 +1716,7 @@
             ]
           },
           {
-            "reading" : "two",
+            "reading" : "∅",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1725,7 +1740,7 @@
             ]
           },
           {
-            "reading" : "two",
+            "reading" : "∅",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1762,7 +1777,7 @@
             ]
           },
           {
-            "reading" : "two",
+            "reading" : "these",
             "witnesses" : [
               "en-walter"
             ]
@@ -1780,12 +1795,6 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "continents",
-            "witnesses" : [
-              "en-walter"
-            ]
-          },
-          {
             "reading" : "deeply",
             "witnesses" : [
               "en-mercier"
@@ -1796,6 +1805,12 @@
             "witnesses" : [
               "fr-5097"
             ]
+          },
+          {
+            "reading" : "two",
+            "witnesses" : [
+              "en-walter"
+            ]
           }
         ]
       },
@@ -1804,7 +1819,7 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : ",",
+            "reading" : "continents",
             "witnesses" : [
               "en-walter"
             ]
@@ -1906,15 +1921,15 @@
             ]
           },
           {
-            "reading" : "matter",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "plus",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -1936,7 +1951,7 @@
             ]
           },
           {
-            "reading" : "matter",
+            "reading" : "∅",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1948,21 +1963,21 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "matter",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "point",
             "witnesses" : [
               "fr-5097"
             ]
           },
           {
-            "reading" : "the",
+            "reading" : "the business",
             "witnesses" : [
               "en-walter"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]

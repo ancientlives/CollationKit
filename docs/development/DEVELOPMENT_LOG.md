@@ -2315,3 +2315,33 @@ reclassified as a substitution on each of the other two; moves and their confide
 `ALGORITHMS.md` §5, §5.2, §5.4 and §9 rule 3 updated.
 
 **State:** 224 tests green. No schema or golden change.
+
+---
+
+## 2026-10-03c — `implementation` + `test`: the base-anchored graph keeps every compared word (release 1 review, blocker B2)
+
+**Defect.** The default N-witness merge (`TokenGraph.build`, the B11 lift) folds each pairwise substitution onto the
+base nodes it covers. It paired the k-th token of the base range with the k-th token of the compared range, but both
+ranges are full-token ranges that include punctuation, and compared tokens past the base range's length were
+discarded (and the last one reused). So `red green` → `blue, yellow` gave `green] ,`; `red` → `very bright blue` gave
+`red] very`, losing "bright blue" from the graph, apparatus, synopsis and JSON; and `old grey` → `young` claimed
+"young" twice. ALGORITHMS §7b prescribed the offset rule. The peer merge (B14) was unaffected.
+
+**Fix.** `TokenGraph.substitutionReading` pairs COMPARABLE tokens only. Equal counts map one-to-one; otherwise the
+pairing is one-to-one up to the last shared position, which carries all remaining compared words joined, and any
+further base node reads `∅`. The unreachable `Collation.legacyVariantGraph` (114 lines; the pre-B11 fold kept as a
+fallback, which shared the bug) is removed.
+
+**Goldens (3 re-recorded, graph only; every pairwise result is unchanged).**
+- `15-mixed-variants`: `old grey` → `young` now reads `old] young`, `grey] ∅` (was a second, invented "young").
+- `20-verne-translation`: punctuation readings replaced by the dropped words (`downright` → `downright
+  inexplicable`, `Traders` → `Traders shipowners`, `the` → `the seaports`, …).
+- `22-verne-trilingual-graph`: the French base against two English translations; the repeated, invented readings
+  ("two" at several unrelated positions) become `∅`, and every compared word is kept.
+Punctuation-only readings across all goldens: **19 → 0**.
+
+**Evidence.** New `GraphSubstitutionTests` (the three reproductions, the rule itself, and a check that no golden has
+a punctuation-only reading): without the fix the behavioural tests fail with 22 assertion failures; with it all pass.
+ALGORITHMS §7b updated.
+
+**State:** 229 tests green. Schema unchanged (v3); three goldens re-recorded (graph only).
