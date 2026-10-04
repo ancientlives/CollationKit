@@ -177,6 +177,18 @@ public enum Exporter {
         fileRenderers(for: run, timestamp: timestamp).map { File(name: $0.name, contents: $0.render()) }
     }
 
+    /// Check, before any collation work, that `rawDir` can be created and written to: create it (with
+    /// intermediates) and write and remove a probe file. Throws the same `.io` error `write` would.
+    public static func preflight(directory rawDir: String) throws {
+        let dir = Paths.expand(rawDir)
+        let fm = FileManager.default
+        do { try fm.createDirectory(atPath: dir, withIntermediateDirectories: true) }
+        catch { throw CLIError(.io, "cannot create output directory \(dir): \(error.localizedDescription)") }
+        let probe = (dir as NSString).appendingPathComponent(".collate-write-test")
+        do { try "".write(toFile: probe, atomically: false, encoding: .utf8); try fm.removeItem(atPath: probe) }
+        catch { throw CLIError(.io, "cannot write to output directory \(dir): \(error.localizedDescription)") }
+    }
+
     /// Write the export files into `dir` (created if needed; `~` expanded — a menu-typed `~/out` must not
     /// become a literal `./~` directory). Returns the paths written. `progress` (optional) reports each file
     /// BEFORE it renders — the renders are the slow part on large runs, so a silent loop reads as a hang.

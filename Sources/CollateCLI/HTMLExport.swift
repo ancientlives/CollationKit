@@ -2194,10 +2194,10 @@ public enum HTMLExport {
     function label(x, y, txt, anchor) { var t = document.createElementNS(SVGNS, 'text');
       t.setAttribute('x', x); t.setAttribute('y', y); t.setAttribute('class', 'axlbl');
       if (anchor) t.setAttribute('text-anchor', anchor); t.textContent = txt; svg.appendChild(t); }
-    label(W / 2, H - 12, esc(D.base) + ' →', 'middle');
+    label(W / 2, H - 12, D.base + ' →', 'middle');   // textContent: no esc(), or A&B renders as A&amp;B
     var yl = document.createElementNS(SVGNS, 'text'); yl.setAttribute('class', 'axlbl');
     yl.setAttribute('transform', 'translate(14,' + (H / 2) + ') rotate(-90)'); yl.setAttribute('text-anchor', 'middle');
-    yl.textContent = esc(mate) + ' →'; svg.appendChild(yl);
+    yl.textContent = mate + ' →'; svg.appendChild(yl);
 
     // the points — colour by type, radius small so 18k dots stay a clean line. One tip element per render,
     // parented to the host (cleared on the next render via host.innerHTML) so it doesn't leak on tab/witness switch.
