@@ -336,13 +336,22 @@ public enum VariationClassifier {
             for t in m.insTokLo...m.insTokHi { carvedFromIns[m.insVi, default: []].insert(t) }
         }
 
-        // Rebuild a deletion/insertion variation from the token indices that survive after carving.
-        func remnant(_ v: Variation, side: Token, tokens: [Token], removed: Set<Int>, isDeletion: Bool) -> Variation? {
-            _ = side
-            guard let r = isDeletion ? v.baseTokenRange : v.comparedTokenRange else { return nil }
-            let kept = r.filter { !removed.contains($0) }
-            guard let lo = kept.min(), let hi = kept.max() else { return nil }   // nothing left → no remnant
-            let range = lo..<(hi + 1)
+        // Rebuild a deletion/insertion variation from the token indices that survive after carving: one variation
+        // per CONTIGUOUS run. (A single `min…max` range used to swallow a word carved from the middle, so the moved
+        // word was reported both inside the deletion and as the transposition; release 1 review, B8.)
+        func remnants(_ v: Variation, tokens: [Token], removed: Set<Int>, isDeletion: Bool) -> [Variation] {
+            guard let r = isDeletion ? v.baseTokenRange : v.comparedTokenRange else { return [] }
+            var runs: [Range<Int>] = []
+            for k in r where !removed.contains(k) {
+                if let last = runs.last, last.upperBound == k { runs[runs.count - 1] = last.lowerBound..<(k + 1) }
+                else { runs.append(k..<(k + 1)) }
+            }
+            // A run made only of punctuation carries no reading of its own once its word moved; drop it.
+            return runs.filter { run in run.contains { tokens[$0].kind == .word } }
+                       .map { remnant(v, range: $0, tokens: tokens, isDeletion: isDeletion) }
+        }
+
+        func remnant(_ v: Variation, range: Range<Int>, tokens: [Token], isDeletion: Bool) -> Variation {
             let reading = surface(tokens, range)
             return Variation(
                 type: isDeletion ? .deletion : .insertion,
@@ -374,10 +383,10 @@ public enum VariationClassifier {
         out.reserveCapacity(variations.count + moves.count)
         for (vi, v) in variations.enumerated() {
             if let removed = carvedFromDel[vi] {
-                if let rem = remnant(v, side: base[0], tokens: base, removed: removed, isDeletion: true) { out.append(rem) }
+                out.append(contentsOf: remnants(v, tokens: base, removed: removed, isDeletion: true))
                 out.append(contentsOf: transpositionAtDel[vi] ?? [])
             } else if let removed = carvedFromIns[vi] {
-                if let rem = remnant(v, side: compared[0], tokens: compared, removed: removed, isDeletion: false) { out.append(rem) }
+                out.append(contentsOf: remnants(v, tokens: compared, removed: removed, isDeletion: false))
                 // the move itself is emitted at the deletion site, not here
             } else {
                 out.append(v)
@@ -420,6 +429,15 @@ public enum VariationClassifier {
                 withinTransposition: withinTransposition,
                 insertionAnchor: anchor))
             pendingDel.removeAll(); pendingIns.removeAll()
+        }
+
+        // A region's ops cover only the tokens NOT consumed by a move, so consecutive ops can jump over a moved
+        // block. Merging across that hole made one variation whose full-token range (and reading) spanned the moved
+        // words too, reporting them twice: inside the substitution and as the transposition (release 1 review,
+        // B8). Start a new variation wherever the pending run is not contiguous on either side.
+        func splitAtGap(a: Int?, b: Int?) {
+            if let a, let last = pendingDel.last, a != last + 1 { flush(); return }
+            if let b, let last = pendingIns.last, b != last + 1 { flush() }
         }
 
         // Compare the punctuation tokens in the gaps (prevFull, full) on each side; if they differ, emit a
@@ -470,10 +488,13 @@ public enum VariationClassifier {
                 }
                 prevAFull = aFull; prevBFull = bFull
             case .substitute(let a, let b):
+                splitAtGap(a: a, b: b)
                 pendingDel.append(a); pendingIns.append(b)
             case .delete(let a):
+                splitAtGap(a: a, b: nil)
                 pendingDel.append(a)
             case .insert(let b):
+                splitAtGap(a: nil, b: b)
                 pendingIns.append(b)
             }
         }
@@ -489,7 +510,10 @@ public enum VariationClassifier {
     private static func punctuationSurfaces(_ tokens: [Token], after: Int, before: Int) -> [String] {
         guard before > after + 1 else { return [] }
         var result: [String] = []
-        for i in (after + 1)..<before where tokens[i].kind == .punctuation {
+        // Only punctuation the aligner did NOT see: when punctuation is comparable (`dropPunctuation == false`, as
+        // under `.diplomatic`) the aligner has already reported any difference as a substitution, and the overlay
+        // reported it a second time (release 1 review, B8).
+        for i in (after + 1)..<before where tokens[i].kind == .punctuation && !tokens[i].isComparable {
             // Whitespace-only or empty punctuation carries no editorial signal; keep real marks/spacing.
             let s = tokens[i].surface.trimmingCharacters(in: .whitespacesAndNewlines)
             if !s.isEmpty { result.append(s) }

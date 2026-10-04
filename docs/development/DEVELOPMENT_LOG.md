@@ -2447,3 +2447,28 @@ New `LexiconNormalisationTests`: the accented-entry and CRLF tests fail before t
 order-independent equality are guarded too. ALGORITHMS §7d updated.
 
 **State:** 251 tests green.
+
+---
+
+## 2026-10-03h — `implementation` + `test`: nothing is reported twice (release 1 review, blocker B8)
+
+Three routes reported the same text twice (the fourth part of B8, moved blocks growing into each other, was fixed
+with B1):
+
+1. **Displaced-word recovery.** A deletion or insertion that a recovered single-word move was carved out of was
+   rebuilt as one `min…max` range, so a word moved out of its *middle* stayed inside it: `alpha zebra beta` deleted
+   and `zebra` moved. Remnants are now one variation per contiguous run (punctuation-only runs dropped).
+2. **Region coalescing across a move.** A region's ops cover only tokens not consumed by an anchor-path move, so
+   consecutive ops can jump a moved block. Merging across that hole produced one substitution whose range spanned the
+   moved words. A pending run now flushes whenever the next op is not contiguous on either side. (Found on the
+   *Journey* full novel after fixing route 1: `off the rocks` was also inside a 22-token substitution.)
+3. **Diplomatic punctuation.** Under the diplomatic normaliser punctuation is comparable, so the aligner already
+   reports a `,`→`;` change; the overlay then reported it again. The overlay now compares only punctuation the
+   aligner did not see.
+
+**Evidence.** New `DoubleReportingTests` (the reproductions, and a seeded fuzz asserting that no move overlaps another
+variant outside `withinTransposition`) fail before the fix with 17 assertion failures and pass after. On all three
+full novels no move now overlaps another variant (one did before); variant counts rise by 1–4 where carved remnants
+split into runs. No golden changed. ALGORITHMS §6, §6.1 and §6.2 updated.
+
+**State:** 254 tests green.

@@ -400,13 +400,15 @@ classify(segments, A, B, aMap, bMap, recordAccidentals):
     return out
 
 classifyRegion(ops, ...):                         // coalesce adjacent non-matches
-    accumulate runs of DELETE (pendingDel) and INSERT (pendingIns); on MATCH or end, flush:
+    accumulate runs of DELETE (pendingDel) and INSERT (pendingIns); on MATCH, at end, or when the next op is NOT
+    contiguous with its pending run on either side (it jumps a moved block's masked tokens), flush:
         both non-empty → SUBSTITUTION;  only ins → INSERTION;  only del → DELETION
     on MATCH, if recordAccidentals and surfaces differ (same key) → VARIANT_SPELLING
     each emitted Variation gets locations via location(tokens, range)   // §7
 ```
 
-Coalescing is why a reworded clause is **one** SUBSTITUTION, not several.
+Coalescing is why a reworded clause is **one** SUBSTITUTION, not several. The contiguity split (2026-10, review
+B8) stops a variation's range from spanning a moved block, which would report the moved words twice.
 
 ### 6.1 Displaced-reading recovery (single/short moves the anchor pass cannot see)
 
@@ -440,7 +442,9 @@ recoverDisplacedReadings(variations, A, B):
         OR maxDeviation <= localMoveTokens          # (3) a genuinely LOCAL single-word hop (small off-diagonal dist)
         # equivalently: DROP only a LONE, globally-COMMON, NON-local word — the coincidence signature
         # a dropped block reverts to the plain DELETION + INSERTION the aligner already found
-    whatever remains of a carved DELETION/INSERTION stays a (smaller) DELETION/INSERTION
+    whatever remains of a carved DELETION/INSERTION stays a (smaller) DELETION/INSERTION — ONE PER CONTIGUOUS
+    RUN of surviving tokens (a run of punctuation only is dropped); never one min…max range, which would still
+    contain a word carved from the middle (2026-10, review B8)
 ```
 
 **The rarity / locality gate.** The 1:1 test at `match` is over the *unmatched* words only. A word that is COMMON
@@ -488,8 +492,10 @@ recordPunctuation overlay (runs during classification, at each MATCH):
     track prevAFull, prevBFull = the previous matched word's full-token index on each side,
         carried ACROSS regions (anchors are regions too) so a split doesn't double-count;
         reset across a transposition (a move breaks the linear punctuation flow)
-    at a MATCH(aFull,bFull): if prev≥0, compare punctuation surfaces in (prevAFull,aFull) vs (prevBFull,bFull)
-        (whitespace-trimmed, empty ignored); if they differ → emit VARIANT_SPELLING located at the word
+    at a MATCH(aFull,bFull): if prev≥0, compare the surfaces of the NON-COMPARABLE punctuation tokens in
+        (prevAFull,aFull) vs (prevBFull,bFull) (whitespace-trimmed, empty ignored); if they differ → emit
+        VARIANT_SPELLING located at the word. Comparable punctuation (dropPunctuation off, as under the diplomatic
+        normaliser) was already aligned and reported; comparing it again reported it twice (2026-10, review B8).
 ```
 
 It is a **pure overlay**: alignment and the substantive apparatus are byte-identical with it off (the default

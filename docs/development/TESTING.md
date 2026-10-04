@@ -45,6 +45,7 @@ The suites:
 | `RenderingTests` | apparatus, synopsis, located report; sigla grouping |
 | `NoCollateRegionTests` | `no_collate` regions (blocker B6): the two-comment form, nested page-break comments, page breaks inside a region, and the invariant that no token lies inside one |
 | `NarrativeTests` | the `CollationNarrative` prose summary: extent, dominant kind, clustering, moves, alignment verdict |
+| `DoubleReportingTests` | nothing reported twice (blocker B8): a word moved out of a deletion's middle, edits on both sides of a moved block, diplomatic punctuation; plus a seeded fuzz that no move overlaps another variant |
 | `GraphInsertionTests` | pure insertions anchored into the N-witness graph as inserted nodes (B6c) |
 | `CollateCLITests` | the `collate` core: flag parsing and validation, witness discovery and ordering, text/JSON/CSV exporters (JSON export equals the conformance golden), dispatch and exit codes, determinism |
 | `MenuTests` | the interactive menu driven by a scripted console (no TTY): defaults, subsets, base, export, quit/EOF, re-asking when fewer than two witnesses |
