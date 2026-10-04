@@ -93,6 +93,8 @@ public enum Collation {
                                lexicon: TranslationLexicon? = nil) -> CollationResult {
         let baseTokens = Tokenizer.tokenize(base.text, with: normalizer, pagination: pagination)
         let compTokens = Tokenizer.tokenize(compared.text, with: normalizer, pagination: pagination)
+        // Key the lexicon exactly as the tokens are keyed (review B7).
+        let lexicon = lexicon?.normalized(with: normalizer)
 
         // Reduce to the comparable tokens the aligner sees, keeping a map back to full-token indices and a
         // parallel page list so the aligner can break transposition ties in favour of the page-stable block.

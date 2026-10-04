@@ -74,6 +74,8 @@ extension TokenGraph {
                              progress: ((String) -> Void)? = nil) -> TokenGraph? {
         guard let base = witnesses.first else { return nil }
         let allIDs = Set(witnesses.map { $0.id })
+        // Key the lexicon exactly as the tokens are keyed (review B7).
+        let lexicon = lexicon?.normalized(with: normalizer)
 
         // ---- seed the spine from the base ----
         var nextUid = 0
