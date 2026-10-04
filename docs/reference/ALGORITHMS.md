@@ -67,8 +67,15 @@ variantGraph(witnesses, params):                // §7 (N witnesses)
 
 Segment `text` into WORD and PUNCT tokens; assign citation coordinates per the pagination model.
 
-- **Word** = a maximal run of letters/digits and *intra-word* `'` `’` `-`. **Punct** = a maximal run of other
-  non-space characters. Whitespace separates; it is not a token.
+- **Characters are Unicode scalars**, not UTF-16 units: a character above U+FFFF (rare CJK, historic scripts,
+  mathematical letters, emoji) is one character. Token ranges are still UTF-16 offsets. *(2026-10, review B4: a
+  port that walks UTF-16 units must decode surrogate pairs; the reference once dropped such characters.)*
+- **Word** = a run that **starts with a letter, digit or mark** and continues through letters, digits, marks and
+  *intra-word* joiners `'` `’` `‘` `ʼ` `-`; a trailing run of joiners is trimmed back off the word. **Punct** = a
+  maximal run of any other non-space characters, including symbols (emoji) and a joiner that does not continue a
+  word (a leading or closing quote, a dash). A run of hyphens is always PUNCT. Whitespace separates; it is not a
+  token. So `'Hello,'` → PUNCT `'`, WORD `Hello`, PUNCT `,'`, the same words as `"Hello,"`; `--` and `—` are both
+  PUNCT. *(2026-10, review B5: before, a leading/trailing quote or dash became part of the word.)*
 - **Hyphen splitting** (configurable; ON for substantive collation, OFF for a diplomatic/exact comparison):
   when on, a word run containing an **interior** hyphen (one not at the run's start or end) is split into its
   component WORD tokens, each hyphen run emitted as a separate PUNCT token (foldable). So `mother-in-law`
@@ -84,7 +91,8 @@ Segment `text` into WORD and PUNCT tokens; assign citation coordinates per the p
   added), reported as insertion/deletion — the hyphen fold does not, and must not, hide a genuine rephrase. A
   word change *inside* the compound (`well-known`→`widely-known`) remains a substitution.
 - **normalize(word)** (configurable — the substantive/accidental lever):
-  `lowercase? → strip-diacritics? → apply spelling-equivalents (e.g. colour→color)`. PUNCT tokens get
+  `fold-typographic-apostrophes? (’ ‘ ʼ → ') → lowercase? → strip-diacritics? → apply spelling-equivalents
+  (e.g. colour→color)`. The apostrophe fold is ON for substantive collation and OFF for diplomatic. PUNCT tokens get
   `normalized = ""` when punctuation is dropped (then ignored by alignment). *Even when dropped, the PUNCT
   token's surface is retained* so the optional **diplomatic punctuation overlay** (§6.2) can compare it.
 - **Pagination & citation coordinates** (§ the pagination model):
