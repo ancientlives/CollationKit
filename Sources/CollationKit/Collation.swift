@@ -217,9 +217,9 @@ public enum Collation {
                let projected = graph.projectedVariantGraph(baseID: base.id) {
                 return (projected, graph)
             }
-            // Fallback (should not happen for a non-empty set): the pre-B11 base-anchored fold.
-            return (legacyVariantGraph(witnesses: witnesses, normalizer: normalizer,
-                                       anchorLength: anchorLength, scores: scores, pagination: pagination), nil)
+            // Unreachable for a non-empty witness set (the guard above handles the empty one). The pre-B11 fold that
+            // used to live here (`legacyVariantGraph`) was removed in 2026-10: it was dead and duplicated bug B2.
+            return (VariantGraph(baseID: base.id, nodes: []), nil)
         case .peerMSA:
             if let graph = TokenGraph.buildPeerMSA(witnesses: witnesses, normalizer: normalizer,
                                                    pagination: pagination, anchorLength: anchorLength,
@@ -231,118 +231,4 @@ public enum Collation {
         }
     }
 
-    /// The pre-B11 base-anchored progressive fold, retained as a fallback and for A/B comparison. `variantGraph`
-    /// now routes through the token-graph projection; this is only reached if a graph can't be built.
-    static func legacyVariantGraph(witnesses: [Witness],
-                                   normalizer: Normalizer = .substantive,
-                                   anchorLength: Int = 3,
-                                   scores: AlignmentScores = .prose,
-                                   pagination: PaginationModel = .default) -> VariantGraph {
-        guard let base = witnesses.first else {
-            return VariantGraph(baseID: "", nodes: [])
-        }
-        let baseTokens = Tokenizer.tokenize(base.text, with: normalizer, pagination: pagination)
-        // Seed each base position with the base's own reading.
-        var readingsByPos: [Int: [String: Set<String>]] = [:]
-        for (i, t) in baseTokens.enumerated() where t.isComparable {
-            readingsByPos[i, default: [:]][t.surface, default: []].insert(base.id)
-        }
-
-        // B6c: insertions have no base position, so they are collected separately, keyed by their "insert-after"
-        // anchor (the base token they follow; -1 = before all base text) and then by the inserted reading. Each
-        // (anchor, reading) becomes one inserted node carrying the witnesses that inserted that text; every
-        // OTHER witness (the base included) omits it → reads `∅`, which is exactly what makes the node a variant.
-        var insertionsByAnchor: [Int: [String: Set<String>]] = [:]
-
-        for compared in witnesses.dropFirst() {
-            let result = collate(base: base, compared: compared,
-                                 normalizer: normalizer, anchorLength: anchorLength,
-                                 scores: scores, pagination: pagination)
-            let compTokensAll = Tokenizer.tokenize(compared.text, with: normalizer, pagination: pagination)
-            // A base position is "changed" by this witness only when a deletion or substitution touches it.
-            // A TRANSPOSITION is NOT a change at the base position — the witness carries the same text, it
-            // merely appears elsewhere — so transposed positions count as AGREEMENT here (the move itself is
-            // reported separately by the pairwise result, not folded into the base apparatus). Recording a
-            // single changed reading PER base token (not the whole multi-word block string per position)
-            // keeps the apparatus and synopsis one-reading-per-cell.
-            var changed = Set<Int>()
-            for v in result.variations {
-                switch v.type {
-                case .deletion:
-                    if let r = v.baseTokenRange {
-                        for pos in r where readingsByPos[pos] != nil {
-                            readingsByPos[pos, default: [:]]["∅", default: []].insert(compared.id)
-                            changed.insert(pos)
-                        }
-                    }
-                case .substitution:
-                    if let r = v.baseTokenRange {
-                        // Map each base token in the substitution to the compared token at the same offset
-                        // (or the last, if the compared side is shorter) so a multi-word sub fills cells
-                        // word-by-word rather than repeating the whole phrase.
-                        let compIdx = v.comparedTokenRange.map { Array($0) } ?? []
-                        for (k, pos) in r.enumerated() where readingsByPos[pos] != nil {
-                            let reading: String
-                            if compIdx.isEmpty { reading = "∅" }
-                            else {
-                                let ci = compIdx[min(k, compIdx.count - 1)]
-                                reading = ci < compTokensAll.count ? compTokensAll[ci].surface : "∅"
-                            }
-                            readingsByPos[pos, default: [:]][reading, default: []].insert(compared.id)
-                            changed.insert(pos)
-                        }
-                    }
-                case .insertion:
-                    // B6c: text this witness added where the base has nothing. Record it against its
-                    // insert-after anchor so it becomes (or joins) an inserted node below. A within-transposition
-                    // insertion is an edit inside a moved block (reported by the pairwise result), not a graph
-                    // insertion; skip it here to keep the base apparatus stable.
-                    if !v.withinTransposition, let anchor = v.insertionAnchor {
-                        insertionsByAnchor[anchor, default: [:]][v.comparedReading, default: []].insert(compared.id)
-                    }
-                case .transposition, .variantSpelling:
-                    break   // transposition = agreement at base (the move is reported by the pairwise result);
-                            // accidentals aren't recorded in the graph.
-                }
-            }
-            // Every base position this witness did NOT change shares the base reading → agreement.
-            for (i, t) in baseTokens.enumerated() where t.isComparable && !changed.contains(i) {
-                readingsByPos[i, default: [:]][t.surface, default: []].insert(compared.id)
-            }
-        }
-
-        let allIDs = Set(witnesses.map { $0.id })
-        var baseNodes = readingsByPos.keys.sorted().map { pos in
-            GraphNode(basePosition: pos, readings: readingsByPos[pos] ?? [:])
-        }
-        // One inserted node per (anchor, reading). Determinism: sort anchors, then readings within an anchor.
-        var insertedNodes: [GraphNode] = []
-        for anchor in insertionsByAnchor.keys.sorted() {
-            let byReading = insertionsByAnchor[anchor] ?? [:]
-            // The inserted text readings (everything except the `∅`-omission bucket), sorted for stable output.
-            let textReadings = byReading.keys.filter { $0 != "∅" }.sorted()
-            for reading in textReadings {
-                var readings: [String: Set<String>] = [reading: byReading[reading] ?? []]
-                // Everyone not carrying THIS reading omits it (other inserters at the same anchor + the base).
-                let carriers = byReading[reading] ?? []
-                let absent = allIDs.subtracting(carriers)
-                if !absent.isEmpty { readings["∅"] = absent }
-                insertedNodes.append(GraphNode(basePosition: -1, readings: readings, insertedAfter: anchor))
-            }
-        }
-        // Merge base + inserted nodes into one text-ordered sequence: an inserted node sits immediately after
-        // its anchor base position (anchor -1 → before all base text). Stable, deterministic ordering.
-        baseNodes.append(contentsOf: insertedNodes)
-        let nodes = baseNodes.sorted { a, b in
-            let ka = a.isInserted ? (a.insertedAfter ?? -1) : a.basePosition
-            let kb = b.isInserted ? (b.insertedAfter ?? -1) : b.basePosition
-            if ka != kb { return ka < kb }
-            // Same anchor index: the base node comes first, then inserted nodes (ordered by their reading).
-            if a.isInserted != b.isInserted { return !a.isInserted }
-            let ra = a.readings.keys.filter { $0 != "∅" }.min() ?? ""
-            let rb = b.readings.keys.filter { $0 != "∅" }.min() ?? ""
-            return ra < rb
-        }
-        return VariantGraph(baseID: base.id, nodes: nodes)
-    }
 }

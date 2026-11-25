@@ -509,8 +509,15 @@ variantGraph(witnesses, params):                  // base = witnesses[0]
         r = collate(base, compared, params); changed = {}
         for v in r.variations:
             DELETION:     for pos in v.baseTokens: readingsByPos[pos]["∅"] += compared.id; changed += pos
-            SUBSTITUTION: map each base token to the compared token at the same offset; record its surface;
-                          changed += pos
+            SUBSTITUTION: B = comparable base tokens in v.baseTokens (n of them); C = comparable compared
+                          tokens in v.comparedTokens (m of them; punctuation excluded on both sides).
+                          for k in 0..<n:
+                              if k >= m:                 reading = "∅"
+                              elif k == min(n, m) - 1:   reading = join(C[k...], " ")   // last shared node
+                              else:                      reading = C[k]                 // keeps the rest
+                          readingsByPos[B[k]][reading] += compared.id; changed += B[k]
+                          // (2026-10, review B2: the old rule paired full tokens by offset, inventing
+                          //  punctuation readings and dropping compared words past the base length)
             INSERTION:    if not v.withinTransposition:                     // B6c
                               insertionsByAnchor[v.insertionAnchor][v.comparedReading] += compared.id
             TRANSPOSITION / VARIANT_SPELLING: skip   // transposition = agreement at base
