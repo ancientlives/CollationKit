@@ -55,6 +55,7 @@ The suites:
 | `PeerMSATests` | the peer merge (B14): recurring-word moves `certain` from structure, shared insertions grouped across non-base witnesses, stability under witness reordering, parity with the base-anchored merge on simple sets |
 | `HTMLExportTests` | the `collation.html` viewer: payload embedding and escaping, determinism, always exported, `--format html`, progress output |
 | `LexiconNormalisationTests` | lexicon forms keyed with the run's normaliser so accented entries match, and CRLF lexicon files (blocker B7) |
+| `ViewerSafetyTests` | the viewer's safety and speed (blockers B11, B12, B15): no raw markup characters in the embedded data, witness ids never inserted as markup, one-pass placeholder filling, no `opacity` on the Changes view's spans |
 | `LexiconTests` | translation-aware anchoring (B10): lexicon file format, empty lexicon is byte-identical, French↔English anchoring, the trilingual Verne graph |
 | `ScoringPresetTests` | the verse/prose scoring presets (B7): `.prose` equals the historical default, `.verse` aligns a reworded line as delete+insert |
 | `CollationJSONTests` | the JSON interchange: shape, round-trip, byte-stable output |

@@ -134,8 +134,9 @@ final class HTMLExportTests: XCTestCase {
         let hostileHTML = HTMLExport.html(hostileRun)
         let dataBlock = hostileHTML.components(separatedBy: "<script type=\"application/json\" id=\"data\">")[1]
             .components(separatedBy: "</script>")[0]
-        XCTAssertTrue(dataBlock.contains("<\\/script>"), "embedded `</` is escaped inside the JSON block")
-        XCTAssertFalse(dataBlock.contains("</script>"), "the data block cannot be terminated early")
+        XCTAssertTrue(dataBlock.contains("\\u003c") && dataBlock.contains("script\\u003e"),
+                      "embedded `<` and `>` are \\u-escaped in the JSON block")
+        XCTAssertFalse(dataBlock.contains("<"), "no raw `<` at all, so the data block cannot be terminated or re-moded")
     }
 
     // MARK: CLI integration

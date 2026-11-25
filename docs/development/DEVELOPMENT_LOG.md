@@ -2472,3 +2472,31 @@ full novels no move now overlaps another variant (one did before); variant count
 split into runs. No golden changed. ALGORITHMS §6, §6.1 and §6.2 updated.
 
 **State:** 254 tests green.
+
+---
+
+## 2026-10-03i — `implementation` + `test`: the viewer is safe with hostile input and fast in Safari (release 1 review, blockers B11, B12, B15)
+
+**B11 — script injection through witness file names.** Witness ids come from file names. Three places in the page
+script built `innerHTML` from an id without `esc()` (`primaryMate` in the overview, `capitalise(mate)` in the story,
+`D.base` in the alignment verdict), so a witness file named `<img src=x onerror=…>.txt` ran script when the viewer
+opened. Placeholders were also substituted one after another, so a witness named `%%DATA%%` pulled the whole payload
+into the page title. All three are escaped (and the variant-type labels too, for defence in depth); placeholders are
+filled in one pass (`HTMLExport.fillPlaceholders`). An audit of all 51 `innerHTML` assignments found no other
+unescaped data.
+
+**B12 — a witness could blank the page.** The embedded JSON escaped only `</`. Witness text containing `<!--<script`
+switched the HTML parser into its "script data escaped" state, so the data script never closed and the page rendered
+blank with no console error. `<`, `>`, `&`, U+2028 and U+2029 are now `\u`-escaped (`HTMLExport.scriptSafeJSON`);
+these are JSON string escapes, so the parsed data is unchanged.
+
+**B15 — the Changes view froze Safari.** `opacity` on every struck-through span (about 26,000 on a full novel) made
+WebKit's layout extremely slow. The rule now uses an equivalent solid colour. Measured in headless WebKit with a forced
+paint on the full *Mysterious Island* viewer: switching to the Changes tab 82.4 s → 2.0 s; scrolling to the middle
+66.5 s → 0.6 s.
+
+**Evidence.** In headless WebKit against `main`, the hostile file name's script ran and the `<!--<script` page
+rendered no tabs; with the fix both pages render all nine tabs, nothing executes, and there are no page errors. New
+`ViewerSafetyTests`; one `HTMLExportTests` assertion that pinned the old `<\/` escaping now pins the stronger rule.
+
+**State:** 258 tests green. No engine, schema or golden change.
