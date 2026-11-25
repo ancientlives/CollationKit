@@ -34,17 +34,19 @@ words; the engine only treats the exact marker `<!-- page break -->` specially).
 
 | work | witnesses (translations) | source | scale | ~variants (Ch.1) | full-novel pair (`full/`) |
 |------|--------------------------|--------|-------|------------------|---------------------------|
-| `20000-leagues` | `mercier` (Sampson Low, 1872 std.) · `walter` (modern, unabridged) | PG164 · PG2488 | Ch.1 excerpt **+ full novel** | 403 | ~21.5k variants, ~9 s; align 4.8% drift / 98.9% mono |
-| `earth-to-moon` | `towle` (From the Earth to the Moon) · `moonvoyage` (The Moon-Voyage) | PG83 · PG12901 | Ch.1 excerpt **+ full novel** | 329 | ~7.4k variants, ~2 s; align 9.4% / 98.3% |
-| `journey-centre-earth` | `malleson` (Liedenbrock) · `ward` (Von Hardwigg) | PG3748 · PG18857 | Ch.1 excerpt **+ full novel** | 157 | ~12.8k variants, ~4.5 s; align 12% / 98.6% (ward is a re-write, ~16% longer) |
-| `mysterious-island` | `kingston` · `white` | PG1268 · PG8993 | Ch.1 excerpt **+ full novel** | 388 | ~31.8k variants, ~15 s — the **largest** pair; align 4.9% / 98.0% |
+| `20000-leagues` | `mercier` (Sampson Low, 1872 std.) · `walter` (modern, unabridged) | PG164 · PG2488 | Ch.1 excerpt **+ full novel** | 403 | 21,456 variants, ~12 s; align 1.7% drift / 100% mono |
+| `earth-to-moon` | `towle` (From the Earth to the Moon) · `moonvoyage` (The Moon-Voyage) | PG83 · PG12901 | Ch.1 excerpt **+ full novel** | 329 | 7,235 variants, ~3 s; align 3.3% / 100% |
+| `journey-centre-earth` | `malleson` (Liedenbrock) · `ward` (Von Hardwigg) | PG3748 · PG18857 | Ch.1 excerpt **+ full novel** | 157 | 12,722 variants, ~7 s; align 12% / 100% (ward is a re-write, ~16% longer) |
+| `mysterious-island` | `kingston` · `white` | PG1268 · PG8993 | Ch.1 excerpt **+ full novel** | 388 | 31,614 variants, ~24 s — the **largest** pair; align 2.9% / 100% |
 
 Every Chapter-1 pair is a genuine, demanding substantive-variation test (heavy substitution + transposition +
 edits-within-moves); the two `journey-centre-earth` translations even name the professor differently
 (Liedenbrock vs Von Hardwigg). **Each work now also has a `full/` whole-novel pair** for scale collation
-testing — `mysterious-island` is the largest (~195k / 167k words, ~15 s), and `journey-centre-earth` is a
+testing — `mysterious-island` is the largest (~195k / 167k words, ~24 s), and `journey-centre-earth` is a
 demanding *structural-divergence* case (the ward edition is a complete re-write, ~16% longer — the alignment
 map shows a clean but consistently-off-diagonal line, i.e. a correct alignment of two very different editions).
+*(Full-novel figures: v0.3.0, release build, Apple silicon, end to end including every export; measured
+2026-11-25. Absolute times are host-specific.)*
 Full-novel witnesses exclude each edition's differing front matter via `<!-- no_collate -->` regions so only the
 novel body is collated. The `20000-leagues` full novels *found a real engine crash* (an inverted-range trap),
 now fixed and guarded; see [`known-issues/`](known-issues/). Per-work stats live in each `meta.json`'s `full`

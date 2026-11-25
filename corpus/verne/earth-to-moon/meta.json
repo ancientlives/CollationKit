@@ -23,7 +23,7 @@
       "full/towle.txt": "~40.7k words, from PG83 (Mercier & King tr., 1873; siglum 'towle' is legacy), Ch.I to just before 'ROUND THE MOON'",
       "full/moonvoyage.txt": "~51.5k words, from PG12901 ('The Moon-Voyage', Ward Lock / likely Linklater tr., 1877), 'THE GUN CLUB.' to just before 'ROUND THE MOON.'"
     },
-    "collationResult": "~7,362 variants (5,684 substitutions, 741 deletions, 825 insertions, 112 moved); ~2.2 s (release). Alignment: 5,796 shared points, 9.4% max off-diagonal drift, 98.3% monotonic — a smooth diagonal (the honest divergence of two different translations)."
+    "collationResult": "7,235 variants (5,684 substitutions, 769 deletions, 778 insertions, 4 moved, 3 of them likely); ~3.4 s end to end (v0.3.0, release, 2026-11-25). Alignment: 3.3% max off-diagonal drift, 100% monotonic — a smooth diagonal (the honest divergence of two different translations)."
   },
   "collate": {
     "recordAccidentals": false,

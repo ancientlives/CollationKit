@@ -7,7 +7,7 @@ corpus problems — recorded here (with reproducers) so they can be fixed in Col
 
 **Resolution.** Fixed in `Transposition.appendRegion` (it now takes bounds and clamps the region spans, so
 B-overlapping spine anchors yield an empty gap instead of an inverted range). The full novels now collate
-(~3 s, ≈21.8k variants). Guarded by `PropertyTests.testLargeRepetitiveReorderedPairsDoNotTrap` (verified to
+(21,456 variants, ~12 s end to end on v0.3.0). Guarded by `PropertyTests.testLargeRepetitiveReorderedPairsDoNotTrap` (verified to
 reproduce the crash pre-fix). See `docs/development/DEVELOPMENT_LOG.md` 2026-07-01. The account below is kept for
 the record.
 

@@ -2545,3 +2545,45 @@ it now confirms explicitly.
 - **`collate-demo` is deprecated** (a notice on stderr; removal in 0.4).
 
 **State:** 270 tests green. No engine change.
+
+---
+
+## 2026-11-25 — `test` + `usage`: v0.3.0 re-measured; the narrative stops claiming what it cannot know
+
+**Re-measurement.** The four Verne full-novel pairs and the `collate-bench` sweep were re-run on the v0.3.0
+candidate (release build, Apple M3), with the pre-fix `main` measured back to back for comparison. The Walter
+witness was rebuilt from a July download (Project Gutenberg was down) and is byte-identical to the one the July
+results came from.
+
+| pair | variants | moves (likely) | drift / monotonic | end to end |
+|------|---------:|---------------:|------------------:|-----------:|
+| earth-to-moon | 7,235 | 4 (3) | 3.3% / 100% | 3.4 s |
+| journey-centre-earth | 12,722 | 2 (2) | 12% / 100% | 6.9 s |
+| 20,000 Leagues | 21,456 | 1 (0) | 1.7% / 100% | 11.7 s |
+| mysterious-island | 31,614 | 1 (1) | 2.9% / 100% | 23.5 s |
+
+- **Moves.** The four pairs now report 8 moves (6 `likely`), against the 11 anchor-path residuals of 2026-07-24 and
+  10 on the pre-fix `main` (4 / 2 / 3 / 1). The two dropped on mysterious-island are the duplicate and overlapping
+  reports B8 removed. Both `certain` moves are genuine single-word reorderings found by the displaced-word path:
+  "the Andes or the Rocky Mountains" / "the Rocky Mountains or the Andes" (20,000 Leagues) and "enfilading, or
+  point-blank firing" placed after "the English, French, and Prussians have nothing to learn" (earth-to-moon).
+  The `meta.json` "526 moved" and "112/133 moved" figures dated from before the July gates.
+- **Alignment.** Every pair is now 100% monotonic. The 20,000 Leagues figures quoted since July (4.8% / 98.9%)
+  predate the July gates; it is now 1.7% / 100%.
+- **Cost.** Same shape as the June recording (near-linear in length and in witness count), slower in absolute
+  terms: that recording predates B11 and the July gates. v0.3.0 costs 10–25% more than the pre-fix `main` on
+  pairwise collation (the B1 no-token-twice check) and about the same on the graph.
+
+**Narrative.** The prose summary said accidentals "were checked and none were recorded" whenever none were in the
+result, even with accidentals off (a release 1 review finding left at "experimental"). The narrative cannot see the
+setting, so it now says that a substantive collation treats accidentals as agreement unless they are recorded. The
+move sentence read "1 of these are reported as possible moves …, the rest as certain" for a single likely move; it
+now agrees in number and drops "the rest" when every move is likely. The viewer's overview carried the same claim.
+
+**Demos.** `site/demos/` had not been regenerated since the initial release, so the published viewer lacked the
+B11/B12/B15 fixes and the engine fixes. Regenerated with `site/build-demos.sh`.
+
+**Docs.** Figures updated in the corpus README, bibliography, `meta.json`, known-issues, PAPER_NOTES and BENCHMARKS
+(tables, CSV, and the stale "progressive fold" wording). Dated log entries are left as they were.
+
+**State:** 271 tests green (+1 `NarrativeTests`). No schema or golden change.

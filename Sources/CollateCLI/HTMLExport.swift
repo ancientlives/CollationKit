@@ -1275,7 +1275,7 @@ public enum HTMLExport {
         + fmt(totalVar) + '</b> points. The dominant kind is <b>' + esc(LABEL[dom] || dom) + '</b> ('
         + Math.round(100 * domN / totalVar) + '% of changes)'
         + (S.moveEdges ? ', with <b>' + fmt(S.moveEdges) + '</b> passage' + (S.moveEdges === 1 ? '' : 's') + ' moved' : '')
-        + '. ' + (S.typeCounts.variantSpelling ? '' : 'Spelling/accidental differences were checked and none were recorded (a substantive collation). ')
+        + '. ' + (S.typeCounts.variantSpelling ? '' : 'No spelling/accidental differences are listed (a substantive collation treats them as agreement unless accidentals are recorded). ')
         + 'Use the breakdown below, then drill into a view.';
       isec.appendChild(ins);
     }

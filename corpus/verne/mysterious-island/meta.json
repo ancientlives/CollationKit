@@ -22,7 +22,7 @@
       "full/kingston.txt": "~195.0k words, from PG1268 (whole novel; front matter excluded before '^Chapter 1')",
       "full/white.txt": "~167.5k words, from PG8993 (whole novel; front matter excluded before '^CHAPTER I.')"
     },
-    "collationResult": "~31,809 variants (25,381 substitutions, 4,192 deletions, 1,710 insertions, 526 moved); ~14.7 s (release) — the corpus's largest-scale timing test. Alignment: 25,919 shared points, 4.9% max drift, 98.0% monotonic — a clean diagonal; the collation holds end to end (the length difference is honest, not a mis-alignment)."
+    "collationResult": "31,614 variants (25,737 substitutions, 4,158 deletions, 1,718 insertions, 1 moved, likely); ~23.5 s end to end (v0.3.0, release, 2026-11-25) — the corpus's largest-scale timing test. Alignment: 2.9% max drift, 100% monotonic — a clean diagonal; the collation holds end to end (the length difference is honest, not a mis-alignment)."
   },
   "collate": {
     "recordAccidentals": false,
