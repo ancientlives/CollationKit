@@ -29,6 +29,10 @@ public enum CollateCLI {
     /// shell passes a real `TerminalConsoleIO`; tests pass a `ScriptedConsoleIO`. With no subcommand (or just
     /// `--dir <path>`), and a console available, this launches the menu; `--no-input` forbids that (for CI).
     public static func main(_ args: [String], sink: OutputSink, console: ConsoleIO?) -> Int32 {
+        var args = args
+        // `--no-input` is a global flag (forbid the menu). Before a subcommand it used to be read as the command
+        // itself, so the documented `collate --no-input run …` failed (release 1 review, B14).
+        if args.count > 1, args[0] == "--no-input", ["run", "list"].contains(args[1]) { args.removeFirst() }
         // A no-subcommand invocation (nothing, or only `--dir <path>`) means "interactive menu".
         if isInteractiveInvocation(args) {
             if args.contains("--no-input") {
@@ -39,6 +43,9 @@ public enum CollateCLI {
             return dispatch { try menuCommand(args, sink: sink, console: console) }(sink)
         }
         let first = args[0]
+        if ["run", "list"].contains(first), args.contains("--help") || args.contains("-h") {
+            sink.out(usage); return 0                     // `collate run --help` (documented; used to error)
+        }
         switch first {
         case "--help", "-h":     sink.out(usage); return 0
         case "--version":        sink.out("collate \(version)"); return 0
@@ -107,6 +114,9 @@ public enum CollateCLI {
     static func execute(_ opts: CLIOptions, sink: OutputSink) throws {
         let witnesses = try WitnessLoader.load(opts)
         let lexicon = try loadLexicon(opts)
+        // Check the output folder BEFORE collating: an unwritable folder used to be found only after the whole
+        // run (minutes on a full novel in a debug build) had been thrown away (release 1 review, B14).
+        if let dir = opts.outDir { try Exporter.preflight(directory: dir) }
         let started = Date()
         sink.err("→ \(witnesses.count) witnesses loaded (base \(witnesses.first?.id ?? "?")): "
                  + witnesses.map { "\($0.id) (\($0.text.count) chars)" }.joined(separator: ", "))

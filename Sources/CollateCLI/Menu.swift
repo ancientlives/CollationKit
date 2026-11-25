@@ -36,10 +36,15 @@ public enum Menu {
             io.write("")
             io.write("  ── Summary " + String(repeating: "─", count: 52))
             io.write("   " + summary(assembled))
-            switch ask(io, "  Run? [Y/n/q] ", default: "y").lowercased() {
-            case "q":            return .quit
-            case "n", "e":       continue                    // edit options → restart the flow
-            default:             return .run(assembled)       // y / empty / anything else → run
+            // Only an explicit yes (or Enter) runs; `n` edits; `q` or end of input quits; anything else asks again.
+            // (It used to run on "no", on anything unrecognised, and on EOF; release 1 review, B14.)
+            confirm: while true {
+                guard let answer = askAllowingQuit(io, "  Run? [Y/n/q]", default: "y") else { return .quit }
+                switch answer.lowercased() {
+                case "y", "yes":       return .run(assembled)
+                case "n", "no", "e":   break confirm               // edit options → restart the flow
+                default:               io.write("     Please answer y (run), n (edit the options) or q (quit).")
+                }
             }
         }
     }
@@ -74,20 +79,42 @@ public enum Menu {
         for (i, d) in discovered.enumerated() { io.write("       [\(i + 1)] \(d.siglum)") }
         let sigla = discovered.map { $0.siglum }
 
-        // 2) Which witnesses? "all" or a 1-based index list ("1,3,4").
-        guard let sel = askAllowingQuit(io, "  2) Which witnesses? (all, or e.g. 1,3)", default: "all") else { return nil }
+        // 2) Which witnesses? "all" or a 1-based index list ("1,3,4"). An edit pass offers the previous choice.
+        let previousSelection = defaults.order.flatMap { order -> String? in
+            let idx = order.compactMap { sigla.firstIndex(of: $0).map { String($0 + 1) } }
+            return idx.count == order.count ? idx.joined(separator: ",") : nil
+        } ?? "all"
+        guard let sel = askAllowingQuit(io, "  2) Which witnesses? (all, or e.g. 1,3)", default: previousSelection) else { return nil }
         let chosen = parseSelection(sel, sigla: sigla)
         opts.order = (chosen.count == sigla.count && chosen == sigla) ? nil : chosen   // nil = all, in order
         let effectiveOrder = chosen
 
-        // 3) Base (copy-text)?
-        guard let base = askAllowingQuit(io, "  3) Base (copy-text)?", default: effectiveOrder.first ?? sigla[0]) else { return nil }
+        // 3) Base (copy-text)? Validated here, so a typo is re-asked rather than failing after the confirm (B14).
+        let baseDefault = defaults.base.flatMap { effectiveOrder.contains($0) ? $0 : nil } ?? effectiveOrder.first ?? sigla[0]
+        var base = ""
+        while true {
+            guard let answer = askAllowingQuit(io, "  3) Base (copy-text)?", default: baseDefault) else { return nil }
+            if effectiveOrder.contains(answer) { base = answer; break }
+            io.write("     ⚠️  '\(answer)' is not one of the chosen witnesses: \(effectiveOrder.joined(separator: ", "))")
+        }
         opts.base = (base == effectiveOrder.first) ? nil : base   // nil = first in order
 
-        // 4) Order? (comma list of sigla, or accept the current order)
-        guard let orderIn = askAllowingQuit(io, "  4) Order?", default: effectiveOrder.joined(separator: ",")) else { return nil }
-        let orderList = orderIn.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
-        if !orderList.isEmpty && orderList != effectiveOrder { opts.order = orderList }
+        // 4) Order? (comma list of sigla, or accept the current order). Each siglum must be a known witness, once.
+        while true {
+            guard let orderIn = askAllowingQuit(io, "  4) Order?", default: effectiveOrder.joined(separator: ",")) else { return nil }
+            let orderList = orderIn.split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+            if let unknown = orderList.first(where: { !sigla.contains($0) }) {
+                io.write("     ⚠️  '\(unknown)' is not one of the witnesses: \(sigla.joined(separator: ", "))"); continue
+            }
+            if Set(orderList).count != orderList.count {
+                io.write("     ⚠️  a witness is listed twice"); continue
+            }
+            if let b = opts.base, !orderList.isEmpty, !orderList.contains(b) {
+                io.write("     ⚠️  the order must include the base, \(b)"); continue
+            }
+            if !orderList.isEmpty && orderList != effectiveOrder { opts.order = orderList }
+            break
+        }
 
         // 5) Comparison mode?
         guard let mode = askChoice(io, "  5) Comparison mode?",
@@ -96,12 +123,19 @@ public enum Menu {
         opts.mode = (mode == 2) ? .diplomatic : .substantive
 
         // 6) Pagination?
+        let previousPagination: Int
+        var previousLines = "40"
+        switch defaults.pagination {
+        case .linesPerPage(let n): previousPagination = 2; previousLines = String(n)
+        case .throughNumbered:     previousPagination = 3
+        default:                   previousPagination = 1
+        }
         guard let pag = askChoice(io, "  6) Pagination?",
                                   options: ["Source markers", "N lines/page", "Through-numbered"],
-                                  default: 1) else { return nil }
+                                  default: previousPagination) else { return nil }
         switch pag {
         case 2:
-            guard let n = askAllowingQuit(io, "     lines per page?", default: "40"), let v = Int(n), v > 0 else {
+            guard let n = askAllowingQuit(io, "     lines per page?", default: previousLines), let v = Int(n), v > 0 else {
                 opts.pagination = .sourceMarkers; break
             }
             opts.pagination = .linesPerPage(v)
