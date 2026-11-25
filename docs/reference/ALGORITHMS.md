@@ -122,14 +122,19 @@ lineNumber  = PER_PAGE | CONTINUOUS
 
   ```
   OPEN  = <!-- no_collate            (case-insensitive; `no-collate` also accepted)
-  CLOSE = the comment's own -->      (a bare --> ends it)  |  <!-- /no_collate -->  (explicit end tag)
-  an OPEN with no CLOSE runs to end-of-text ("everything after here is back matter")
+  ONE-COMMENT form:  OPEN … -->      the region ends at the first --> that does not close a comment NESTED
+                                     inside it (e.g. a <!-- page break --> in multi-page front matter)
+  TWO-COMMENT form:  OPEN --> … <!-- /no_collate -->
+                                     an OPEN immediately followed by --> waits for the explicit end tag
+  in either form <!-- /no_collate --> ends the region; an OPEN with no CLOSE runs to end-of-text
   ```
 
-  Compute the excluded character ranges (each OPEN paired with the next CLOSE at/after it), then during the walk
-  skip any position inside one. The excluded text is still *present in the witness* (a viewer may display it); it
-  simply produces no tokens. **Invariant:** no token's range intersects a no-collate region. Determinism: regions
-  are found by a fixed scan, marker-inclusive, in ascending order.
+  Compute the excluded character ranges, then during the walk skip any position inside one. Page-break markers
+  that overlap an excluded range are part of the excluded matter: they are **ignored** (they count no page). The
+  excluded text is still *present in the witness* (a viewer may display it); it simply produces no tokens.
+  **Invariant:** no token's range intersects a no-collate region. Determinism: regions are found by a fixed scan,
+  marker-inclusive, in ascending order. *(2026-10, review B6: the reference once closed at the first `-->` of any
+  kind, and could rewind into a region at an inner page-break marker, leaking excluded text.)*
 
 ## 3. Pairwise alignment — Needleman–Wunsch
 
