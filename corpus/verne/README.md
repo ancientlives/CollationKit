@@ -136,5 +136,6 @@ Every committed witness is in the public domain in the US, **except one that is 
 > positions only). The files are git-ignored so they cannot be committed by accident. Until you run the script,
 > the `20000-leagues` pair has only its `mercier` witness.
 >
-> The conformance cases 20, 22 and 29 (`docs/conformance/cases/`) each contain the same 87-word opening paragraph
-> of the Walter translation, as a short attributed quotation for research and testing; see `LICENSE-docs.md`.
+> The conformance cases 20, 22 and 29 (`docs/conformance/cases/`), and the website's viewer demo built from case 29,
+> each contain the same 87-word opening paragraph of the Walter translation, as a short attributed quotation for
+> research and testing; see `LICENSE-docs.md`.

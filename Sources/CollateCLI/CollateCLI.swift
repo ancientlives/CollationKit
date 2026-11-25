@@ -17,7 +17,8 @@ public protocol OutputSink {
 
 public enum CollateCLI {
 
-    public static let version = "0.2.0 (Stage A — engine harness, interactive)"
+    /// Keep in step with `CITATION.cff` (`VersionConsistencyTests` checks it) and the CHANGELOG.
+    public static let version = "0.3.0"
 
     /// Dispatch on argv (without the program name). Returns a POSIX exit code (0 ok; 1 usage; 2 witnesses;
     /// 3 IO). Never throws — every error is mapped to a message + code.
@@ -221,22 +222,24 @@ public enum CollateCLI {
       --base <siglum>           choose the base (copy-text); default: first in order
       --order <a,b,c>           explicit witness order (and subset)
       --substantive             fold accidentals (default)
-      --diplomatic              also report spelling/case + punctuation accidentals
+      --diplomatic              exact comparison: case, accents and punctuation differences are all variants
       --accidentals             report spelling/case accidentals
       --record-punctuation      report punctuation accidentals
-      --lines-per-page <N>      cite against a uniform printed page of N text lines
-      --through-numbered        continuous line numbering (no per-page reset)
+      --lines-per-page <N>      (experimental) cite against a uniform printed page of N text lines
+      --through-numbered        (experimental) continuous line numbering (no per-page reset)
       --format <f>              output encoding: text (default), json, csv, or html — the interactive
                                 collation viewer (perspective tabs, alignment highlights, variant panel)
       --strategy <s>            N-witness merge strategy: base-anchored (default; apparatus keyed to the
                                 copy-text) or peer-msa (peer alignment — best for base-free material,
                                 competing translations, and cross-language sets)
       --scoring prose|verse     alignment scoring preset (default: prose; verse biases toward whole-line insert/delete)
-      --lexicon <path>          translation lexicon for cross-language collation (one equivalence group per
-                                line, forms separated by commas: "année, year"); pairs best with peer-msa
+      --lexicon <path>          (experimental) translation lexicon for cross-language collation (one
+                                equivalence group per line, forms separated by commas: "année, year");
+                                pairs best with peer-msa
       --out <dir>               export to a directory (collation.json + manifest always written)
 
-    A witness's id is its filename stem (MS.txt → MS). With --out, a run also writes the machine-readable
+    A witness's id is its filename stem (MS.txt → MS), and ids must be unique. Input conventions (page breaks,
+    no_collate regions, the lexicon format) are in docs/guides/INPUT_FORMAT.md. With --out, a run also writes the machine-readable
     collation.json interchange and a self-describing manifest, so results are reproducible downstream.
 
     FULL TEXTS: build once with `-c release` and run the optimised binary — a debug build is minutes slower and

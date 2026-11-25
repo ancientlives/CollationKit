@@ -7,6 +7,8 @@ pull-request workflow.
 ```
 README.md                     ← root: what it is, how to run, pipeline at a glance
 CONTRIBUTING.md               ← root: how to propose a change; the engine's invariants; doc conventions
+CHANGELOG.md                  ← root: what changed in each version
+SECURITY.md                   ← root: how to report a vulnerability privately
 docs/
   INDEX.md                    ← you are here
   RESEARCH_INTRO.md           ← PROSPECTIVE RESEARCH STUDENT, START HERE: what the project is and has
@@ -14,6 +16,8 @@ docs/
                                  (overview only, no build steps; ONBOARDING.md is the next document)
   ONBOARDING.md               ← NEW CONTRIBUTOR, START HERE: running it, the code map, the working culture,
                                  a first week, and where ML/AI and UI/UX research fits
+  guides/
+    INPUT_FORMAT.md           ← preparing witness files: ids, page breaks, no_collate regions, lexicons
   reference/                  ← the engine, precisely (for implementers and for methods sections)
     ALGORITHMS.md             ← LANGUAGE-NEUTRAL algorithm spec: port to any language
     PAPER_NOTES.md            ← Swift-grounded algorithm reference (complexity, parameters, bibliography)
@@ -51,6 +55,11 @@ site/                         ← the project website (deployed to GitHub Pages)
 | [`RESEARCH_INTRO.md`](RESEARCH_INTRO.md) | **A research introduction**: the intellectual problem, what has been achieved, the core vocabulary, and the open questions in ML/AI and UI/UX. | You are a prospective research student or collaborator. Read it first. |
 | [`ONBOARDING.md`](ONBOARDING.md) | **Guide for a new contributor or research student**: why this isn't `diff`, how to build and run it (including the debug-versus-release trap), the source map and pipeline stage by stage, the working culture and invariants, a suggested first week, the vocabulary, and where **ML/AI** (the gated semantic layer, B16/B17, the irreducible-residual question; read `PAPER_NOTES` Appendix A first) and **UI/UX** (the unevaluated viewer, the trust argument, B13 Step 2) research fits. | You are new to the project. Read after the research introduction. |
 | [`../CONTRIBUTING.md`](../CONTRIBUTING.md) | **How to contribute**: branches and pull requests, local checks, the engine's invariants, golden-file discipline, test and documentation conventions. | Before your first pull request. |
+
+### guides/
+| doc | purpose | read when |
+|-----|---------|-----------|
+| [`guides/INPUT_FORMAT.md`](guides/INPUT_FORMAT.md) | **Preparing texts**: witness files and ids, what counts as a word, page-break markers (including the Markdown `---` caveat), `no_collate` regions, the translation-lexicon format. | Before you collate your own texts. |
 
 ### reference/
 | doc | purpose | read when |

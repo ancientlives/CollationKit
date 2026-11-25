@@ -7,8 +7,8 @@ authors:
 repository-code: "https://github.com/ancientlives/CollationKit"
 url: "https://ancientlives.github.io/CollationKit/"
 license: MIT
-version: "0.1.0"
-date-released: "2026-09-25"
+version: "0.3.0"
+date-released: "2026-10-03"
 keywords:
   - textual collation
   - textual scholarship
