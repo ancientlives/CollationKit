@@ -45,8 +45,36 @@ public enum Apparatus {
     // MARK: N-witness apparatus (from the variant graph)
 
     /// Build apparatus entries from an N-witness variant graph: each variant node becomes one entry whose
-    /// lemma is the base witness's reading and whose variants are the OTHER readings + their sigla.
+    /// lemma is the base witness's reading and whose variants are the OTHER readings + their sigla; each move
+    /// becomes one transposition entry (`movedEntries`).
     public static func entries(from graph: Collation.VariantGraph) -> [ApparatusEntry] {
+        nodeEntries(from: graph) + movedEntries(from: graph)
+    }
+
+    /// The marker shown as a moved passage's reading: `(moved)` for a certain move, `(possible move)` for a
+    /// `.likely` one (the same wording the viewer and narrative use).
+    public static func moveMarker(_ confidence: MoveConfidence) -> String {
+        confidence == .certain ? "(moved)" : "(possible move)"
+    }
+
+    /// One transposition entry per moved passage: the lemma is the base text of the passage, and each variant is
+    /// the move marker with the witnesses that carry the passage elsewhere. Before 2026-10 the apparatus omitted
+    /// moves entirely, because the moved words agree with the base (release 1 review, B3).
+    static func movedEntries(from graph: Collation.VariantGraph) -> [ApparatusEntry] {
+        var byPassage: [[Int]: (lemma: String, variants: [(reading: String, sigla: [String])])] = [:]
+        for move in graph.moves {
+            byPassage[move.basePositions, default: (move.lemma, [])]
+                .variants.append((reading: moveMarker(move.confidence), sigla: move.witnesses.sorted()))
+        }
+        return byPassage.keys.sorted { $0.lexicographicallyPrecedes($1) }.map { positions in
+            let passage = byPassage[positions]!
+            return ApparatusEntry(position: positions.first ?? 0, lemma: passage.lemma.isEmpty ? "∅" : passage.lemma,
+                                  type: .transposition,
+                                  variants: passage.variants.sorted { $0.reading < $1.reading })
+        }
+    }
+
+    static func nodeEntries(from graph: Collation.VariantGraph) -> [ApparatusEntry] {
         graph.variantNodes.map { node in
             // The lemma is the reading carried by the base witness (if any); else the most-attested reading.
             // For an INSERTED node (B6c) the base has no reading here, so the lemma is `∅` and the entry is an

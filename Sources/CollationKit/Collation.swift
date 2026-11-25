@@ -155,9 +155,24 @@ public enum Collation {
         }
     }
 
+    /// A run of base text that one or more witnesses carry in a different place (a transposition). The moved
+    /// words agree with the base, so they are not variant nodes; without this record the apparatus could not show
+    /// a move at all (release 1 review, B3). `basePositions` are base full-token positions of the moved words, in
+    /// order; `lemma` is the base's reading of them; `witnesses` are the witnesses that moved them, with the
+    /// confidence the merge assigned.
+    public struct GraphMove: Equatable {
+        public let basePositions: [Int]
+        public let lemma: String
+        public let witnesses: Set<String>
+        public let confidence: MoveConfidence
+    }
+
     public struct VariantGraph: Equatable {
         public let baseID: String
         public let nodes: [GraphNode]
+        /// Transpositions relative to the base, in base-text order. (Not part of the JSON interchange: the pairwise
+        /// results there already carry every move with its full citation.)
+        public var moves: [GraphMove] = []
         /// The nodes where witnesses disagree — the apparatus.
         public var variantNodes: [GraphNode] { nodes.filter { $0.isVariant } }
     }

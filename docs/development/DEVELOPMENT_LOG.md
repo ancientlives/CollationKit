@@ -2345,3 +2345,26 @@ a punctuation-only reading): without the fix the behavioural tests fail with 22 
 ALGORITHMS §7b updated.
 
 **State:** 229 tests green. Schema unchanged (v3); three goldens re-recorded (graph only).
+
+---
+
+## 2026-10-03d — `implementation` + `test`: moves reach the critical apparatus (release 1 review, blocker B3)
+
+**Defect.** The apparatus is built from the variant graph's variant nodes. A moved passage agrees with the base
+word for word, so its nodes are not variant nodes and the apparatus never showed a move: a move-only collation
+printed "(no points of variance)", and the six-edition example left out its headline cross-page move. The token
+graph knew every move (its `isMove` edges), but the projection to the apparatus-facing graph dropped them.
+
+**Fix.** `VariantGraph` gains `moves` (`GraphMove`: base positions, lemma, witnesses, confidence), read off the
+token graph's move edges in `projectedMoves`. A move edge runs from the spine node before a moved block to the node
+after it, so the block is the spine nodes strictly between; an endpoint that is not on the spine (including the
+lift's virtual end id, engine review A13) is treated as end of text. This works for both merge strategies.
+`Apparatus.entries(from: graph)` adds one `.transposition` entry per moved passage, with `(moved)` or `(possible
+move)` as the reading. Six editions now shows `19 The lamps were lit along the quay one by one] (moved) GB1 PR UNI
+US1`; case 04 shows `8 at last] (moved) B`; the Calamus poem relocation appears too.
+
+**No golden or schema change.** The JSON interchange encodes only the graph's nodes (its pairwise results already
+carry every move with its citation). New `ApparatusMoveTests`; ALGORITHMS §7b documents the moves and the
+apparatus rule.
+
+**State:** 233 tests green.
