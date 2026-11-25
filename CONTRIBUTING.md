@@ -94,9 +94,9 @@ one will not be merged without a very good argument.
 
 - Every behaviour change or bug fix comes with a test that fails before the change and passes after.
 - Put the test in the suite that matches the area (see [`docs/development/TESTING.md`](docs/development/TESTING.md)).
-- `TestCountGuardTests` checks that the advertised test count matches reality. If you add tests, update the
-  count where its failure message tells you to: the constant in that file, `README.md`,
-  `docs/development/TESTING.md`, and the latest `State:` line of the development log.
+- If you add a test suite (a new `XCTestCase` class), add a row for it to the suite table in
+  `docs/development/TESTING.md`. The docs deliberately don't quote an exact test count, so adding tests needs no
+  other doc changes.
 
 ## Code style
 

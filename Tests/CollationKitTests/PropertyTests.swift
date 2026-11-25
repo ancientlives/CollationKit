@@ -97,7 +97,7 @@ final class PropertyTests: XCTestCase {
             // Use FULLY distinctive words so every edit lands on a unique, anchorable token and reads as a
             // clean substitution (no accidental insert/delete from repeated function words).
             let n = 60 + Int(rng.next() % 80)
-            var base: [String] = (0..<n).map { "wd\($0)s\(seed)" }
+            let base: [String] = (0..<n).map { "wd\($0)s\(seed)" }
             var comp = base
             // Pick K distinct positions to substitute (never adjacent, so coalescing can't merge two edits
             // into one and undercount — this makes "≤ K" the tight, meaningful bound).

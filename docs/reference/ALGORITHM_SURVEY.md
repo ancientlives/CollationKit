@@ -13,8 +13,8 @@ it cites the section of `ALGORITHMS.md` that owns it.
 
 **Status of the numbers.** Complexities are derived from the implementation (file and line cited where it
 matters). Measured times are from [`../development/BENCHMARKS.md`](../development/BENCHMARKS.md) (release
-build, median of 5 trials, macOS/8-core). Test and case counts verified 2026-09-06: 222 tests, 29 conformance
-cases.
+build, median of 5 trials, macOS/8-core). Counts verified 2026-09-06: 222 tests, 29 conformance
+cases (the test count grows; `swift test` reports the current figure).
 
 **Notation.** `n`, `m` = comparable-token counts of the two witnesses; `N` = witness count; `k` = anchor-pin
 count; `r` = tokens in a single inter-anchor region. "Comparable" tokens are those with a non-empty normalised
@@ -597,7 +597,7 @@ by B-position: for each pin in A-order, query the max weighted chain over all sm
 weight, and update. This is the same transformation that turns naive LIS into patience-sorting LIS.
 
 **Why it is the ideal first substantial contribution:** self-contained (one function), textbook algorithm,
-enormous existing test coverage to protect you, and a crisp success criterion — **every one of the 222 tests and
+enormous existing test coverage to protect you, and a crisp success criterion — **every existing test and all
 29 goldens must be byte-identical**. The subtlety, and the reason it is not trivial, is `§9.3`: ties must still
 resolve to the **earliest maximal chain**. A Fenwick tree returning "a" maximum is not enough; it must return the
 *same* maximum the `O(k²)` scan would. Get that right and you have learned the project's whole engineering
@@ -791,7 +791,7 @@ the approximation is unacceptable. Do B19 (item 2) first: measure the regime bef
 
 ### Tier 4 — performance engineering (correctness-neutral)
 
-These change no output. All are `O(1)`-risk to goldens, and each can be validated by "all 222 tests still pass,
+These change no output. All are `O(1)`-risk to goldens, and each can be validated by "all existing tests still pass,
 byte-identical."
 
 | # | Change | Where | Expected gain |
@@ -818,7 +818,7 @@ byte-identical."
 **Whatever you pick, the workflow is the same** — it is the project's culture, and it is what makes changes here
 land safely:
 
-1. `swift test` (222 green) before you start.
+1. `swift test` (all green) before you start.
 2. Build behind existing types (`TOKEN_GRAPH_PLAN.md`); leave the old path byte-identical.
 3. `swift test` after — investigate **every** diff. A changed golden is a deliberate, documented decision, never
    a way to get green.

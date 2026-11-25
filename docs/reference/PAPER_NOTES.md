@@ -814,9 +814,8 @@ hand-chosen cases.
 
 The engine is **pure** (value-type input/output, no I/O, deterministic), so all of the above is verifiable in
 isolation; a CLI harness (`collate` / `collate-demo`) also runs it on arbitrary user-supplied files. The suite is
-in the low‑hundreds of unit tests plus the 29-case conformance corpus (9 of them the real cases above); the exact
-count is build‑enforced by `TestCountGuardTests` and quoted in the README, which is the authoritative figure.
-At the last review the suite was **222 tests** (2026‑07‑24).
+in the low‑hundreds of unit tests plus the 29-case conformance corpus (9 of them the real cases above);
+`swift test` reports the exact count.
 
 ## 11. Limitations and future work
 

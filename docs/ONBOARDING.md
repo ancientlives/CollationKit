@@ -50,7 +50,7 @@ separately with collaborators on request):
 
 ### Current state (verified 2026-09-06)
 
-- **222 tests across 27 suites, all passing** (`swift test`, ~7 s).
+- **200+ tests, all passing** (`swift test`, a few seconds); `development/TESTING.md` lists what each suite covers.
 - 29 conformance cases with byte-exact golden JSON outputs.
 - Two N-witness merge strategies shipped; cross-language collation shipped; an 8-view interactive HTML viewer
   shipped; validated on four full Verne novels in independent English translations.
@@ -66,7 +66,7 @@ dependencies**, which is a deliberate portability commitment.
 ```sh
 git clone https://github.com/ancientlives/CollationKit.git && cd CollationKit
 swift build            # ~seconds, cached after the first run
-swift test             # 222 tests, ~7 s — do this before and after every change
+swift test             # the full suite, a few seconds — do this before and after every change
 swift run collate-demo # the built-in six-edition example, end to end
 ```
 
@@ -150,7 +150,7 @@ CollationKit/
 │   ├── collate/               # thin shell: argv + stdout/stderr + exit codes
 │   ├── collate-demo/          # the worked example
 │   └── collate-bench/         # the cost-sweep benchmark harness
-├── Tests/CollationKitTests/   # 27 suites, 222 tests
+├── Tests/CollationKitTests/   # the XCTest suites (see development/TESTING.md)
 ├── docs/                      # research intro, onboarding, spec, history, evaluation — see INDEX.md
 ├── corpus/verne/              # the Verne translation corpus (excerpts + full novels)
 └── site/                      # the project website (GitHub Pages)
@@ -221,7 +221,7 @@ This project has an unusually disciplined process, and matching it is the fastes
 ### The workflow
 
 ```sh
-swift test                     # baseline: confirm 222 green before you start
+swift test                     # baseline: confirm all green before you start
 # … make your change …
 swift test                     # confirm still green; investigate every diff
 swift run collate-demo         # eyeball the human-readable output
@@ -244,9 +244,8 @@ The maintenance convention (stated at the end of [`INDEX.md`](INDEX.md)):
   [`reference/PAPER_NOTES.md`](reference/PAPER_NOTES.md) (Swift-grounded);
 - a landed backlog item → a one-line tick in [`development/BACKLOG.md`](development/BACKLOG.md) pointing at the
   log entry;
-- **the test count is build-enforced.** `TestCountGuardTests` fails if the README's advertised figure drifts
-  from what `swift test` discovers, and its failure message names every place to update. This is a nice piece of
-  documentation engineering worth stealing for your own projects.
+- **a new test suite gets a row in `development/TESTING.md`.** The docs don't quote an exact test count, so
+  adding tests needs no other doc change.
 
 `DEVELOPMENT_LOG.md` is the single best thing to read to understand *how* the project thinks. It records dead
 ends and rejected approaches, not just successes — including approaches that were analytically demolished before
@@ -274,7 +273,7 @@ only when the evidence is in. Follow it.
 4. **Pick a small backlog item.** [`development/BACKLOG.md`](development/BACKLOG.md) is written so that each
    item can be used directly as a task brief. Good first items:
    - **Fenwick-tree weighted LIS** (`ALGORITHM_SURVEY.md` Part II, item 1) — replace the spine's `O(k²)` DP
-     with the `O(k log k)` form. Textbook algorithm, one function, and the 222 tests must stay byte-identical,
+     with the `O(k log k)` form. Textbook algorithm, one function, and every existing test must still pass byte-identically,
      so it teaches you the project's determinism discipline in a single change.
    - **B19 — adversarial cost benchmark point.** Small, self-contained, touches `collate-bench` only, and closes
      a real gap the benchmark notes call out. An excellent way to learn the codebase without risk.

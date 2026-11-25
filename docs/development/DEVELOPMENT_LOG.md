@@ -2264,3 +2264,26 @@ updated.
 **State:** 222 tests green (27 suites) — +2 `MoveRecoveryTests`. No schema/payload change; **no golden changed**
 (the softening lands only on long-witness short blocks, which the goldens don't contain). Asserted (`certain`) false
 moves on the four full-novel pairs: → **0**.
+
+---
+
+## 2026-10-03 — `test`: test-suite hygiene (release 1 review, blocker B9)
+
+The release 1 review (`docs/development/review-2026-10/`) found two tests that asserted nothing.
+
+- **`testShortNearDiagonalMoveOnLongPairIsLikelyNotCertain`** (2026-07-24b) built two witnesses that shared only the
+  phrase "off the rocks", so the phrase became the whole spine and could never be a move; the assertion loop ran
+  over an empty list. It also took 68% of the suite's run time. Rewritten: the witnesses now share a 6,000-token
+  backbone with the phrase displaced by ten tokens, and the test asserts that exactly one move is recovered and
+  that it is `.likely`. (A first probe at 3,000 tokens correctly gave `.certain`: that is below the 4,000-token
+  `confidentMoveWitnessFloor`, so the scale-relative rule is working as designed.)
+- **`testLongCollationIsDeterministic`** substituted `ship600`, which the generator never produces, so it compared
+  identical texts. It now substitutes the real token `ship621` and asserts that the variant is found.
+
+`TestCountGuardTests` is **retired**. It compared the discovered count with its own constant (it never read the
+docs), it does not compile on Linux (`XCTestSuite.default` is missing from corelibs XCTest), it cannot see Swift
+Testing tests, and two independent green pull requests that each add a test leave `main` red. The living docs no
+longer quote an exact test count; a new suite gets a row in `TESTING.md`. Three test-file compiler warnings
+(`var` → `let`) are fixed.
+
+**State:** 221 tests green (26 suites), suite time about 8 s → 2.8 s. No engine, schema or golden change.

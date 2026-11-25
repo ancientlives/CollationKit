@@ -23,7 +23,7 @@ docs/
   development/                ← how it was built, how it is tested, and what's next
     DEVELOPMENT_LOG.md        ← dated concept → design → proof → test narrative, including dead ends
     BACKLOG.md                ← ranked open items and proposed future work
-    TESTING.md                ← running the tests; what each of the 27 suites covers
+    TESTING.md                ← running the tests; what each suite covers
     CASE_STUDY.md             ← the engine on 9 real cases: Shelley, Whitman, Verne, Pushkin
     BENCHMARKS.md             ← measured cost: length × diversity × witness count
     CLI_PLAN.md               ← design of the `collate` command-line tool
@@ -104,8 +104,7 @@ site/                         ← the project website (deployed to GitHub Pages)
 - A **new feature** → a dated entry in `development/DEVELOPMENT_LOG.md`, and updates to the *spec* in
   `reference/ALGORITHMS.md` **and** `reference/PAPER_NOTES.md`.
 - A **new doc** → file it under the right `docs/` subdirectory and add a row here and in the tree above.
-- **Test count and status lines** live in `README.md`, `development/TESTING.md` and the `State:` lines of the
-  log; update them together when they change. This is **build-enforced**: `TestCountGuardTests` fails if the
-  advertised count drifts from what `swift test` discovers.
+- **Test counts are not quoted exactly** in the living docs, so adding a test needs no doc change; a new suite
+  gets a row in `development/TESTING.md`. The log's dated `State:` lines record the count at that date.
 - `reference/ALGORITHMS.md` is the **portability contract**: changing an algorithm's behaviour means updating
   its pseudocode and re-checking the determinism rules (§9) so existing ports stay in agreement.

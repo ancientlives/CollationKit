@@ -1,7 +1,7 @@
 # Testing
 
 ```sh
-swift test                                   # the whole suite (222 tests across 27 suites)
+swift test                                   # the whole suite (200+ tests, a few seconds)
 swift test --filter MoveRecoveryTests        # one suite
 swift test --filter ConformanceTests/testGoldensMatchOrRecord   # one test
 python3 -m pip install -r docs/conformance/requirements.txt && python3 docs/conformance/validate.py
@@ -16,17 +16,15 @@ The suite is the project's specification in executable form. Three kinds of test
   request (see [`CONTRIBUTING.md`](../../CONTRIBUTING.md)).
 - **Property tests** run seeded fuzzing over invariants such as determinism and self-collation being empty.
 
-`TestCountGuardTests` enforces documentation hygiene: it fails if the number of tests `swift test` discovers
-differs from the count advertised in the docs. When you add or remove a test, update the constant in that file,
-the `swift test  # N tests` comment in the root `README.md`, this file, and the latest `State:` line in
-[`DEVELOPMENT_LOG.md`](DEVELOPMENT_LOG.md).
+The docs deliberately don't quote an exact test count, so adding a test needs no doc change. If you add a new
+suite (an `XCTestCase` class), add a row for it to the table below.
 
 During development the viewer's JavaScript was also checked in a headless browser (Playwright + WebKit); that
 harness is not part of the repository.
 
 ## Suites
 
-The 222 tests across 27 suites:
+The suites:
 
 | suite | covers |
 |-------|--------|
@@ -56,4 +54,3 @@ The 222 tests across 27 suites:
 | `ConformanceTests` | the golden corpus: every golden reproduces, output is deterministic, goldens match the JSON Schema |
 | `PropertyTests` | seeded fuzzing over invariants, including the regression guards for two inverted-`Range` crashes found on full novels |
 | `PerformanceTests` | scale and determinism on 2k–4k-token inputs |
-| `TestCountGuardTests` | the documentation-hygiene guard described above |

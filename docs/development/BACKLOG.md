@@ -87,7 +87,7 @@ cross-language anchoring via a lexicon. Portability (**B1/B2**) and evaluation (
 | **B6 (hyphenation)** | Intra-word hyphenation folded as an accidental (`splitHyphenatedWords`) | 2026-06-30 |
 | **B6c** | Pure insertions anchored into the N-witness graph as inserted nodes | 2026-07-01 |
 | **B9 Stage A** | Scriptable `collate run`/`list` + interactive menu over a testable `CollateCLI` core | 2026-07-01 |
-| **Doc-hygiene** | Build-enforced `TestCountGuardTests` so the advertised test count can't rot | 2026-07-01 |
+| **Doc-hygiene** | Build-enforced `TestCountGuardTests` so the advertised test count can't rot (retired 2026-10: it blocked Linux and made parallel PRs conflict; the docs no longer quote exact counts) | 2026-07-01 |
 | **B11** | Token-graph merge (`TokenGraph.build`) replacing the hand-rolled fold; subsumes B6c | 2026-07-02 |
 | **B13 Step 1** | Selectable merge-strategy seam (`CollationStrategy` + `--strategy`; `.baseAnchored` default) | 2026-07-02 |
 | **B7** | Verse/prose scoring presets (`--scoring`; prose == historical default, no golden changed) | 2026-07-03 |
