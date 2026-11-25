@@ -141,12 +141,6 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "bizarre",
-            "witnesses" : [
-              "en-walter"
-            ]
-          },
-          {
             "reading" : "remarkable",
             "witnesses" : [
               "en-mercier"
@@ -156,6 +150,12 @@
             "reading" : "événement",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "en-walter"
             ]
           }
         ]
@@ -167,13 +167,8 @@
           {
             "reading" : "bizarre",
             "witnesses" : [
+              "en-walter",
               "fr-5097"
-            ]
-          },
-          {
-            "reading" : "development",
-            "witnesses" : [
-              "en-walter"
             ]
           },
           {
@@ -195,7 +190,7 @@
             ]
           },
           {
-            "reading" : "an",
+            "reading" : "development",
             "witnesses" : [
               "en-walter"
             ]
@@ -213,6 +208,12 @@
         "isVariant" : true,
         "readings" : [
           {
+            "reading" : "an",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
             "reading" : "mysterious",
             "witnesses" : [
               "en-mercier"
@@ -220,6 +221,24 @@
           },
           {
             "reading" : "phénomène",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 11,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "and",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
+            "reading" : "inexpliqué",
             "witnesses" : [
               "fr-5097"
             ]
@@ -233,30 +252,11 @@
         ]
       },
       {
-        "basePosition" : 11,
-        "isVariant" : true,
-        "readings" : [
-          {
-            "reading" : "and",
-            "witnesses" : [
-              "en-mercier",
-              "en-walter"
-            ]
-          },
-          {
-            "reading" : "inexpliqué",
-            "witnesses" : [
-              "fr-5097"
-            ]
-          }
-        ]
-      },
-      {
         "basePosition" : 12,
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "downright",
+            "reading" : "and",
             "witnesses" : [
               "en-walter"
             ]
@@ -271,6 +271,26 @@
             "reading" : "puzzling",
             "witnesses" : [
               "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : -1,
+        "insertedAfter" : 12,
+        "isVariant" : true,
+        "readings" : [
+          {
+            "reading" : "downright",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "en-mercier",
+              "fr-5097"
             ]
           }
         ]
@@ -344,6 +364,12 @@
         "isVariant" : true,
         "readings" : [
           {
+            "reading" : "doubtless",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          },
+          {
             "reading" : "surely",
             "witnesses" : [
               "en-walter"
@@ -352,7 +378,6 @@
           {
             "reading" : "∅",
             "witnesses" : [
-              "en-mercier",
               "fr-5097"
             ]
           }
@@ -363,14 +388,9 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "doubtless",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "no",
             "witnesses" : [
+              "en-mercier",
               "en-walter"
             ]
           },
@@ -393,14 +413,9 @@
             ]
           },
           {
-            "reading" : "no",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "one",
             "witnesses" : [
+              "en-mercier",
               "en-walter"
             ]
           }
@@ -413,13 +428,8 @@
           {
             "reading" : "has",
             "witnesses" : [
+              "en-mercier",
               "en-walter"
-            ]
-          },
-          {
-            "reading" : "one",
-            "witnesses" : [
-              "en-mercier"
             ]
           },
           {
@@ -447,7 +457,7 @@
             ]
           },
           {
-            "reading" : "has",
+            "reading" : "yet",
             "witnesses" : [
               "en-mercier"
             ]
@@ -465,15 +475,15 @@
             ]
           },
           {
-            "reading" : "oublié",
+            "reading" : "forgotten",
             "witnesses" : [
-              "fr-5097"
+              "en-mercier"
             ]
           },
           {
-            "reading" : "yet",
+            "reading" : "oublié",
             "witnesses" : [
-              "en-mercier"
+              "fr-5097"
             ]
           }
         ]
@@ -483,15 +493,15 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "Sans",
+            "reading" : "Not",
             "witnesses" : [
-              "fr-5097"
+              "en-mercier"
             ]
           },
           {
-            "reading" : "forgotten",
+            "reading" : "Sans",
             "witnesses" : [
-              "en-mercier"
+              "fr-5097"
             ]
           },
           {
@@ -507,12 +517,6 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "Not",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "into",
             "witnesses" : [
               "en-walter"
@@ -522,6 +526,12 @@
             "reading" : "parler",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "to",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -537,15 +547,15 @@
             ]
           },
           {
-            "reading" : "those",
+            "reading" : "mention",
             "witnesses" : [
-              "en-walter"
+              "en-mercier"
             ]
           },
           {
-            "reading" : "to",
+            "reading" : "those",
             "witnesses" : [
-              "en-mercier"
+              "en-walter"
             ]
           }
         ]
@@ -554,12 +564,6 @@
         "basePosition" : 24,
         "isVariant" : true,
         "readings" : [
-          {
-            "reading" : "mention",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
           {
             "reading" : "rumeurs",
             "witnesses" : [
@@ -570,6 +574,12 @@
             "reading" : "rumors",
             "witnesses" : [
               "en-walter"
+            ]
+          },
+          {
+            "reading" : "rumours",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -585,15 +595,15 @@
             ]
           },
           {
-            "reading" : "rumours",
-            "witnesses" : [
-              "en-mercier"
-            ]
-          },
-          {
             "reading" : "that",
             "witnesses" : [
               "en-walter"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "en-mercier"
             ]
           }
         ]
@@ -1376,16 +1386,16 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "America",
-            "witnesses" : [
-              "en-mercier",
-              "en-walter"
-            ]
-          },
-          {
             "reading" : "de",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
             ]
           }
         ]
@@ -1395,16 +1405,16 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "l'Amérique",
-            "witnesses" : [
-              "fr-5097"
-            ]
-          },
-          {
-            "reading" : "naval",
+            "reading" : "America",
             "witnesses" : [
               "en-mercier",
               "en-walter"
+            ]
+          },
+          {
+            "reading" : "l'Amérique",
+            "witnesses" : [
+              "fr-5097"
             ]
           }
         ]
@@ -1414,16 +1424,16 @@
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "officers",
-            "witnesses" : [
-              "en-mercier",
-              "en-walter"
-            ]
-          },
-          {
             "reading" : "officiers",
             "witnesses" : [
               "fr-5097"
+            ]
+          },
+          {
+            "reading" : "∅",
+            "witnesses" : [
+              "en-mercier",
+              "en-walter"
             ]
           }
         ]
@@ -1458,7 +1468,7 @@
             ]
           },
           {
-            "reading" : "∅",
+            "reading" : "naval",
             "witnesses" : [
               "en-mercier",
               "en-walter"
@@ -1477,7 +1487,7 @@
             ]
           },
           {
-            "reading" : "∅",
+            "reading" : "officers",
             "witnesses" : [
               "en-mercier",
               "en-walter"
@@ -1577,26 +1587,6 @@
         ]
       },
       {
-        "basePosition" : -1,
-        "insertedAfter" : 73,
-        "isVariant" : true,
-        "readings" : [
-          {
-            "reading" : "at",
-            "witnesses" : [
-              "en-walter"
-            ]
-          },
-          {
-            "reading" : "∅",
-            "witnesses" : [
-              "en-mercier",
-              "fr-5097"
-            ]
-          }
-        ]
-      },
-      {
         "basePosition" : 75,
         "isVariant" : true,
         "readings" : [
@@ -1607,7 +1597,7 @@
             ]
           },
           {
-            "reading" : "their",
+            "reading" : "at",
             "witnesses" : [
               "en-walter"
             ]
@@ -1631,13 +1621,13 @@
             ]
           },
           {
-            "reading" : "heels",
+            "reading" : "their",
             "witnesses" : [
               "en-walter"
             ]
           },
           {
-            "reading" : "the",
+            "reading" : "∅",
             "witnesses" : [
               "en-mercier"
             ]
@@ -1649,13 +1639,37 @@
         "isVariant" : true,
         "readings" : [
           {
+            "reading" : "heels",
+            "witnesses" : [
+              "en-walter"
+            ]
+          },
+          {
+            "reading" : "les",
+            "witnesses" : [
+              "fr-5097"
+            ]
+          },
+          {
+            "reading" : "the",
+            "witnesses" : [
+              "en-mercier"
+            ]
+          }
+        ]
+      },
+      {
+        "basePosition" : 79,
+        "isVariant" : true,
+        "readings" : [
+          {
             "reading" : "Governments",
             "witnesses" : [
               "en-mercier"
             ]
           },
           {
-            "reading" : "les",
+            "reading" : "gouvernements",
             "witnesses" : [
               "fr-5097"
             ]
@@ -1669,11 +1683,11 @@
         ]
       },
       {
-        "basePosition" : 79,
+        "basePosition" : 80,
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "gouvernements",
+            "reading" : "des",
             "witnesses" : [
               "fr-5097"
             ]
@@ -1693,11 +1707,11 @@
         ]
       },
       {
-        "basePosition" : 80,
+        "basePosition" : 81,
         "isVariant" : true,
         "readings" : [
           {
-            "reading" : "des",
+            "reading" : "divers",
             "witnesses" : [
               "fr-5097"
             ]
@@ -1717,15 +1731,9 @@
         ]
       },
       {
-        "basePosition" : 81,
+        "basePosition" : 82,
         "isVariant" : true,
         "readings" : [
-          {
-            "reading" : "divers",
-            "witnesses" : [
-              "fr-5097"
-            ]
-          },
           {
             "reading" : "governments",
             "witnesses" : [
@@ -1737,11 +1745,18 @@
             "witnesses" : [
               "en-mercier"
             ]
+          },
+          {
+            "reading" : "États",
+            "witnesses" : [
+              "fr-5097"
+            ]
           }
         ]
       },
       {
-        "basePosition" : 82,
+        "basePosition" : -1,
+        "insertedAfter" : 82,
         "isVariant" : true,
         "readings" : [
           {
@@ -1752,7 +1767,7 @@
             ]
           },
           {
-            "reading" : "États",
+            "reading" : "∅",
             "witnesses" : [
               "fr-5097"
             ]
@@ -2025,18 +2040,19 @@
       "base" : "fr-5097",
       "compared" : "en-mercier",
       "counts" : {
-        "deletion" : 0,
-        "insertion" : 0,
-        "substitution" : 13,
+        "deletion" : 1,
+        "insertion" : 1,
+        "substitution" : 15,
         "transposition" : 0,
         "variantSpelling" : 0
       },
       "schemaVersion" : 3,
       "variations" : [
         {
-          "baseLocation" : {
+          "baseReading" : "",
+          "comparedLocation" : {
             "charFrom" : 0,
-            "charTo" : 7,
+            "charTo" : 3,
             "cite" : "p.1 · line 1 · word 1",
             "endLine" : 0,
             "firstWord" : 0,
@@ -2044,60 +2060,45 @@
             "line" : 0,
             "page" : 0
           },
-          "baseReading" : "L'année",
-          "baseTokens" : {
+          "comparedReading" : "The",
+          "comparedTokens" : {
             "from" : 0,
             "to" : 1
           },
-          "comparedLocation" : {
-            "charFrom" : 0,
-            "charTo" : 8,
-            "cite" : "p.1 · line 1 · words 1–2",
-            "endLine" : 0,
-            "firstWord" : 0,
-            "lastWord" : 1,
-            "line" : 0,
-            "page" : 0
-          },
-          "comparedReading" : "The year",
-          "comparedTokens" : {
-            "from" : 0,
-            "to" : 2
-          },
           "confidence" : "certain",
           "crossesPage" : false,
-          "type" : "substitution",
+          "type" : "insertion",
           "withinTransposition" : false
         },
         {
           "baseLocation" : {
-            "charFrom" : 17,
+            "charFrom" : 25,
             "charTo" : 28,
-            "cite" : "p.1 · line 1 · words 4–5",
+            "cite" : "p.1 · line 1 · word 5",
             "endLine" : 0,
-            "firstWord" : 3,
+            "firstWord" : 4,
             "lastWord" : 4,
             "line" : 0,
             "page" : 0
           },
-          "baseReading" : "marquée par",
+          "baseReading" : "par",
           "baseTokens" : {
-            "from" : 3,
+            "from" : 4,
             "to" : 5
           },
           "comparedLocation" : {
-            "charFrom" : 18,
+            "charFrom" : 29,
             "charTo" : 31,
-            "cite" : "p.1 · line 1 · words 5–6",
+            "cite" : "p.1 · line 1 · word 6",
             "endLine" : 0,
-            "firstWord" : 4,
+            "firstWord" : 5,
             "lastWord" : 5,
             "line" : 0,
             "page" : 0
           },
-          "comparedReading" : "signalised by",
+          "comparedReading" : "by",
           "comparedTokens" : {
-            "from" : 4,
+            "from" : 5,
             "to" : 6
           },
           "confidence" : "certain",
@@ -2180,32 +2181,104 @@
         {
           "baseLocation" : {
             "charFrom" : 95,
-            "charTo" : 190,
-            "cite" : "p.1 · lines 2–3 · words 5…9",
-            "endLine" : 2,
+            "charTo" : 118,
+            "cite" : "p.1 · line 2 · words 5–8",
+            "endLine" : 1,
+            "firstWord" : 4,
+            "lastWord" : 7,
+            "line" : 1,
+            "page" : 0
+          },
+          "baseReading" : "personne n'a sans doute",
+          "baseTokens" : {
+            "from" : 15,
+            "to" : 19
+          },
+          "comparedLocation" : {
+            "charFrom" : 99,
+            "charTo" : 123,
+            "cite" : "p.1 · line 2 · words 5–9",
+            "endLine" : 1,
             "firstWord" : 4,
             "lastWord" : 8,
             "line" : 1,
             "page" : 0
           },
-          "baseReading" : "personne n'a sans doute oublié . Sans parler des rumeurs qui agitaient les populations des ports",
-          "baseTokens" : {
-            "from" : 15,
-            "to" : 31
+          "comparedReading" : "doubtless no one has yet",
+          "comparedTokens" : {
+            "from" : 17,
+            "to" : 22
           },
-          "comparedLocation" : {
-            "charFrom" : 99,
-            "charTo" : 196,
-            "cite" : "p.1 · lines 2–3 · words 5…7",
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 127,
+            "charTo" : 142,
+            "cite" : "p.1 · lines 2–3 · words 11…2",
             "endLine" : 2,
-            "firstWord" : 4,
-            "lastWord" : 6,
+            "firstWord" : 10,
+            "lastWord" : 1,
             "line" : 1,
             "page" : 0
           },
-          "comparedReading" : "doubtless no one has yet forgotten . Not to mention rumours which agitated the maritime population",
+          "baseReading" : "Sans parler des",
+          "baseTokens" : {
+            "from" : 21,
+            "to" : 24
+          },
+          "comparedLocation" : {
+            "charFrom" : 135,
+            "charTo" : 149,
+            "cite" : "p.1 · lines 2–3 · words 12…1",
+            "endLine" : 2,
+            "firstWord" : 11,
+            "lastWord" : 0,
+            "line" : 1,
+            "page" : 0
+          },
+          "comparedReading" : "Not to mention",
           "comparedTokens" : {
-            "from" : 17,
+            "from" : 24,
+            "to" : 27
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 151,
+            "charTo" : 190,
+            "cite" : "p.1 · line 3 · words 4–9",
+            "endLine" : 2,
+            "firstWord" : 3,
+            "lastWord" : 8,
+            "line" : 2,
+            "page" : 0
+          },
+          "baseReading" : "qui agitaient les populations des ports",
+          "baseTokens" : {
+            "from" : 25,
+            "to" : 31
+          },
+          "comparedLocation" : {
+            "charFrom" : 158,
+            "charTo" : 196,
+            "cite" : "p.1 · line 3 · words 3–7",
+            "endLine" : 2,
+            "firstWord" : 2,
+            "lastWord" : 6,
+            "line" : 2,
+            "page" : 0
+          },
+          "comparedReading" : "which agitated the maritime population",
+          "comparedTokens" : {
+            "from" : 28,
             "to" : 33
           },
           "confidence" : "certain",
@@ -2360,68 +2433,54 @@
         {
           "baseLocation" : {
             "charFrom" : 384,
-            "charTo" : 397,
-            "cite" : "p.1 · line 6 · words 10–11",
+            "charTo" : 386,
+            "cite" : "p.1 · line 6 · word 10",
             "endLine" : 5,
             "firstWord" : 9,
-            "lastWord" : 10,
+            "lastWord" : 9,
             "line" : 5,
             "page" : 0
           },
-          "baseReading" : "de l'Amérique",
+          "baseReading" : "de",
           "baseTokens" : {
             "from" : 62,
-            "to" : 64
+            "to" : 63
           },
-          "comparedLocation" : {
-            "charFrom" : 380,
-            "charTo" : 394,
-            "cite" : "p.1 · line 6 · words 7–9",
-            "endLine" : 5,
-            "firstWord" : 6,
-            "lastWord" : 8,
-            "line" : 5,
-            "page" : 0
-          },
-          "comparedReading" : "America , naval",
-          "comparedTokens" : {
-            "from" : 67,
-            "to" : 70
-          },
+          "comparedReading" : "",
           "confidence" : "certain",
           "crossesPage" : false,
-          "type" : "substitution",
+          "type" : "deletion",
           "withinTransposition" : false
         },
         {
           "baseLocation" : {
-            "charFrom" : 409,
+            "charFrom" : 399,
             "charTo" : 439,
-            "cite" : "p.1 · line 7 · words 1–5",
+            "cite" : "p.1 · lines 6–7 · words 13…5",
             "endLine" : 6,
-            "firstWord" : 0,
+            "firstWord" : 12,
             "lastWord" : 4,
-            "line" : 6,
+            "line" : 5,
             "page" : 0
           },
-          "baseReading" : "des marines militaires de tous",
+          "baseReading" : "officiers des marines militaires de tous",
           "baseTokens" : {
-            "from" : 66,
+            "from" : 65,
             "to" : 71
           },
           "comparedLocation" : {
-            "charFrom" : 404,
+            "charFrom" : 389,
             "charTo" : 410,
-            "cite" : "p.1 · line 6 · words 11–12",
+            "cite" : "p.1 · line 6 · words 9–12",
             "endLine" : 5,
-            "firstWord" : 10,
+            "firstWord" : 8,
             "lastWord" : 11,
             "line" : 5,
             "page" : 0
           },
-          "comparedReading" : "of all",
+          "comparedReading" : "naval officers of all",
           "comparedTokens" : {
-            "from" : 71,
+            "from" : 69,
             "to" : 73
           },
           "confidence" : "certain",
@@ -2432,32 +2491,104 @@
         {
           "baseLocation" : {
             "charFrom" : 450,
-            "charTo" : 499,
-            "cite" : "p.1 · lines 7–8 · words 10…4",
-            "endLine" : 7,
+            "charTo" : 464,
+            "cite" : "p.1 · line 7 · words 10–13",
+            "endLine" : 6,
             "firstWord" : 9,
-            "lastWord" : 3,
+            "lastWord" : 12,
             "line" : 6,
             "page" : 0
           },
-          "baseReading" : "après eux , les gouvernements des divers États des",
+          "baseReading" : "après eux , les",
           "baseTokens" : {
             "from" : 75,
-            "to" : 84
+            "to" : 79
           },
           "comparedLocation" : {
             "charFrom" : 426,
-            "charTo" : 466,
-            "cite" : "p.1 · line 7 · words 2–8",
+            "charTo" : 429,
+            "cite" : "p.1 · line 7 · word 2",
             "endLine" : 6,
             "firstWord" : 1,
+            "lastWord" : 1,
+            "line" : 6,
+            "page" : 0
+          },
+          "comparedReading" : "the",
+          "comparedTokens" : {
+            "from" : 76,
+            "to" : 77
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 479,
+            "charTo" : 489,
+            "cite" : "p.1 · line 8 · words 1–2",
+            "endLine" : 7,
+            "firstWord" : 0,
+            "lastWord" : 1,
+            "line" : 7,
+            "page" : 0
+          },
+          "baseReading" : "des divers",
+          "baseTokens" : {
+            "from" : 80,
+            "to" : 82
+          },
+          "comparedLocation" : {
+            "charFrom" : 442,
+            "charTo" : 452,
+            "cite" : "p.1 · line 7 · words 4–5",
+            "endLine" : 6,
+            "firstWord" : 3,
+            "lastWord" : 4,
+            "line" : 6,
+            "page" : 0
+          },
+          "comparedReading" : "of several",
+          "comparedTokens" : {
+            "from" : 78,
+            "to" : 80
+          },
+          "confidence" : "certain",
+          "crossesPage" : false,
+          "type" : "substitution",
+          "withinTransposition" : false
+        },
+        {
+          "baseLocation" : {
+            "charFrom" : 496,
+            "charTo" : 499,
+            "cite" : "p.1 · line 8 · word 4",
+            "endLine" : 7,
+            "firstWord" : 3,
+            "lastWord" : 3,
+            "line" : 7,
+            "page" : 0
+          },
+          "baseReading" : "des",
+          "baseTokens" : {
+            "from" : 83,
+            "to" : 84
+          },
+          "comparedLocation" : {
+            "charFrom" : 460,
+            "charTo" : 466,
+            "cite" : "p.1 · line 7 · words 7–8",
+            "endLine" : 6,
+            "firstWord" : 6,
             "lastWord" : 7,
             "line" : 6,
             "page" : 0
           },
-          "comparedReading" : "the Governments of several states on the",
+          "comparedReading" : "on the",
           "comparedTokens" : {
-            "from" : 76,
+            "from" : 81,
             "to" : 83
           },
           "confidence" : "certain",

@@ -631,8 +631,14 @@ words). Two behavioural consequences a port must honour: (1) a matched pair whos
 (possible only under a lexicon) is structural agreement, NOT a `variantSpelling` accidental — the accidental
 check requires normalised equality; (2) displaced-reading recovery (§6.1) pairs on pivoted keys, so a moved
 translation pair is recovered as a move. A nil/empty/irrelevant lexicon is the **identity, byte-for-byte** —
-every unpinned golden is unaffected. File format (CLI `--lexicon`): one group per line, forms
-comma-separated, `#` comments.
+every unpinned golden is unaffected. File format (CLI `--lexicon`): one group per line (any newline style,
+including CRLF), forms comma-separated, `#` comments.
+
+**Forms are normalised with the run's normaliser** before pivots are computed, exactly as token keys are (§2):
+under the default substantive normaliser `année` is keyed `annee`, so a lexicon written with accents matches.
+*(2026-10, review B7: the reference once only lower-cased forms, so every entry with a diacritic was silently
+inert, and read a CRLF file as one line. Golden 29, the one lexicon case, was re-recorded: correct French–English
+lexicon pairings in its graph rose from 32 to 37 of 54.)*
 
 ## 8. JSON interchange (the portability contract)
 

@@ -2417,3 +2417,33 @@ pass after. The full-novel results are byte-identical (their regions use the pla
 changed.
 
 **State:** 246 tests green.
+
+---
+
+## 2026-10-03g — `implementation` + `test`: lexicon entries with accents match, and CRLF lexicon files parse (release 1 review, blocker B7)
+
+**Defect 1.** Token keys are normalised (under the default `.substantive` normaliser, `année` → `annee`), but
+`TranslationLexicon` only lower-cased its forms, so every entry containing a diacritic was silently inert. The
+documented `année, year` example did nothing; so did most of golden 29's French entries. `LexiconTests` still passed
+because its trilingual case's slots lined up by position and never checked that `année` actually pivoted.
+
+**Defect 2.** `parse` split on the `"\n"` Character, which does not match the `"\r\n"` grapheme: a CRLF file was read
+as one line and its groups merged, yet still produced a non-empty lexicon, so the CLI's empty-lexicon check did not
+catch it.
+
+**Fix.** The lexicon keeps its groups (in canonical order) and `normalized(with:)` re-keys them with a normaliser;
+`Collation.collate` and the peer merge apply the run's normaliser on entry, so callers may write forms exactly as
+spoken. `parse` splits on every newline style.
+
+**Golden 29 re-recorded** (the one lexicon case; the French original against the Mercier and Walter translations).
+With its accented entries now active, the graph pairs a French word with its lexicon equivalent in 37 of 54 possible
+places (32 before), and in the French–Mercier pair French words inside a reported variant fall from 68 to 62 of 85:
+`L'année ≈ year`, `marquée ≈ signalised`, `l'Amérique ≈ America`, `gouvernements ≈ Governments` and `États ≈ states`
+become agreement, and large blanket substitutions split into precise ones. Some local orderings get worse where
+French noun–adjective order inverts English (`officiers … militaires` vs `naval officers`): the documented
+word-order limitation that sentence-level anchoring (B17) addresses.
+
+New `LexiconNormalisationTests`: the accented-entry and CRLF tests fail before the fix; diplomatic matching and
+order-independent equality are guarded too. ALGORITHMS §7d updated.
+
+**State:** 251 tests green.
