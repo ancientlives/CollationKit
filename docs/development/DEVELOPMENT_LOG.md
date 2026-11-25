@@ -2368,3 +2368,28 @@ carry every move with its citation). New `ApparatusMoveTests`; ALGORITHMS §7b d
 apparatus rule.
 
 **State:** 233 tests green.
+
+---
+
+## 2026-10-03e — `implementation` + `test`: the tokeniser reads every character, and quotes are punctuation (release 1 review, blockers B4 and B5)
+
+**B4 — characters above U+FFFF were dropped.** The tokeniser built each scalar from one UTF-16 unit, which returns
+nil for each half of a surrogate pair; the "never stall" branch then skipped it. Rare CJK, historic scripts (Gothic,
+cuneiform), mathematical letters and emoji never became tokens, so `𠀀` → `𠀁` reported **no variant**. Fixed by
+decoding surrogate pairs (`scalarAt`). Supplementary-plane letters are words; symbols such as emoji are
+punctuation-class (folded substantively, recorded diplomatically).
+
+**B5 — quotes, apostrophes and dashes were words.** `'`, `’` and `-` were word characters anywhere, so a leading
+or closing quote or a dash became part of the word, and only a single `-` counted as punctuation. British vs American
+quotation (`'Hello,'` vs `"Hello,"`), `don't` vs `don’t`, and `--` vs `—` were all *substantive* variants. Now a word
+must start with a letter, digit or mark; trailing joiners are trimmed back off; any hyphen run is punctuation; and a
+new `Normalizer.foldTypographicApostrophes` (on for substantive, off for diplomatic) folds `’ ‘ ʼ` to `'`.
+
+**Effect.** No conformance golden changed (case 13, apostrophes and hyphens, is unaffected). On the full novels the
+spurious variants fall: Mysterious Island −140, Journey −37, Earth to the Moon −93; readings involving a quote,
+apostrophe or hyphen fall 20–36%; two of Mysterious Island's three "possible moves", anchored on quote tokens,
+disappear. One existing test pinned the old behaviour (`-dash` as one word token) and was updated.
+
+New `TokenizerUnicodeTests` fail before the fix (13 assertion failures) and pass after. ALGORITHMS §2 updated.
+
+**State:** 241 tests green. No schema or golden change.
