@@ -29,7 +29,24 @@ final class NarrativeTests: XCTestCase {
         let s = CollationNarrative.summary(r, base: base, compared: comp)
         XCTAssertTrue(s.contains("differs from"), "states that B differs from A")
         XCTAssertTrue(s.contains("substitution"), "names the (dominant) substitution kind")
-        XCTAssertTrue(s.contains("substantive collation"), "notes accidentals were checked (none recorded)")
+        XCTAssertTrue(s.contains("substantive collation"), "explains why no accidentals are listed")
+        XCTAssertFalse(s.contains("were checked"), "never claims accidentals were checked (release 1 review)")
+    }
+
+    func testSingleLikelyMoveIsNotDescribedAsOneOfMany() {
+        // A short phrase displaced near the diagonal of a LONG pair is the engine's one `.likely` move (the
+        // construction from MoveRecoveryTests). The prose used to read "1 of these are reported as possible moves
+        // …, the rest as certain" when there was no rest.
+        let phrase = ["off", "the", "rocks"]
+        let backbone = (0..<6000).map { "s\($0)" }
+        let base = (Array(backbone[..<3001]) + phrase + Array(backbone[3001...])).joined(separator: " ")
+        let comp = (Array(backbone[..<3011]) + phrase + Array(backbone[3011...])).joined(separator: " ")
+        let r = Collation.collate(base: Witness(id: "A", text: base), compared: Witness(id: "B", text: comp))
+        XCTAssertEqual(r.variations.filter { $0.type == .transposition && $0.confidence == .likely }.count, 1)
+        let s = CollationNarrative.summary(r, base: base, compared: comp)
+        XCTAssertTrue(s.contains("1 passage was relocated; it is reported as a *possible* move"), s)
+        XCTAssertFalse(s.contains("of these are"), "no number disagreement")
+        XCTAssertFalse(s.contains("the rest as certain"), "no orphaned clause when every move is likely")
     }
 
     func testAlignmentVerdictSoundForColinearChanges() {

@@ -78,7 +78,7 @@ value" notes what *kind* of variation a pairing exercises (the reason it earns a
   | Frederick Paul Walter | 2010 | SUNY Press (*Amazing Journeys*) | **PG2488** | fully restored/unabridged. The *faithful* counter-witness to Mercier. **In copyright** (© 1999 F. P. Walter; on PG under its licence) — **held locally only**: rebuilt by `scripts/build_corpus.sh`, not committed. |
   | David Coward | 2017 | Penguin Classics | — | in copyright. |
 
-  *Collation value:* Mercier ↔ Walter is the flagship abridged-vs-complete pair (~21.8k variants on the full novel).
+  *Collation value:* Mercier ↔ Walter is the flagship abridged-vs-complete pair (21,456 variants on the full novel, v0.3.0).
 
 ### 2.2 From the Earth to the Moon — *De la Terre à la Lune*
 
@@ -105,7 +105,7 @@ value" notes what *kind* of variation a pairing exercises (the reason it earns a
     `towle` witness); **PG12901** (*The Moon-Voyage*) = **probably Linklater** (our `moonvoyage` witness). A third,
     **PG28918** (*From the Earth to the Moon*), the Internet Archive record attributes to **Lewis Page Mercier**
     ⟨confirm; may duplicate PG83's text⟩.
-  - *Collation value:* PG83 ↔ PG12901 is our mid-difficulty pair (~7.4k full-novel variants) — now properly
+  - *Collation value:* PG83 ↔ PG12901 is our mid-difficulty pair (7,235 full-novel variants, v0.3.0) — now properly
     describable as **Mercier & King (1873) ↔ Linklater? (1877)**, two named Victorian translations.
 
 ### 2.3 Journey to the Centre of the Earth — *Voyage au centre de la Terre*
@@ -144,7 +144,7 @@ value" notes what *kind* of variation a pairing exercises (the reason it earns a
   | Sidney Kravitz | 2001 | Wesleyan University Press | — | unabridged, illustrated; in copyright. |
   | Jordan Stump | 2001 | Random House / Modern Library | — | unabridged; in copyright. |
 
-  *Collation value:* Kingston ↔ White is our **largest** pair (~195k/167k words, ~31.8k variants) — a scale +
+  *Collation value:* Kingston ↔ White is our **largest** pair (~195k/167k words, 31,614 variants on v0.3.0) — a scale +
   substantive-divergence stress test.
 
 ### 2.5 Around the World in Eighty Days — *Le Tour du monde en quatre-vingts jours* *(not yet in corpus)*

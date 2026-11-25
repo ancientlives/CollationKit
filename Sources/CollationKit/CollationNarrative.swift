@@ -88,14 +88,22 @@ public enum CollationNarrative {
             let crossPage = vars.filter { $0.type == .transposition && $0.crossesPage }.count
             var m = "\(fmt(moves)) passage\(moves == 1 ? " was" : "s were") relocated"
             if crossPage > 0 { m += " (\(fmt(crossPage)) across a page boundary)" }
-            if likely > 0 { m += "; \(fmt(likely)) of these are reported as *possible* moves (a heuristic pairing), the rest as certain" }
+            if likely > 0 && likely == moves {
+                m += moves == 1 ? "; it is reported as a *possible* move (a heuristic pairing)"
+                                : "; all are reported as *possible* moves (a heuristic pairing)"
+            } else if likely > 0 {
+                m += "; \(fmt(likely)) of these \(likely == 1 ? "is" : "are") reported as *possible* "
+                   + "move\(likely == 1 ? "" : "s") (a heuristic pairing), the rest as certain"
+            }
             out.append(m + ".")
         }
 
-        // 5) Accidentals note (reassurance about what was checked).
+        // 5) Accidentals note. The narrative cannot see whether accidentals were being recorded, so with none in
+        //    the result it must not claim they were checked (release 1 review): it says what a substantive
+        //    collation does with them instead.
         if spell == 0 {
-            out.append("Spelling and other accidental differences were checked and none were recorded — this is a "
-                       + "substantive collation.")
+            out.append("No spelling or other accidental differences are listed — this is a substantive collation, "
+                       + "which treats them as agreement unless accidentals are recorded.")
         } else {
             out.append("\(fmt(spell)) accidental (spelling/case) difference\(spell == 1 ? " was" : "s were") also recorded.")
         }

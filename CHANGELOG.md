@@ -35,12 +35,18 @@ The first tagged release. It fixes the release blockers found by the October 202
 - **CLI:** duplicate witness ids were accepted (B13); the menu ran the collation when you answered "no"; a mistyped base
   was caught only after confirming; an unwritable `--out` was found only after collating; `collate --no-input run` and
   `collate run --help` failed. (B14)
+- **The prose narrative claimed accidentals "were checked"** when they had not been recorded, and described a single
+  possible move as "1 of these are … the rest as certain". It now says what a substantive collation does with
+  accidentals, and the move sentence agrees in number.
+- **The website's live demos still ran the pre-review viewer.** They are regenerated with the fixed viewer and engine.
 
 ### Changed
 
 - The CLI version and `CITATION.cff` agree (0.3.0), and a test keeps them in step. (B10)
 - `--lexicon`, `--lines-per-page` and `--through-numbered` are labelled experimental.
 - The docs no longer quote an exact test count; `TestCountGuardTests` is retired (it blocked Linux).
+- The Verne full-novel figures (corpus README, bibliography, `meta.json`, PAPER_NOTES) and `BENCHMARKS.md` are
+  re-measured on this release.
 
 ### Deprecated
 

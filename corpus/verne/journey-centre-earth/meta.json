@@ -22,7 +22,7 @@
       "full/malleson.txt": "~74.6k words, from PG3748 (whole novel; front matter excluded before '^CHAPTER I.')",
       "full/ward.txt": "~86.6k words, from PG18857 (whole novel; front matter excluded before the first body title)"
     },
-    "collationResult": "~12,789 variants (10,283 substitutions, 562 deletions, 1,811 insertions, 133 moved); ~4.5 s (release). Alignment: 10,368 shared points, 12% max drift, 98.6% monotonic — the dot-plot is a clean, monotonic line that runs consistently below the diagonal (ward is systematically longer): a correct alignment of two substantially divergent editions, NOT a mis-alignment. A good test of the engine + alignment-map on honest large divergence."
+    "collationResult": "12,722 variants (10,318 substitutions, 584 deletions, 1,818 insertions, 2 moved, both likely); ~6.9 s end to end (v0.3.0, release, 2026-11-25). Alignment: 12% max drift, 100% monotonic — the dot-plot is a clean, monotonic line that runs consistently below the diagonal (ward is systematically longer): a correct alignment of two substantially divergent editions, NOT a mis-alignment. A good test of the engine + alignment-map on honest large divergence."
   },
   "collate": {
     "recordAccidentals": false,

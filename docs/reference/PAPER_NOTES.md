@@ -733,8 +733,9 @@ tackles a problem the numbers alone don't — *helping a reader/reviewer trust a
 correspondence points, the **maximum off-diagonal drift** (deviation from the co-linear diagonal, as a % of length)
 and the **monotonicity** (% of consecutive points where the comparison position also advances). A sound collation
 has both near-ideal; it is reported as a plain-language verdict. On the full *20,000 Leagues* pair (two independent
-English translations, Walter 843,520 chars / 17,874 lines vs. Mercier 597,023 chars / 12,174 lines) the **18,074
-shared points show max drift 4.8 % and 98.9 % monotonic** — a visibly clean diagonal confirming the alignment is
+English translations, Walter 843,520 chars / 17,874 lines vs. Mercier 597,023 chars / 12,174 lines) shared points
+show **max drift 1.7 % and 100 % monotonic** (v0.3.0, re-measured 2026-11-25; 4.8 % / 98.9 % before the July
+false-move gates) — a visibly clean diagonal confirming the alignment is
 correct end to end. This directly answers a reviewer's "did the tool align these correctly, or jump somewhere?"
 that a raw variant list cannot — and it distinguishes *genuine* text-length divergence (Walter's 5,700 extra lines)
 from a mis-alignment. (Full inventory + rationale: [`VIEWER_UX_PLAN.md`](../development/VIEWER_UX_PLAN.md).)
