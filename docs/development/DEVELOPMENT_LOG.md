@@ -2287,3 +2287,31 @@ longer quote an exact test count; a new suite gets a row in `TESTING.md`. Three 
 (`var` → `let`) are fixed.
 
 **State:** 221 tests green (26 suites), suite time about 8 s → 2.8 s. No engine, schema or golden change.
+
+---
+
+## 2026-10-03b — `implementation` + `test`: no token is used twice (release 1 review, blocker B1)
+
+**Defect.** Unique-in-both anchors are de-overlapped in A only, so two anchors can share tokens in B. The spine
+(`maxWeightIncreasingByB`) only required anchors to *start* in increasing B order, so two overlapping spine anchors
+emitted the shared B tokens as matches twice. A moved anchor could likewise claim B tokens the spine owned, and two
+moved blocks could grow into each other. In every case the base tokens on the other side of the duplicate match were
+never reported: `alpha beta gamma delta epsilon beta gamma zeta` vs `alpha beta gamma zeta` reported only "delta
+epsilon" deleted. The 2026-07-01 inverted-Range fix had clamped the region so this no longer crashed, which turned
+a crash into a silently wrong apparatus.
+
+**Fix (`Transposition.align`).**
+1. The spine chain requires B-non-overlap: `bStart[j] + length[j] <= bStart[i]`.
+2. Off-spine pins are trimmed to the tokens the spine does not own in either witness (`trimmedOffSpine`); a pin
+   with fewer than `minAnchorLength` tokens left, or a spine token inside, is dropped to region alignment.
+3. A non-adjacent moved pin whose B span is already claimed by an earlier move is skipped.
+4. Block growth (and its bridging `resync`) never enters a token another moved block owns.
+
+**Evidence.** New `AnchorOverlapTests`: the two minimal reproductions from the review and a seeded fuzz over a
+small vocabulary asserting the invariant *every token of either witness is used exactly once by the alignment*. On
+`main` the three tests fail with 79 assertion failures; after the fix all pass. **No conformance golden changed.** On
+the three public-domain full-novel pairs the effect is small but real (Mysterious Island +3 variants; one deletion
+reclassified as a substitution on each of the other two; moves and their confidence unchanged).
+`ALGORITHMS.md` §5, §5.2, §5.4 and §9 rule 3 updated.
+
+**State:** 224 tests green. No schema or golden change.
